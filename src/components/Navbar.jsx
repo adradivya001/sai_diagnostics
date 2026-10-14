@@ -1,42 +1,113 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Activity } from 'lucide-react';
+import { Phone, Calendar, Menu, X } from 'lucide-react';
+import './Navbar.css';
 
 const Navbar = () => {
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isActive = (path) => {
-    return location.pathname === path ? 'active' : '';
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Doctor', path: '/doctors' },
+    { name: 'Services', path: '/services' },
+    { name: 'Contact', path: '/contact' }
+  ];
 
   return (
-    <nav className="navbar" style={{ background: 'var(--background)' }}>
-      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: '2rem', padding: '0.5rem 1.5rem', height: 'auto' }}>
+    <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-container">
         
         {/* Logo Section */}
-        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/logo.png" alt="Sai Diagnostics Logo" style={{ height: '85px', width: 'auto', objectFit: 'contain', mixBlendMode: 'multiply' }} />
+        <Link to="/" className="navbar-logo">
+          <img 
+            src="/maternal-fetal-medicine-logo.png" 
+            alt="Sai Diagnostics & Fetal Medicine Center" 
+            className="navbar-logo-img"
+          />
         </Link>
         
-        {/* Center Links */}
-        <div className="nav-links" style={{ justifyContent: 'center', alignItems: 'center', gap: '2rem', fontSize: '1rem' }}>
-          <a href="#" style={{ background: '#e4edea', padding: '0.5rem 1rem', borderRadius: '20px', color: 'var(--primary)', fontWeight: 600 }}>Home</a>
-          <a href="#services" style={{ color: 'var(--text-main)', fontWeight: 500 }}>Services</a>
-          <a href="#doctors" style={{ color: 'var(--text-main)', fontWeight: 500 }}>Doctors</a>
-          <a href="#dashboard" style={{ color: 'var(--text-main)', fontWeight: 500 }}>Dashboard</a>
+        {/* Center Desktop Links */}
+        <nav className="navbar-links" aria-label="Main Navigation">
+          {navLinks.map((link) => {
+            const isCurrent = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`navbar-link-item ${isCurrent ? 'active' : ''}`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Desktop Actions */}
+        <div className="navbar-actions">
+          <a href="tel:+917799900248" className="navbar-phone-btn">
+            <Phone size={15} />
+            +91 7799900248
+          </a>
+          <Link to="/doctors" className="navbar-cta-btn">
+            <Calendar size={15} />
+            Book Appointment
+          </Link>
         </div>
 
-        {/* Right Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <button className="btn btn-outline" style={{ borderRadius: '999px', padding: '0.5rem 1.25rem', borderColor: '#ccc', color: 'var(--primary)' }}>
-            +91 7799900248
-          </button>
-          <button className="btn btn-primary" style={{ borderRadius: '999px', padding: '0.5rem 1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            Book Appointment
-          </button>
-        </div>
+        {/* Mobile Menu Toggle Button */}
+        <button
+          className="navbar-mobile-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          type="button"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
 
       </div>
-    </nav>
+
+      {/* Mobile Dropdown Menu */}
+      <div className={`navbar-mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+        {navLinks.map((link) => {
+          const isCurrent = location.pathname === link.path;
+          return (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`navbar-link-item ${isCurrent ? 'active' : ''}`}
+            >
+              {link.name}
+            </Link>
+          );
+        })}
+        <div className="navbar-mobile-actions">
+          <a href="tel:+917799900248" className="navbar-phone-btn">
+            <Phone size={15} />
+            +91 7799900248
+          </a>
+          <Link to="/doctors" className="navbar-cta-btn">
+            <Calendar size={15} />
+            Book Appointment
+          </Link>
+        </div>
+      </div>
+    </header>
   );
 };
 
