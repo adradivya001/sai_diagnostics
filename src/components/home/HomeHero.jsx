@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Award, Star, Users, ShieldCheck } from 'lucide-react';
 import CountUp from '../CountUp';
+import { useAppointmentModal } from '../AppointmentModal';
 import './Hero.css';
 
 const HomeHero = () => {
+  const { openModal } = useAppointmentModal();
+
   return (
     <section className="hero-section">
       {/* Complete Screen Background Image */}
@@ -35,9 +38,14 @@ const HomeHero = () => {
           </p>
 
           <div className="hero-actions">
-            <Link to="/doctors" className="hero-btn-primary">
+            <button 
+              onClick={() => openModal()} 
+              className="hero-btn-primary"
+              style={{ cursor: 'pointer' }}
+              type="button"
+            >
               Book an Appointment
-            </Link>
+            </button>
             <Link to="/services" className="hero-btn-secondary">
               Explore Our Services
             </Link>

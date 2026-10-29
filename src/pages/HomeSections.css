@@ -1,0 +1,235 @@
+/* ==========================================================================
+   Home Sections Styles (Strictly Scoped to Homepage Sections Below Hero)
+   Palette:
+   - Deep rose pink: #C2184B
+   - Soft blush: #F5B7C8
+   - Light blush: #FCE8EE
+   - Clinical cyan: #17A9CF
+   - Pale cyan: #E6F7FC
+   - Ivory: #FFF9F5
+   - White: #FFFFFF
+   - Dark text: #202735
+   ========================================================================== */
+
+/* 1. About the Centre Section */
+.home-about-section {
+  background: linear-gradient(180deg, #FFF9F5 0%, #FFF4F7 60%, #FFFFFF 100%);
+  padding: 5rem 1.5rem;
+  border-top: 1px solid rgba(194, 24, 75, 0.08);
+}
+
+.home-about-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .home-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.home-founder-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid rgba(194, 24, 75, 0.16);
+  border-left: 5px solid #C2184B;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 10px 30px rgba(194, 24, 75, 0.05);
+}
+
+/* 2. Services Section */
+.home-services-section {
+  background: #FFFFFF;
+  padding: 5rem 1.5rem;
+}
+
+.home-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.home-service-card {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(32, 39, 53, 0.08);
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justifyContent: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.home-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(194, 24, 75, 0.08);
+  border-color: rgba(194, 24, 75, 0.25);
+}
+
+.home-service-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #FCE8EE;
+  color: #C2184B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.home-service-card:hover .home-service-icon-box {
+  background: #C2184B;
+  color: #FFFFFF;
+}
+
+/* 3. Specialist Section */
+.home-specialist-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%);
+  padding: 5rem 1.5rem;
+}
+
+.home-specialist-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  border: 1px solid rgba(194, 24, 75, 0.14);
+  box-shadow: 0 12px 36px rgba(194, 24, 75, 0.06);
+  overflow: hidden;
+}
+
+.home-specialist-inner {
+  padding: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .home-specialist-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* 4. Timeline Section (Your Visit, Made Simple) */
+.home-timeline-section {
+  background: linear-gradient(180deg, #FFF9F5 0%, #FCE8EE 50%, #FFF9F5 100%);
+  padding: 5rem 1.5rem;
+}
+
+.home-timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .home-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-timeline-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.home-timeline-card {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(194, 24, 75, 0.12);
+  padding: 2rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0 4px 16px rgba(194, 24, 75, 0.04);
+  transition: transform 0.2s ease;
+}
+
+.home-timeline-card:hover {
+  transform: translateY(-3px);
+}
+
+.home-timeline-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FCE8EE;
+  color: #C2184B;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+}
+
+/* 5. Values Section */
+.home-values-section {
+  background: #FFFFFF;
+  padding: 5rem 1.5rem;
+}
+
+.home-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.75rem;
+}
+
+.home-value-card {
+  background: #FFF9F5;
+  border-radius: 18px;
+  border: 1px solid rgba(194, 24, 75, 0.1);
+  padding: 2.25rem 1.75rem;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.home-value-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(194, 24, 75, 0.25);
+  box-shadow: 0 10px 26px rgba(194, 24, 75, 0.06);
+  transform: translateY(-3px);
+}
+
+/* 6. Appointment CTA Section */
+.home-cta-section {
+  background: linear-gradient(135deg, #FFF9F5 0%, #FCE8EE 50%, #E6F7FC 100%);
+  padding: 5rem 1.5rem;
+  border-top: 1px solid rgba(194, 24, 75, 0.1);
+  border-bottom: 1px solid rgba(194, 24, 75, 0.1);
+  text-align: center;
+}
+
+/* 7. Location & Contact Section */
+.home-location-section {
+  background: #FFFFFF;
+  padding: 5rem 1.5rem;
+}
+
+.home-location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .home-location-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

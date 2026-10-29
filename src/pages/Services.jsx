@@ -17,41 +17,43 @@ import {
   Eye,
   FileText
 } from 'lucide-react';
+import { useAppointmentModal } from '../components/AppointmentModal';
 
 const categoryColorMap = {
   'Pregnancy & Fetal Medicine Scans': {
-    badgeBg: '#e8f5e9',
-    badgeText: '#1b5e20',
-    border: '#c8e6c9',
-    accent: '#2b5c4b'
+    badgeBg: '#F8E7EC',
+    badgeText: '#AD2348',
+    border: '#eedee3',
+    accent: '#AD2348'
   },
   'General Ultrasound Scans': {
-    badgeBg: '#e0f2fe',
-    badgeText: '#0369a1',
-    border: '#bae6fd',
-    accent: '#0284c7'
+    badgeBg: '#E8F4FB',
+    badgeText: '#2589C4',
+    border: '#cce5f5',
+    accent: '#2589C4'
   },
   'Blood Tests & Genetic Screening': {
-    badgeBg: '#f3e8ff',
-    badgeText: '#7e22ce',
-    border: '#e9d5ff',
-    accent: '#9333ea'
+    badgeBg: '#F8E7EC',
+    badgeText: '#AD2348',
+    border: '#eedee3',
+    accent: '#AD2348'
   },
   'Pregnancy Tissue & Genetic Diagnostic Tests': {
-    badgeBg: '#fef3c7',
-    badgeText: '#b45309',
-    border: '#fde68a',
-    accent: '#d97706'
+    badgeBg: '#E8F4FB',
+    badgeText: '#2589C4',
+    border: '#cce5f5',
+    accent: '#2589C4'
   },
   'Fertility Follow-Up': {
-    badgeBg: '#ffe4e6',
-    badgeText: '#be123c',
-    border: '#fecdd3',
-    accent: '#e11d48'
+    badgeBg: '#F8E7EC',
+    badgeText: '#AD2348',
+    border: '#eedee3',
+    accent: '#AD2348'
   }
 };
 
 const Services = () => {
+  const { openModal } = useAppointmentModal();
   const [selectedCategory, setSelectedCategory] = useState('All Scans & Tests');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeModalTest, setActiveModalTest] = useState(null);
@@ -78,6 +80,11 @@ const Services = () => {
       document.body.style.overflow = 'unset';
     };
   }, [activeModalTest]);
+
+  // Set document title
+  useEffect(() => {
+    document.title = 'Diagnostic Scans & Services | Sai Diagnostics Anantapur';
+  }, []);
 
   // Filtered services based on search and category
   const filteredServices = useMemo(() => {
@@ -109,59 +116,26 @@ const Services = () => {
   }, []);
 
   return (
-    <div style={{ background: '#fbf9f4', minHeight: '100vh', paddingBottom: '5rem' }}>
+    <div style={{ background: 'var(--bg-warm-white)', minHeight: '100vh', paddingBottom: '5rem' }}>
       {/* Header Banner */}
       <section style={{
-        background: 'linear-gradient(135deg, #163026 0%, #2b5c4b 100%)',
-        color: '#ffffff',
-        padding: '3.5rem 1.5rem 3rem',
+        background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
+        color: 'var(--text-heading)',
+        padding: '3.75rem 1.5rem 3.25rem',
         textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderBottom: '1px solid rgba(173, 35, 72, 0.1)'
       }}>
-        {/* Subtle decorative circles */}
-        <div style={{
-          position: 'absolute',
-          top: '-60px',
-          right: '-60px',
-          width: '240px',
-          height: '240px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%)',
-          pointerEvents: 'none'
-        }} />
-        <div style={{
-          position: 'absolute',
-          bottom: '-80px',
-          left: '-40px',
-          width: '260px',
-          height: '260px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%)',
-          pointerEvents: 'none'
-        }} />
-
         <div style={{ maxWidth: '840px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span style={{
-            display: 'inline-block',
-            letterSpacing: '2.5px',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            color: '#a7d3c0',
-            marginBottom: '0.75rem',
-            background: 'rgba(255, 255, 255, 0.08)',
-            padding: '4px 14px',
-            borderRadius: '999px',
-            border: '1px solid rgba(255, 255, 255, 0.15)'
-          }}>
-            CLINICAL EXCELLENCE • TRANSPARENT PRICING
+          <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
+            ● CLINICAL EXCELLENCE • TRANSPARENT PRICING
           </span>
 
           <h1 style={{
             fontFamily: '"Playfair Display", serif',
             fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
-            color: '#ffffff',
+            color: 'var(--text-heading)',
             marginBottom: '1rem',
             lineHeight: 1.15
           }}>
@@ -170,7 +144,7 @@ const Services = () => {
 
           <p style={{
             fontSize: '1.05rem',
-            color: '#e2ece6',
+            color: 'var(--text-charcoal)',
             lineHeight: 1.6,
             maxWidth: '680px',
             margin: '0 auto 2rem'
@@ -273,10 +247,10 @@ const Services = () => {
                     fontWeight: 500,
                     cursor: 'pointer',
                     transition: 'all 0.2s ease',
-                    border: isActive ? '1px solid var(--primary)' : '1px solid #e2e8f0',
-                    background: isActive ? 'var(--primary)' : '#ffffff',
-                    color: isActive ? '#ffffff' : '#334155',
-                    boxShadow: isActive ? '0 4px 12px rgba(43, 92, 75, 0.2)' : '0 1px 3px rgba(0,0,0,0.04)',
+                    border: isActive ? '1px solid var(--primary-burgundy)' : '1px solid #eedee3',
+                    background: isActive ? 'var(--primary-burgundy)' : '#ffffff',
+                    color: isActive ? '#ffffff' : 'var(--text-charcoal)',
+                    boxShadow: isActive ? '0 4px 12px rgba(173, 35, 72, 0.22)' : '0 1px 3px rgba(0,0,0,0.04)',
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '8px'
@@ -616,7 +590,7 @@ const Services = () => {
                     <span style={{
                       fontSize: '0.84rem',
                       fontWeight: 600,
-                      color: 'var(--primary)',
+                      color: 'var(--primary-burgundy)',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '4px'
@@ -631,9 +605,9 @@ const Services = () => {
                         setActiveModalTest(service);
                       }}
                       style={{
-                        background: '#e4edea',
-                        color: 'var(--primary)',
-                        border: '1px solid #c8e6c9',
+                        background: 'var(--bg-skyblue-pale)',
+                        color: 'var(--primary-blue)',
+                        border: '1px solid rgba(37, 137, 196, 0.25)',
                         borderRadius: '999px',
                         padding: '0.4rem 0.85rem',
                         fontSize: '0.78rem',
@@ -644,8 +618,8 @@ const Services = () => {
                         gap: '4px',
                         transition: 'background 0.2s'
                       }}
-                      onMouseOver={(e) => e.currentTarget.style.background = '#d0e5dd'}
-                      onMouseOut={(e) => e.currentTarget.style.background = '#e4edea'}
+                      onMouseOver={(e) => e.currentTarget.style.background = '#d6ecf9'}
+                      onMouseOut={(e) => e.currentTarget.style.background = 'var(--bg-skyblue-pale)'}
                     >
                       <FileText size={13} />
                       Full Info
@@ -660,24 +634,24 @@ const Services = () => {
         {/* Bottom Guidance & Assistance Banner */}
         <div style={{
           marginTop: '4.5rem',
-          background: '#ffffff',
-          borderRadius: '20px',
-          border: '1px solid #e2e8f0',
+          background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
+          borderRadius: '24px',
+          border: '1px solid rgba(173, 35, 72, 0.12)',
           padding: '2.5rem 2.25rem',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: '2rem',
           alignItems: 'center',
-          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)'
+          boxShadow: 'var(--shadow-md)'
         }}>
           <div>
-            <span style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <span className="section-tag" style={{ marginBottom: '0.5rem' }}>
               PATIENT GUIDANCE & APPOINTMENTS
             </span>
-            <h3 style={{ fontSize: '1.6rem', color: '#0a2540', marginTop: '0.25rem', marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1.7rem', color: 'var(--text-heading)', marginTop: '0.25rem', marginBottom: '0.75rem', fontFamily: '"Playfair Display", serif' }}>
               Need Help Choosing the Right Scan?
             </h3>
-            <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+            <p style={{ color: 'var(--text-charcoal)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
               Our fetal medicine specialists and staff are available to explain gestational timing, clinical requirements, and appropriate ultrasound protocols.
             </p>
           </div>
@@ -687,38 +661,27 @@ const Services = () => {
               href="tel:+917799900248"
               className="btn btn-primary"
               style={{
-                borderRadius: '999px',
-                padding: '0.85rem 1.75rem',
-                fontSize: '0.95rem',
-                fontWeight: 600,
-                display: 'inline-flex',
-                alignItems: 'center',
+                width: '100%',
                 justifyContent: 'center',
-                gap: '8px',
-                textDecoration: 'none'
+                padding: '0.85rem 1.75rem'
               }}
             >
               <PhoneCall size={18} /> Call Clinic: +91 7799900248
             </a>
-            <Link
-              to="/doctors"
+            <button
+              onClick={() => openModal()}
+              type="button"
               className="btn btn-outline"
               style={{
-                borderRadius: '999px',
-                padding: '0.85rem 1.75rem',
-                fontSize: '0.95rem',
-                fontWeight: 600,
-                display: 'inline-flex',
-                alignItems: 'center',
+                backgroundColor: '#ffffff',
+                width: '100%',
                 justifyContent: 'center',
-                gap: '8px',
-                borderColor: 'var(--primary)',
-                color: 'var(--primary)',
-                textDecoration: 'none'
+                padding: '0.85rem 1.75rem',
+                cursor: 'pointer'
               }}
             >
               <CalendarCheck size={18} /> Schedule Doctor Consultation
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -843,7 +806,7 @@ const Services = () => {
                     fontSize: '0.72rem',
                     fontWeight: 700,
                     color: '#ffffff',
-                    background: 'var(--primary)',
+                    background: 'var(--primary-burgundy)',
                     padding: '3px 12px',
                     borderRadius: '999px',
                     boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
@@ -854,7 +817,7 @@ const Services = () => {
 
                 <div style={{
                   background: '#ffffff',
-                  color: 'var(--primary)',
+                  color: 'var(--primary-burgundy)',
                   fontFamily: '"Playfair Display", serif',
                   fontSize: '1.35rem',
                   fontWeight: 700,
@@ -872,7 +835,7 @@ const Services = () => {
               {/* Test Name */}
               <h2 style={{
                 fontSize: '1.65rem',
-                color: '#0a2540',
+                color: 'var(--text-heading)',
                 fontFamily: '"Playfair Display", serif',
                 marginBottom: '0.75rem',
                 lineHeight: 1.25
@@ -885,8 +848,8 @@ const Services = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                background: '#f8fafc',
-                border: '1px solid #e2e8f0',
+                background: 'var(--bg-warm-white)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '12px',
                 padding: '0.75rem 1.25rem',
                 marginBottom: '1.5rem',
@@ -894,14 +857,14 @@ const Services = () => {
                 gap: '8px'
               }}>
                 <div>
-                  <span style={{ fontSize: '0.74rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>
+                  <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>
                     Standard Clinic Fee
                   </span>
-                  <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--primary)', fontFamily: '"Playfair Display", serif' }}>
+                  <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--primary-burgundy)', fontFamily: '"Playfair Display", serif' }}>
                     ₹{activeModalTest.price}
                   </span>
                 </div>
-                <span style={{ fontSize: '0.8rem', color: '#10b981', background: '#ecfdf5', padding: '4px 12px', borderRadius: '999px', fontWeight: 600, border: '1px solid #a7f3d0' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--primary-blue)', background: 'var(--bg-skyblue-pale)', padding: '4px 12px', borderRadius: '999px', fontWeight: 600, border: '1px solid rgba(37, 137, 196, 0.25)' }}>
                   ✓ Includes Clinical Report & Scan Film
                 </span>
               </div>
@@ -1062,13 +1025,12 @@ const Services = () => {
                 borderTop: '1px solid #f1f5f9',
                 flexWrap: 'wrap'
               }}>
-                <Link
-                  to="/doctors"
+                <button
+                  type="button"
                   className="btn btn-primary"
                   style={{
                     flex: 1,
                     minWidth: '220px',
-                    borderRadius: '999px',
                     padding: '0.85rem',
                     fontSize: '0.95rem',
                     fontWeight: 600,
@@ -1076,13 +1038,17 @@ const Services = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '8px',
-                    textDecoration: 'none'
+                    cursor: 'pointer'
                   }}
-                  onClick={() => setActiveModalTest(null)}
+                  onClick={() => {
+                    const testName = activeModalTest.name;
+                    setActiveModalTest(null);
+                    openModal(testName);
+                  }}
                 >
                   <CalendarCheck size={18} />
                   <span>Book This Test (₹{activeModalTest.price})</span>
-                </Link>
+                </button>
 
                 <a
                   href="tel:+917799900248"

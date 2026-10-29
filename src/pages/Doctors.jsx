@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { doctors } from '../data/doctors';
 import { 
@@ -13,10 +13,17 @@ import {
   X, 
   Stethoscope, 
   HeartHandshake,
-  FileCheck
+  FileCheck,
+  PhoneCall
 } from 'lucide-react';
+import { useAppointmentModal } from '../components/AppointmentModal';
 
 const Doctors = () => {
+  const { openModal } = useAppointmentModal();
+  useEffect(() => {
+    document.title = 'Specialist Doctor | Dr. T. Sai Kiranmai | Sai Diagnostics';
+  }, []);
+
   const [bookingDoctor, setBookingDoctor] = useState(null);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [patientName, setPatientName] = useState('');
@@ -36,68 +43,55 @@ const Doctors = () => {
   };
 
   return (
-    <div style={{ background: '#fbf9f4', minHeight: '100vh', paddingBottom: '5rem' }}>
-      {/* Header Banner */}
+    <div style={{ background: 'var(--bg-warm-white)', minHeight: '100vh', paddingBottom: '0' }}>
+      {/* 1. Header Banner (Light Burgundy Warm Ambient Header) */}
       <section style={{
-        background: 'linear-gradient(135deg, #163026 0%, #2b5c4b 100%)',
-        color: '#ffffff',
-        padding: '3.5rem 1.5rem 3rem',
+        background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
+        color: 'var(--text-heading)',
+        padding: '3.75rem 1.5rem 3.25rem',
         textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderBottom: '1px solid rgba(173, 35, 72, 0.1)'
       }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span style={{
-            display: 'inline-block',
-            letterSpacing: '2px',
-            fontSize: '0.78rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            color: '#a7d3c0',
-            marginBottom: '0.75rem',
-            background: 'rgba(255, 255, 255, 0.08)',
-            padding: '4px 14px',
-            borderRadius: '999px',
-            border: '1px solid rgba(255, 255, 255, 0.15)'
-          }}>
-            CLINICAL FACULTY & LEADERSHIP
+          <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
+            ● CLINICAL FACULTY & LEADERSHIP
           </span>
 
           <h1 style={{
             fontFamily: '"Playfair Display", serif',
             fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
-            color: '#ffffff',
+            color: 'var(--text-heading)',
             marginBottom: '1rem',
             lineHeight: 1.15
           }}>
-            Our Fetal Medicine Specialist
+            Meet Our Specialist
           </h1>
 
           <p style={{
             fontSize: '1.05rem',
-            color: '#e2ece6',
+            color: 'var(--text-charcoal)',
             lineHeight: 1.6,
             maxWidth: '640px',
             margin: '0 auto'
           }}>
-            Consult with our fellowship-trained fetal medicine radiologist for high-resolution ultrasound scans, early genetic risk assessments, and personalized scan reviews.
+            Specialised fetal imaging and personalised care to support families throughout their pregnancy journey.
           </p>
         </div>
       </section>
 
-      {/* Main Profile Section */}
-      <div className="container" style={{ maxWidth: '1140px', marginTop: '2.5rem' }}>
-        <div style={{
-          background: '#ffffff',
-          borderRadius: '24px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 10px 30px -5px rgba(10, 37, 64, 0.06)',
-          overflow: 'hidden'
+      {/* 2. Main Profile Section (Warm White Surface) */}
+      <div className="container" style={{ maxWidth: '1160px', marginTop: '2.5rem', marginBottom: '3.5rem' }}>
+        <div className="card" style={{
+          padding: 0,
+          overflow: 'hidden',
+          backgroundColor: '#ffffff'
         }}>
           {/* Top highlight bar */}
           <div style={{
             height: '6px',
-            background: 'linear-gradient(90deg, #163026 0%, #2b5c4b 50%, #0369a1 100%)'
+            background: 'linear-gradient(90deg, #AD2348 0%, #D989A0 50%, #2589C4 100%)'
           }} />
 
           <div style={{
@@ -118,40 +112,29 @@ const Doctors = () => {
                 flexWrap: 'wrap'
               }}>
                 <div style={{
-                  width: '100px',
-                  height: '100px',
+                  width: '96px',
+                  height: '96px',
                   borderRadius: '24px',
-                  background: 'linear-gradient(135deg, #e4edea 0%, #cce0d8 100%)',
+                  background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--primary)',
-                  boxShadow: '0 8px 20px rgba(43, 92, 75, 0.15)',
+                  color: 'var(--primary-burgundy)',
+                  border: '1px solid rgba(173, 35, 72, 0.2)',
+                  boxShadow: 'var(--shadow-sm)',
                   flexShrink: 0
                 }}>
-                  <Stethoscope size={52} strokeWidth={1.75} />
+                  <Stethoscope size={48} strokeWidth={1.8} />
                 </div>
 
                 <div>
-                  <div style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    background: '#e8f5e9',
-                    color: '#1b5e20',
-                    padding: '3px 10px',
-                    borderRadius: '999px',
-                    fontSize: '0.78rem',
-                    fontWeight: 700,
-                    marginBottom: '0.5rem'
-                  }}>
-                    <Sparkles size={13} />
-                    <span>Lead Consultant Radiologist</span>
-                  </div>
+                  <span className="section-tag" style={{ marginBottom: '0.4rem', fontSize: '0.74rem' }}>
+                    <Sparkles size={13} /> Lead Consultant Radiologist
+                  </span>
                   <h2 style={{
                     fontFamily: '"Playfair Display", serif',
                     fontSize: 'clamp(1.8rem, 2.5vw, 2.4rem)',
-                    color: '#0a2540',
+                    color: 'var(--text-heading)',
                     lineHeight: 1.15,
                     margin: 0
                   }}>
@@ -171,17 +154,17 @@ const Doctors = () => {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  background: '#f8fafc',
-                  border: '1px solid #e2e8f0',
-                  padding: '0.6rem 1rem',
-                  borderRadius: '10px'
+                  background: 'var(--bg-warm-white)',
+                  border: '1px solid rgba(173, 35, 72, 0.15)',
+                  padding: '0.65rem 1rem',
+                  borderRadius: '12px'
                 }}>
-                  <Award size={18} color="var(--primary)" />
-                  <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.95rem' }}>
+                  <Award size={18} color="var(--primary-burgundy)" />
+                  <span style={{ fontWeight: 700, color: 'var(--text-heading)', fontSize: '0.95rem' }}>
                     {doctor.qualifications}
                   </span>
-                  <span style={{ color: '#64748b', fontSize: '0.85rem' }}>
-                    (Medical & Radiology Degrees)
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    (Medical & Radiology Qualifications)
                   </span>
                 </div>
 
@@ -189,13 +172,13 @@ const Doctors = () => {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  background: '#eef5f8',
-                  border: '1px solid #bae6fd',
-                  padding: '0.6rem 1rem',
-                  borderRadius: '10px'
+                  background: 'var(--bg-skyblue-pale)',
+                  border: '1px solid rgba(37, 137, 196, 0.25)',
+                  padding: '0.65rem 1rem',
+                  borderRadius: '12px'
                 }}>
-                  <Award size={18} color="#0284c7" />
-                  <span style={{ fontWeight: 700, color: '#0369a1', fontSize: '0.95rem' }}>
+                  <Award size={18} color="var(--primary-blue)" />
+                  <span style={{ fontWeight: 700, color: 'var(--primary-blue)', fontSize: '0.95rem' }}>
                     {doctor.fellowship}
                   </span>
                 </div>
@@ -208,62 +191,63 @@ const Doctors = () => {
                   fontWeight: 700,
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px',
-                  color: '#64748b',
+                  color: 'var(--text-muted)',
                   marginBottom: '0.5rem'
                 }}>
                   Clinical Profile
                 </h4>
-                <p style={{
-                  color: '#334155',
-                  fontSize: '0.95rem',
-                  lineHeight: 1.65,
+
+                <div style={{
+                  background: 'var(--bg-burgundy-light)',
+                  borderLeft: '4px solid var(--primary-burgundy)',
+                  padding: '1rem 1.25rem',
+                  borderRadius: '0 12px 12px 0',
+                  fontSize: '1rem',
+                  color: 'var(--text-heading)',
+                  lineHeight: 1.7,
                   marginBottom: '1rem'
+                }}>
+                  “Committed to providing careful fetal imaging and personalised attention, with a focus on helping expectant parents understand their examinations and receive appropriate guidance.”
+                </div>
+
+                <p style={{
+                  color: 'var(--text-charcoal)',
+                  fontSize: '0.93rem',
+                  lineHeight: 1.65,
+                  margin: 0
                 }}>
                   {doctor.bio}
                 </p>
-
-                <div style={{
-                  background: '#fcfdfb',
-                  borderLeft: '4px solid var(--primary)',
-                  padding: '0.85rem 1rem',
-                  borderRadius: '0 10px 10px 0',
-                  fontSize: '0.9rem',
-                  color: '#2b5c4b',
-                  fontStyle: 'italic',
-                  lineHeight: 1.5
-                }}>
-                  &ldquo;{doctor.philosophy}&rdquo;
-                </div>
               </div>
 
-              {/* Trust stats pill bar */}
+              {/* Trust stats pill bar — strictly verified */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
                 gap: '0.75rem',
-                background: '#f8fafc',
-                border: '1px solid #e2e8f0',
+                background: 'var(--bg-warm-white)',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '14px',
                 padding: '1rem',
                 textAlign: 'center'
               }}>
                 <div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)', fontFamily: '"Playfair Display", serif' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-burgundy)', fontFamily: '"Playfair Display", serif' }}>
                     12+ Yrs
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Clinical Practice</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Clinical Practice</div>
                 </div>
-                <div style={{ borderLeft: '1px solid #e2e8f0', borderRight: '1px solid #e2e8f0' }}>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0a2540', fontFamily: '"Playfair Display", serif' }}>
-                    45,000+
+                <div style={{ borderLeft: '1px solid var(--border-subtle)', borderRight: '1px solid var(--border-subtle)' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-heading)', fontFamily: '"Playfair Display", serif' }}>
+                    GE Voluson
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Ultrasound Scans</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Fetal Ultrasound</div>
                 </div>
                 <div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0284c7', fontFamily: '"Playfair Display", serif' }}>
-                    4.9★
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-blue)', fontFamily: '"Playfair Display", serif' }}>
+                    Specialised
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 600 }}>Patient Satisfaction</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>Personalised Care</div>
                 </div>
               </div>
             </div>
@@ -273,21 +257,21 @@ const Doctors = () => {
               {/* Areas of Clinical Specialization */}
               <div style={{
                 background: '#ffffff',
-                border: '1px solid #e2e8f0',
+                border: '1px solid var(--border-subtle)',
                 borderRadius: '16px',
                 padding: '1.5rem',
                 marginBottom: '1.5rem',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)'
+                boxShadow: 'var(--shadow-sm)'
               }}>
                 <h3 style={{
                   fontSize: '1.15rem',
-                  color: '#0a2540',
+                  color: 'var(--text-heading)',
                   marginBottom: '1rem',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <HeartHandshake size={20} color="var(--primary)" />
+                  <HeartHandshake size={20} color="var(--primary-burgundy)" />
                   Clinical Specializations & Procedures
                 </h3>
 
@@ -298,9 +282,9 @@ const Doctors = () => {
                       alignItems: 'flex-start',
                       gap: '8px',
                       fontSize: '0.9rem',
-                      color: '#334155'
+                      color: 'var(--text-charcoal)'
                     }}>
-                      <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <CheckCircle2 size={16} color="var(--primary-blue)" style={{ flexShrink: 0, marginTop: '3px' }} />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -309,8 +293,8 @@ const Doctors = () => {
 
               {/* Consultation Info Box */}
               <div style={{
-                background: '#fafafa',
-                border: '1px solid #e2e8f0',
+                background: 'var(--bg-skyblue-pale)',
+                border: '1px solid rgba(37, 137, 196, 0.25)',
                 borderRadius: '16px',
                 padding: '1.25rem',
                 marginBottom: '1.5rem',
@@ -319,32 +303,32 @@ const Doctors = () => {
                 gap: '0.75rem',
                 fontSize: '0.88rem'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#334155' }}>
-                  <Clock size={16} color="var(--primary)" style={{ flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-charcoal)' }}>
+                  <Clock size={16} color="var(--primary-burgundy)" style={{ flexShrink: 0 }} />
                   <div>
                     <strong>Timings: </strong> {doctor.availability}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#334155' }}>
-                  <Languages size={16} color="#0284c7" style={{ flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-charcoal)' }}>
+                  <Languages size={16} color="var(--primary-blue)" style={{ flexShrink: 0 }} />
                   <div>
                     <strong>Consultation Languages: </strong> {doctor.languages.join(', ')}
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#334155' }}>
-                  <MapPin size={16} color="#e11d48" style={{ flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-charcoal)' }}>
+                  <MapPin size={16} color="var(--primary-burgundy)" style={{ flexShrink: 0 }} />
                   <div>
                     <strong>Center: </strong> {doctor.clinic}, 9th Cross Rd, Sai Nagar, Anantapur
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#334155' }}>
-                  <Phone size={16} color="#10b981" style={{ flexShrink: 0 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-charcoal)' }}>
+                  <Phone size={16} color="var(--primary-blue)" style={{ flexShrink: 0 }} />
                   <div>
                     <strong>Helpline: </strong>
-                    <a href={`tel:${doctor.phone}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>
+                    <a href={`tel:${doctor.phone}`} style={{ color: 'var(--primary-burgundy)', fontWeight: 700 }}>
                       {doctor.phone}
                     </a>
                   </div>
@@ -354,43 +338,33 @@ const Doctors = () => {
               {/* Quick Action Buttons */}
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <button
-                  onClick={() => { setBookingDoctor(doctor); setBookingSuccess(false); }}
+                  onClick={() => openModal()}
                   className="btn btn-primary"
                   style={{
                     flex: 1,
-                    minWidth: '220px',
-                    borderRadius: '999px',
-                    padding: '0.9rem 1.5rem',
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    boxShadow: '0 4px 14px rgba(43, 92, 75, 0.25)'
+                    minWidth: '200px',
+                    padding: '0.85rem 1.5rem',
+                    fontSize: '0.95rem',
+                    justifyContent: 'center'
                   }}
+                  type="button"
                 >
-                  <Calendar size={18} /> Book Consultation
+                  <Calendar size={18} /> Book an Appointment
                 </button>
 
                 <Link
-                  to="/services"
+                  to="/contact"
                   className="btn btn-outline"
                   style={{
-                    borderRadius: '999px',
-                    padding: '0.9rem 1.5rem',
+                    flex: 1,
+                    minWidth: '200px',
+                    backgroundColor: '#ffffff',
+                    padding: '0.85rem 1.5rem',
                     fontSize: '0.95rem',
-                    fontWeight: 600,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    borderColor: 'var(--primary)',
-                    color: 'var(--primary)',
-                    textDecoration: 'none'
+                    justifyContent: 'center'
                   }}
                 >
-                  <FileCheck size={18} /> View All 30 Tests
+                  <PhoneCall size={18} /> Contact the Centre
                 </Link>
               </div>
             </div>
@@ -407,7 +381,7 @@ const Doctors = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(10, 25, 40, 0.65)',
+            background: 'rgba(52, 57, 67, 0.65)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -426,7 +400,8 @@ const Doctors = () => {
               width: '100%',
               maxWidth: '460px',
               position: 'relative',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              border: '1px solid var(--border-subtle)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -436,7 +411,7 @@ const Doctors = () => {
                 position: 'absolute',
                 top: '1.25rem',
                 right: '1.25rem',
-                background: '#f1f5f9',
+                background: 'var(--bg-warm-white)',
                 border: 'none',
                 cursor: 'pointer',
                 color: 'var(--text-muted)',
@@ -452,46 +427,35 @@ const Doctors = () => {
             </button>
 
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-              <div style={{
-                width: '64px',
-                height: '64px',
-                background: '#e4edea',
-                color: 'var(--primary)',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 1rem',
-                boxShadow: '0 4px 12px rgba(43, 92, 75, 0.15)'
-              }}>
-                <Calendar size={32} />
+              <div className="icon-box-burgundy" style={{ margin: '0 auto 1rem', width: '64px', height: '64px' }}>
+                <Calendar size={30} />
               </div>
-              <h3 style={{ fontSize: '1.4rem', color: '#0a2540', marginBottom: '0.25rem' }}>
+              <h3 style={{ fontSize: '1.4rem', color: 'var(--text-heading)', marginBottom: '0.25rem' }}>
                 Schedule Consultation
               </h3>
-              <p style={{ color: 'var(--primary)', fontWeight: 600, margin: 0 }}>
+              <p style={{ color: 'var(--primary-burgundy)', fontWeight: 600, margin: 0 }}>
                 {doctor.name} ({doctor.qualifications})
               </p>
-              <span style={{ fontSize: '0.8rem', color: '#64748b' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                 {doctor.fellowship}
               </span>
             </div>
 
             {bookingSuccess ? (
               <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
-                <CheckCircle2 size={52} style={{ color: '#10b981', margin: '0 auto 1rem' }} />
-                <h4 style={{ color: '#0a2540', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
+                <CheckCircle2 size={52} style={{ color: 'var(--primary-burgundy)', margin: '0 auto 1rem' }} />
+                <h4 style={{ color: 'var(--text-heading)', marginBottom: '0.5rem', fontSize: '1.2rem' }}>
                   Appointment Request Received!
                 </h4>
-                <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+                <p style={{ color: 'var(--text-charcoal)', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
                   Thank you, <strong>{patientName}</strong>. Our reception team at Sai Diagnostics will call you at <strong>{patientPhone}</strong> shortly to confirm your consultation slot with {doctor.name}.
                 </p>
-                <div style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '10px', fontSize: '0.82rem', color: '#64748b', marginBottom: '1.5rem' }}>
-                  Direct Clinic Desk: <strong>+91 7799900248</strong>
+                <div style={{ background: 'var(--bg-skyblue-pale)', padding: '0.85rem', borderRadius: '10px', fontSize: '0.85rem', color: 'var(--primary-blue)', marginBottom: '1.5rem', fontWeight: 600 }}>
+                  Direct Clinic Desk: +91 7799900248
                 </div>
                 <button
                   className="btn btn-primary"
-                  style={{ borderRadius: '999px', width: '100%', padding: '0.75rem' }}
+                  style={{ width: '100%', padding: '0.75rem' }}
                   onClick={() => setBookingDoctor(null)}
                 >
                   Close
@@ -500,13 +464,13 @@ const Doctors = () => {
             ) : (
               <form onSubmit={handleBookSubmit}>
                 <div style={{
-                  background: '#fafafa',
-                  border: '1px solid #e2e8f0',
+                  background: 'var(--bg-skyblue-pale)',
+                  border: '1px solid rgba(37, 137, 196, 0.2)',
                   borderRadius: '12px',
                   padding: '0.85rem 1rem',
                   marginBottom: '1.25rem',
                   fontSize: '0.82rem',
-                  color: '#475569'
+                  color: 'var(--text-charcoal)'
                 }}>
                   <div><strong>Location:</strong> 9th Cross Rd, Sai Nagar, Anantapur</div>
                   <div><strong>Consultation Timings:</strong> Mon–Sat, 9 AM – 7 PM</div>
@@ -514,7 +478,7 @@ const Doctors = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '1.5rem' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '4px' }}>
                       Patient Full Name *
                     </label>
                     <input
@@ -523,19 +487,12 @@ const Doctors = () => {
                       placeholder="e.g. Ananya Rao"
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: '10px',
-                        border: '1px solid #cbd5e1',
-                        fontSize: '0.92rem',
-                        outline: 'none'
-                      }}
+                      className="form-input"
                     />
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '4px' }}>
                       Phone / Mobile Number (+91) *
                     </label>
                     <input
@@ -544,33 +501,18 @@ const Doctors = () => {
                       placeholder="e.g. 9876543210"
                       value={patientPhone}
                       onChange={(e) => setPatientPhone(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: '10px',
-                        border: '1px solid #cbd5e1',
-                        fontSize: '0.92rem',
-                        outline: 'none'
-                      }}
+                      className="form-input"
                     />
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '4px' }}>
                       Scan or Test Requested
                     </label>
                     <select
                       value={selectedScan}
                       onChange={(e) => setSelectedScan(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: '10px',
-                        border: '1px solid #cbd5e1',
-                        fontSize: '0.92rem',
-                        outline: 'none',
-                        background: '#ffffff'
-                      }}
+                      className="form-select"
                     >
                       <option value="TIFFA / Anomaly Scan">Anomaly / TIFFA Scan (₹1,800)</option>
                       <option value="Nuchal Translucency Scan">NT Scan (12–14 Weeks) (₹1,500)</option>
@@ -584,21 +526,14 @@ const Doctors = () => {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: '#334155', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-heading)', marginBottom: '4px' }}>
                       Preferred Date
                     </label>
                     <input
                       type="date"
                       value={preferredDate}
                       onChange={(e) => setPreferredDate(e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem 1rem',
-                        borderRadius: '10px',
-                        border: '1px solid #cbd5e1',
-                        fontSize: '0.92rem',
-                        outline: 'none'
-                      }}
+                      className="form-input"
                     />
                   </div>
                 </div>
@@ -606,14 +541,7 @@ const Doctors = () => {
                 <button
                   type="submit"
                   className="btn btn-primary"
-                  style={{
-                    width: '100%',
-                    borderRadius: '999px',
-                    padding: '0.9rem',
-                    fontWeight: 600,
-                    fontSize: '1rem',
-                    boxShadow: '0 4px 14px rgba(43, 92, 75, 0.25)'
-                  }}
+                  style={{ width: '100%', padding: '0.9rem' }}
                 >
                   Confirm Appointment Request →
                 </button>
@@ -623,42 +551,25 @@ const Doctors = () => {
         </div>
       )}
 
-      {/* Testimonials */}
-      <section className="py-12" style={{ background: '#fbf9f4' }}>
-        <div className="container" style={{ maxWidth: '1100px' }}>
-          <div className="text-center" style={{ marginBottom: '2.5rem' }}>
-            <span style={{ display: 'inline-block', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--primary)', background: 'rgba(43,92,75,0.06)', padding: '4px 14px', borderRadius: '999px', marginBottom: '0.75rem' }}>PATIENT TESTIMONIALS</span>
-            <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', color: '#0a2540' }}>What Families Are Saying</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-            {[
-              { name: 'Padmavathi R.', tag: 'TIFFA Scan Patient', text: 'Dr. Kiranmai explained every detail of our anomaly scan with exceptional patience. The equipment quality and the calm atmosphere made what could have been a stressful visit genuinely reassuring.' },
-              { name: 'Sridevi L.', tag: 'NT Scan + Double Marker', text: 'From the moment we walked in, the staff made us feel at ease. The scan was thorough and the report was ready promptly. We felt completely confident in the clinical team here.' },
-              { name: 'Anitha M.', tag: 'Fetal Echocardiography', text: "We drove from Kurnool specifically for the Fetal Echo — well worth every kilometer. Dr. Kiranmai's expertise and willingness to explain every cardiac view gave us tremendous peace of mind." }
-            ].map((t, i) => (
-              <div key={i} style={{ background: '#ffffff', borderRadius: '18px', padding: '2rem', border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', gap: '4px', marginBottom: '1rem' }}>
-                  {[1,2,3,4,5].map(s => <Sparkles key={s} size={15} fill="#f59e0b" color="#f59e0b" />)}
-                </div>
-                <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '1.25rem' }}>"{t.text}"</p>
-                <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                  <strong style={{ color: '#0a2540', fontSize: '0.95rem' }}>{t.name}</strong>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 500, marginTop: '2px' }}>{t.tag}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* CTA Strip — Can't find what you need? */}
-      <section style={{ background: 'linear-gradient(135deg, #163026 0%, #2b5c4b 100%)', padding: '3.5rem 1.5rem', textAlign: 'center' }}>
+      {/* 4. CTA Strip (Light Burgundy Warm Ambient Panel) */}
+      <section style={{ background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)', padding: '4rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(173, 35, 72, 0.1)' }}>
         <div className="container" style={{ maxWidth: '780px' }}>
-          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', color: '#ffffff', marginBottom: '0.5rem' }}>Need to Speak With Our Team?</h2>
-          <p style={{ color: '#c8e6da', fontSize: '1rem', maxWidth: '520px', margin: '0 auto 1.75rem' }}>Our patient care team is available Mon–Sat, 9 AM to 7 PM to answer your questions and help schedule your scan.</p>
+          <span className="section-tag" style={{ marginBottom: '0.75rem' }}>HAVE QUESTIONS?</span>
+          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Need to Speak With Our Team?</h2>
+          <p style={{ color: 'var(--text-charcoal)', fontSize: '1rem', maxWidth: '520px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>Our patient care team is available Mon–Sat, 9 AM to 7 PM to answer your questions and help schedule your scan.</p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <a href="tel:+917799900248" className="btn" style={{ background: '#ffffff', color: 'var(--primary)', borderRadius: '999px', padding: '0.85rem 2rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}><Phone size={18} /> +91 7799900248</a>
-            <Link to="/contact" className="btn" style={{ background: 'rgba(255,255,255,0.12)', color: '#ffffff', borderRadius: '999px', padding: '0.85rem 2rem', fontWeight: 600, border: '1px solid rgba(255,255,255,0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}><Calendar size={18} /> Book Appointment</Link>
+            <a href="tel:+917799900248" className="btn btn-primary" style={{ padding: '0.85rem 2rem' }}>
+              <Phone size={18} /> +91 7799900248
+            </a>
+            <button
+              onClick={() => openModal()}
+              className="btn btn-outline"
+              style={{ backgroundColor: '#ffffff', padding: '0.85rem 2rem', cursor: 'pointer' }}
+              type="button"
+            >
+              <Calendar size={18} /> Book Appointment
+            </button>
           </div>
         </div>
       </section>
@@ -667,4 +578,3 @@ const Doctors = () => {
 };
 
 export default Doctors;
-

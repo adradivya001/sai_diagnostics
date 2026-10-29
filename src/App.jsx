@@ -9,6 +9,7 @@ import Doctors from './pages/Doctors';
 import Contact from './pages/Contact';
 import Facilities from './pages/Facilities';
 import FloatingContact from './components/FloatingContact';
+import { AppointmentModalProvider } from './components/AppointmentModal';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -19,23 +20,28 @@ function ScrollToTop() {
 }
 
 function App() {
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <ScrollToTop />
-      <FloatingContact />
-      <Navbar />
-      <main style={{ flex: 1 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/doctors" element={<Doctors />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/facilities" element={<Facilities />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <AppointmentModalProvider>
+      <div className="flex flex-col min-h-screen">
+        <ScrollToTop />
+        <FloatingContact />
+        <Navbar />
+        <main style={{ flex: 1, paddingTop: isHome ? 0 : '4.5rem' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/facilities" element={<Facilities />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </AppointmentModalProvider>
   );
 }
 

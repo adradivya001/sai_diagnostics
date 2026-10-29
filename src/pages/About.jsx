@@ -1,250 +1,337 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Award, 
-  ShieldCheck, 
   Heart, 
-  Users, 
-  CheckCircle2, 
+  ShieldCheck, 
+  Stethoscope, 
+  Sparkles, 
   PhoneCall, 
   ArrowRight,
-  Sparkles,
-  Stethoscope
+  Quote,
+  CheckCircle2,
+  CalendarCheck
 } from 'lucide-react';
 
 const About = () => {
+  useEffect(() => {
+    document.title = 'About Us | Sai Diagnostics & Fetal Medicine Centre';
+  }, []);
+
   return (
-    <div style={{ background: '#fbf9f4', minHeight: '100vh', paddingBottom: '5rem' }}>
-      {/* Header Banner */}
+    <div style={{ background: 'var(--bg-warm-white)', minHeight: '100vh', paddingBottom: '0' }}>
+      {/* 1. Header Banner */}
       <section style={{
-        background: 'linear-gradient(135deg, #163026 0%, #2b5c4b 100%)',
-        color: '#ffffff',
+        background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
+        color: 'var(--text-heading)',
         padding: '3.75rem 1.5rem 3.25rem',
         textAlign: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderBottom: '1px solid rgba(173, 35, 72, 0.1)'
       }}>
-        <div style={{ maxWidth: '820px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span style={{
-            display: 'inline-block',
-            letterSpacing: '2px',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            color: '#a7d3c0',
-            marginBottom: '0.75rem',
-            background: 'rgba(255, 255, 255, 0.08)',
-            padding: '4px 16px',
-            borderRadius: '999px',
-            border: '1px solid rgba(255, 255, 255, 0.15)'
-          }}>
-            ABOUT OUR CENTER
+        <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
+            ● ABOUT OUR CENTRE
           </span>
 
           <h1 style={{
             fontFamily: '"Playfair Display", serif',
-            fontSize: 'clamp(2.3rem, 4vw, 3.3rem)',
-            color: '#ffffff',
-            marginBottom: '1rem',
-            lineHeight: 1.15
+            fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)',
+            color: 'var(--text-heading)',
+            marginBottom: '1.25rem',
+            lineHeight: 1.2
           }}>
-            Dedicated to Maternal & Fetal Wellbeing
+            About Sai Diagnostics and Fetal Medicine Centre
           </h1>
 
           <p style={{
-            fontSize: '1.05rem',
-            color: '#e2ece6',
-            lineHeight: 1.6,
-            maxWidth: '660px',
+            fontSize: '1.08rem',
+            color: 'var(--text-charcoal)',
+            lineHeight: 1.7,
+            maxWidth: '720px',
             margin: '0 auto'
           }}>
-            For over three decades, Sai Diagnostics has stood as a beacon of clinical accuracy, technological innovation, and compassionate care for mothers and families across Anantapur.
+            Every patient deserves individual attention, clear guidance, and compassionate care. Our aim is to support families through their healthcare journey while building lasting relationships with patients and referring doctors.
           </p>
         </div>
       </section>
 
-      {/* Main Story Section with Clinic Reception Image */}
-      <section style={{ padding: '4rem 0' }}>
+      {/* 2. Main About Section — Founder's Message & Core Vision */}
+      <section className="py-16" style={{ background: '#ffffff' }}>
         <div className="container" style={{ maxWidth: '1240px' }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: '3.5rem',
-            alignItems: 'center'
+            gap: '3rem',
+            alignItems: 'start'
           }}>
-            {/* Image Column */}
+            {/* Left Column: Elegant Founder's Message Card */}
             <div>
               <div style={{
-                position: 'relative',
-                borderRadius: '24px',
+                background: 'linear-gradient(150deg, #FFFFFF 0%, #FFF8FA 55%, #F4FAFD 100%)',
+                borderRadius: '22px',
+                border: '1px solid rgba(173, 35, 72, 0.18)',
+                borderLeft: '5px solid var(--primary-burgundy)',
+                boxShadow: '0 10px 32px rgba(173, 35, 72, 0.06), 0 2px 10px rgba(37, 137, 196, 0.05)',
+                padding: 'clamp(2rem, 3.5vw, 2.75rem)',
+                position: 'relative'
+              }}>
+                {/* Header Badge */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '1.5rem',
+                  gap: '1rem',
+                  flexWrap: 'wrap'
+                }}>
+                  <div style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    background: 'rgba(173, 35, 72, 0.08)',
+                    padding: '6px 14px',
+                    borderRadius: '20px',
+                    border: '1px solid rgba(173, 35, 72, 0.15)'
+                  }}>
+                    <Heart size={15} color="var(--primary-burgundy)" />
+                    <span style={{
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      color: 'var(--primary-burgundy)',
+                      textTransform: 'uppercase'
+                    }}>
+                      Founder's Message
+                    </span>
+                  </div>
+
+                  <Quote size={32} style={{ color: 'rgba(173, 35, 72, 0.18)', transform: 'rotate(180deg)' }} />
+                </div>
+
+                {/* Founder's Exact Message Quote */}
+                <blockquote style={{
+                  margin: '0 0 1.75rem',
+                  fontFamily: '"Inter", sans-serif',
+                  fontSize: '1.05rem',
+                  lineHeight: 1.8,
+                  color: 'var(--text-heading)',
+                  fontWeight: 400
+                }}>
+                  “Recognised for its dedicated care in Rayalaseema, Sai Diagnostics and Fetal Medicine Centre is committed to providing personalised care to every patient. The centre has been involved in the evaluation of rare and complex fetal cases. We value the trust placed in us by senior gynaecologists and paediatric specialists and continue to work towards providing thoughtful, specialised care for every family.”
+                </blockquote>
+
+                {/* Subtle Divider with Rose-Pink to Cyan Gradient */}
+                <div style={{
+                  height: '1px',
+                  background: 'linear-gradient(90deg, rgba(173, 35, 72, 0.25) 0%, rgba(37, 137, 196, 0.25) 50%, transparent 100%)',
+                  marginBottom: '1.5rem'
+                }} />
+
+                {/* Verified Founder Details */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  flexWrap: 'wrap'
+                }}>
+                  <div>
+                    <h3 style={{
+                      fontFamily: '"Playfair Display", serif',
+                      fontSize: '1.35rem',
+                      color: 'var(--primary-burgundy)',
+                      margin: '0 0 0.25rem',
+                      fontWeight: 700
+                    }}>
+                      Dr. T. Sai Kiranmai
+                    </h3>
+                    <div style={{
+                      fontSize: '0.92rem',
+                      fontWeight: 600,
+                      color: 'var(--text-charcoal)',
+                      marginBottom: '0.2rem'
+                    }}>
+                      Consultant Radiologist & Fetal Medicine Specialist
+                    </div>
+                    <div style={{
+                      fontSize: '0.84rem',
+                      color: 'var(--text-muted)'
+                    }}>
+                      M.B.B.S., DMRD • Fellowship in Fetal Ultrasound
+                    </div>
+                  </div>
+
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.8rem',
+                    fontWeight: 600,
+                    padding: '6px 12px',
+                    borderRadius: '12px',
+                    background: 'rgba(37, 137, 196, 0.1)',
+                    color: 'var(--primary-blue)',
+                    border: '1px solid rgba(37, 137, 196, 0.2)'
+                  }}>
+                    <CheckCircle2 size={14} /> Verified Specialist
+                  </span>
+                </div>
+              </div>
+
+              {/* Supporting Text Card */}
+              <div style={{
+                background: 'linear-gradient(145deg, #F0F8FC 0%, #FFFFFF 100%)',
+                border: '1px solid rgba(37, 137, 196, 0.22)',
+                borderLeft: '4px solid var(--primary-blue)',
+                borderRadius: '16px',
+                padding: '1.5rem 1.75rem',
+                marginTop: '1.75rem',
+                boxShadow: 'var(--shadow-sm)'
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  marginBottom: '0.5rem',
+                  color: 'var(--primary-blue)',
+                  fontWeight: 600,
+                  fontSize: '0.95rem'
+                }}>
+                  <Stethoscope size={18} /> Our Patient-Centred Commitment
+                </div>
+                <p style={{
+                  color: 'var(--text-charcoal)',
+                  fontSize: '0.98rem',
+                  lineHeight: 1.7,
+                  margin: 0
+                }}>
+                  Every patient deserves individual attention, clear guidance, and compassionate care. Our aim is to support families through their healthcare journey while building lasting relationships with patients and referring doctors.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Reception Visual & Clinical Core Pillars */}
+            <div>
+              {/* Modern Clinic Reception Photo */}
+              <div style={{
+                borderRadius: '20px',
                 overflow: 'hidden',
-                boxShadow: '0 20px 45px -10px rgba(10, 37, 64, 0.15)',
-                border: '1px solid #e2e8f0',
-                background: '#f1f5f9'
+                boxShadow: 'var(--shadow-md)',
+                border: '1px solid var(--border-subtle)',
+                background: 'var(--bg-warm-white)',
+                marginBottom: '1rem'
               }}>
                 <img 
                   src="/modern-reception.png" 
-                  alt="Modern Medical Clinic Reception at Sai Diagnostics"
+                  alt="Sai Diagnostics & Fetal Medicine Centre Patient Reception, Anantapur"
                   style={{
                     width: '100%',
-                    height: 'auto',
+                    height: '240px',
                     display: 'block',
                     objectFit: 'cover'
                   }}
                 />
               </div>
-              <div style={{
-                marginTop: '1rem',
-                textAlign: 'center',
+              <p style={{
                 fontSize: '0.85rem',
-                color: '#64748b',
-                fontStyle: 'italic'
+                color: 'var(--text-muted)',
+                fontStyle: 'italic',
+                textAlign: 'center',
+                margin: '0 0 1.75rem'
               }}>
-                Welcoming patient reception and consultation foyer at Sai Diagnostics, Anantapur.
-              </div>
-            </div>
-
-            {/* Story Text Column */}
-            <div>
-              <span style={{
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                color: 'var(--primary)',
-                marginBottom: '0.5rem',
-                display: 'block'
-              }}>
-                OUR HERITAGE & MISSION
-              </span>
-
-              <h2 style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: 'clamp(1.9rem, 2.6vw, 2.5rem)',
-                color: '#0a2540',
-                lineHeight: 1.2,
-                marginBottom: '1.25rem'
-              }}>
-                Excellence in Fetal Medicine & Diagnostic Imaging
-              </h2>
-
-              <p style={{
-                color: '#334e68',
-                fontSize: '1rem',
-                lineHeight: 1.7,
-                marginBottom: '1.25rem'
-              }}>
-                Founded with a singular vision to bring world-class fetal imaging and diagnostic precision to Rayalaseema, Sai Diagnostics has evolved into a premier regional referral center for high-risk pregnancies, fetal echocardiography, and genetic risk assessments.
+                Welcoming patient consultation lounge and diagnostic suites at Sai Diagnostics, Anantapur.
               </p>
 
-              <p style={{
-                color: '#334e68',
-                fontSize: '1rem',
-                lineHeight: 1.7,
-                marginBottom: '1.75rem'
-              }}>
-                We believe that every expectant mother deserves transparent explanations, serene clinical environments, and the reassurance of fellowship-trained specialist oversight for every ultrasound scan.
-              </p>
-
-              {/* Four Key Pillars */}
+              {/* Verified Pillars (No unverified claims) */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '1rem',
-                marginBottom: '2rem'
+                marginBottom: '1.75rem'
               }}>
                 <div style={{
-                  background: '#ffffff',
-                  padding: '1rem',
-                  borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+                  background: 'var(--bg-warm-white)',
+                  padding: '1.2rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(173, 35, 72, 0.15)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <ShieldCheck size={18} color="var(--primary)" />
-                    <strong style={{ color: '#0a2540', fontSize: '0.92rem' }}>33+ Years Legacy</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <ShieldCheck size={18} color="var(--primary-burgundy)" />
+                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.94rem' }}>Fetal Medicine Expertise</strong>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: '#64748b', margin: 0 }}>Trusted by over 45,000 families</p>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    Fellowship-trained fetal ultrasound specialist oversight for every scan.
+                  </p>
                 </div>
 
                 <div style={{
-                  background: '#ffffff',
-                  padding: '1rem',
-                  borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+                  background: 'var(--bg-warm-white)',
+                  padding: '1.2rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(37, 137, 196, 0.2)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <Award size={18} color="#0284c7" />
-                    <strong style={{ color: '#0a2540', fontSize: '0.92rem' }}>Fellowship Trained</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <Sparkles size={18} color="var(--primary-blue)" />
+                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.94rem' }}>High-Definition Imaging</strong>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: '#64748b', margin: 0 }}>Fetal ultrasound specialist</p>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    Advanced GE Voluson ultrasound system for clear prenatal views.
+                  </p>
                 </div>
 
                 <div style={{
-                  background: '#ffffff',
-                  padding: '1rem',
-                  borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+                  background: 'var(--bg-warm-white)',
+                  padding: '1.2rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(37, 137, 196, 0.2)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <Sparkles size={18} color="#d97706" />
-                    <strong style={{ color: '#0a2540', fontSize: '0.92rem' }}>30+ Diagnostic Tests</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <Heart size={18} color="var(--primary-blue)" />
+                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.94rem' }}>Compassionate Care</strong>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: '#64748b', margin: 0 }}>All prenatal scans & genetics</p>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    Unrushed consultations and empathetic counseling for every parent.
+                  </p>
                 </div>
 
                 <div style={{
-                  background: '#ffffff',
-                  padding: '1rem',
-                  borderRadius: '12px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.03)'
+                  background: 'var(--bg-warm-white)',
+                  padding: '1.2rem',
+                  borderRadius: '14px',
+                  border: '1px solid rgba(173, 35, 72, 0.15)',
+                  boxShadow: 'var(--shadow-sm)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <Heart size={18} color="#e11d48" />
-                    <strong style={{ color: '#0a2540', fontSize: '0.92rem' }}>Compassionate Care</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                    <Stethoscope size={18} color="var(--primary-burgundy)" />
+                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.94rem' }}>Specialist Trust</strong>
                   </div>
-                  <p style={{ fontSize: '0.8rem', color: '#64748b', margin: 0 }}>Gentle & supportive guidance</p>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0, lineHeight: 1.5 }}>
+                    Trusted regional referral destination for complex and rare fetal cases.
+                  </p>
                 </div>
               </div>
 
-              {/* Action Buttons */}
+              {/* Navigation Action Buttons */}
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <Link
                   to="/facilities"
                   className="btn btn-outline"
                   style={{
-                    borderRadius: '999px',
-                    padding: '0.8rem 1.75rem',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    borderColor: 'var(--primary)',
-                    color: 'var(--primary)',
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px'
+                    backgroundColor: '#ffffff'
                   }}
                 >
-                  Explore Our Facilities <ArrowRight size={16} />
+                  Explore Center Facilities <ArrowRight size={16} />
                 </Link>
 
                 <Link
                   to="/doctors"
                   className="btn btn-primary"
-                  style={{
-                    borderRadius: '999px',
-                    padding: '0.8rem 1.75rem',
-                    fontSize: '0.95rem',
-                    fontWeight: 600,
-                    textDecoration: 'none',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}
                 >
-                  Meet Dr. T. Sai Kiranmai
+                  Doctor Profile & Timings
                 </Link>
               </div>
             </div>
@@ -252,13 +339,11 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership Profile Spotlight */}
-      <section style={{ background: '#ffffff', padding: '4rem 0', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      {/* 3. Clinical Consultation & Location Details */}
+      <section className="py-16" style={{ background: 'var(--bg-skyblue-pale)', borderTop: '1px solid rgba(37, 137, 196, 0.15)', borderBottom: '1px solid rgba(37, 137, 196, 0.15)' }}>
         <div className="container" style={{ maxWidth: '1040px' }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #f8fafc 0%, #eef5f8 100%)',
-            borderRadius: '24px',
-            border: '1px solid #e2e8f0',
+          <div className="card" style={{
+            background: '#ffffff',
             padding: 'clamp(2rem, 4vw, 3rem)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -266,32 +351,21 @@ const About = () => {
             alignItems: 'center'
           }}>
             <div>
-              <div style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: '#e4edea',
-                color: 'var(--primary)',
-                padding: '4px 12px',
-                borderRadius: '999px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                marginBottom: '0.75rem'
-              }}>
-                <Stethoscope size={14} /> CLINICAL DIRECTOR
-              </div>
+              <span className="section-tag section-tag-blue" style={{ marginBottom: '0.75rem' }}>
+                <Stethoscope size={14} /> CLINICAL DIRECTOR & SPECIALIST
+              </span>
 
               <h3 style={{
                 fontFamily: '"Playfair Display", serif',
                 fontSize: '2rem',
-                color: '#0a2540',
+                color: 'var(--text-heading)',
                 marginBottom: '0.25rem'
               }}>
                 Dr. T. Sai Kiranmai
               </h3>
 
               <div style={{
-                color: 'var(--primary)',
+                color: 'var(--primary-burgundy)',
                 fontWeight: 700,
                 fontSize: '1rem',
                 marginBottom: '0.25rem'
@@ -299,43 +373,35 @@ const About = () => {
                 M.B.B.S., DMRD • Fellowship in Fetal Ultrasound
               </div>
 
-              <div style={{ color: '#64748b', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
                 Consultant Radiologist & Fetal Medicine Specialist
               </div>
 
-              <p style={{ color: '#334155', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>
-                With over a decade of dedicated expertise in maternal-fetal imaging, Dr. Kiranmai leads our clinical scans including TIFFA, NT Screening, Fetal Echocardiography, Doppler Studies, and invasive prenatal genetic testing.
+              <p style={{ color: 'var(--text-charcoal)', fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>
+                With dedicated clinical practice in maternal-fetal imaging, Dr. Kiranmai personally conducts and interprets specialised scans including NT Screening, TIFFA, Fetal Echocardiography, Doppler Studies, and fetal wellbeing assessments.
               </p>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center' }}>
               <div style={{
-                background: '#ffffff',
+                background: 'var(--bg-skyblue-pale)',
                 padding: '1.25rem',
                 borderRadius: '16px',
-                border: '1px solid #e2e8f0'
+                border: '1px solid rgba(37, 137, 196, 0.2)'
               }}>
-                <h4 style={{ fontSize: '0.9rem', color: '#0a2540', marginBottom: '0.5rem' }}>Consultation Timings</h4>
-                <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569' }}>
+                <h4 style={{ fontSize: '0.95rem', color: 'var(--text-heading)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <CalendarCheck size={16} color="var(--primary-blue)" /> Consultation Timings
+                </h4>
+                <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-charcoal)', lineHeight: 1.5 }}>
                   Monday to Saturday: 9:00 AM – 7:00 PM<br />
-                  Location: 9th Cross Rd, Sai Nagar, Anantapur
+                  Location: 9th Cross Rd, Sai Nagar, Anantapur, AP
                 </p>
               </div>
 
               <Link
                 to="/doctors"
                 className="btn btn-primary"
-                style={{
-                  borderRadius: '999px',
-                  padding: '0.85rem 1.5rem',
-                  fontSize: '0.95rem',
-                  fontWeight: 600,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  textDecoration: 'none'
-                }}
+                style={{ width: '100%', justifyContent: 'center' }}
               >
                 View Full Doctor Profile & Book Consultation
               </Link>
@@ -344,70 +410,19 @@ const About = () => {
         </div>
       </section>
 
-      {/* Contact Helpline Callout */}
-      <section style={{ padding: '4rem 0 0' }}>
-        <div className="container text-center" style={{ maxWidth: '680px' }}>
-          <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.8rem', color: '#0a2540', marginBottom: '0.5rem' }}>
-            Have Questions About an Upcoming Scan?
-          </h3>
-          <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.75rem' }}>
-            Our patient care counselors are on hand to guide you on gestational timing, scan preparation, and doctor appointments.
-          </p>
-          <a
-            href="tel:+917799900248"
-            className="btn btn-primary"
-            style={{
-              borderRadius: '999px',
-              padding: '0.85rem 2rem',
-              fontSize: '1rem',
-              fontWeight: 600,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              textDecoration: 'none'
-            }}
-          >
-            <PhoneCall size={18} /> Call Us: +91 7799900248
-          </a>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-12" style={{ background: '#fbf9f4' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="text-center" style={{ marginBottom: '2.5rem' }}>
-            <span style={{ display: 'inline-block', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--primary)', background: 'rgba(43,92,75,0.06)', padding: '4px 14px', borderRadius: '999px', marginBottom: '0.75rem' }}>PATIENT TESTIMONIALS</span>
-            <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', color: '#0a2540' }}>What Our Patients Say</h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-            {[
-              { name: 'Padmavathi R.', tag: 'TIFFA Scan Patient', text: 'Dr. Kiranmai explained every detail of our anomaly scan with exceptional patience. The equipment quality and the calm atmosphere made what could have been a stressful visit genuinely reassuring.' },
-              { name: 'Sridevi L.', tag: 'NT Scan + Double Marker', text: 'From the moment we walked in, the staff made us feel at ease. The scan was thorough and the report was ready promptly. We felt completely confident in the clinical team here.' },
-              { name: 'Anitha M.', tag: 'Fetal Echocardiography', text: "We drove from Kurnool specifically for the Fetal Echo — well worth every kilometer. Dr. Kiranmai's expertise and willingness to explain every cardiac view gave us tremendous peace of mind." }
-            ].map((t, i) => (
-              <div key={i} style={{ background: '#ffffff', borderRadius: '18px', padding: '2rem', border: '1px solid #e2e8f0', boxShadow: '0 4px 16px rgba(0,0,0,0.03)' }}>
-                <div style={{ display: 'flex', gap: '4px', marginBottom: '1rem' }}>
-                  {[1,2,3,4,5].map(s => <Sparkles key={s} size={15} fill="#f59e0b" color="#f59e0b" />)}
-                </div>
-                <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.65, fontStyle: 'italic', marginBottom: '1.25rem' }}>"{t.text}"</p>
-                <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                  <strong style={{ color: '#0a2540', fontSize: '0.95rem' }}>{t.name}</strong>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 500, marginTop: '2px' }}>{t.tag}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section style={{ background: 'linear-gradient(135deg, #163026 0%, #2b5c4b 100%)', padding: '4rem 1.5rem', textAlign: 'center' }}>
+      {/* 4. CTA Banner */}
+      <section style={{ background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)', padding: '4.5rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(173, 35, 72, 0.1)' }}>
         <div className="container" style={{ maxWidth: '780px' }}>
-          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: '#ffffff', marginBottom: '0.75rem' }}>Begin Your Journey With Us</h2>
-          <p style={{ color: '#c8e6da', fontSize: '1rem', maxWidth: '560px', margin: '0 auto 2rem' }}>Book a consultation with Dr. T. Sai Kiranmai today and experience world-class maternal-fetal diagnostics in Anantapur.</p>
+          <span className="section-tag" style={{ marginBottom: '0.75rem' }}>EXPERIENCE COMPASSIONATE CARE</span>
+          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: 'var(--text-heading)', marginBottom: '0.75rem' }}>Begin Your Journey With Us</h2>
+          <p style={{ color: 'var(--text-charcoal)', fontSize: '1rem', maxWidth: '560px', margin: '0 auto 2rem', lineHeight: 1.6 }}>Book a consultation with Dr. T. Sai Kiranmai today and experience world-class maternal-fetal diagnostics in Anantapur.</p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <a href="tel:+917799900248" className="btn" style={{ background: '#ffffff', color: 'var(--primary)', borderRadius: '999px', padding: '0.85rem 2rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}><PhoneCall size={18} /> Call: +91 7799900248</a>
-            <Link to="/services" className="btn" style={{ background: 'rgba(255,255,255,0.12)', color: '#ffffff', borderRadius: '999px', padding: '0.85rem 2rem', fontWeight: 600, border: '1px solid rgba(255,255,255,0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}><ArrowRight size={18} /> Explore All Services</Link>
+            <a href="tel:+917799900248" className="btn btn-primary" style={{ padding: '0.85rem 2rem' }}>
+              <PhoneCall size={18} /> Call: +91 7799900248
+            </a>
+            <Link to="/services" className="btn btn-outline" style={{ backgroundColor: '#ffffff', padding: '0.85rem 2rem' }}>
+              <ArrowRight size={18} /> Explore All Services
+            </Link>
           </div>
         </div>
       </section>
@@ -416,4 +431,3 @@ const About = () => {
 };
 
 export default About;
-

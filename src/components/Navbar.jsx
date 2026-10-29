@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Calendar, Menu, X } from 'lucide-react';
+import { useAppointmentModal } from './AppointmentModal';
 import './Navbar.css';
 
 const Navbar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { openModal } = useAppointmentModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +19,11 @@ const Navbar = () => {
   }, []);
 
   // Close mobile menu on route change
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
     setMobileMenuOpen(false);
-  }, [location.pathname]);
+  }
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -29,8 +33,10 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
+  const isHome = location.pathname === '/';
+
   return (
-    <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`navbar ${isHome ? 'navbar-hero' : ''} ${scrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         
         {/* Logo Section */}
@@ -64,10 +70,15 @@ const Navbar = () => {
             <Phone size={15} />
             +91 7799900248
           </a>
-          <Link to="/doctors" className="navbar-cta-btn">
+          <button 
+            onClick={() => openModal()} 
+            className="navbar-cta-btn"
+            style={{ cursor: 'pointer' }}
+            type="button"
+          >
             <Calendar size={15} />
             Book Appointment
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -101,10 +112,18 @@ const Navbar = () => {
             <Phone size={15} />
             +91 7799900248
           </a>
-          <Link to="/doctors" className="navbar-cta-btn">
+          <button 
+            onClick={() => {
+              setMobileMenuOpen(false);
+              openModal();
+            }} 
+            className="navbar-cta-btn"
+            style={{ cursor: 'pointer', width: '100%', justifyContent: 'center' }}
+            type="button"
+          >
             <Calendar size={15} />
             Book Appointment
-          </Link>
+          </button>
         </div>
       </div>
     </header>
