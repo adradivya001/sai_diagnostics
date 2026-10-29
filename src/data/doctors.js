@@ -4,24 +4,23 @@ export const doctors = [
     name: "Dr. T. Sai Kiranmai",
     qualifications: "M.B.B.S., DMRD",
     fellowship: "Fellowship in Fetal Ultrasound",
-    title: "Lead Radiologist & Fetal Medicine Specialist",
-    experience: "12+ Years Clinical Practice",
+    title: "Consultant Radiologist & Fetal Medicine Specialist",
+    specialty: "Maternal-Fetal Ultrasound & Prenatal Imaging",
     languages: ["English", "Telugu", "Hindi"],
-    availability: "Monday – Saturday, 9:00 AM – 7:00 PM",
+    availability: "Monday – Saturday (By Appointment)",
     consultation: "In-Person Scan Review & Clinical Consultation",
-    clinic: "Sai Diagnostics & Fetal Medicine Center",
+    clinic: "Sai Diagnostics & Fetal Medicine Centre",
     address: "9th Cross Rd, Sai Nagar, Anantapur, Andhra Pradesh 515001",
-    phone: "+91 7799900248",
+    phone: "+91 77999 00248",
     expertise: [
-      "Advanced Fetal Ultrasound & Neurosonogram",
-      "TIFFA / Anomaly Scan & Structural Screening",
-      "Nuchal Translucency (NT) & First Trimester Combined Screening",
-      "Advanced Fetal Echocardiography (Fetal Echo)",
-      "Obstetric Doppler & AFI Fetal Growth Monitoring",
-      "Pelvic 3D Imaging & Follicular Studies",
-      "Amniocentesis & Prenatal Genetic Counselling"
+      "First-Trimester Screening (NT Scan & Early Anatomy)",
+      "Mid-Trimester Anomaly Scan (TIFFA / Target Scan)",
+      "Advanced Fetal Echocardiography (Fetal Heart Assessment)",
+      "Obstetric Color Doppler & Placental Assessment",
+      "Fetal Neurosonography (Targeted Brain & Spine Scan)",
+      "Fetal Growth & Wellbeing Assessments"
     ],
-    bio: "Dr. T. Sai Kiranmai is a distinguished specialist in Fetal Ultrasound, holding M.B.B.S., DMRD, and an advanced Fellowship in Fetal Ultrasound. With over 12 years of specialized clinical experience, Dr. Kiranmai has performed and interpreted tens of thousands of obstetric, fetal medicine, and general diagnostic scans with unwavering precision, clinical warmth, and empathy.",
-    philosophy: "Every pregnancy is precious. My goal is to empower mothers and families with absolute diagnostic clarity, early detection, and compassionate clinical guidance at every step of their journey."
+    bio: "Dr. T. Sai Kiranmai is a Consultant Radiologist and Fetal Medicine Specialist holding M.B.B.S., DMRD, and a Fellowship in Fetal Ultrasound. Dr. Kiranmai conducts and interprets specialized obstetric and maternal-fetal scans with careful clinical evaluation, clear guidance, and thoughtful communication with patients and referring specialists.",
+    philosophy: "Committed to providing careful fetal imaging and personalised attention, with a focus on helping expectant parents understand their examinations and receive appropriate guidance."
   }
 ];

@@ -1,153 +1,137 @@
 /* ==========================================================================
-   Clinical Trust & Metrics Strip Bar
-   Pill container showcasing the verified clinic metrics & equipment:
-   - 12+ Years | Lead Radiologist Experience
-   - 4.9★ | Verified Patient Reviews
-   - 12K+ | Mothers & Families Served
-   - GE Voluson | High-Definition Fetal Ultrasound
-   Theme: Warm Ivory (#FFF9F5), Brand Burgundy (#AD2348), Sky Blue (#2589C4)
+   Horizontal Trust Strip Bar (Refined Editorial Presentation)
+   Replaces boxed cards with a seamless horizontal strip with thin dividers.
    ========================================================================== */
 
 .home-feature-strip-section {
   position: relative;
   width: 100%;
   background: #FFF9F5;
-  border-top: 1px solid rgba(173, 35, 72, 0.08);
-  border-bottom: 1px solid rgba(173, 35, 72, 0.08);
-  padding: 1.5rem 1rem;
+  border-top: 1px solid rgba(194, 24, 75, 0.08);
+  border-bottom: 1px solid rgba(194, 24, 75, 0.08);
+  padding: 1.25rem 1rem;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 5;
 }
 
-/* 1. Placement in document flow */
-.hero-trust-strip-bar {
+.trust-strip-horizontal-bar {
+  width: 100%;
+}
+
+.trust-strip-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.trust-strip-segment {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
   position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  pointer-events: auto;
-}
-
-/* 2. Container Wrapper */
-.trust-strip-continuous-float {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-/* 3. Glassmorphic Pill Container */
-.trust-strip-container {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(173, 35, 72, 0.12);
-  padding: 0.95rem 2.75rem;
-  border-radius: 999px;
-  box-shadow: 0 6px 24px rgba(173, 35, 72, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-  pointer-events: auto;
-  transition: all 0.3s ease;
-  flex-wrap: nowrap;
-  width: max-content;
-}
-
-/* 4. Item Layout & Micro-interactions */
-.trust-strip-item {
-  display: flex;
-  align-items: center;
-  gap: 0.95rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.5rem 1rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
 }
 
-.trust-strip-item:hover {
-  transform: translateY(-2px);
+/* Subtle desktop hover response */
+@media (hover: hover) {
+  .trust-strip-segment:hover .trust-strip-label {
+    color: #C2184B;
+  }
+  .trust-strip-segment:hover .trust-strip-icon-circle {
+    background: #C2184B;
+    color: #FFFFFF;
+    transform: scale(1.08);
+  }
 }
 
-/* Dim non-hovered siblings when container is hovered */
-.trust-strip-container:hover .trust-strip-item:not(:hover) {
-  opacity: 0.55;
-}
-
-/* Icon Box matching the user's first image */
-.trust-item-icon-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+.trust-strip-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(194, 24, 75, 0.08);
+  color: #C2184B;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.25s ease;
 }
 
-.trust-item-icon-burgundy {
-  background: rgba(173, 35, 72, 0.08);
-  color: var(--primary-burgundy);
-}
-
-.trust-item-icon-blue {
-  background: rgba(37, 137, 196, 0.10);
-  color: var(--primary-blue);
-}
-
-/* Stacked Text with Serif Typography matching the first image */
-.trust-item-text {
+.trust-strip-content {
   display: flex;
   flex-direction: column;
 }
 
-.trust-item-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.15rem;
+.trust-strip-label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: #1a2233;
-  line-height: 1.2;
-  white-space: nowrap;
-  letter-spacing: -0.01em;
-}
-
-.trust-item-detail {
-  font-size: 0.74rem;
-  font-weight: 500;
-  color: #556277;
-  margin-top: 0.15rem;
+  color: #202735;
+  line-height: 1.3;
+  transition: color 0.25s ease;
   white-space: nowrap;
 }
 
-/* 5. Mobile & Tablet Responsiveness */
+.trust-strip-sub {
+  font-size: 0.78rem;
+  color: #6A7280;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Thin vertical divider between items */
+.trust-strip-divider {
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(194, 24, 75, 0.12);
+}
+
+/* Responsive Stacking */
 @media (max-width: 1024px) {
-  .home-feature-strip-section {
-    padding: 1.25rem 1rem;
-  }
-  .trust-strip-container {
+  .trust-strip-row {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 650px;
-    gap: 1.35rem;
-    padding: 1.25rem 1.75rem;
+    gap: 1.25rem;
+  }
+  
+  .trust-strip-divider {
+    display: none;
+  }
+
+  .trust-strip-segment {
+    padding: 0.5rem 0.5rem;
   }
 }
 
 @media (max-width: 640px) {
-  .trust-strip-container {
-    grid-template-columns: 1fr;
-    border-radius: 16px;
-    padding: 1.1rem 1.25rem;
-    gap: 0.85rem;
+  .home-feature-strip-section {
+    padding: 1.5rem 1rem;
   }
-}
 
-/* Accessibility: prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .trust-strip-item {
-    transition: none !important;
+  .trust-strip-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .trust-strip-segment {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(194, 24, 75, 0.06);
+  }
+
+  .trust-strip-segment:last-child {
+    border-bottom: none;
+  }
+
+  .trust-strip-label,
+  .trust-strip-sub {
+    white-space: normal;
   }
 }

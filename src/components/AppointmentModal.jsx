@@ -1,5 +1,5 @@
 import { useState, createContext, useContext } from 'react';
-import { X, Calendar, CheckCircle2, Phone, Clock, User, FileText, AlertCircle } from 'lucide-react';
+import { X, Calendar, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
 import { services } from '../data/services';
 
 const AppointmentModalContext = createContext(null);
@@ -8,7 +8,6 @@ export const useAppointmentModal = () => useContext(AppointmentModalContext);
 
 export const AppointmentModalProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [prefilledService, setPrefilledService] = useState('');
   
   const [formData, setFormData] = useState({
     name: '',
@@ -22,27 +21,48 @@ export const AppointmentModalProvider = ({ children }) => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const openModal = (initialService = '') => {
     if (initialService) {
       setFormData(prev => ({ ...prev, scanType: initialService }));
     }
     setSubmitted(false);
+    setIsSubmitting(false);
+    setErrors({});
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
     setSubmitted(false);
+    setIsSubmitting(false);
+    setErrors({});
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      errs.name = 'Please enter your full name (minimum 2 characters).';
+    }
+    const cleanPhone = formData.phone.trim().replace(/\D/g, '');
+    if (!cleanPhone || !/^[6-9]\d{9}$/.test(cleanPhone)) {
+      errs.phone = 'Please enter a valid 10-digit mobile number.';
+    }
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.phone.trim()) {
-      alert('Please enter your full name and mobile number.');
-      return;
-    }
-    setSubmitted(true);
+    if (!validate()) return;
+    
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }, 700);
   };
 
   return (
@@ -156,11 +176,11 @@ export const AppointmentModalProvider = ({ children }) => {
                   </div>
 
                   <h3 style={{ fontSize: '1.45rem', color: 'var(--text-heading)', marginBottom: '0.5rem', fontFamily: '"Playfair Display", serif' }}>
-                    Appointment Request Received!
+                    Inquiry Received, {formData.name}!
                   </h3>
 
                   <p style={{ color: 'var(--text-charcoal)', fontSize: '0.94rem', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto 1.5rem' }}>
-                    Thank you, <strong>{formData.name}</strong>. We have registered your request for <strong>{formData.scanType}</strong>. Our clinical coordinator will call you at <strong>{formData.phone}</strong> shortly to confirm your visit time.
+                    We have logged your request for <strong>{formData.scanType}</strong>. Please note: An appointment request is not confirmed until our reception team calls you at <strong>{formData.phone}</strong> to confirm doctor schedule and scan preparation.
                   </p>
 
                   <div style={{
@@ -173,10 +193,10 @@ export const AppointmentModalProvider = ({ children }) => {
                     color: 'var(--text-charcoal)',
                     textAlign: 'left'
                   }}>
-                    <div style={{ fontWeight: 700, color: '#2589C4', marginBottom: '0.35rem' }}>Appointment Summary:</div>
+                    <div style={{ fontWeight: 700, color: '#2589C4', marginBottom: '0.35rem' }}>Inquiry Summary:</div>
                     <div><strong>Specialist:</strong> {formData.doctor}</div>
-                    <div><strong>Preferred Slot:</strong> {formData.preferredDate || 'Earliest Available'} ({formData.preferredTime})</div>
-                    <div><strong>Clinic Desk:</strong> +91 7799900248</div>
+                    <div><strong>Requested Time Window:</strong> {formData.preferredDate || 'Earliest Available'} ({formData.preferredTime})</div>
+                    <div><strong>Clinic Helpline:</strong> +91 77999 00248</div>
                   </div>
 
                   <button
@@ -189,7 +209,7 @@ export const AppointmentModalProvider = ({ children }) => {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                   {/* Step Indicators / Info Badge */}
                   <div style={{
                     background: '#F8E7EC',
@@ -204,46 +224,69 @@ export const AppointmentModalProvider = ({ children }) => {
                     gap: '8px'
                   }}>
                     <Clock size={16} style={{ flexShrink: 0 }} />
-                    <span>Clinic Timings: Mon–Sat, 9:00 AM – 8:30 PM • Same-day appointments available</span>
+                    <span>Operating Hours: Monday – Saturday: 8:30 AM – 7:00 PM • Sunday: Closed</span>
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {/* Patient Name */}
                     <div className="form-group" style={{ marginBottom: 0 }}>
-                      <label className="form-label">
+                      <label className="form-label" htmlFor="modal-name">
                         Patient Full Name *
                       </label>
                       <input
+                        id="modal-name"
                         type="text"
                         required
                         placeholder="e.g. Sravani Reddy"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (errors.name) setErrors({ ...errors, name: undefined });
+                        }}
                         className="form-input"
+                        style={{ borderColor: errors.name ? '#C2184B' : undefined }}
                       />
+                      {errors.name && (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C2184B', fontSize: '0.8rem', marginTop: '4px' }}>
+                          <AlertCircle size={13} /> {errors.name}
+                        </span>
+                      )}
                     </div>
 
                     {/* Phone & Age Row */}
                     <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '0.85rem' }}>
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="modal-phone">
                           Mobile Number (+91) *
                         </label>
                         <input
+                          id="modal-phone"
                           type="tel"
                           required
+                          maxLength={10}
                           placeholder="e.g. 9876543210"
                           value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/\D/g, '');
+                            setFormData({ ...formData, phone: val });
+                            if (errors.phone) setErrors({ ...errors, phone: undefined });
+                          }}
                           className="form-input"
+                          style={{ borderColor: errors.phone ? '#C2184B' : undefined }}
                         />
+                        {errors.phone && (
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C2184B', fontSize: '0.8rem', marginTop: '4px' }}>
+                            <AlertCircle size={13} /> {errors.phone}
+                          </span>
+                        )}
                       </div>
 
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="modal-age">
                           Age
                         </label>
                         <input
+                          id="modal-age"
                           type="number"
                           placeholder="Years"
                           min="1"
@@ -257,17 +300,18 @@ export const AppointmentModalProvider = ({ children }) => {
 
                     {/* Scan / Test Selection */}
                     <div className="form-group" style={{ marginBottom: 0 }}>
-                      <label className="form-label">
+                      <label className="form-label" htmlFor="modal-service">
                         Select Diagnostic Scan / Service *
                       </label>
                       <select
+                        id="modal-service"
                         value={formData.scanType}
                         onChange={(e) => setFormData({ ...formData, scanType: e.target.value })}
                         className="form-select"
                       >
                         {services.map((s) => (
                           <option key={s.id} value={s.name}>
-                            {s.name} (₹{s.price})
+                            {s.name}
                           </option>
                         ))}
                       </select>
@@ -276,10 +320,11 @@ export const AppointmentModalProvider = ({ children }) => {
                     {/* Preferred Date & Time Slot Row */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.85rem' }}>
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="modal-date">
                           Preferred Date
                         </label>
                         <input
+                          id="modal-date"
                           type="date"
                           value={formData.preferredDate}
                           onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
@@ -288,17 +333,18 @@ export const AppointmentModalProvider = ({ children }) => {
                       </div>
 
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label">
+                        <label className="form-label" htmlFor="modal-time">
                           Preferred Time Window
                         </label>
                         <select
+                          id="modal-time"
                           value={formData.preferredTime}
                           onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
                           className="form-select"
                         >
                           <option value="Morning (09:00 AM - 01:00 PM)">Morning (09:00 AM - 01:00 PM)</option>
-                          <option value="Afternoon (01:00 PM - 05:00 PM)">Afternoon (01:00 PM - 05:00 PM)</option>
-                          <option value="Evening (05:00 PM - 08:30 PM)">Evening (05:00 PM - 08:30 PM)</option>
+                          <option value="Afternoon (01:00 PM - 04:00 PM)">Afternoon (01:00 PM - 04:00 PM)</option>
+                          <option value="Evening (04:00 PM - 07:00 PM)">Evening (04:00 PM - 07:00 PM)</option>
                         </select>
                       </div>
                     </div>
@@ -319,10 +365,11 @@ export const AppointmentModalProvider = ({ children }) => {
 
                     {/* Additional Notes / Gestational Weeks */}
                     <div className="form-group" style={{ marginBottom: 0 }}>
-                      <label className="form-label">
+                      <label className="form-label" htmlFor="modal-notes">
                         Gestational Age / Clinical Notes (Optional)
                       </label>
                       <textarea
+                        id="modal-notes"
                         rows={2}
                         placeholder="e.g. 19 weeks pregnant, referred by gynecologist for anomaly survey..."
                         value={formData.notes}
@@ -337,18 +384,31 @@ export const AppointmentModalProvider = ({ children }) => {
                   <div style={{ marginTop: '1.5rem' }}>
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       className="btn btn-primary"
                       style={{
                         width: '100%',
                         padding: '0.95rem',
                         fontSize: '1rem',
-                        fontWeight: 700
+                        fontWeight: 700,
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                        opacity: isSubmitting ? 0.8 : 1,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px'
                       }}
                     >
-                      Confirm Appointment Request →
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" /> Submitting Request...
+                        </>
+                      ) : (
+                        'Submit Appointment Request →'
+                      )}
                     </button>
                     <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.5rem', marginBottom: 0 }}>
-                      🔒 Your medical data is strictly confidential. No pre-payment required.
+                      * Note: An appointment request is confirmed only after telephone verification by our reception desk.
                     </p>
                   </div>
                 </form>

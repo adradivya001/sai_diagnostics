@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Calendar, Phone, MapPin, Navigation } from 'lucide-react';
+import { Calendar, Phone, MapPin, Navigation, Clock } from 'lucide-react';
 import { useAppointmentModal } from './AppointmentModal';
 import './Footer.css';
 
@@ -11,14 +11,15 @@ const Footer = () => {
     { name: 'About Us', path: '/about' },
     { name: 'Doctor', path: '/doctors' },
     { name: 'Services', path: '/services' },
+    { name: 'Facilities', path: '/facilities' },
     { name: 'Contact', path: '/contact' }
   ];
 
   const confirmedServices = [
-    { name: 'NT Scan', path: '/services' },
+    { name: 'NT Scan / Screening', path: '/services' },
     { name: 'TIFFA / Anomaly Scan', path: '/services' },
     { name: 'Obstetric Doppler', path: '/services' },
-    { name: 'Fetal Imaging', path: '/services' }
+    { name: 'Fetal Echocardiography', path: '/services' }
   ];
 
   return (
@@ -109,11 +110,20 @@ const Footer = () => {
             </div>
 
             {/* Phone */}
-            <div className="footer-contact-item" style={{ marginBottom: '1.25rem' }}>
+            <div className="footer-contact-item" style={{ marginBottom: '0.85rem' }}>
               <Phone size={18} className="footer-contact-icon" />
               <a href="tel:+917799900248" className="footer-contact-link" style={{ fontWeight: 600 }}>
                 +91 77999 00248
               </a>
+            </div>
+
+            {/* Operating Hours */}
+            <div className="footer-contact-item" style={{ marginBottom: '1.25rem' }}>
+              <Clock size={18} className="footer-contact-icon" />
+              <span>
+                Mon – Sat: 8:30 AM – 7:00 PM<br />
+                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Sunday: Closed</span>
+              </span>
             </div>
 
             {/* Prominent Appointment CTA */}

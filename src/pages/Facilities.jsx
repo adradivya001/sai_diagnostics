@@ -1,28 +1,27 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Building, 
-  Sparkles, 
   Heart, 
   ShieldCheck, 
-  Calendar, 
   PhoneCall, 
   CheckCircle2, 
-  Activity,
-  Layers,
-  Clock,
-  ArrowRight
+  Clock, 
+  Navigation, 
+  Building2, 
+  Sparkles 
 } from 'lucide-react';
-import { useAppointmentModal } from '../components/AppointmentModal';
+import useScrollReveal from '../hooks/useScrollReveal';
 
 const Facilities = () => {
-  const { openModal } = useAppointmentModal();
+  useScrollReveal();
+
   useEffect(() => {
-    document.title = 'Diagnostic Facilities & Infrastructure | Sai Diagnostics';
+    document.title = 'Our Centre and Facilities | Sai Diagnostics Anantapur';
   }, []);
 
   return (
-    <div style={{ background: 'var(--bg-warm-white)', minHeight: '100vh', paddingBottom: '0' }}>
+    <div style={{ background: '#FFFFFF', minHeight: '100vh', paddingBottom: '0' }}>
+      
       {/* 1. Header Banner (Light Burgundy Warm Ambient Header) */}
       <section style={{
         background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
@@ -60,247 +59,360 @@ const Facilities = () => {
         </div>
       </section>
 
-      {/* 2. Featured Section: Modern Clinic Waiting Room */}
-      <section className="py-16" style={{ background: '#ffffff' }}>
+      {/* SECTION B — Genuine Photo Showcase Gallery */}
+      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
         <div className="container" style={{ maxWidth: '1240px' }}>
+          <div className="text-center reveal-on-scroll" style={{ marginBottom: '3.5rem' }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '7px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#17A9CF',
+              background: '#E6F7FC',
+              border: '1px solid rgba(23, 169, 207, 0.25)',
+              padding: '5px 14px',
+              borderRadius: '9999px',
+              marginBottom: '1rem'
+            }}>
+              <Sparkles size={13} /> AUTHENTIC CLINIC PHOTOGRAPHY
+            </span>
+            <h2 style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+              color: '#202735',
+              lineHeight: 1.2
+            }}>
+              Tour Our Diagnostic Setting
+            </h2>
+            <p style={{ color: '#59616B', fontSize: '1rem', maxWidth: '620px', margin: '0.5rem auto 0' }}>
+              Genuine views of our clinical spaces, patient reception, and diagnostic consultation suites in Anantapur.
+            </p>
+          </div>
+
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: '3.5rem',
-            alignItems: 'center'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '2rem'
           }}>
-            {/* Image Column */}
-            <div>
-              <div style={{
-                position: 'relative',
-                borderRadius: '24px',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-lg)',
-                border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-warm-white)'
-              }}>
+            {/* Photo 1: Patient Reception */}
+            <div className="reveal-on-scroll stagger-1" style={{
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 12px 32px rgba(194, 24, 75, 0.08)',
+              border: '1px solid rgba(194, 24, 75, 0.14)',
+              background: '#FFFFFF',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ height: '260px', overflow: 'hidden' }}>
                 <img 
-                  src="/modern-waiting-room.png" 
-                  alt="Modern Clinic Waiting Room with Fetal Mural at Sai Diagnostics"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                    objectFit: 'cover'
-                  }}
+                  src="/modern-reception.png" 
+                  alt="Sai Diagnostics Reception Lounge, Anantapur" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  loading="lazy"
                 />
               </div>
-              <div style={{
-                marginTop: '1rem',
-                textAlign: 'center',
-                fontSize: '0.85rem',
-                color: 'var(--text-muted)',
-                fontStyle: 'italic'
-              }}>
-                Our serene expectant mother lounge with custom maternal-fetal art and tranquil seating.
+              <div style={{ padding: '1.5rem' }}>
+                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#C2184B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  PATIENT RECEPTION
+                </span>
+                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
+                  Reception & Check-in Desk
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
+                  Orderly registration counter where our front-desk staff assists expectant parents with arrival and scan coordination.
+                </p>
               </div>
             </div>
 
-            {/* Content Column */}
-            <div>
-              <span className="section-tag section-tag-blue" style={{ marginBottom: '0.5rem', display: 'inline-flex' }}>
-                HEALING ENVIRONMENT
-              </span>
-
-              <h2 style={{
-                fontFamily: '"Playfair Display", serif',
-                fontSize: 'clamp(1.9rem, 2.6vw, 2.5rem)',
-                color: 'var(--text-heading)',
-                lineHeight: 1.2,
-                marginBottom: '1.25rem'
-              }}>
-                A Peaceful Haven for Expecting Families
-              </h2>
-
-              <p style={{
-                color: 'var(--text-charcoal)',
-                fontSize: '1rem',
-                lineHeight: 1.7,
-                marginBottom: '1.25rem'
-              }}>
-                Medical diagnostics should never feel intimidating. At Sai Diagnostics, our center features calming ambient lighting, spacious lounge seating, soothing acoustic treatment, and gentle artistic aesthetics that reduce appointment stress for both mother and child.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <CheckCircle2 size={20} color="var(--primary-burgundy)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>
-                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.95rem' }}>Serene Mother & Family Lounge:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
-                      Clean, ergonomic seating with plenty of room for accompanying family members and refreshments.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <CheckCircle2 size={20} color="var(--primary-blue)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>
-                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.95rem' }}>High-Precision Ultrasound Scanning Suites:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
-                      Equipped with high-resolution GE Voluson ultrasound machines and ceiling display monitors for parents to watch their baby during the scan.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <CheckCircle2 size={20} color="var(--primary-burgundy)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>
-                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.95rem' }}>Private Genetic & Scan Counselling Chambers:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
-                      Confidential consultation rooms where Dr. T. Sai Kiranmai reviews scan reports and genetic markers one-on-one with families.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                  <CheckCircle2 size={20} color="var(--primary-blue)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <div>
-                    <strong style={{ color: 'var(--text-heading)', fontSize: '0.95rem' }}>Sterile Sample Collection & Phlebotomy:</strong>
-                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', margin: '2px 0 0' }}>
-                      Highest hospital hygiene standards for Double Marker, Quadruple, NIPT, and genetic laboratory draws.
-                    </p>
-                  </div>
-                </div>
+            {/* Photo 2: Patient Waiting Lounge */}
+            <div className="reveal-on-scroll stagger-2" style={{
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 12px 32px rgba(23, 169, 207, 0.08)',
+              border: '1px solid rgba(23, 169, 207, 0.2)',
+              background: '#FFFFFF',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ height: '260px', overflow: 'hidden' }}>
+                <img 
+                  src="/modern-waiting-room.png" 
+                  alt="Sai Diagnostics Patient Waiting Area, Anantapur" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  loading="lazy"
+                />
               </div>
+              <div style={{ padding: '1.5rem' }}>
+                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#17A9CF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  COMFORTABLE LOUNGE
+                </span>
+                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
+                  Patient Waiting Area
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
+                  A clean, air-conditioned waiting space providing comfortable seating and a serene atmosphere for accompanying family members.
+                </p>
+              </div>
+            </div>
 
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button
-                  onClick={() => openModal()}
-                  className="btn btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="button"
-                >
-                  <Calendar size={18} /> Book Scan Appointment
-                </button>
-
-                <Link
-                  to="/services"
-                  className="btn btn-outline"
-                  style={{ backgroundColor: '#ffffff' }}
-                >
-                  Browse All 30 Services
-                </Link>
+            {/* Photo 3: Clinic Exterior Entrance */}
+            <div className="reveal-on-scroll stagger-3" style={{
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 12px 32px rgba(194, 24, 75, 0.08)',
+              border: '1px solid rgba(194, 24, 75, 0.14)',
+              background: '#FFFFFF',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              <div style={{ height: '260px', overflow: 'hidden' }}>
+                <img 
+                  src="/sai-diagnostics-building.png" 
+                  alt="Sai Diagnostics Centre Exterior Building, Anantapur" 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </div>
+              <div style={{ padding: '1.5rem' }}>
+                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#C2184B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                  CENTRAL LOCATION
+                </span>
+                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
+                  Clinic Entrance & Access
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
+                  Conveniently situated on 9th Cross Road, Sai Nagar in Anantapur with direct road access for arriving families.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Facilities Grid (Pale Sky Blue Alternation) */}
-      <section className="py-16" style={{ background: 'var(--bg-skyblue-pale)', borderTop: '1px solid rgba(37, 137, 196, 0.15)', borderBottom: '1px solid rgba(37, 137, 196, 0.15)' }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
-          <div className="text-center mb-10">
-            <span className="section-tag section-tag-blue" style={{ marginBottom: '0.5rem' }}>
-              ADVANCED CLINICAL STANDARDS
+      {/* SECTION C — Patient Experience (Editorial Alternating Layout) */}
+      <section style={{
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%)',
+        padding: '5.5rem 1.5rem',
+        borderTop: '1px solid rgba(194, 24, 75, 0.06)'
+      }}>
+        <div className="container" style={{ maxWidth: '1240px' }}>
+          <div className="text-center reveal-on-scroll" style={{ marginBottom: '3.5rem' }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '7px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#C2184B',
+              background: 'rgba(194, 24, 75, 0.08)',
+              border: '1px solid rgba(194, 24, 75, 0.18)',
+              padding: '5px 14px',
+              borderRadius: '9999px',
+              marginBottom: '1rem'
+            }}>
+              <Heart size={14} /> PATIENT-FIRST CARE
             </span>
-            <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2.4rem', color: 'var(--text-heading)', marginTop: '0.5rem' }}>
-              Equipment & Patient Amenities
+            <h2 style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+              color: '#202735',
+              lineHeight: 1.2
+            }}>
+              Pillars of the Patient Experience
             </h2>
           </div>
 
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1.5rem'
+            gap: '2rem'
           }}>
-            <div className="card" style={{ backgroundColor: '#ffffff' }}>
-              <div className="icon-box-burgundy" style={{ marginBottom: '1rem' }}>
-                <Activity size={24} />
+            {/* Feature 1 */}
+            <div className="reveal-on-scroll stagger-1" style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              padding: '2.25rem 1.85rem',
+              border: '1px solid rgba(194, 24, 75, 0.12)',
+              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)'
+            }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '12px',
+                background: '#FCE8EE',
+                color: '#C2184B',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.25rem'
+              }}>
+                <Clock size={22} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Voluson 3D/4D Ultrasound</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                High-frequency probes delivering unmatched clarity for fetal brain, heart, spine, and facial structural evaluations.
+              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
+                Appointment Arrangements
+              </h3>
+              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
+                Patients are scheduled by appointment to preserve dedicated scanning time for comprehensive fetal anatomical reviews.
               </p>
             </div>
 
-            <div className="card" style={{ backgroundColor: '#ffffff' }}>
-              <div className="icon-box-blue" style={{ marginBottom: '1rem' }}>
-                <Clock size={24} />
+            {/* Feature 2 */}
+            <div className="reveal-on-scroll stagger-2" style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              padding: '2.25rem 1.85rem',
+              border: '1px solid rgba(23, 169, 207, 0.2)',
+              boxShadow: '0 8px 24px rgba(23, 169, 207, 0.04)'
+            }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '12px',
+                background: '#E6F7FC',
+                color: '#17A9CF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.25rem'
+              }}>
+                <ShieldCheck size={22} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Zero-Wait Scanning Slots</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                Dedicated appointment time allocation so mothers are never subjected to long uncomfortable waiting periods.
+              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
+                Patient Privacy
+              </h3>
+              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
+                Individual ultrasound consultation rooms arranged to maintain dignified privacy and comfortable scanning for every patient.
               </p>
             </div>
 
-            <div className="card" style={{ backgroundColor: '#ffffff' }}>
-              <div className="icon-box-burgundy" style={{ marginBottom: '1rem' }}>
-                <Layers size={24} />
+            {/* Feature 3 */}
+            <div className="reveal-on-scroll stagger-3" style={{
+              background: '#FFFFFF',
+              borderRadius: '20px',
+              padding: '2.25rem 1.85rem',
+              border: '1px solid rgba(194, 24, 75, 0.12)',
+              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)'
+            }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '12px',
+                background: '#FCE8EE',
+                color: '#C2184B',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.25rem'
+              }}>
+                <CheckCircle2 size={22} />
               </div>
-              <h3 style={{ fontSize: '1.2rem', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Digital Image Archiving</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                High-resolution digital reports and printable fetal keepsake images handed over immediately after each scan.
-              </p>
-            </div>
-
-            <div className="card" style={{ backgroundColor: '#ffffff' }}>
-              <div className="icon-box-blue" style={{ marginBottom: '1rem' }}>
-                <Heart size={24} />
-              </div>
-              <h3 style={{ fontSize: '1.2rem', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>Maternal Privacy Protocols</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, margin: 0 }}>
-                Fully private, sound-insulated imaging suites with female chaperone assistance for all obstetric and pelvic scans.
+              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
+                Visit Guidance & Prep
+              </h3>
+              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
+                Clear preparation instructions (such as hydration or bladder requirements) are explained in advance when scheduling your scan.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Clinic Visit Callout */}
-      <section className="py-16" style={{ background: 'var(--bg-warm-white)' }}>
-        <div className="container text-center" style={{ maxWidth: '680px' }}>
-          <span className="section-tag" style={{ marginBottom: '0.75rem' }}>EASY ACCESS</span>
-          <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2rem', color: 'var(--text-heading)', marginBottom: '0.5rem' }}>
-            Visit Us in Sai Nagar, Anantapur
-          </h3>
-          <p style={{ color: 'var(--text-charcoal)', fontSize: '0.98rem', marginBottom: '1.75rem', lineHeight: 1.6 }}>
-            Located conveniently on 9th Cross Road with parking facilities and step-free clinic access for pregnant mothers.
+      {/* SECTION D — Location CTA */}
+      <section style={{
+        background: 'linear-gradient(135deg, #8E133C 0%, #AD2348 55%, #C2184B 100%)',
+        padding: '5.5rem 1.5rem',
+        color: '#FFFFFF',
+        textAlign: 'center'
+      }}>
+        <div className="container reveal-on-scroll" style={{ maxWidth: '780px' }}>
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '0.78rem',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#FCE8EE',
+            background: 'rgba(255, 255, 255, 0.12)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            padding: '5px 14px',
+            borderRadius: '9999px',
+            marginBottom: '1.25rem'
+          }}>
+            <Navigation size={14} /> DIRECTIONS & VISITS
+          </span>
+
+          <h2 style={{
+            fontFamily: '"Playfair Display", Georgia, serif',
+            fontSize: 'clamp(2.2rem, 3.8vw, 3rem)',
+            color: '#FFFFFF',
+            lineHeight: 1.2,
+            marginBottom: '1.15rem'
+          }}>
+            Plan Your Visit
+          </h2>
+
+          <p style={{
+            fontSize: '1.05rem',
+            lineHeight: 1.75,
+            color: 'rgba(255, 255, 255, 0.92)',
+            maxWidth: '620px',
+            margin: '0 auto 2.5rem'
+          }}>
+            Find our location in Anantapur or get in touch with our team for appointment scheduling and assistance.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              to="/contact"
-              className="btn btn-primary"
-              style={{ padding: '0.85rem 2rem' }}
-            >
-              Get Directions & Contact
-            </Link>
-            <a
-              href="tel:+917799900248"
-              className="btn btn-outline"
+
+          <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a 
+              href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-cta-white"
               style={{
-                backgroundColor: '#ffffff',
-                padding: '0.85rem 2rem'
+                background: '#FFFFFF',
+                color: '#AD2348',
+                fontWeight: 700,
+                padding: '0.9rem 2.25rem',
+                borderRadius: '9999px',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
             >
-              <PhoneCall size={18} /> +91 7799900248
+              <Navigation size={16} /> Get Directions
             </a>
-          </div>
-        </div>
-      </section>
 
-
-      {/* 6. CTA Banner */}
-      <section style={{ background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)', padding: '4.5rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(173, 35, 72, 0.1)' }}>
-        <div className="container" style={{ maxWidth: '780px' }}>
-          <span className="section-tag" style={{ marginBottom: '0.75rem' }}>WALK-INS WELCOME</span>
-          <h2 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', color: 'var(--text-heading)', marginBottom: '0.75rem' }}>Experience Our Center in Person</h2>
-          <p style={{ color: 'var(--text-charcoal)', fontSize: '1rem', maxWidth: '560px', margin: '0 auto 2rem', lineHeight: 1.6 }}>Visit Sai Diagnostics & Fetal Medicine Center in Anantapur. Walk-ins welcome during clinic hours.</p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <a href="tel:+917799900248" className="btn btn-primary" style={{ padding: '0.85rem 2rem' }}>
-              <PhoneCall size={18} /> Call: +91 7799900248
-            </a>
-            <Link to="/contact" className="btn btn-outline" style={{ backgroundColor: '#ffffff', padding: '0.85rem 2rem' }}>
-              <Calendar size={18} /> Get Directions
+            <Link 
+              to="/contact" 
+              className="btn btn-cta-outline-white"
+              style={{
+                background: 'transparent',
+                color: '#FFFFFF',
+                fontWeight: 700,
+                padding: '0.9rem 2.25rem',
+                borderRadius: '9999px',
+                border: '1.5px solid rgba(255, 255, 255, 0.7)',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <PhoneCall size={18} /> Contact the Centre
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

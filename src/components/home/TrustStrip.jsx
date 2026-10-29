@@ -1,49 +1,52 @@
-import { Award, Star, Users, ShieldCheck } from 'lucide-react';
+import { Heart, Activity, CalendarCheck, Users } from 'lucide-react';
 import './TrustStrip.css';
 
 const trustItems = [
   { 
-    label: "12+ Years", 
-    detail: "Lead Radiologist Experience",
-    icon: Award,
-    theme: "burgundy"
+    label: "Personalised Patient Care", 
+    detail: "Dedicated attention for every mother & family",
+    icon: Heart
   },
   { 
-    label: "4.9★", 
-    detail: "Verified Patient Reviews",
-    icon: Star,
-    theme: "blue"
+    label: "Fetal Imaging Services", 
+    detail: "Evidence-based diagnostic ultrasound",
+    icon: Activity
   },
   { 
-    label: "12K+", 
-    detail: "Mothers & Families Served",
-    icon: Users,
-    theme: "burgundy"
+    label: "Appointment Guidance", 
+    detail: "Clear scan timing & preparation support",
+    icon: CalendarCheck
   },
   { 
-    label: "GE Voluson", 
-    detail: "High-Definition Fetal Ultrasound",
-    icon: ShieldCheck,
-    theme: "blue"
+    label: "Doctor Collaboration", 
+    detail: "Close coordination with referring specialists",
+    icon: Users
   }
 ];
 
 const TrustStrip = () => {
   return (
-    <div className="hero-trust-strip-bar" aria-label="Trust & Clinical Excellence Metrics">
-      <div className="trust-strip-continuous-float">
-        <div className="trust-strip-container">
+    <div className="trust-strip-horizontal-bar" aria-label="Core Patient Care Values">
+      <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="trust-strip-row">
           {trustItems.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="trust-strip-item">
-                <div className={`trust-item-icon-box trust-item-icon-${item.theme}`} aria-hidden="true">
-                  <Icon size={16} strokeWidth={2.2} />
+              <div 
+                key={idx} 
+                className="trust-strip-segment"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                <div className="trust-strip-icon-circle" aria-hidden="true">
+                  <Icon size={18} strokeWidth={2.2} />
                 </div>
-                <div className="trust-item-text">
-                  <span className="trust-item-title">{item.label}</span>
-                  <span className="trust-item-detail">{item.detail}</span>
+                <div className="trust-strip-content">
+                  <span className="trust-strip-label">{item.label}</span>
+                  <span className="trust-strip-sub">{item.detail}</span>
                 </div>
+                {idx < trustItems.length - 1 && (
+                  <div className="trust-strip-divider" aria-hidden="true" />
+                )}
               </div>
             );
           })}

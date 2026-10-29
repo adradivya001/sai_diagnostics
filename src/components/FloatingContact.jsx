@@ -1,4 +1,4 @@
-import { MessageCircle, Phone, ArrowUp } from 'lucide-react';
+import { Phone, ArrowUp } from 'lucide-react';
 
 const FloatingContact = () => {
   const scrollToTop = () => {
@@ -16,37 +16,6 @@ const FloatingContact = () => {
       alignItems: 'center',
       gap: '0.75rem'
     }}>
-      {/* WhatsApp Floating Button */}
-      <a 
-        href="https://wa.me/917799900248" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        style={{
-          width: '46px',
-          height: '46px',
-          borderRadius: '50%',
-          backgroundColor: '#25D366',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#ffffff',
-          boxShadow: '0 4px 14px rgba(37, 211, 102, 0.4)',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-          textDecoration: 'none'
-        }}
-        onMouseOver={e => {
-          e.currentTarget.style.transform = 'scale(1.08)';
-          e.currentTarget.style.boxShadow = '0 6px 18px rgba(37, 211, 102, 0.5)';
-        }}
-        onMouseOut={e => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 14px rgba(37, 211, 102, 0.4)';
-        }}
-        title="WhatsApp Us"
-      >
-        <MessageCircle size={22} />
-      </a>
-      
       {/* Phone Helpline Floating Button (Primary Burgundy) */}
       <a 
         href="tel:+917799900248"

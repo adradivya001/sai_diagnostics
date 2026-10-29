@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { services, categories } from '../data/services';
 import { 
   Search, 
@@ -14,8 +13,7 @@ import {
   CalendarCheck,
   Stethoscope,
   Filter,
-  Eye,
-  FileText
+  Eye
 } from 'lucide-react';
 import { useAppointmentModal } from '../components/AppointmentModal';
 
@@ -129,7 +127,7 @@ const Services = () => {
       }}>
         <div style={{ maxWidth: '840px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
-            ● CLINICAL EXCELLENCE • TRANSPARENT PRICING
+            ● COMPREHENSIVE CLINICAL DIRECTORY
           </span>
 
           <h1 style={{
@@ -139,7 +137,7 @@ const Services = () => {
             marginBottom: '1rem',
             lineHeight: 1.15
           }}>
-            Diagnostic Services & Specialized Scans
+            Diagnostic Services and Specialised Scans
           </h1>
 
           <p style={{
@@ -149,7 +147,7 @@ const Services = () => {
             maxWidth: '680px',
             margin: '0 auto 2rem'
           }}>
-            Comprehensive directory of all 30 ultrasound scans, fetal wellbeing assessments, and genetic screenings. Click on any test card to view its complete clinical protocol, procedure, checklist, and preparation.
+            Explore available diagnostic services and contact the centre to understand which examination may be appropriate for your needs.
           </p>
 
           {/* Search Bar */}
@@ -473,7 +471,7 @@ const Services = () => {
                     {service.category.replace(' Scans', '').replace(' Diagnostic Tests', '')}
                   </div>
 
-                  {/* Bottom-Right: Price Tag Pill */}
+                  {/* Bottom-Right: Indicative Price Pill */}
                   <div style={{
                     position: 'absolute',
                     bottom: '12px',
@@ -481,16 +479,16 @@ const Services = () => {
                     background: '#ffffff',
                     color: 'var(--primary)',
                     fontFamily: '"Playfair Display", serif',
-                    fontSize: '1.2rem',
+                    fontSize: '1.05rem',
                     fontWeight: 700,
-                    padding: '4px 12px',
+                    padding: '3px 10px',
                     borderRadius: '999px',
                     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.18)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px'
                   }}>
-                    <span>₹{service.price}</span>
+                    <span>₹{service.price}*</span>
                   </div>
 
                   {/* Bottom-Left: Quick Click Cue */}
@@ -578,6 +576,7 @@ const Services = () => {
                   </div>
 
                   {/* Card Bottom CTA Row */}
+                  {/* Card Actions Footer */}
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -587,17 +586,6 @@ const Services = () => {
                     borderTop: '1px solid #f1f5f9',
                     marginTop: 'auto'
                   }}>
-                    <span style={{
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      color: 'var(--primary-burgundy)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}>
-                      View Protocol & Prep <ChevronRight size={15} />
-                    </span>
-
                     <button
                       type="button"
                       onClick={(e) => {
@@ -605,24 +593,52 @@ const Services = () => {
                         setActiveModalTest(service);
                       }}
                       style={{
-                        background: 'var(--bg-skyblue-pale)',
-                        color: 'var(--primary-blue)',
-                        border: '1px solid rgba(37, 137, 196, 0.25)',
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        fontSize: '0.84rem',
+                        fontWeight: 600,
+                        color: 'var(--primary-burgundy)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      View Details <ChevronRight size={15} />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(service.name);
+                      }}
+                      style={{
+                        background: 'var(--bg-burgundy-light)',
+                        color: 'var(--primary-burgundy)',
+                        border: '1px solid rgba(173, 35, 72, 0.25)',
                         borderRadius: '999px',
-                        padding: '0.4rem 0.85rem',
+                        padding: '0.4rem 0.95rem',
                         fontSize: '0.78rem',
                         fontWeight: 600,
                         cursor: 'pointer',
                         display: 'inline-flex',
                         alignItems: 'center',
-                        gap: '4px',
-                        transition: 'background 0.2s'
+                        gap: '5px',
+                        transition: 'all 0.2s'
                       }}
-                      onMouseOver={(e) => e.currentTarget.style.background = '#d6ecf9'}
-                      onMouseOut={(e) => e.currentTarget.style.background = 'var(--bg-skyblue-pale)'}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = 'var(--primary-burgundy)';
+                        e.currentTarget.style.color = '#FFFFFF';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = 'var(--bg-burgundy-light)';
+                        e.currentTarget.style.color = 'var(--primary-burgundy)';
+                      }}
                     >
-                      <FileText size={13} />
-                      Full Info
+                      <CalendarCheck size={13} />
+                      Enquire
                     </button>
                   </div>
                 </div>
@@ -819,13 +835,13 @@ const Services = () => {
                   background: '#ffffff',
                   color: 'var(--primary-burgundy)',
                   fontFamily: '"Playfair Display", serif',
-                  fontSize: '1.35rem',
+                  fontSize: '1.15rem',
                   fontWeight: 700,
                   padding: '4px 14px',
                   borderRadius: '999px',
                   boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)'
                 }}>
-                  ₹{activeModalTest.price}
+                  ₹{activeModalTest.price}*
                 </div>
               </div>
             </div>
@@ -843,7 +859,7 @@ const Services = () => {
                 {activeModalTest.name}
               </h2>
 
-              {/* Price & Report Status Bar */}
+              {/* Price & Confirmation Guidance Bar */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -858,14 +874,14 @@ const Services = () => {
               }}>
                 <div>
                   <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>
-                    Standard Clinic Fee
+                    Indicative Examination Fee
                   </span>
-                  <span style={{ fontSize: '1.35rem', fontWeight: 700, color: 'var(--primary-burgundy)', fontFamily: '"Playfair Display", serif' }}>
-                    ₹{activeModalTest.price}
+                  <span style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--primary-burgundy)', fontFamily: '"Playfair Display", serif' }}>
+                    ₹{activeModalTest.price}*
                   </span>
                 </div>
                 <span style={{ fontSize: '0.8rem', color: 'var(--primary-blue)', background: 'var(--bg-skyblue-pale)', padding: '4px 12px', borderRadius: '999px', fontWeight: 600, border: '1px solid rgba(37, 137, 196, 0.25)' }}>
-                  ✓ Includes Clinical Report & Scan Film
+                  Please contact the centre to confirm the current fee.
                 </span>
               </div>
 

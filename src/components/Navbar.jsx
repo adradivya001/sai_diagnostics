@@ -30,6 +30,7 @@ const Navbar = () => {
     { name: 'About Us', path: '/about' },
     { name: 'Doctor', path: '/doctors' },
     { name: 'Services', path: '/services' },
+    { name: 'Facilities', path: '/facilities' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -66,8 +67,8 @@ const Navbar = () => {
 
         {/* Right Desktop Actions */}
         <div className="navbar-actions">
-          <a href="tel:+917799900248" className="navbar-phone-btn">
-            <Phone size={15} />
+          <a href="tel:+917799900248" className="navbar-phone-btn" title="Call Sai Diagnostics directly">
+            <Phone size={15} className="phone-icon-wiggle" />
             +91 7799900248
           </a>
           <button 
@@ -75,8 +76,9 @@ const Navbar = () => {
             className="navbar-cta-btn"
             style={{ cursor: 'pointer' }}
             type="button"
+            title="Book Scan Appointment Online"
           >
-            <Calendar size={15} />
+            <Calendar size={15} className="calendar-icon-pulse" />
             Book Appointment
           </button>
         </div>
@@ -109,7 +111,7 @@ const Navbar = () => {
         })}
         <div className="navbar-mobile-actions">
           <a href="tel:+917799900248" className="navbar-phone-btn">
-            <Phone size={15} />
+            <Phone size={15} className="phone-icon-wiggle" />
             +91 7799900248
           </a>
           <button 
@@ -121,7 +123,7 @@ const Navbar = () => {
             style={{ cursor: 'pointer', width: '100%', justifyContent: 'center' }}
             type="button"
           >
-            <Calendar size={15} />
+            <Calendar size={15} className="calendar-icon-pulse" />
             Book Appointment
           </button>
         </div>

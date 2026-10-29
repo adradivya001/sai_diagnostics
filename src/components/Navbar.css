@@ -106,47 +106,77 @@
 .navbar-phone-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   border-radius: 9999px;
-  padding: 0.5rem 1.15rem;
-  border: 1.5px solid rgba(37, 137, 196, 0.3);
-  color: #2589C4;
+  padding: 0.52rem 1.15rem;
+  border: 1.5px solid rgba(23, 169, 207, 0.35);
+  color: #127993;
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  background: #E8F4FB;
-  transition: all 0.2s ease;
+  background: #EAF7FC;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .navbar-phone-btn:hover {
-  background: #d6ecf9;
-  border-color: #2589C4;
-  color: #1b6ea1;
+  background: #dcf2fa;
+  border-color: #17A9CF;
+  color: #094b5c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(23, 169, 207, 0.2);
+}
+
+.navbar-phone-btn:focus-visible {
+  outline: 2px solid #17A9CF;
+  outline-offset: 2px;
+}
+
+.navbar-phone-btn:hover .phone-icon-wiggle {
+  transform: rotate(-12deg) scale(1.12);
+}
+
+.phone-icon-wiggle {
+  transition: transform 0.25s ease;
+  color: #17A9CF;
 }
 
 .navbar-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   border-radius: 9999px;
   padding: 0.55rem 1.45rem;
-  background: #AD2348;
+  background: linear-gradient(135deg, #C2184B 0%, #9F1745 100%);
   color: #ffffff !important;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-decoration: none;
-  border: 1.5px solid #AD2348;
-  box-shadow: 0 4px 14px rgba(173, 35, 72, 0.22);
-  transition: all 0.2s ease;
+  border: 1.5px solid #C2184B;
+  box-shadow: 0 3px 12px rgba(194, 24, 75, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .navbar-cta-btn:hover {
-  background: #8f1b3a;
+  background: linear-gradient(135deg, #9F1745 0%, #7d1035 100%);
   border-color: #8f1b3a;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(173, 35, 72, 0.3);
+  box-shadow: 0 6px 18px rgba(194, 24, 75, 0.35);
+}
+
+.navbar-cta-btn:focus-visible {
+  outline: 2px solid #C2184B;
+  outline-offset: 2px;
+}
+
+.navbar-cta-btn:hover .calendar-icon-pulse {
+  transform: scale(1.15) rotate(-6deg);
+}
+
+.calendar-icon-pulse {
+  transition: transform 0.25s ease;
 }
 
 /* Mobile Toggle */
