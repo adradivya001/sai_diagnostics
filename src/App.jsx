@@ -9,6 +9,7 @@ import Doctors from './pages/Doctors';
 import Contact from './pages/Contact';
 import Facilities from './pages/Facilities';
 import FloatingContact from './components/FloatingContact';
+import MobileBottomBar from './components/MobileBottomBar';
 import { AppointmentModalProvider } from './components/AppointmentModal';
 
 function ScrollToTop() {
@@ -29,7 +30,7 @@ function App() {
         <ScrollToTop />
         <FloatingContact />
         <Navbar />
-        <main style={{ flex: 1, paddingTop: isHome ? 0 : '4.5rem' }}>
+        <main className={`site-main-content ${isHome ? 'is-home' : ''}`} style={{ flex: 1, paddingTop: isHome ? 0 : '4.5rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -40,6 +41,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <MobileBottomBar />
       </div>
     </AppointmentModalProvider>
   );

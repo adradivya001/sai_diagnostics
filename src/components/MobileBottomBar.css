@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Mobile Bottom Navigation Bar (Pinned on Mobile & Tablet <= 768px)
+   Theme: Frosted Pure White with Burgundy Accent (#AD2348) & Sky Blue (#2589C4)
+   ========================================================================== */
+
+.mobile-bottom-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(173, 35, 72, 0.12);
+  box-shadow: 0 -4px 20px rgba(52, 57, 67, 0.08);
+  z-index: 9990;
+  padding: 0.45rem 0.5rem calc(0.45rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.mobile-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 48px;
+  text-decoration: none;
+  color: var(--text-charcoal);
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.2rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-bar-item:hover,
+.mobile-bar-item:active {
+  background-color: #F8E7EC;
+  color: var(--primary-burgundy);
+}
+
+.mobile-bar-item.active {
+  color: var(--primary-burgundy);
+  font-weight: 700;
+}
+
+.mobile-bar-item.active::before {
+  content: '';
+  position: absolute;
+  top: -0.45rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--primary-burgundy);
+}
+
+.mobile-bar-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  transition: transform 0.2s ease;
+}
+
+.mobile-bar-item:active .mobile-bar-icon-wrap {
+  transform: scale(0.92);
+}
+
+.mobile-bar-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* Center Highlight CTA: Book Scan */
+.mobile-bar-item-cta {
+  background: linear-gradient(135deg, #C2184B 0%, #AD2348 100%) !important;
+  color: #ffffff !important;
+  border-radius: 9999px;
+  padding: 0.35rem 0.75rem;
+  box-shadow: 0 4px 14px rgba(173, 35, 72, 0.35);
+  transform: translateY(-4px);
+  flex: 1.25;
+}
+
+.mobile-bar-item-cta:hover,
+.mobile-bar-item-cta:active {
+  background: linear-gradient(135deg, #9F1745 0%, #8f1b3a 100%) !important;
+  box-shadow: 0 6px 18px rgba(173, 35, 72, 0.45);
+}
+
+.mobile-bar-item-cta .mobile-bar-label {
+  color: #ffffff !important;
+  font-weight: 700;
+}

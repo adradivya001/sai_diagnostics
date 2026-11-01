@@ -6,16 +6,7 @@ const FloatingContact = () => {
   };
 
   return (
-    <div style={{
-      position: 'fixed',
-      bottom: '2rem',
-      right: '1.5rem',
-      zIndex: 9999,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '0.75rem'
-    }}>
+    <div className="floating-contact-container">
       {/* Phone Helpline Floating Button (Primary Burgundy) */}
       <a 
         href="tel:+917799900248"

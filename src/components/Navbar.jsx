@@ -12,11 +12,19 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      // On the home page, remain completely transparent throughout all 3 hero section stages
+      // Only switch to frosted/scrolled navbar after scrolling past the full hero section
+      const threshold = location.pathname === '/' ? (window.innerHeight - 80) : 10;
+      setScrolled(window.scrollY > threshold);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [location.pathname]);
 
   // Close mobile menu on route change
   const [prevPath, setPrevPath] = useState(location.pathname);

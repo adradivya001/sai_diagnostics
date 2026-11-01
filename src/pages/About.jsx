@@ -174,7 +174,7 @@ const About = () => {
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '2rem'
           }}>
             {/* Principle 1: Thoughtful Diagnostics */}
@@ -292,14 +292,9 @@ const About = () => {
       </section>
 
       {/* SECTION D — Centre Environment (Genuine Clinic Photography Showcase) */}
-      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3rem, 6vw, 5.5rem) 1rem' }}>
         <div className="container" style={{ maxWidth: '1240px' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1.15fr 1fr',
-            gap: '4rem',
-            alignItems: 'center'
-          }}>
+          <div className="responsive-about-split">
             {/* Visual Column: Genuine Reception Photo */}
             <div className="reveal-on-scroll">
               <div style={{

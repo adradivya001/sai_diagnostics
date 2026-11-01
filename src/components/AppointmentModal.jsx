@@ -84,7 +84,7 @@ export const AppointmentModalProvider = ({ children }) => {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 99999,
-            padding: '1rem',
+            padding: 'clamp(0.5rem, 2.5vw, 1rem)',
             animation: 'fadeIn 0.25s ease-out'
           }}
           onClick={closeModal}
@@ -96,7 +96,7 @@ export const AppointmentModalProvider = ({ children }) => {
               borderRadius: '24px',
               maxWidth: '560px',
               width: '100%',
-              maxHeight: '92vh',
+              maxHeight: '94dvh',
               overflowY: 'auto',
               boxShadow: '0 25px 60px -15px rgba(173, 35, 72, 0.3)',
               position: 'relative',
@@ -107,7 +107,7 @@ export const AppointmentModalProvider = ({ children }) => {
             {/* Header Strip with Burgundy Gradient */}
             <div style={{
               background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
-              padding: '1.75rem 2rem 1.5rem',
+              padding: 'clamp(1.25rem, 3.5vw, 1.75rem) clamp(1.15rem, 4vw, 2rem) clamp(1rem, 3vw, 1.5rem)',
               borderBottom: '1px solid rgba(173, 35, 72, 0.12)',
               position: 'relative'
             }}>
@@ -115,13 +115,13 @@ export const AppointmentModalProvider = ({ children }) => {
                 onClick={closeModal}
                 style={{
                   position: 'absolute',
-                  top: '1.25rem',
-                  right: '1.25rem',
+                  top: '1rem',
+                  right: '1rem',
                   background: '#ffffff',
                   border: '1px solid rgba(173, 35, 72, 0.15)',
                   borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
+                  width: '42px',
+                  height: '42px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -135,7 +135,7 @@ export const AppointmentModalProvider = ({ children }) => {
                 type="button"
                 aria-label="Close appointment modal"
               >
-                <X size={18} />
+                <X size={20} />
               </button>
 
               <span className="section-tag" style={{ marginBottom: '0.4rem', fontSize: '0.74rem' }}>
@@ -157,7 +157,7 @@ export const AppointmentModalProvider = ({ children }) => {
             </div>
 
             {/* Content Body */}
-            <div style={{ padding: '1.75rem 2rem 2rem' }}>
+            <div style={{ padding: 'clamp(1.25rem, 3.5vw, 1.75rem) clamp(1rem, 3.5vw, 2rem) clamp(1.25rem, 3.5vw, 2rem)' }}>
               {submitted ? (
                 <div style={{ textAlign: 'center', padding: '1.5rem 0' }}>
                   <div style={{
@@ -254,7 +254,7 @@ export const AppointmentModalProvider = ({ children }) => {
                     </div>
 
                     {/* Phone & Age Row */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '0.85rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))', gap: '0.85rem' }}>
                       <div className="form-group" style={{ marginBottom: 0 }}>
                         <label className="form-label" htmlFor="modal-phone">
                           Mobile Number (+91) *

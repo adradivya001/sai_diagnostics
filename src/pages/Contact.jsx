@@ -56,14 +56,9 @@ const Contact = () => {
       </section>
 
       {/* SECTION B — Contact Details and Location (Two-Column Layout) */}
-      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3rem, 6vw, 5.5rem) 1rem' }}>
         <div className="container" style={{ maxWidth: '1240px' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1.15fr',
-            gap: '4.5rem',
-            alignItems: 'center'
-          }}>
+          <div className="responsive-contact-split">
             
             {/* Left Side: Direct Contact Details */}
             <div className="reveal-on-scroll">
@@ -196,7 +191,7 @@ const Contact = () => {
                 overflow: 'hidden',
                 boxShadow: '0 16px 36px rgba(32, 39, 53, 0.08)',
                 border: '1px solid rgba(23, 169, 207, 0.25)',
-                height: '420px',
+                height: 'clamp(280px, 45vw, 420px)',
                 background: '#F4FAFD'
               }}>
                 <iframe

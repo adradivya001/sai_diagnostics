@@ -347,7 +347,7 @@ const Services = () => {
         {/* Service Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
           gap: '1.75rem',
           alignItems: 'stretch'
         }}>
@@ -653,9 +653,9 @@ const Services = () => {
           background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
           borderRadius: '24px',
           border: '1px solid rgba(173, 35, 72, 0.12)',
-          padding: '2.5rem 2.25rem',
+          padding: 'clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.25rem)',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
           gap: '2rem',
           alignItems: 'center',
           boxShadow: 'var(--shadow-md)'
@@ -720,7 +720,7 @@ const Services = () => {
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 9999,
-            padding: '1.25rem',
+            padding: 'clamp(0.5rem, 2.5vw, 1.25rem)',
             animation: 'fadeIn 0.2s ease-out'
           }}
           onClick={() => setActiveModalTest(null)}
@@ -731,7 +731,7 @@ const Services = () => {
               borderRadius: '24px',
               maxWidth: '660px',
               width: '100%',
-              maxHeight: '92vh',
+              maxHeight: '94dvh',
               overflowY: 'auto',
               boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.35)',
               position: 'relative',
@@ -744,7 +744,7 @@ const Services = () => {
             <div style={{
               position: 'relative',
               width: '100%',
-              height: '210px',
+              height: 'clamp(160px, 28vw, 210px)',
               backgroundColor: '#0a2540',
               overflow: 'hidden'
             }}>

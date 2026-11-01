@@ -1,32 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Official Brand Palette: Premium Light Burgundy & Sky Blue */
-  --bg-warm-white: #FFFCFA;      /* Dominant Background */
-  --bg-burgundy-light: #F8E7EC;  /* Light Burgundy section alternation */
-  --bg-skyblue-pale: #E8F4FB;    /* Pale Sky Blue section alternation */
+  /* Official Brand Palette: Modern Premium Specialist Fetal Medicine */
+  --primary-deep-pink: #C21850;
+  --primary-deep-pink-hover: #a11341;
+  --blush-pink: #F8E5EA;
+  --soft-cyan: #DDF5F6;
+  --ivory: #FFFAF6;
+  --white: #FFFFFF;
+  --dark-charcoal: #202B3C;
+  --secondary-text: #647184;
+
+  /* Legacy & system aliases */
+  --bg-warm-white: #FFFAF6;      /* Dominant Ivory Background */
+  --bg-burgundy-light: #F8E5EA;  /* Blush Pink section background */
+  --bg-skyblue-pale: #DDF5F6;    /* Soft Cyan accent background */
   --surface: #FFFFFF;            /* Card Surfaces */
   
-  --primary-burgundy: #AD2348;   /* Primary Burgundy: Main CTA & key headings */
-  --primary-burgundy-hover: #8f1b3a;
-  --accent-rose: #D989A0;        /* Soft Rose Accent */
+  --primary-burgundy: #C21850;   /* Primary Deep Pink */
+  --primary-burgundy-hover: #a11341;
+  --accent-rose: #F8E5EA;        /* Blush Pink Accent */
   
-  --primary-blue: #2589C4;       /* Primary Logo Blue: Medical icons, links, secondary badges */
-  --primary-blue-hover: #1b6ea1;
-  --accent-blue-soft: #79B9DF;   /* Soft Medical Blue */
+  --primary-blue: #0E8E9E;       /* Medical Diagnostic Cyan */
+  --primary-blue-hover: #0b7380;
+  --accent-blue-soft: #DDF5F6;   /* Soft Cyan */
   
-  --text-charcoal: #343943;      /* Soft Charcoal Text */
-  --text-muted: #59616B;         /* Muted caption text */
-  --text-heading: #1B2533;       /* High-contrast headings */
+  --text-charcoal: #202B3C;      /* Dark Charcoal Text */
+  --text-muted: #647184;         /* Secondary Text */
+  --text-heading: #202B3C;       /* Dark Charcoal Headings */
   
   /* System State Accents */
   --success: #10b981;
   --warning: #f59e0b;
-  --danger: #AD2348;
+  --danger: #C21850;
   
   /* Structural Tokens */
-  --border-light: rgba(173, 35, 72, 0.12);
-  --border-blue: rgba(37, 137, 196, 0.16);
+  --border-light: rgba(194, 24, 80, 0.12);
+  --border-blue: rgba(14, 142, 158, 0.18);
   --border-subtle: #eedee3;
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -34,10 +44,10 @@
   --radius-full: 9999px;
   
   /* Premium Soft Elevation Shadows */
-  --shadow-sm: 0 2px 8px rgba(173, 35, 72, 0.04);
-  --shadow-md: 0 6px 20px rgba(52, 57, 67, 0.06);
-  --shadow-lg: 0 12px 32px rgba(173, 35, 72, 0.08);
-  --shadow-hover: 0 14px 36px rgba(173, 35, 72, 0.12);
+  --shadow-sm: 0 2px 10px rgba(194, 24, 80, 0.04);
+  --shadow-md: 0 8px 24px rgba(32, 43, 60, 0.06);
+  --shadow-lg: 0 16px 40px rgba(194, 24, 80, 0.08);
+  --shadow-hover: 0 18px 44px rgba(194, 24, 80, 0.12);
 }
 
 * {
@@ -48,15 +58,25 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100vw;
 }
 
 body {
+  overflow-x: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--bg-warm-white);
   color: var(--text-charcoal);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
 }
 
 a {
@@ -71,9 +91,22 @@ ul {
 
 .container {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.75rem;
+  }
 }
 
 /* Fluid Typography */
@@ -283,6 +316,84 @@ p {
   .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+/* Reusable Mobile-First Fluid Grids */
+.responsive-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.responsive-split-editorial {
+  display: grid;
+  grid-template-columns: 0.9fr 1.15fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.responsive-about-split {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.responsive-contact-split {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.responsive-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 960px) {
+  .responsive-two-col,
+  .responsive-split-editorial,
+  .responsive-about-split,
+  .responsive-contact-split {
+    grid-template-columns: 1fr !important;
+    gap: 2.25rem !important;
+  }
+}
+
+/* Touch Friendly Targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Page Spacing for Mobile Bottom Bar */
+@media (max-width: 768px) {
+  .site-main-content {
+    padding-bottom: 4.5rem !important;
+  }
+}
+
+/* Floating Contact Container Responsive Positioning */
+.floating-contact-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 1.5rem;
+  z-index: 9980;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  transition: bottom 0.25s ease, right 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .floating-contact-container {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+  }
+}
+
 /* Badges */
 .badge {
   display: inline-block;
@@ -340,10 +451,11 @@ p {
   border: 1.5px solid #e5d8dc;
   border-radius: var(--radius-md);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 16px; /* Prevents auto-zoom on iOS Safari */
   background-color: #ffffff;
   color: var(--text-charcoal);
   transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 46px;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {

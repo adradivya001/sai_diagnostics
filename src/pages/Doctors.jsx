@@ -62,14 +62,9 @@ const Doctors = () => {
       </section>
 
       {/* SECTION B — Main Doctor Profile (Asymmetrical Editorial Two-Column Presentation) */}
-      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3rem, 6vw, 5.5rem) 1rem' }}>
         <div className="container" style={{ maxWidth: '1240px' }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '0.9fr 1.15fr',
-            gap: '4.5rem',
-            alignItems: 'center'
-          }}>
+          <div className="responsive-split-editorial">
             
             {/* Left Side: Large Visual Identity Anchor */}
             <div className="reveal-on-scroll">
@@ -77,9 +72,9 @@ const Doctors = () => {
                 position: 'relative',
                 background: 'linear-gradient(145deg, #FFF9F5 0%, #FCE8EE 50%, #E6F7FC 100%)',
                 borderRadius: '32px',
-                padding: '4rem 2.5rem',
+                padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem)',
                 border: '1.5px solid rgba(194, 24, 75, 0.16)',
-                boxShadow: '24px 24px 0px rgba(194, 24, 75, 0.05), 0 20px 44px rgba(194, 24, 75, 0.08)',
+                boxShadow: '0 16px 40px rgba(194, 24, 75, 0.08)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -322,7 +317,7 @@ const Doctors = () => {
       {/* SECTION C — Consultation and Booking */}
       <section style={{
         background: 'linear-gradient(135deg, #FDF4F7 0%, #FFF9F5 50%, #E6F7FC 100%)',
-        padding: '5.5rem 1.5rem',
+        padding: 'clamp(3rem, 6vw, 5.5rem) 1rem',
         borderTop: '1px solid rgba(194, 24, 75, 0.08)',
         textAlign: 'center'
       }}>
