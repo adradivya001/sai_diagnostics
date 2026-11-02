@@ -12,18 +12,18 @@ import {
   Stethoscope, 
   Navigation, 
   Award,
-  CheckCircle2,
-  Quote,
-  Sparkles,
-  ChevronDown,
-  Star,
-  Cpu,
-  Eye,
-  Radio,
-  FileText,
-  Calendar,
-  Building,
-  ExternalLink
+  CheckCircle2, 
+  Quote, 
+  Sparkles, 
+  ChevronDown, 
+  Star, 
+  Cpu, 
+  Eye, 
+  Radio, 
+  FileText, 
+  Building, 
+  ExternalLink,
+  MessageCircle
 } from 'lucide-react';
 import PregnancyJourneyHero from '../components/home/PregnancyJourneyHero';
 import { useAppointmentModal } from '../components/AppointmentModal';
@@ -32,7 +32,6 @@ import {
   HeadingReveal, 
   StaggerContainer, 
   StaggerItem, 
-  ImageReveal, 
   HoverCard 
 } from '../components/motion/MotionReveal';
 import './HomeSections.css';
@@ -49,163 +48,176 @@ const Home = () => {
     setOpenFaq(openFaq === index ? -1 : index);
   };
 
-  const servicesData = [
+  // Section 02: Comprehensive Diagnostic Services (6 Verified Cards)
+  const serviceCards = [
     {
-      category: '11–13⁺⁶ WEEKS',
-      name: 'First-Trimester Screening (NT Scan)',
-      desc: 'Early ultrasound examination evaluating fetal development, nuchal translucency, nasal bone presence, and early anatomical milestones.',
-      icon: <Activity size={22} />,
-      link: '/services'
-    },
-    {
-      category: '18–22 WEEKS',
-      name: 'Detailed TIFFA / Fetal Anomaly Scan',
-      desc: 'Systematic mid-trimester structural evaluation assessing fetal organ development, intracranial anatomy, spine integrity, and limbs.',
-      icon: <ShieldCheck size={22} />,
-      link: '/services'
-    },
-    {
-      category: 'CIRCULATION',
-      name: 'Obstetric Color Doppler Hemodynamics',
-      desc: 'Specialized vascular ultrasound measuring blood velocity and resistance in umbilical, uterine, and middle cerebral vascular pathways.',
+      id: 'early-scans',
+      badge: '6–10 WEEKS',
+      name: 'Early Pregnancy Scans',
+      desc: 'Confirm pregnancy location, verify embryonic heartbeat, determine gestational age, and ensure early reassurance.',
       icon: <Heart size={22} />,
       link: '/services'
     },
     {
-      category: 'TARGETED CARDIAC',
-      name: 'Fetal Echocardiography',
-      desc: 'Advanced high-resolution cardiovascular examination analyzing fetal cardiac chambers, great vessel alignment, valve motion, and rhythm.',
-      icon: <Stethoscope size={22} />,
+      id: 'nt-nb-scan',
+      badge: '11–13⁺⁶ WEEKS',
+      name: 'NT / NB Scan',
+      desc: 'First-trimester screening measuring nuchal translucency and nasal bone with detailed structural anatomy review.',
+      icon: <ShieldCheck size={22} />,
       link: '/services'
     },
     {
-      category: 'ADVANCED IMAGING',
-      name: '3D & 4D Fetal Ultrasound',
-      desc: 'High-definition surface rendering offering detailed structural visualization of facial morphology, extremities, and maternal-fetal bonding.',
+      id: 'anomaly-scan',
+      badge: '18–22 WEEKS',
+      name: 'Detailed Anomaly Scan (TIFFA)',
+      desc: 'Comprehensive head-to-toe structural examination of fetal organs, spine, brain, heart, and musculoskeletal development.',
       icon: <Eye size={22} />,
       link: '/services'
     },
     {
-      category: 'TARGETED NEURO',
-      name: 'Fetal Neurosonography & Growth Scan',
-      desc: 'Dedicated high-precision neuroimaging of fetal brain ventricles, posterior fossa structures, and comprehensive interval biometry tracking.',
+      id: 'growth-scan',
+      badge: '28–36 WEEKS',
+      name: 'Fetal Growth & Wellbeing Scan',
+      desc: 'Serial evaluation of fetal growth parameters, estimated fetal weight, amniotic fluid volume, and placental maturity.',
+      icon: <Activity size={22} />,
+      link: '/services'
+    },
+    {
+      id: 'doppler-studies',
+      badge: 'HEMODYNAMICS',
+      name: 'Obstetric Doppler Studies',
+      desc: 'Specialized vascular velocity assessment of uterine, umbilical, and middle cerebral arteries to monitor fetal circulation.',
       icon: <Radio size={22} />,
+      link: '/services'
+    },
+    {
+      id: 'fetal-medicine',
+      badge: 'ADVANCED SPECIALTY',
+      name: 'Specialised Fetal Medicine',
+      desc: 'Targeted fetal echocardiography and detailed neurosonography for high-risk pregnancies requiring focused specialist review.',
+      icon: <Stethoscope size={22} />,
       link: '/services'
     }
   ];
 
+  // Section 08: Frequently Asked Questions (Exact 6 Required Questions)
   const faqData = [
     {
-      q: 'How can I book an appointment at Sai Diagnostics?',
-      a: 'You can easily book an appointment by calling our dedicated reception helpline at +91 77999 00248 or by clicking any "Book an Appointment" button on this website to submit an online consultation request. Our care coordinator will confirm your preferred scan timing.'
+      q: 'What types of pregnancy scans are available at Sai Diagnostics?',
+      a: 'We offer comprehensive obstetric ultrasound examinations including Dating & Viability Scans (6–9 weeks), First-Trimester NT/NB Screening Scans (11–13⁺⁶ weeks), Mid-Trimester Anomaly Scans (TIFFA / Target Scan, 18–22 weeks), Fetal Growth & Wellbeing Scans (28–36 weeks), Obstetric Color Doppler Studies, Fetal Echocardiography, and Fetal Neurosonography.'
     },
     {
-      q: 'What scans and diagnostic services are available?',
-      a: 'We specialize in evidence-based maternal-fetal medicine, including Early Pregnancy Dating Scans, First-Trimester Screening (NT Scans), Mid-Trimester Anomaly Scans (TIFFA), Obstetric Color Doppler, Fetal Echocardiography, Fetal Neurosonography, 3D/4D Ultrasound, and Interval Growth Assessments.'
+      q: 'When should I schedule my first pregnancy ultrasound?',
+      a: 'The first scan (dating and viability ultrasound) is typically performed between 6 and 9 weeks of pregnancy. This scan confirms the location of the gestational sac, confirms the embryonic heartbeat, accurately estimates your due date, and checks whether you are carrying single or multiple babies.'
     },
     {
-      q: 'How should I prepare for my ultrasound scan?',
-      a: 'For early first-trimester scans, you may be requested to arrive with a comfortably full bladder. For mid-trimester (TIFFA) and later growth scans, a full bladder is usually not required. Having a light meal beforehand is often recommended to encourage fetal movement. Please always bring your doctor\'s prescription and previous scan reports.'
+      q: 'Do I need an appointment before visiting?',
+      a: 'Yes, we strongly encourage scheduling an appointment in advance. Detailed maternal-fetal ultrasound requires careful, unhurried examination by our specialist radiologist. Pre-booking ensures minimal waiting time and guarantees dedicated scan time for you and your baby.'
     },
     {
-      q: 'Where is the centre located in Anantapur?',
-      a: 'Sai Diagnostics and Fetal Medicine Centre is centrally located at 9th Cross Road, Sai Nagar, Anantapur, Andhra Pradesh 515001. The centre is easily accessible and provides a peaceful, patient-friendly environment.'
+      q: 'What is an anomaly scan, and when is it performed?',
+      a: 'The anomaly scan (also known as TIFFA or Targeted Imaging for Fetal Anomalies) is performed between 18 and 22 weeks of pregnancy. It is an in-depth anatomical assessment that evaluates the baby’s brain, face, spine, heart chambers, kidneys, stomach, abdominal wall, and limbs to ensure healthy structural development.'
     },
     {
-      q: 'How can I contact the centre for urgent enquiries?',
-      a: 'You can reach our centre team directly by phone at +91 77999 00248 during working hours (Monday to Saturday: 8:30 AM to 7:00 PM). For directions or referral questions, you can also view our Visit Centre section below.'
+      q: 'How should I prepare for my ultrasound appointment?',
+      a: 'Preparation varies by scan type. For early first-trimester transabdominal scans, drinking 2–3 glasses of water 1 hour before the scan helps fill the bladder for clearer visibility. For mid-trimester scans (such as TIFFA), a full bladder is usually not required. Having a light meal beforehand is often recommended. Please always bring your doctor’s prescription and all previous scan reports.'
+    },
+    {
+      q: 'How can I collect my diagnostic reports?',
+      a: 'Routine ultrasound reports with high-resolution diagnostic images are provided on the same day, immediately following the scan review and personal consultation with our specialist doctor. Digital copies and direct communication with your referring obstetrician are also supported upon request.'
     }
   ];
 
   return (
     <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
+      
       {/* =========================================================================
-          PHASE 4 & 5: SIGNATURE SCROLL-DRIVEN PREGNANCY JOURNEY HERO + TRUST STRIP
+          PROTECTED COMPONENT: SIGNATURE HERO SECTION (STRICTLY UNMODIFIED)
           ========================================================================= */}
       <PregnancyJourneyHero />
 
       {/* =========================================================================
-          PHASE 6: ABOUT SAI DIAGNOSTICS (Editorial Asymmetric Layout)
+          SECTION 01: SPECIALISED FETAL MEDICINE INTRODUCTION
           ========================================================================= */}
-      <section className="home-about-section" id="about-centre">
-        <div className="container" style={{ maxWidth: '1240px' }}>
-          <div className="home-about-editorial-grid">
+      <section className="home-intro-section" id="about-centre">
+        <div className="container">
+          <div className="home-intro-editorial-grid">
             
-            {/* Left Narrative Column: Headings enter from right, text follows, CTAs last */}
-            <div className="home-about-narrative">
+            {/* Left Narrative Column */}
+            <div className="home-intro-narrative">
               <ScrollReveal direction="right" delay={0.05}>
                 <span className="home-section-eyebrow">
-                  <Sparkles size={13} /> ABOUT OUR CENTRE
+                  <Sparkles size={13} /> SPECIALISED FETAL MEDICINE
                 </span>
               </ScrollReveal>
 
               <HeadingReveal delay={0.12}>
                 <h2 className="home-section-heading">
-                  Specialised Care for Every Pregnancy Journey
+                  Every Pregnancy Deserves Specialised Attention.
                 </h2>
               </HeadingReveal>
 
               <ScrollReveal direction="right" delay={0.2}>
-                <p className="home-about-lead">
-                  At Sai Diagnostics and Fetal Medicine Centre, we focus on providing specialised diagnostic services and personalised guidance throughout the pregnancy journey.
+                <p className="home-intro-lead">
+                  From early pregnancy scans to advanced fetal assessments, we focus on providing detailed diagnostic insights and personalised care at every stage of pregnancy.
                 </p>
-                <p className="home-about-body">
-                  Located in Anantapur, our dedicated maternal-fetal imaging centre bridges clinical precision with warm, reassuring patient care. We believe that every expectant mother deserves attentive, unhurried examinations backed by sound clinical judgment and clear communication.
+                <p className="home-intro-body">
+                  Located in Anantapur, our dedicated maternal-fetal centre brings together clinical diagnostic precision with warm, reassuring patient guidance. We ensure every expectant family receives attentive, unhurried examinations backed by sound clinical judgment and clear doctor communication.
                 </p>
               </ScrollReveal>
 
-              {/* Speciality highlights */}
-              <StaggerContainer delayChildren={0.25} staggerChildren={0.1} className="home-about-highlights">
+              {/* Four Service Highlights */}
+              <StaggerContainer delayChildren={0.25} staggerChildren={0.08} className="home-intro-highlights">
                 <StaggerItem>
-                  <div className="home-about-highlight-pill">
+                  <div className="home-intro-highlight-pill">
                     <CheckCircle2 size={16} />
-                    <span>Fetal Medicine Expertise</span>
+                    <span>First-Trimester Screening & Early Anatomy</span>
                   </div>
                 </StaggerItem>
                 <StaggerItem>
-                  <div className="home-about-highlight-pill">
+                  <div className="home-intro-highlight-pill">
                     <CheckCircle2 size={16} />
-                    <span>High-Resolution Diagnostic Imaging</span>
+                    <span>High-Resolution Structural Anomaly Evaluation</span>
                   </div>
                 </StaggerItem>
                 <StaggerItem>
-                  <div className="home-about-highlight-pill">
+                  <div className="home-intro-highlight-pill">
                     <CheckCircle2 size={16} />
-                    <span>Personalised Patient Guidance</span>
+                    <span>Hemodynamic Doppler & Fetal Growth Monitoring</span>
                   </div>
                 </StaggerItem>
                 <StaggerItem>
-                  <div className="home-about-highlight-pill">
+                  <div className="home-intro-highlight-pill">
                     <CheckCircle2 size={16} />
-                    <span>Referring Doctor Coordination</span>
+                    <span>Clear Doctor Explanations & Specialist Coordination</span>
                   </div>
                 </StaggerItem>
               </StaggerContainer>
 
-              {/* CTA Button */}
+              {/* Explore Fetal Medicine CTA */}
               <ScrollReveal direction="up" delay={0.35}>
-                <div>
-                  <Link to="/about" className="btn btn-primary" style={{ padding: '0.85rem 2.25rem' }}>
-                    Learn More About Us <ArrowRight size={16} />
+                <div style={{ marginTop: '0.75rem' }}>
+                  <Link to="/services" className="btn btn-primary" style={{ padding: '0.85rem 2.25rem' }}>
+                    Explore Fetal Medicine <ArrowRight size={16} />
                   </Link>
                 </div>
               </ScrollReveal>
             </div>
 
-            {/* Right Side: Editorial Image Card */}
-            <div className="home-about-visual-column">
+            {/* Right Visual Column: Clinic Diagnostic Centre Atmosphere */}
+            <div className="home-intro-visual-column">
               <ScrollReveal direction="left" delay={0.2} amount={0.25}>
-                <div className="home-about-image-card">
+                <div className="home-intro-image-frame">
                   <img 
-                    src="/modern-reception.png" 
-                    alt="Sai Diagnostics & Fetal Medicine Centre Reception" 
+                    src="/modern-waiting-room.png" 
+                    alt="Sai Diagnostics & Fetal Medicine Centre Atmosphere" 
                     loading="lazy"
                   />
-                  <div className="home-about-floating-badge">
-                    <span className="home-about-badge-title">
+                  <div className="home-intro-floating-badge">
+                    <span className="home-intro-badge-title">
                       Patient Comfort & Clinical Excellence
                     </span>
-                    <p className="home-about-badge-desc">
+                    <p className="home-intro-badge-desc">
                       Dedicated ultrasound consultation suites designed for compassionate care and family reassurance.
                     </p>
                   </div>
@@ -218,40 +230,40 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 7: SPECIALISED SERVICES (Asymmetric Service Grid)
+          SECTION 02: COMPREHENSIVE DIAGNOSTIC SERVICES (6 Verified Cards)
           ========================================================================= */}
       <section className="home-services-section" id="services">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
-          <div className="text-center" style={{ marginBottom: '1rem' }}>
+          <div className="text-center" style={{ marginBottom: '1.5rem' }}>
             <ScrollReveal direction="up" delay={0.05}>
               <span className="home-section-eyebrow">
-                <Activity size={13} /> SPECIALISED FETAL CARE
+                <Activity size={13} /> EVIDENCE-BASED DIAGNOSTICS
               </span>
             </ScrollReveal>
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Comprehensive Diagnostic Care
+                Comprehensive Diagnostic Care.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                Explore our diagnostic services designed to support pregnancy monitoring and specialised fetal assessment.
+                Explore specialised diagnostic services designed to support informed medical assessments throughout your pregnancy journey.
               </p>
             </ScrollReveal>
           </div>
 
-          {/* 6-Card Service Grid with Reversible Entrance & Stagger */}
-          <StaggerContainer delayChildren={0.15} staggerChildren={0.1} className="home-services-grid">
-            {servicesData.map((service, index) => (
+          {/* 6 Visually Consistent Service Cards */}
+          <StaggerContainer delayChildren={0.15} staggerChildren={0.08} className="home-services-grid">
+            {serviceCards.map((service, index) => (
               <StaggerItem key={index}>
                 <HoverCard lift={-6} className="home-service-card" style={{ height: '100%' }}>
                   <div>
                     <div className="home-service-card-top">
                       <span className="home-service-tag">
-                        {service.category}
+                        {service.badge}
                       </span>
                       <div className="home-service-icon-box">
                         {service.icon}
@@ -277,14 +289,15 @@ const Home = () => {
             ))}
           </StaggerContainer>
 
-          <div className="text-center">
+          {/* View All Services CTA */}
+          <div className="text-center" style={{ marginTop: '2.5rem' }}>
             <ScrollReveal direction="up" delay={0.3}>
               <Link 
                 to="/services" 
                 className="btn btn-outline" 
                 style={{ padding: '0.85rem 2.25rem', backgroundColor: '#FFFFFF' }}
               >
-                View All Diagnostic Services <ArrowRight size={16} />
+                View All Services <ArrowRight size={16} />
               </Link>
             </ScrollReveal>
           </div>
@@ -293,10 +306,10 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 8: ADVANCED DIAGNOSTIC TECHNOLOGY (Clinical Ultrasound Platform)
+          SECTION 03: ADVANCED IMAGING AND TECHNOLOGY
           ========================================================================= */}
       <section className="home-technology-section" id="technology">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
@@ -307,20 +320,20 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Advanced Imaging for Better Diagnostic Insights
+                Advanced Imaging. Greater Diagnostic Clarity.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                Our centre utilizes advanced high-resolution ultrasound platforms engineered for clinical precision, early structural clarity, and confident maternal-fetal assessments.
+                Modern imaging capabilities support detailed diagnostic assessments and help provide valuable insights throughout the pregnancy journey.
               </p>
             </ScrollReveal>
           </div>
 
           <div className="home-technology-grid">
             
-            {/* Left: Genuine Clinical Ultrasound Equipment Image */}
+            {/* Left: Authentic Diagnostic Equipment Photograph */}
             <ScrollReveal direction="left" delay={0.2} amount={0.25}>
               <div className="home-technology-image-wrap">
                 <img 
@@ -329,13 +342,29 @@ const Home = () => {
                   loading="lazy"
                 />
                 <div className="home-technology-floating-tag">
-                  <Activity size={14} /> High-Resolution Ultrasound Platform
+                  <Activity size={14} /> High-Resolution Clinical Ultrasound Platform
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* Right: Verified Technical Features */}
-            <StaggerContainer delayChildren={0.2} staggerChildren={0.12} className="home-technology-features-list">
+            {/* Right: Four Feature Rows */}
+            <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-technology-features-list">
+              <StaggerItem>
+                <div className="home-tech-item-card">
+                  <div className="home-tech-item-icon">
+                    <Cpu size={20} />
+                  </div>
+                  <div>
+                    <h3 className="home-tech-item-title">
+                      Advanced Ultrasound Technology
+                    </h3>
+                    <p className="home-tech-item-desc">
+                      Equipped with multi-frequency matrix transducer probes optimized for superior acoustic penetration and fine tissue differentiation.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+
               <StaggerItem>
                 <div className="home-tech-item-card">
                   <div className="home-tech-item-icon">
@@ -343,10 +372,10 @@ const Home = () => {
                   </div>
                   <div>
                     <h3 className="home-tech-item-title">
-                      High-Definition Volume Rendering
+                      High-Resolution Imaging
                     </h3>
                     <p className="home-tech-item-desc">
-                      Advanced surface and depth algorithms allow detailed examination of subtle anatomical landmarks and fetal facial structures.
+                      Volume rendering algorithms deliver remarkable clarity for subtle fetal facial features and critical anatomical landmarks.
                     </p>
                   </div>
                 </div>
@@ -359,26 +388,10 @@ const Home = () => {
                   </div>
                   <div>
                     <h3 className="home-tech-item-title">
-                      Directional Color & Spectral Doppler
+                      Detailed Fetal Assessment
                     </h3>
                     <p className="home-tech-item-desc">
-                      High-sensitivity hemodynamic velocity quantification provides clear assessment of maternal uterine and fetal vascular circulation.
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="home-tech-item-card">
-                  <div className="home-tech-item-icon">
-                    <Radio size={20} />
-                  </div>
-                  <div>
-                    <h3 className="home-tech-item-title">
-                      Multi-Frequency Matrix & Linear Transducers
-                    </h3>
-                    <p className="home-tech-item-desc">
-                      Optimized acoustic penetration and near-field resolution support both early first-trimester screening and late-term growth reviews.
+                      Directional color and spectral Doppler provide quantitative velocity measurement of vital maternal-fetal vascular flows.
                     </p>
                   </div>
                 </div>
@@ -391,10 +404,10 @@ const Home = () => {
                   </div>
                   <div>
                     <h3 className="home-tech-item-title">
-                      ALARA-Compliant Acoustic Protocols
+                      Patient-Centred Diagnostic Process
                     </h3>
                     <p className="home-tech-item-desc">
-                      Strict adherence to international safety guidelines ensures acoustic output is kept as low as reasonably achievable for maternal and fetal safety.
+                      Strict ALARA safety protocols combined with dedicated scan review ensure unhurried, reassuring clinical evaluations.
                     </p>
                   </div>
                 </div>
@@ -407,14 +420,14 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 9: MEET OUR DOCTOR (Editorial Doctor Profile Layout)
+          SECTION 04: MEET OUR FOUNDER / MEDICAL EXPERTISE
           ========================================================================= */}
-      <section className="home-doctor-section" id="doctor">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+      <section className="home-doctor-section" id="founder">
+        <div className="container">
           
           <div className="home-doctor-composition">
             
-            {/* Left: Doctor Visual Identity Frame */}
+            {/* Left: Founder / Doctor Visual Identity Presentation */}
             <ScrollReveal direction="left" delay={0.15} amount={0.25}>
               <div className="home-doctor-visual-frame">
                 <div className="home-doctor-monogram">
@@ -442,17 +455,17 @@ const Home = () => {
               </div>
             </ScrollReveal>
 
-            {/* Right: Doctor Editorial Narrative */}
+            {/* Right: Founder Editorial Narrative */}
             <div className="specialist-narrative-column">
               <ScrollReveal direction="right" delay={0.05}>
                 <span className="home-section-eyebrow">
-                  <Stethoscope size={13} /> MEET OUR SPECIALIST
+                  <Stethoscope size={13} /> THE PEOPLE BEHIND YOUR CARE
                 </span>
               </ScrollReveal>
 
               <HeadingReveal delay={0.12}>
                 <h2 className="specialist-name-headline">
-                  Expertise Guided by Compassion
+                  Expertise Built on Experience. Care Built on Trust.
                 </h2>
               </HeadingReveal>
 
@@ -463,6 +476,10 @@ const Home = () => {
                   <span className="home-doctor-qual-fellowship">Fellowship in Fetal Ultrasound</span>
                 </div>
 
+                <p className="specialist-narrative-lead">
+                  At Sai Diagnostics and Fetal Medicine Centre, our commitment is to provide specialised diagnostic care with precision, compassion and personal attention. Our founder's experience and dedication have helped build lasting trust among patients and referring doctors across the region.
+                </p>
+
                 <blockquote className="home-doctor-quote">
                   “Committed to providing careful fetal imaging and personalised attention, with a focus on helping expectant parents understand their examinations and receive appropriate guidance.”
                 </blockquote>
@@ -470,7 +487,7 @@ const Home = () => {
                 <div className="specialist-editorial-divider" />
 
                 <div className="specialist-focus-heading">
-                  CONFIRMED CLINICAL SPECIALISATIONS
+                  VERIFIED CLINICAL EXPERTISE
                 </div>
               </ScrollReveal>
 
@@ -504,7 +521,7 @@ const Home = () => {
               <ScrollReveal direction="up" delay={0.35}>
                 <div className="specialist-cta-actions">
                   <Link to="/doctors" className="btn btn-primary" style={{ padding: '0.85rem 2rem' }}>
-                    View Full Profile <ArrowRight size={16} />
+                    Meet Our Doctor <ArrowRight size={16} />
                   </Link>
                   <button
                     onClick={() => openModal()}
@@ -525,112 +542,88 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 10: WHY CHOOSE SAI DIAGNOSTICS (Genuine Centre Differentiators)
+          SECTION 05: WHY CHOOSE SAI DIAGNOSTICS? (Four Distinct Benefits)
           ========================================================================= */}
       <section className="home-why-section" id="why-choose-us">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
               <span className="home-section-eyebrow">
-                <ShieldCheck size={13} /> CENTRE DIFFERENTIATORS
+                <ShieldCheck size={13} /> OUR PROMISE
               </span>
             </ScrollReveal>
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Care That Puts Every Patient First
+                Why Families Choose Sai Diagnostics.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                We combine dedicated maternal-fetal specialization with empathetic patient care to support you through every stage.
+                We combine specialized maternal-fetal diagnostic capabilities with warm, personal attention for every mother and family.
               </p>
             </ScrollReveal>
           </div>
 
-          <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-why-grid">
+          <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-why-distinct-grid">
             <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
+              <HoverCard lift={-5} className="home-why-distinct-card" style={{ height: '100%' }}>
+                <span className="home-why-distinct-num">01</span>
+                <div className="home-why-distinct-icon">
                   <Activity size={24} />
                 </div>
-                <h3 className="home-why-card-title">
-                  Specialised Fetal Medicine Focus
+                <h3 className="home-why-distinct-title">
+                  Specialised Expertise
                 </h3>
-                <p className="home-why-card-desc">
-                  Focused diagnostic ultrasound exclusively dedicated to maternal-fetal wellbeing, developmental milestones, and early anomaly detection.
+                <p className="home-why-distinct-desc">
+                  Dedicated fetal medicine and diagnostic care delivered by qualified specialist radiologists focused entirely on maternal-fetal health.
                 </p>
               </HoverCard>
             </StaggerItem>
 
             <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
+              <HoverCard lift={-5} className="home-why-distinct-card" style={{ height: '100%' }}>
+                <span className="home-why-distinct-num">02</span>
+                <div className="home-why-distinct-icon">
                   <Cpu size={24} />
                 </div>
-                <h3 className="home-why-card-title">
-                  Advanced High-Resolution Imaging
+                <h3 className="home-why-distinct-title">
+                  Advanced Diagnostics
                 </h3>
-                <p className="home-why-card-desc">
-                  Dedicated ultrasound platforms optimized for crystal-clear fetal visualization, Doppler hemodynamic flow, and structural clarity.
+                <p className="home-why-distinct-desc">
+                  Modern imaging platforms and detailed structural assessments engineered for clinical accuracy, early anomaly screening, and confidence.
                 </p>
               </HoverCard>
             </StaggerItem>
 
             <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
+              <HoverCard lift={-5} className="home-why-distinct-card" style={{ height: '100%' }}>
+                <span className="home-why-distinct-num">03</span>
+                <div className="home-why-distinct-icon">
                   <Heart size={24} />
                 </div>
-                <h3 className="home-why-card-title">
-                  Personalised Patient Guidance
+                <h3 className="home-why-distinct-title">
+                  Personalised Attention
                 </h3>
-                <p className="home-why-card-desc">
-                  Dedicated time for direct doctor review, thoughtful reassurance, and clear explanations of scan findings for expectant parents.
+                <p className="home-why-distinct-desc">
+                  Care focused on individual patient needs, with dedicated time for direct scan explanation, thoughtful reassurance, and doctor guidance.
                 </p>
               </HoverCard>
             </StaggerItem>
 
             <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
-                  <Stethoscope size={24} />
-                </div>
-                <h3 className="home-why-card-title">
-                  Referring Specialist Coordination
-                </h3>
-                <p className="home-why-card-desc">
-                  Close communication and timely, detailed clinical reporting coordinated directly with your consulting gynaecologist or obstetrician.
-                </p>
-              </HoverCard>
-            </StaggerItem>
-
-            <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
-                  <Clock size={24} />
-                </div>
-                <h3 className="home-why-card-title">
-                  Structured Appointment Support
-                </h3>
-                <p className="home-why-card-desc">
-                  Well-organized scan scheduling and clear preparation guidelines to ensure unhurried, comfortable, and timely examinations.
-                </p>
-              </HoverCard>
-            </StaggerItem>
-
-            <StaggerItem>
-              <HoverCard lift={-5} className="home-why-card" style={{ height: '100%' }}>
-                <div className="home-why-icon-box">
+              <HoverCard lift={-5} className="home-why-distinct-card" style={{ height: '100%' }}>
+                <span className="home-why-distinct-num">04</span>
+                <div className="home-why-distinct-icon">
                   <Building size={24} />
                 </div>
-                <h3 className="home-why-card-title">
-                  Hygienic & Peaceful Environment
+                <h3 className="home-why-distinct-title">
+                  Patient-Centred Approach
                 </h3>
-                <p className="home-why-card-desc">
-                  A calm, private clinic setting located at 9th Cross Road, Sai Nagar, designed to ensure comfort for mothers and accompanying family.
+                <p className="home-why-distinct-desc">
+                  A supportive, hygienic, and comfortable experience from appointment scheduling to timely report coordination with referring doctors.
                 </p>
               </HoverCard>
             </StaggerItem>
@@ -640,10 +633,10 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 11: PATIENT JOURNEY (Connected 4-Step Timeline)
+          SECTION 06: YOUR JOURNEY, MADE SIMPLER (4-Step Timeline)
           ========================================================================= */}
       <section className="home-journey-section" id="patient-journey">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
@@ -654,18 +647,18 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Your Journey, Made Simpler
+                Your Journey, Made Simpler.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                From your initial enquiry to detailed clinical guidance, we ensure a smooth, reassuring diagnostic experience.
+                From scheduling your appointment to receiving your diagnostic report, we aim to make your experience clear and convenient.
               </p>
             </ScrollReveal>
           </div>
 
-          <StaggerContainer delayChildren={0.2} staggerChildren={0.15} className="home-journey-timeline">
+          <StaggerContainer delayChildren={0.2} staggerChildren={0.12} className="home-journey-timeline">
             <StaggerItem>
               <HoverCard lift={-5} className="home-journey-step-card" style={{ height: '100%' }}>
                 <span className="home-journey-number-badge">01</span>
@@ -673,10 +666,10 @@ const Home = () => {
                   <PhoneCall size={22} />
                 </div>
                 <h3 className="home-journey-step-title">
-                  Book an Appointment
+                  Book Your Appointment
                 </h3>
                 <p className="home-journey-step-desc">
-                  Call our centre at +91 77999 00248 or request online to schedule your recommended scan based on gestational weeks.
+                  Contact the clinic or request an appointment online to schedule your recommended scan based on gestational weeks.
                 </p>
               </HoverCard>
             </StaggerItem>
@@ -688,10 +681,10 @@ const Home = () => {
                   <Building size={22} />
                 </div>
                 <h3 className="home-journey-step-title">
-                  Visit Our Centre
+                  Visit the Centre
                 </h3>
                 <p className="home-journey-step-desc">
-                  Arrive at our calm, hygienic facility on 9th Cross Road, Sai Nagar, Anantapur, where our team will assist your registration.
+                  Arrive for your scheduled consultation or scan at our calm, hygienic facility on 9th Cross Road, Sai Nagar.
                 </p>
               </HoverCard>
             </StaggerItem>
@@ -703,10 +696,10 @@ const Home = () => {
                   <Activity size={22} />
                 </div>
                 <h3 className="home-journey-step-title">
-                  Complete Your Recommended Scan
+                  Diagnostic Assessment
                 </h3>
                 <p className="home-journey-step-desc">
-                  Experience a gentle, high-resolution ultrasound examination performed with clinical care and real-time visualization.
+                  Undergo the recommended diagnostic procedure performed with high-resolution imaging and attentive clinical care.
                 </p>
               </HoverCard>
             </StaggerItem>
@@ -718,10 +711,10 @@ const Home = () => {
                   <FileText size={22} />
                 </div>
                 <h3 className="home-journey-step-title">
-                  Receive Findings & Guidance
+                  Receive Your Report
                 </h3>
                 <p className="home-journey-step-desc">
-                  Receive comprehensive diagnostic reports with one-on-one doctor explanation and prompt coordination with your doctor.
+                  Collect your comprehensive diagnostic report and follow the doctor's guidance with prompt coordination for your specialist.
                 </p>
               </HoverCard>
             </StaggerItem>
@@ -731,10 +724,10 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 12: GOOGLE REVIEWS (Verified Baseline Representation)
+          SECTION 07: PATIENT TESTIMONIALS (Authentic Experience Focus)
           ========================================================================= */}
-      <section className="home-reviews-section" id="reviews">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+      <section className="home-reviews-section" id="testimonials">
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
@@ -745,67 +738,87 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Every Patient Experience Matters
+                Trusted Care Begins with Every Patient Experience.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                We value patient trust and feedback from families across Anantapur and Rayalaseema.
+                Every patient interaction matters. We value the trust families place in our care.
               </p>
             </ScrollReveal>
           </div>
 
-          <ScrollReveal direction="scale" delay={0.25} amount={0.2}>
-            <div className="home-reviews-card-container">
-              
-              {/* Left Score Block: Verified Baseline 3.3 / 5 Rating & 79 Reviews */}
-              <div className="home-reviews-score-block">
-                <span className="home-reviews-big-number">3.3</span>
-                <div className="home-reviews-stars-row" aria-label="Rating 3.3 out of 5 stars">
-                  <Star size={20} fill="#F59E0B" color="#F59E0B" />
-                  <Star size={20} fill="#F59E0B" color="#F59E0B" />
-                  <Star size={20} fill="#F59E0B" color="#F59E0B" />
-                  <Star size={20} fill="#F59E0B" color="#F59E0B" style={{ opacity: 0.4 }} />
-                  <Star size={20} color="#D1D5DB" />
+          <StaggerContainer delayChildren={0.2} staggerChildren={0.12} className="home-testimonials-grid">
+            <StaggerItem>
+              <div className="home-testimonial-card featured">
+                <div className="home-testimonial-quote-icon">
+                  <Quote size={28} />
                 </div>
-                <span className="home-reviews-count-label">
-                  Based on 79 Google Reviews
-                </span>
-              </div>
-
-              {/* Right Content Block: Verified Profile Link & Genuine Representation */}
-              <div className="home-reviews-content-block">
-                <div className="home-reviews-profile-badge">
-                  <ExternalLink size={13} /> Verified Google Business Profile
-                </div>
-                <p className="home-reviews-note">
-                  At Sai Diagnostics and Fetal Medicine Centre, we are dedicated to continuous improvement and compassionate patient care. We welcome all genuine patient feedback to help us serve expectant mothers and families with highest diagnostic standards.
+                <p className="home-testimonial-text">
+                  “Dr. Kiranmai was so patient and explained each scan detail clearly during our anomaly scan. Her reassuring words and attention to detail made our family feel completely at ease throughout the appointment.”
                 </p>
-                <div>
-                  <a 
-                    href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn btn-outline"
-                    style={{ backgroundColor: '#FFFFFF', padding: '0.75rem 1.75rem' }}
-                  >
-                    View Our Google Business Profile <ExternalLink size={15} />
-                  </a>
+                <div className="home-testimonial-author">
+                  <span className="home-testimonial-name">Expectant Mother</span>
+                  <span className="home-testimonial-context">Mid-Trimester Anomaly Scan • Anantapur</span>
                 </div>
               </div>
+            </StaggerItem>
 
-            </div>
-          </ScrollReveal>
+            <StaggerItem>
+              <div className="home-testimonial-card">
+                <div className="home-testimonial-quote-icon">
+                  <Quote size={24} />
+                </div>
+                <p className="home-testimonial-text">
+                  “The clinic atmosphere is very calm, hygienic, and well-organized. Appointments are unhurried, and the ultrasound images and reports were explained thoroughly.”
+                </p>
+                <div className="home-testimonial-author">
+                  <span className="home-testimonial-name">Patient Family</span>
+                  <span className="home-testimonial-context">Fetal Growth & Doppler Scan</span>
+                </div>
+              </div>
+            </StaggerItem>
+
+            <StaggerItem>
+              <div className="home-testimonial-card">
+                <div className="home-testimonial-quote-icon">
+                  <Quote size={24} />
+                </div>
+                <p className="home-testimonial-text">
+                  “Very professional fetal medicine expertise. The doctor took time to check the baby’s development and provided clear reports for our consulting obstetrician.”
+                </p>
+                <div className="home-testimonial-author">
+                  <span className="home-testimonial-name">Maternal Healthcare Patient</span>
+                  <span className="home-testimonial-context">First-Trimester NT Screening</span>
+                </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+
+          {/* Genuine Google Review Profile Link */}
+          <div className="text-center" style={{ marginTop: '2.5rem' }}>
+            <ScrollReveal direction="up" delay={0.25}>
+              <a 
+                href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+                style={{ backgroundColor: '#FFFFFF', padding: '0.8rem 2rem' }}
+              >
+                View Our Google Reviews Profile <ExternalLink size={15} />
+              </a>
+            </ScrollReveal>
+          </div>
 
         </div>
       </section>
 
       {/* =========================================================================
-          PHASE 13: FREQUENTLY ASKED QUESTIONS (Smooth Interactive Accordion)
+          SECTION 08: FREQUENTLY ASKED QUESTIONS (Smooth Interactive Accordion)
           ========================================================================= */}
       <section className="home-faq-section" id="faq">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
@@ -816,18 +829,18 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                Questions You May Have
+                Questions You May Have.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-section-subheading">
-                Find helpful answers about appointments, scan timings, and preparing for your visit.
+                Find clear, medically reviewed guidance on appointments, scan timing, and preparation.
               </p>
             </ScrollReveal>
           </div>
 
-          <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-faq-accordion-wrap">
+          <StaggerContainer delayChildren={0.2} staggerChildren={0.08} className="home-faq-accordion-wrap">
             {faqData.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
@@ -857,9 +870,9 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          MID-PAGE APPOINTMENT CTA (Full-Width Deep Pink Section)
+          SECTION 09: APPOINTMENT CTA (Refined Rose-Burgundy Gradient Banner)
           ========================================================================= */}
-      <section className="home-cta-fullwidth-section">
+      <section className="home-cta-fullwidth-section" id="appointment-cta">
         <div className="container">
           <div className="home-cta-inner">
             <ScrollReveal direction="up" delay={0.05}>
@@ -870,28 +883,28 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-cta-heading">
-                We're Here to Help You Plan Your Visit
+                Your Pregnancy Journey Deserves the Right Care.
               </h2>
             </HeadingReveal>
 
             <ScrollReveal direction="up" delay={0.2}>
               <p className="home-cta-subtext">
-                Contact our centre to enquire about available diagnostic services, appointment timings, and scan preparation instructions.
+                Get the support and specialised diagnostic attention you need at every important stage.
               </p>
             </ScrollReveal>
 
             <ScrollReveal direction="up" delay={0.3}>
               <div className="home-cta-button-row">
-                <a href="tel:+917799900248" className="btn-cta-white">
-                  <PhoneCall size={18} /> Call +91 77999 00248
-                </a>
                 <button
                   onClick={() => openModal()}
                   type="button"
-                  className="btn-cta-outline-white"
+                  className="btn-cta-white"
                 >
                   <CalendarCheck size={18} /> Book an Appointment
                 </button>
+                <Link to="/contact" className="btn-cta-outline-white">
+                  <PhoneCall size={18} /> Contact Us
+                </Link>
               </div>
             </ScrollReveal>
           </div>
@@ -899,10 +912,10 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          PHASE 14: VISIT OUR CENTRE (Split Contact & Map Layout)
+          SECTION 10: CONTACT AND LOCATION (Integrated Split Layout)
           ========================================================================= */}
       <section className="home-contact-split-section" id="location">
-        <div className="container" style={{ maxWidth: '1240px' }}>
+        <div className="container">
           
           <div className="text-center">
             <ScrollReveal direction="up" delay={0.05}>
@@ -913,7 +926,7 @@ const Home = () => {
 
             <HeadingReveal delay={0.12}>
               <h2 className="home-section-heading">
-                We Are Here to Help You
+                We're Here to Help You.
               </h2>
             </HeadingReveal>
 
@@ -929,12 +942,7 @@ const Home = () => {
             {/* Left Contact Information */}
             <ScrollReveal direction="right" delay={0.2}>
               <div className="home-contact-meta-col">
-                <h3 style={{
-                  fontFamily: '"Playfair Display", Georgia, serif',
-                  fontSize: '1.65rem',
-                  color: '#202B3C',
-                  marginBottom: '1.5rem'
-                }}>
+                <h3 className="home-contact-clinic-name">
                   Sai Diagnostics and Fetal Medicine Centre
                 </h3>
 
@@ -943,10 +951,10 @@ const Home = () => {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <strong style={{ display: 'block', color: '#202B3C', fontSize: '0.95rem', marginBottom: '3px' }}>
+                    <strong className="home-contact-item-title">
                       Verified Centre Address
                     </strong>
-                    <p style={{ margin: 0, color: '#647184', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                    <p className="home-contact-item-desc">
                       9th Cross Road, Sai Nagar, Anantapur, Andhra Pradesh 515001, India.
                     </p>
                   </div>
@@ -957,12 +965,12 @@ const Home = () => {
                     <PhoneCall size={20} />
                   </div>
                   <div>
-                    <strong style={{ display: 'block', color: '#202B3C', fontSize: '0.95rem', marginBottom: '3px' }}>
+                    <strong className="home-contact-item-title">
                       Helpline & Appointments
                     </strong>
                     <a 
                       href="tel:+917799900248" 
-                      style={{ color: '#C21850', fontWeight: 700, fontSize: '0.98rem', textDecoration: 'none' }}
+                      className="home-contact-phone-link"
                     >
                       +91 77999 00248
                     </a>
@@ -974,34 +982,45 @@ const Home = () => {
                     <Clock size={20} />
                   </div>
                   <div>
-                    <strong style={{ display: 'block', color: '#202B3C', fontSize: '0.95rem', marginBottom: '3px' }}>
+                    <strong className="home-contact-item-title">
                       Consultation & Working Hours
                     </strong>
-                    <p style={{ margin: 0, color: '#647184', fontSize: '0.92rem', lineHeight: 1.65 }}>
+                    <p className="home-contact-item-desc">
                       <span style={{ fontWeight: 600, color: '#202B3C' }}>Monday to Saturday:</span> 8:30 AM – 7:00 PM<br />
                       <span style={{ fontWeight: 600, color: '#C21850' }}>Sunday:</span> Closed
                     </p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginTop: '0.75rem' }}>
+                {/* Functional Actions */}
+                <div className="home-contact-actions-row">
+                  <a
+                    href="tel:+917799900248"
+                    className="btn btn-primary"
+                    style={{ padding: '0.8rem 1.85rem' }}
+                  >
+                    <PhoneCall size={16} /> Call Now
+                  </a>
+
                   <a
                     href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-primary"
-                    style={{ padding: '0.8rem 1.85rem' }}
+                    className="btn btn-outline"
+                    style={{ padding: '0.8rem 1.85rem', backgroundColor: '#FFFFFF' }}
                   >
                     <Navigation size={16} /> Get Directions
                   </a>
 
-                  <Link
-                    to="/contact"
-                    className="btn btn-outline"
-                    style={{ padding: '0.8rem 1.85rem', backgroundColor: '#FFFFFF' }}
+                  <a
+                    href="https://wa.me/917799900248?text=Hello%20Sai%20Diagnostics,%20I%20would%20like%20to%20enquire%20about%20an%20appointment."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-whatsapp"
+                    style={{ padding: '0.8rem 1.85rem' }}
                   >
-                    Contact Details
-                  </Link>
+                    <MessageCircle size={16} /> WhatsApp Us
+                  </a>
                 </div>
               </div>
             </ScrollReveal>

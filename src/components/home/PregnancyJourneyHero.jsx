@@ -9,10 +9,14 @@ import './PregnancyJourney.css';
 import stage1Img from '../../../Serene Pastel Nursery Maternity Portrait.png';
 import stage2Img from '../../../Tender Nursery Mother and Baby Portrait.png';
 
+// Automatic slide rotation interval: 5.5 seconds (in the requested 5-6s range)
+const AUTO_SLIDE_INTERVAL = 5500;
+
 const PregnancyJourneyHero = () => {
   const { openModal } = useAppointmentModal();
-  const containerRef = useRef(null);
   const [activeStage, setActiveStage] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef(null);
 
   // Preload both images in browser memory to eliminate loading delay
   useEffect(() => {
@@ -22,32 +26,29 @@ const PregnancyJourneyHero = () => {
     });
   }, []);
 
-  // Seamless, native scroll-linked stage transition
+  // Automatic slide rotation every 5.5 seconds (5-6s)
   useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      if (!container) return;
+    if (isPaused) return;
 
-      const rect = container.getBoundingClientRect();
-      const totalScrollable = container.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) return;
-
-      const scrolled = -rect.top;
-      const progress = scrolled / totalScrollable;
-
-      // Transition to Stage 2 at 35% scroll through the hero container
-      if (progress >= 0.35) {
-        setActiveStage(2);
-      } else {
-        setActiveStage(1);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    timerRef.current = setInterval(() => {
+      setActiveStage((prev) => (prev === 1 ? 2 : 1));
+    }, AUTO_SLIDE_INTERVAL);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [isPaused, activeStage]);
+
+  // Pause when browser tab is hidden to preserve battery & keep animation aligned
+  useEffect(() => {
+    const handleVisibility = () => {
+      setIsPaused(document.hidden);
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
 
@@ -61,7 +62,6 @@ const PregnancyJourneyHero = () => {
 
   return (
     <div 
-      ref={containerRef} 
       className="pj-scroll-container"
       aria-label="Sai Diagnostics & Fetal Medicine Centre"
     >
@@ -92,7 +92,11 @@ const PregnancyJourneyHero = () => {
 
         {/* 2. HERO CONTENT: EDITORIAL HEALTHCARE LAYOUT */}
         <div className="pj-content-container">
-          <div className="pj-narrative-col">
+          <div 
+            className="pj-narrative-col"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
 
             {/* ============================================================= */}
             {/* STAGE 01 CONTENT                                              */}
@@ -107,10 +111,9 @@ const PregnancyJourneyHero = () => {
                 SAI DIAGNOSTICS & FETAL MEDICINE CENTRE
               </div>
 
-              {/* Main heading with blinking cursor placeholder */}
+              {/* Main heading */}
               <h1 className="pj-heading">
                 Expert Fetal Care for a <span className="pj-heading-burgundy">Healthier Tomorrow</span>
-                <span className="pj-blinking-cursor" aria-hidden="true">|</span>
               </h1>
 
               {/* Small highlight with blinking starlet placeholder */}
@@ -153,10 +156,9 @@ const PregnancyJourneyHero = () => {
                 SAI DIAGNOSTICS & FETAL MEDICINE CENTRE
               </div>
 
-              {/* Main heading with blinking cursor placeholder */}
+              {/* Main heading */}
               <h2 className="pj-heading">
                 A Beautiful Beginning Starts with <span className="pj-heading-burgundy">Expert Care</span>
-                <span className="pj-blinking-cursor" aria-hidden="true">|</span>
               </h2>
 
               {/* Small highlight with blinking starlet placeholder */}

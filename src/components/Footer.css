@@ -163,7 +163,7 @@
 
 .footer-bottom-bar {
   display: flex;
-  justifyContent: space-between;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
@@ -173,9 +173,22 @@
   color: var(--text-muted);
 }
 
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
 @media (max-width: 640px) {
   .footer-bottom-bar {
     flex-direction: column;
     text-align: center;
+  }
+
+  .footer-legal-links {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

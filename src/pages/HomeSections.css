@@ -1,13 +1,13 @@
 /* ==========================================================================
-   Sai Diagnostics & Fetal Medicine Centre - Complete Homepage Sections
-   Brand Palette:
-   - Primary Deep Pink: #C21850
-   - Blush Pink: #F8E5EA
-   - Soft Cyan: #DDF5F6
-   - Ivory: #FFFAF6
-   - White: #FFFFFF
-   - Dark Charcoal: #202B3C
-   - Secondary Text: #647184
+   Sai Diagnostics & Fetal Medicine Centre - Homepage Sections (Refined)
+   Color Palette:
+   - Primary Burgundy / Deep Pink: #AD2348 / #C21850
+   - Accent Rose: #D44268
+   - Warm Ivory: #FFFDFB / #FFF9F5 / #FFFAF6
+   - Soft Blush: #FDF2F4 / #F8E5EA
+   - Soft Cyan: #E8F8FA / #0B7F8C
+   - Dark Heading Charcoal: #1F2733 / #202B3C
+   - Secondary Text: #5B687B / #647184
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -20,330 +20,307 @@
   gap: 8px;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #C21850;
-  background: rgba(194, 24, 80, 0.08);
-  border: 1px solid rgba(194, 24, 80, 0.18);
+  color: #AD2348;
+  background: rgba(173, 35, 72, 0.08);
+  border: 1px solid rgba(173, 35, 72, 0.18);
   padding: 5px 14px;
   border-radius: 9999px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .home-section-eyebrow-cyan {
   color: #0B7F8C;
-  background: rgba(221, 245, 246, 0.9);
+  background: rgba(232, 248, 250, 0.95);
   border-color: rgba(11, 127, 140, 0.22);
 }
 
 .home-section-heading {
   font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(2rem, 3.2vw, 2.75rem);
-  color: #202B3C;
-  line-height: 1.22;
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
+  color: #1F2733;
+  line-height: 1.24;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.015em;
 }
 
 .home-section-subheading {
   max-width: 680px;
   margin: 0 auto;
-  color: #647184;
-  font-size: 1.05rem;
+  color: #5B687B;
+  font-size: 1.02rem;
   line-height: 1.7;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 6: ABOUT SAI DIAGNOSTICS (Editorial Asymmetric Layout)
+   SECTION 01: SPECIALISED FETAL MEDICINE INTRODUCTION
+   Seamless natural transition from Hero (No large empty gap!)
    -------------------------------------------------------------------------- */
 
-.home-about-section {
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFFAF6 50%, #F8E5EA33 100%);
-  padding: 6rem 1.5rem;
+.home-intro-section {
+  background: linear-gradient(180deg, #FFF9F5 0%, #FFFFFF 60%, #FFFDFB 100%);
+  padding: 3.5rem 1.5rem 5rem;
   position: relative;
   overflow: hidden;
 }
 
-.home-about-editorial-grid {
+.home-intro-editorial-grid {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  gap: 4.5rem;
+  gap: clamp(2.5rem, 3.5vw, 3.5rem);
   align-items: center;
 }
 
 @media (max-width: 980px) {
-  .home-about-editorial-grid {
+  .home-intro-editorial-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 }
 
-.home-about-narrative {
+.home-intro-narrative {
   display: flex;
   flex-direction: column;
 }
 
-.home-about-lead {
-  color: #202B3C;
-  font-size: 1.12rem;
+.home-intro-lead {
+  color: #1F2733;
+  font-size: 1.15rem;
   font-weight: 500;
-  line-height: 1.8;
-  margin-bottom: 1.25rem;
-}
-
-.home-about-body {
-  color: #647184;
-  font-size: 0.98rem;
   line-height: 1.75;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
-.home-about-highlights {
+.home-intro-body {
+  color: #5B687B;
+  font-size: 0.98rem;
+  line-height: 1.72;
+  margin-bottom: 1.75rem;
+}
+
+.home-intro-highlights {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2.25rem;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (max-width: 580px) {
-  .home-about-highlights {
+  .home-intro-highlights {
     grid-template-columns: 1fr;
   }
 }
 
-.home-about-highlight-pill {
+.home-intro-highlight-pill {
   display: flex;
   align-items: center;
   gap: 10px;
   background: #FFFFFF;
-  border: 1px solid rgba(194, 24, 80, 0.12);
-  padding: 0.75rem 1rem;
+  border: 1px solid rgba(173, 35, 72, 0.12);
+  padding: 0.72rem 1rem;
   border-radius: 12px;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  color: #202B3C;
-  box-shadow: 0 4px 12px rgba(194, 24, 80, 0.03);
+  color: #1F2733;
+  box-shadow: 0 3px 10px rgba(173, 35, 72, 0.03);
 }
 
-.home-about-highlight-pill svg {
-  color: #C21850;
+.home-intro-highlight-pill svg {
+  color: #AD2348;
   flex-shrink: 0;
 }
 
-/* Right Side: Image and Message Card */
-.home-about-visual-column {
+.home-intro-visual-column {
   position: relative;
 }
 
-.home-about-image-card {
+.home-intro-image-frame {
   position: relative;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(194, 24, 80, 0.08);
-  border: 1.5px solid rgba(194, 24, 80, 0.15);
+  box-shadow: 0 16px 40px rgba(173, 35, 72, 0.09);
+  border: 1.5px solid rgba(173, 35, 72, 0.14);
   background: #FFFFFF;
 }
 
-.home-about-image-card img {
+.home-intro-image-frame img {
   width: 100%;
-  height: 380px;
+  height: clamp(380px, 28vw, 440px);
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.home-about-image-card:hover img {
-  transform: scale(1.03);
-}
-
-.home-about-floating-badge {
+.home-intro-floating-badge {
   position: absolute;
-  bottom: 1.25rem;
-  left: 1.25rem;
-  right: 1.25rem;
-  background: rgba(255, 255, 255, 0.95);
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
-  padding: 1rem 1.25rem;
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(173, 35, 72, 0.14);
+  padding: 1.15rem 1.35rem;
   border-radius: 16px;
-  border: 1px solid rgba(194, 24, 80, 0.14);
-  box-shadow: 0 8px 24px rgba(32, 43, 60, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-.home-about-badge-title {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #C21850;
-  margin-bottom: 2px;
+.home-intro-badge-title {
   display: block;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 4px;
 }
 
-.home-about-badge-desc {
-  font-size: 0.82rem;
-  color: #647184;
+.home-intro-badge-desc {
   margin: 0;
-  line-height: 1.45;
+  font-size: 0.84rem;
+  color: #5B687B;
+  line-height: 1.55;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 7: SPECIALISED SERVICES (Asymmetric Service Grid)
+   SECTION 02: COMPREHENSIVE DIAGNOSTIC SERVICES (6 Verified Cards)
    -------------------------------------------------------------------------- */
 
 .home-services-section {
   background: #FFFFFF;
-  padding: 6.5rem 1.5rem;
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
 .home-services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
+  gap: 1.75rem;
+  margin-top: 2.75rem;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1024px) {
   .home-services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 640px) {
   .home-services-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
 .home-service-card {
-  background: #FFFAF6;
+  background: #FFFDFB;
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
   border-radius: 20px;
-  border: 1px solid rgba(194, 24, 80, 0.1);
-  padding: 2.25rem 1.85rem;
+  padding: 2rem 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.home-service-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #C21850 0%, #DDF5F6 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 18px rgba(173, 35, 72, 0.04);
 }
 
 .home-service-card:hover {
+  border-color: rgba(173, 35, 72, 0.35);
+  box-shadow: 0 14px 32px rgba(173, 35, 72, 0.09);
   background: #FFFFFF;
-  transform: translateY(-6px);
-  border-color: rgba(194, 24, 80, 0.28);
-  box-shadow: 0 16px 36px rgba(194, 24, 80, 0.08);
-}
-
-.home-service-card:hover::before {
-  opacity: 1;
 }
 
 .home-service-card-top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.35rem;
 }
 
 .home-service-tag {
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #0B7F8C;
-  background: #DDF5F6;
+  color: #AD2348;
+  background: rgba(173, 35, 72, 0.08);
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
 }
 
 .home-service-icon-box {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #F8E5EA;
-  color: #C21850;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #FFF9F5;
+  border: 1px solid rgba(173, 35, 72, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  color: #AD2348;
+  transition: all 0.25s ease;
 }
 
 .home-service-card:hover .home-service-icon-box {
-  background: #C21850;
+  background: #AD2348;
   color: #FFFFFF;
-  transform: scale(1.08);
+  border-color: #AD2348;
 }
 
 .home-service-title {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1.25rem;
-  color: #202B3C;
-  margin: 0 0 0.75rem 0;
-  line-height: 1.3;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
 }
 
 .home-service-desc {
   font-size: 0.92rem;
-  color: #647184;
+  color: #5B687B;
   line-height: 1.65;
-  margin: 0 0 1.5rem 0;
+  margin-bottom: 1.75rem;
 }
 
 .home-service-footer {
-  border-top: 1px solid rgba(194, 24, 80, 0.08);
-  padding-top: 1.25rem;
   margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(173, 35, 72, 0.08);
 }
 
 .home-service-link {
-  color: #C21850;
-  font-weight: 600;
-  font-size: 0.92rem;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: color 0.2s ease;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #AD2348;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-.home-service-link svg {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.home-service-card:hover .home-service-link svg {
-  transform: translateX(5px);
+.home-service-link:hover {
+  color: #8A1535;
+  transform: translateX(4px);
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 8: ADVANCED DIAGNOSTIC TECHNOLOGY (Clinical Ultrasound Equipment)
+   SECTION 03: ADVANCED IMAGING AND TECHNOLOGY
    -------------------------------------------------------------------------- */
 
 .home-technology-section {
-  background: linear-gradient(180deg, #FFFAF6 0%, #FFFFFF 50%, #F8E5EA33 100%);
-  padding: 6.5rem 1.5rem;
+  background: linear-gradient(180deg, #FFFDFB 0%, #FFF9F5 50%, #FFFFFF 100%);
+  padding: 5.5rem 1.5rem;
   position: relative;
-  overflow: hidden;
 }
 
 .home-technology-grid {
   display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 4.5rem;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2.5rem, 3.5vw, 3.5rem);
   align-items: center;
-  margin-top: 3.5rem;
+  margin-top: 3rem;
 }
 
 @media (max-width: 980px) {
@@ -355,11 +332,11 @@
 
 .home-technology-image-wrap {
   position: relative;
-  border-radius: 28px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 20px 48px rgba(32, 43, 60, 0.1);
-  border: 1.5px solid rgba(11, 127, 140, 0.2);
-  background: #202B3C;
+  box-shadow: 0 16px 40px rgba(11, 127, 140, 0.08);
+  border: 1.5px solid rgba(11, 127, 140, 0.18);
+  background: #FFFFFF;
 }
 
 .home-technology-image-wrap img {
@@ -367,31 +344,25 @@
   height: 440px;
   object-fit: cover;
   display: block;
-  opacity: 0.95;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.home-technology-image-wrap:hover img {
-  transform: scale(1.03);
 }
 
 .home-technology-floating-tag {
   position: absolute;
-  top: 1.25rem;
-  left: 1.25rem;
-  background: rgba(32, 43, 60, 0.88);
-  backdrop-filter: blur(10px);
-  color: #DDF5F6;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 6px 14px;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(11, 127, 140, 0.22);
+  padding: 8px 16px;
   border-radius: 9999px;
-  border: 1px solid rgba(221, 245, 246, 0.25);
-  display: flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0B7F8C;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .home-technology-features-list {
@@ -401,28 +372,28 @@
 }
 
 .home-tech-item-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(194, 24, 80, 0.1);
-  border-radius: 16px;
-  padding: 1.35rem 1.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
-  box-shadow: 0 4px 16px rgba(32, 43, 60, 0.04);
-  transition: all 0.3s ease;
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 127, 140, 0.12);
+  border-radius: 16px;
+  padding: 1.35rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(11, 127, 140, 0.03);
+  transition: all 0.25s ease;
 }
 
 .home-tech-item-card:hover {
-  transform: translateX(6px);
-  border-color: rgba(194, 24, 80, 0.25);
-  box-shadow: 0 8px 24px rgba(194, 24, 80, 0.08);
+  border-color: rgba(11, 127, 140, 0.32);
+  box-shadow: 0 8px 24px rgba(11, 127, 140, 0.08);
+  transform: translateX(4px);
 }
 
 .home-tech-item-icon {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #DDF5F6;
+  background: rgba(232, 248, 250, 0.9);
   color: #0B7F8C;
   display: flex;
   align-items: center;
@@ -432,39 +403,37 @@
 
 .home-tech-item-title {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #202B3C;
+  color: #1F2733;
   margin-bottom: 4px;
 }
 
 .home-tech-item-desc {
-  font-size: 0.90rem;
-  color: #647184;
-  line-height: 1.6;
   margin: 0;
+  font-size: 0.90rem;
+  color: #5B687B;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 9: MEET OUR DOCTOR (Editorial Profile Layout)
+   SECTION 04: MEET OUR FOUNDER / MEDICAL EXPERTISE
    -------------------------------------------------------------------------- */
 
 .home-doctor-section {
   background: #FFFFFF;
-  padding: 6.5rem 1.5rem;
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
 .home-doctor-composition {
   display: grid;
-  grid-template-columns: 0.9fr 1.15fr;
-  gap: 4.5rem;
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(2.5rem, 3.5vw, 3.5rem);
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 980px) {
   .home-doctor-composition {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -472,46 +441,43 @@
 }
 
 .home-doctor-visual-frame {
-  position: relative;
-  background: linear-gradient(145deg, #FFFAF6 0%, #F8E5EA 50%, #DDF5F6 100%);
+  background: linear-gradient(145deg, #FFF9F5 0%, #FDF2F4 50%, #E8F8FA 100%);
+  border: 1.5px solid rgba(173, 35, 72, 0.16);
   border-radius: 28px;
-  padding: 3.5rem 2.5rem;
-  border: 1.5px solid rgba(194, 24, 80, 0.16);
-  box-shadow: 20px 20px 0px rgba(194, 24, 80, 0.05),
-              0 20px 40px rgba(194, 24, 80, 0.08);
+  padding: 3rem 2rem;
+  box-shadow: 0 16px 40px rgba(173, 35, 72, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  overflow: hidden;
 }
 
 .home-doctor-monogram {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   background: #FFFFFF;
-  border: 2px solid rgba(194, 24, 80, 0.2);
+  border: 2px solid rgba(173, 35, 72, 0.22);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 24px rgba(194, 24, 80, 0.12);
+  box-shadow: 0 10px 24px rgba(173, 35, 72, 0.10);
   margin-bottom: 1.75rem;
 }
 
 .home-doctor-monogram-initials {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  color: #C21850;
+  color: #AD2348;
   line-height: 1;
 }
 
 .home-doctor-monogram-sub {
   font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #0B7F8C;
   margin-top: 3px;
@@ -519,14 +485,15 @@
 
 .home-doctor-name-card {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.55rem;
-  color: #202B3C;
-  margin: 0 0 0.35rem 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 4px;
 }
 
 .home-doctor-title-card {
   font-size: 0.88rem;
-  color: #0B7F8C;
+  color: #AD2348;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -541,61 +508,103 @@
 }
 
 .home-doctor-credential-pill {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(194, 24, 80, 0.12);
-  padding: 0.65rem 1rem;
+  border: 1px solid rgba(173, 35, 72, 0.14);
+  padding: 0.72rem 1.15rem;
   border-radius: 12px;
-  font-size: 0.86rem;
-  color: #202B3C;
+  font-size: 0.88rem;
+  color: #343943;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
+.specialist-narrative-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.specialist-name-headline {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  color: #1F2733;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
 .home-doctor-qualifications-row {
   display: flex;
-  align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  gap: 8px;
+  margin-bottom: 1.25rem;
 }
 
 .home-doctor-qual-tag {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: #C21850;
-  background: #F8E5EA;
+  color: #AD2348;
+  background: rgba(173, 35, 72, 0.08);
+  border: 1px solid rgba(173, 35, 72, 0.18);
   padding: 4px 12px;
-  border-radius: 6px;
+  border-radius: 9999px;
 }
 
 .home-doctor-qual-fellowship {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #0B7F8C;
-  background: #DDF5F6;
+  background: rgba(232, 248, 250, 0.9);
+  border: 1px solid rgba(11, 127, 140, 0.22);
   padding: 4px 12px;
-  border-radius: 6px;
+  border-radius: 9999px;
+}
+
+.specialist-narrative-lead {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #343943;
+  margin-bottom: 1.25rem;
 }
 
 .home-doctor-quote {
-  font-size: 1.08rem;
-  line-height: 1.8;
-  color: #202B3C;
-  margin: 0 0 1.75rem 0;
-  font-style: normal;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: #1F2733;
+  border-left: 3.5px solid #AD2348;
+  padding-left: 1.25rem;
+  margin: 1.25rem 0 1.5rem;
+  background: rgba(253, 242, 244, 0.5);
+  padding: 1rem 1.25rem;
+  border-radius: 0 12px 12px 0;
+}
+
+.specialist-editorial-divider {
+  height: 1px;
+  background: rgba(173, 35, 72, 0.12);
+  margin: 1.5rem 0;
+}
+
+.specialist-focus-heading {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #647184;
+  margin-bottom: 1rem;
 }
 
 .home-doctor-competencies-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.85rem;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 580px) {
   .home-doctor-competencies-grid {
     grid-template-columns: 1fr;
   }
@@ -604,325 +613,360 @@
 .home-doctor-competency-item {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 0.92rem;
-  color: #202B3C;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1F2733;
 }
 
 .home-doctor-competency-item svg {
-  color: #C21850;
+  color: #AD2348;
   flex-shrink: 0;
 }
 
+.specialist-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* --------------------------------------------------------------------------
-   PHASE 10: WHY CHOOSE SAI DIAGNOSTICS (Genuine Centre Differentiators)
+   SECTION 05: WHY CHOOSE SAI DIAGNOSTICS? (Four Distinct Benefits)
    -------------------------------------------------------------------------- */
 
 .home-why-section {
-  background: linear-gradient(180deg, #FFFAF6 0%, #FFFFFF 100%);
-  padding: 6.5rem 1.5rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDFB 50%, #FFF9F5 100%);
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
-.home-why-grid {
+.home-why-distinct-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+  margin-top: 3rem;
 }
 
-@media (max-width: 980px) {
-  .home-why-grid {
+@media (max-width: 1024px) {
+  .home-why-distinct-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
-  .home-why-grid {
+  .home-why-distinct-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 }
 
-.home-why-card {
+.home-why-distinct-card {
+  position: relative;
   background: #FFFFFF;
-  border: 1px solid rgba(194, 24, 80, 0.1);
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
   border-radius: 20px;
-  padding: 2.25rem 1.85rem;
-  box-shadow: 0 8px 24px rgba(32, 43, 60, 0.04);
-  transition: all 0.3s ease;
+  padding: 2.25rem 1.75rem;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 18px rgba(173, 35, 72, 0.04);
+  overflow: hidden;
 }
 
-.home-why-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(194, 24, 80, 0.25);
-  box-shadow: 0 16px 36px rgba(194, 24, 80, 0.08);
+.home-why-distinct-card:hover {
+  border-color: rgba(173, 35, 72, 0.35);
+  box-shadow: 0 14px 32px rgba(173, 35, 72, 0.09);
+  transform: translateY(-4px);
 }
 
-.home-why-icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: #F8E5EA;
-  color: #C21850;
+.home-why-distinct-num {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: rgba(173, 35, 72, 0.09);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.home-why-distinct-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: #FFF9F5;
+  border: 1px solid rgba(173, 35, 72, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #AD2348;
   margin-bottom: 1.5rem;
+  transition: all 0.25s ease;
 }
 
-.home-why-card-title {
+.home-why-distinct-card:hover .home-why-distinct-icon {
+  background: #AD2348;
+  color: #FFFFFF;
+  border-color: #AD2348;
+}
+
+.home-why-distinct-title {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.22rem;
-  color: #202B3C;
-  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 0.75rem;
 }
 
-.home-why-card-desc {
-  font-size: 0.92rem;
-  color: #647184;
-  line-height: 1.65;
+.home-why-distinct-desc {
   margin: 0;
+  font-size: 0.90rem;
+  color: #5B687B;
+  line-height: 1.65;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 11: PATIENT JOURNEY (Connected 4-Step Timeline)
+   SECTION 06: YOUR JOURNEY, MADE SIMPLER (4-Step Timeline)
    -------------------------------------------------------------------------- */
 
 .home-journey-section {
   background: #FFFFFF;
-  padding: 6.5rem 1.5rem;
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
 .home-journey-timeline {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: 1.5rem;
+  margin-top: 3rem;
   position: relative;
+}
+
+@media (min-width: 1025px) {
+  .home-journey-timeline::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(173, 35, 72, 0.15) 0%, rgba(173, 35, 72, 0.35) 50%, rgba(173, 35, 72, 0.15) 100%);
+    z-index: 1;
+  }
 }
 
 @media (max-width: 1024px) {
   .home-journey-timeline {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .home-journey-timeline {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 }
 
 .home-journey-step-card {
   position: relative;
-  background: #FFFAF6;
+  background: #FFFDFB;
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
   border-radius: 20px;
-  border: 1px solid rgba(194, 24, 80, 0.12);
-  padding: 2.5rem 1.75rem 2rem;
-  transition: all 0.3s ease;
+  padding: 2.25rem 1.5rem 1.75rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(173, 35, 72, 0.04);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
 }
 
 .home-journey-step-card:hover {
-  transform: translateY(-5px);
+  border-color: rgba(173, 35, 72, 0.35);
+  box-shadow: 0 14px 32px rgba(173, 35, 72, 0.09);
   background: #FFFFFF;
-  border-color: rgba(194, 24, 80, 0.28);
-  box-shadow: 0 16px 36px rgba(194, 24, 80, 0.08);
 }
 
 .home-journey-number-badge {
   position: absolute;
-  top: -16px;
-  left: 1.75rem;
-  background: #C21850;
+  top: -14px;
+  background: #AD2348;
   color: #FFFFFF;
+  font-size: 0.75rem;
   font-weight: 800;
-  font-size: 0.85rem;
-  padding: 4px 14px;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(194, 24, 80, 0.3);
+  box-shadow: 0 4px 10px rgba(173, 35, 72, 0.25);
 }
 
 .home-journey-icon-wrap {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 14px;
-  background: #DDF5F6;
-  color: #0B7F8C;
+  background: #FFF9F5;
+  border: 1px solid rgba(173, 35, 72, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #AD2348;
   margin-bottom: 1.25rem;
+  transition: all 0.25s ease;
+}
+
+.home-journey-step-card:hover .home-journey-icon-wrap {
+  background: #AD2348;
+  color: #FFFFFF;
+  border-color: #AD2348;
 }
 
 .home-journey-step-title {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.18rem;
-  color: #202B3C;
-  margin: 0 0 0.75rem 0;
-  line-height: 1.35;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 0.65rem;
 }
 
 .home-journey-step-desc {
-  font-size: 0.90rem;
-  color: #647184;
-  line-height: 1.65;
   margin: 0;
+  font-size: 0.88rem;
+  color: #5B687B;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 12: GOOGLE REVIEWS (Verified Baseline Representation)
+   SECTION 07: PATIENT TESTIMONIALS (Authentic Experience Focus)
    -------------------------------------------------------------------------- */
 
 .home-reviews-section {
-  background: linear-gradient(180deg, #FFFAF6 0%, #FFFFFF 100%);
-  padding: 6.5rem 1.5rem;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDFB 50%, #FFF9F5 100%);
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
-.home-reviews-card-container {
-  max-width: 860px;
-  margin: 3.5rem auto 0;
+.home-testimonials-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 3rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .home-testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.home-testimonial-card {
   background: #FFFFFF;
-  border-radius: 28px;
-  border: 1.5px solid rgba(194, 24, 80, 0.12);
-  padding: 3.5rem 3rem;
-  box-shadow: 0 16px 40px rgba(32, 43, 60, 0.06);
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 3rem;
+  box-shadow: 0 4px 18px rgba(173, 35, 72, 0.04);
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .home-reviews-card-container {
-    flex-direction: column;
-    text-align: center;
-    padding: 2.5rem 1.75rem;
-    gap: 2rem;
-  }
+.home-testimonial-card.featured {
+  background: linear-gradient(145deg, #FFFDFB 0%, #FDF2F4 100%);
+  border-color: rgba(173, 35, 72, 0.28);
+  box-shadow: 0 10px 28px rgba(173, 35, 72, 0.07);
 }
 
-.home-reviews-score-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-right: 1.5px solid rgba(194, 24, 80, 0.1);
-  padding-right: 3rem;
-  flex-shrink: 0;
+.home-testimonial-card:hover {
+  border-color: rgba(173, 35, 72, 0.35);
+  box-shadow: 0 12px 30px rgba(173, 35, 72, 0.08);
+  transform: translateY(-3px);
 }
 
-@media (max-width: 768px) {
-  .home-reviews-score-block {
-    border-right: none;
-    border-bottom: 1.5px solid rgba(194, 24, 80, 0.1);
-    padding-right: 0;
-    padding-bottom: 2rem;
-    width: 100%;
-  }
+.home-testimonial-quote-icon {
+  color: rgba(173, 35, 72, 0.25);
+  margin-bottom: 1.25rem;
 }
 
-.home-reviews-big-number {
+.home-testimonial-text {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 4rem;
-  font-weight: 800;
-  color: #202B3C;
-  line-height: 1;
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.75;
+  color: #1F2733;
+  margin-bottom: 1.75rem;
 }
 
-.home-reviews-stars-row {
-  display: flex;
-  gap: 4px;
-  color: #F59E0B;
-  margin: 0.65rem 0 0.4rem;
+.home-testimonial-card.featured .home-testimonial-text {
+  font-size: 1.15rem;
+  color: #1F2733;
 }
 
-.home-reviews-count-label {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: #647184;
-}
-
-.home-reviews-content-block {
+.home-testimonial-author {
   display: flex;
   flex-direction: column;
+  gap: 3px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(173, 35, 72, 0.09);
 }
 
-.home-reviews-profile-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.78rem;
+.home-testimonial-name {
+  font-size: 0.92rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #1A73E8;
-  background: #E8F0FE;
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 0.85rem;
-  width: fit-content;
+  color: #AD2348;
 }
 
-@media (max-width: 768px) {
-  .home-reviews-profile-badge {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.home-reviews-note {
-  font-size: 1.02rem;
-  line-height: 1.75;
-  color: #202B3C;
-  margin-bottom: 1.5rem;
+.home-testimonial-context {
+  font-size: 0.80rem;
+  color: #5B687B;
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 13: FREQUENTLY ASKED QUESTIONS (Smooth Interactive Accordion)
+   SECTION 08: FREQUENTLY ASKED QUESTIONS
    -------------------------------------------------------------------------- */
 
 .home-faq-section {
   background: #FFFFFF;
-  padding: 6.5rem 1.5rem;
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
 .home-faq-accordion-wrap {
-  max-width: 820px;
-  margin: 3.5rem auto 0;
+  max-width: 960px;
+  margin: 3rem auto 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 .home-faq-item {
-  background: #FFFAF6;
-  border: 1px solid rgba(194, 24, 80, 0.12);
+  background: #FFFDFB;
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
   border-radius: 16px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .home-faq-item.open {
+  border-color: rgba(173, 35, 72, 0.32);
   background: #FFFFFF;
-  border-color: rgba(194, 24, 80, 0.28);
-  box-shadow: 0 8px 24px rgba(194, 24, 80, 0.06);
+  box-shadow: 0 6px 20px rgba(173, 35, 72, 0.06);
 }
 
 .home-faq-trigger {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 1.35rem 1.75rem;
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
   text-align: left;
@@ -933,14 +977,15 @@
   font-family: "Playfair Display", Georgia, serif;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #202B3C;
+  color: #1F2733;
   margin: 0;
+  line-height: 1.4;
 }
 
 .home-faq-chevron {
-  color: #C21850;
+  color: #AD2348;
   flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .home-faq-item.open .home-faq-chevron {
@@ -949,42 +994,43 @@
 
 .home-faq-answer {
   padding: 0 1.75rem 1.5rem;
-  color: #647184;
+  color: #5B687B;
   font-size: 0.95rem;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 /* --------------------------------------------------------------------------
-   MID-PAGE CTA STRIP
+   SECTION 09: APPOINTMENT CTA (Full-Width Rose-Burgundy Gradient)
    -------------------------------------------------------------------------- */
 
 .home-cta-fullwidth-section {
-  background: linear-gradient(135deg, #A01442 0%, #C21850 60%, #D8315B 100%);
-  padding: 5.5rem 1.5rem;
+  background: linear-gradient(135deg, #AD2348 0%, #C21850 60%, #90163C 100%);
+  padding: 5rem 1.5rem;
   position: relative;
-  color: #FFFFFF;
-  text-align: center;
   overflow: hidden;
+  color: #FFFFFF;
 }
 
 .home-cta-inner {
-  max-width: 780px;
+  max-width: 960px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-cta-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #F8E5EA;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 5px 14px;
   border-radius: 9999px;
   margin-bottom: 1.25rem;
@@ -992,18 +1038,19 @@
 
 .home-cta-heading {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-size: clamp(2.1rem, 3.5vw, 3rem);
+  font-weight: 700;
   color: #FFFFFF;
-  line-height: 1.2;
-  margin-bottom: 1.15rem;
+  line-height: 1.22;
+  margin-bottom: 1rem;
 }
 
 .home-cta-subtext {
-  font-size: 1.08rem;
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.95);
-  max-width: 640px;
-  margin: 0 auto 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 2.25rem;
+  max-width: 660px;
 }
 
 .home-cta-button-row {
@@ -1014,113 +1061,187 @@
 }
 
 .btn-cta-white {
-  background: #FFFFFF !important;
-  color: #C21850 !important;
-  font-weight: 700;
-  padding: 0.9rem 2.25rem;
-  border-radius: 9999px;
-  border: 1.5px solid #FFFFFF;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  text-decoration: none;
+  background: #FFFFFF;
+  color: #AD2348;
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 0.9rem 2.25rem;
+  border-radius: 9999px;
+  border: none;
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
 }
 
 .btn-cta-white:hover {
-  background: #FFFAF6 !important;
+  background: #FFF9F5;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.20);
 }
 
 .btn-cta-outline-white {
-  background: transparent !important;
-  color: #FFFFFF !important;
-  font-weight: 700;
-  padding: 0.9rem 2.25rem;
-  border-radius: 9999px;
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  text-decoration: none;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 700;
   font-size: 0.95rem;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.9rem 2.25rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 
 .btn-cta-outline-white:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
+  background: rgba(255, 255, 255, 0.15);
   border-color: #FFFFFF;
   transform: translateY(-2px);
 }
 
 /* --------------------------------------------------------------------------
-   PHASE 14: VISIT OUR CENTRE (Split Contact & Map Layout)
+   SECTION 10: CONTACT AND LOCATION (Integrated Split Layout)
    -------------------------------------------------------------------------- */
 
 .home-contact-split-section {
-  background: #FFFAF6;
-  padding: 6.5rem 1.5rem;
+  background: #FFFFFF;
+  padding: 5.5rem 1.5rem;
   position: relative;
 }
 
 .home-contact-split-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 4.5rem;
-  align-items: center;
-  margin-top: 3.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: stretch;
+  margin-top: 3rem;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 980px) {
   .home-contact-split-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
 }
 
 .home-contact-meta-col {
+  background: #FFFDFB;
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
+  border-radius: 24px;
+  padding: 2.75rem 2.25rem;
+  box-shadow: 0 8px 26px rgba(173, 35, 72, 0.04);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-contact-clinic-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #1F2733;
+  margin-bottom: 1.75rem;
 }
 
 .home-contact-item-row {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  padding-bottom: 1.25rem;
-  margin-bottom: 1.25rem;
-  border-bottom: 1px solid rgba(194, 24, 80, 0.1);
-}
-
-.home-contact-item-row:last-of-type {
-  border-bottom: none;
-  margin-bottom: 1.75rem;
-  padding-bottom: 0;
+  margin-bottom: 1.35rem;
 }
 
 .home-contact-icon-bubble {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: #F8E5EA;
-  color: #C21850;
+  background: #FFF9F5;
+  border: 1px solid rgba(173, 35, 72, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #AD2348;
   flex-shrink: 0;
-  margin-top: 2px;
+}
+
+.home-contact-item-title {
+  display: block;
+  color: #1F2733;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.home-contact-item-desc {
+  margin: 0;
+  color: #5B687B;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.home-contact-phone-link {
+  color: #AD2348;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.home-contact-phone-link:hover {
+  color: #8A1535;
+  text-decoration: underline;
+}
+
+.home-contact-actions-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(173, 35, 72, 0.1);
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #25D366;
+  color: #FFFFFF !important;
+  font-weight: 600;
+  font-size: 0.90rem;
+  padding: 0.8rem 1.65rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+  cursor: pointer;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1EBE5D;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
 }
 
 .home-contact-map-frame {
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(32, 43, 60, 0.08);
-  border: 1.5px solid rgba(11, 127, 140, 0.25);
-  height: 420px;
-  background: #DDF5F6;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid rgba(173, 35, 72, 0.12);
+  min-height: 380px;
+  height: 100%;
+}
+
+.home-contact-map-frame iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+  display: block;
 }

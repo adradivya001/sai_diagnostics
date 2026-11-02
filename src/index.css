@@ -327,21 +327,21 @@ p {
 .responsive-split-editorial {
   display: grid;
   grid-template-columns: 0.9fr 1.15fr;
-  gap: 4rem;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
   align-items: center;
 }
 
 .responsive-about-split {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
-  gap: 4rem;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
   align-items: center;
 }
 
 .responsive-contact-split {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 4rem;
+  gap: clamp(2rem, 3.5vw, 3.5rem);
   align-items: center;
 }
 

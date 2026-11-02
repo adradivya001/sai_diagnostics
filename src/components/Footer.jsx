@@ -24,7 +24,7 @@ const Footer = () => {
 
   return (
     <footer className="site-footer">
-      <div className="container" style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem' }}>
+      <div className="container">
         
         {/* 4-Column Layout */}
         <div className="site-footer-grid">

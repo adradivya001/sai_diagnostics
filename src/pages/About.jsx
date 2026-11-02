@@ -10,335 +10,205 @@ import {
   Quote,
   CheckCircle2,
   CalendarCheck,
-  Building2
+  Building2,
+  MessageSquare
 } from 'lucide-react';
-import useScrollReveal from '../hooks/useScrollReveal';
+import { 
+  ScrollReveal, 
+  HeadingReveal, 
+  StaggerContainer, 
+  StaggerItem, 
+  HoverCard 
+} from '../components/motion/MotionReveal';
 
 const About = () => {
-  useScrollReveal();
-
   useEffect(() => {
     document.title = 'About Us | Sai Diagnostics & Fetal Medicine Centre';
   }, []);
 
+  const philosophyPrinciples = [
+    {
+      num: '01',
+      title: 'Thoughtful Diagnostics',
+      desc: 'Diagnostic examinations are selected according to the clinical question and relevant referral or medical advice.',
+      icon: <Stethoscope size={24} />,
+      accentBg: '#FCE8EF',
+      accentColor: '#AD2348'
+    },
+    {
+      num: '02',
+      title: 'Clear Communication',
+      desc: 'Patients should have access to clear information about appointments, examination preparation and follow-up.',
+      icon: <MessageSquare size={24} />,
+      accentBg: '#E8F8FA',
+      accentColor: '#0B7F8C'
+    },
+    {
+      num: '03',
+      title: 'Respectful Patient Care',
+      desc: 'Every patient deserves privacy, dignity and individual attention throughout their consultation and ultrasound examination.',
+      icon: <Heart size={24} />,
+      accentBg: '#FCE8EF',
+      accentColor: '#AD2348'
+    }
+  ];
+
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh', paddingBottom: '0' }}>
       
-      {/* 1. Header Banner */}
+      {/* =========================================================================
+          SECTION 1: ABOUT PAGE INTRODUCTION (Compact Title Banner)
+          ========================================================================= */}
       <section style={{
-        background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
-        color: 'var(--text-heading)',
-        padding: '3.75rem 1.5rem 3.25rem',
+        background: 'linear-gradient(135deg, #FDF2F4 0%, #FFF9F5 50%, #E8F8FA 100%)',
+        color: '#1F2733',
+        padding: 'clamp(3rem, 5vw, 4rem) 1.5rem clamp(2.5rem, 4vw, 3.25rem)',
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
         borderBottom: '1px solid rgba(173, 35, 72, 0.1)'
       }}>
-        <div style={{ maxWidth: '860px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
-            ● ABOUT OUR CENTRE
-          </span>
-
-          <h1 style={{
-            fontFamily: '"Playfair Display", serif',
-            fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)',
-            color: 'var(--text-heading)',
-            marginBottom: '1.25rem',
-            lineHeight: 1.2
-          }}>
-            About Sai Diagnostics and Fetal Medicine Centre
-          </h1>
-
-          <p style={{
-            fontSize: '1.08rem',
-            color: 'var(--text-charcoal)',
-            lineHeight: 1.7,
-            maxWidth: '720px',
-            margin: '0 auto'
-          }}>
-            Every patient deserves individual attention, clear guidance, and compassionate care. Our aim is to support families through their healthcare journey while building lasting relationships with patients and referring doctors.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION B — Founder's Message (Distinctive Editorial Quotation Section) */}
-      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
-        <div className="container" style={{ maxWidth: '1080px' }}>
-          <div className="reveal-on-scroll" style={{
-            background: 'linear-gradient(145deg, #FFF9F5 0%, #FFFFFF 60%, #FDF4F7 100%)',
-            borderRadius: '28px',
-            padding: 'clamp(2.5rem, 5vw, 4rem)',
-            border: '1px solid rgba(194, 24, 75, 0.14)',
-            borderLeft: '5px solid #C2184B',
-            boxShadow: '0 16px 40px rgba(194, 24, 75, 0.05)',
-            position: 'relative'
-          }}>
-            <Quote 
-              size={68} 
-              style={{
-                position: 'absolute',
-                top: '2rem',
-                right: '2.5rem',
-                color: 'rgba(194, 24, 75, 0.12)',
-                pointerEvents: 'none'
-              }} 
-            />
-
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#C2184B',
-              marginBottom: '1.5rem'
-            }}>
-              <Heart size={14} /> FOUNDER'S MESSAGE
-            </div>
-
-            <blockquote style={{
-              fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: 'clamp(1.15rem, 2vw, 1.35rem)',
-              lineHeight: 1.9,
-              color: '#202735',
-              margin: '0 0 2rem',
-              fontStyle: 'italic',
-              maxWidth: '920px'
-            }}>
-              “Recognised for its dedicated care in Rayalaseema, Sai Diagnostics and Fetal Medicine Centre is committed to providing personalised care to every patient. The centre has been involved in the evaluation of rare and complex fetal cases. We value the trust placed in us by senior gynaecologists and paediatric specialists and continue to work towards providing thoughtful, specialised care for every family.”
-            </blockquote>
-
-            <div style={{
-              height: '1px',
-              background: 'linear-gradient(90deg, #C2184B 0%, rgba(245, 183, 200, 0.3) 70%, transparent 100%)',
-              marginBottom: '1.5rem'
-            }} />
-
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{
-                fontFamily: '"Playfair Display", Georgia, serif',
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: '#C2184B',
-                marginBottom: '4px'
-              }}>
-                Dr. T. Sai Kiranmai
-              </span>
-              <span style={{ fontSize: '0.92rem', color: '#343943', fontWeight: 600 }}>
-                Consultant Radiologist & Fetal Medicine Specialist
-              </span>
-              <span style={{ fontSize: '0.85rem', color: '#17A9CF', fontWeight: 600, marginTop: '2px' }}>
-                M.B.B.S., DMRD • Fellowship in Fetal Ultrasound
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION C — Our Approach to Care (Three Distinct Principles) */}
-      <section style={{
-        background: 'linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%)',
-        padding: '5.5rem 1.5rem',
-        borderTop: '1px solid rgba(194, 24, 75, 0.06)'
-      }}>
-        <div className="container" style={{ maxWidth: '1240px' }}>
-          <div className="text-center reveal-on-scroll" style={{ marginBottom: '3.5rem' }}>
+        <div style={{ maxWidth: '840px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          <ScrollReveal direction="down" delay={0.05}>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '7px',
+              gap: '6px',
               fontSize: '0.78rem',
               fontWeight: 700,
-              letterSpacing: '0.08em',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: '#17A9CF',
-              background: '#E6F7FC',
-              border: '1px solid rgba(23, 169, 207, 0.25)',
-              padding: '5px 14px',
+              color: '#AD2348',
+              background: 'rgba(173, 35, 72, 0.08)',
+              border: '1px solid rgba(173, 35, 72, 0.18)',
+              padding: '4px 14px',
               borderRadius: '9999px',
               marginBottom: '1rem'
             }}>
-              <ShieldCheck size={14} /> CLINICAL PHILOSOPHY
+              ● ABOUT OUR CENTRE
             </span>
-            <h2 style={{
+          </ScrollReveal>
+
+          <HeadingReveal delay={0.1}>
+            <h1 style={{
               fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
-              color: '#202735',
+              fontSize: 'clamp(2.1rem, 3.8vw, 3.1rem)',
+              color: '#1F2733',
+              marginBottom: '1rem',
               lineHeight: 1.2
             }}>
-              Our Approach to Care
-            </h2>
-          </div>
+              About Sai Diagnostics and Fetal Medicine Centre
+            </h1>
+          </HeadingReveal>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-            gap: '2rem'
-          }}>
-            {/* Principle 1: Thoughtful Diagnostics */}
-            <div className="reveal-on-scroll stagger-1" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.5rem 2rem',
-              border: '1px solid rgba(194, 24, 75, 0.12)',
-              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column'
+          <ScrollReveal direction="up" delay={0.15}>
+            <p style={{
+              fontSize: '1.05rem',
+              color: '#5B687B',
+              lineHeight: 1.7,
+              maxWidth: '720px',
+              margin: '0 auto'
             }}>
-              <div style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '14px',
-                background: '#FCE8EE',
-                color: '#C2184B',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <Stethoscope size={24} />
-              </div>
-              <h3 style={{
-                fontFamily: '"Playfair Display", Georgia, serif',
-                fontSize: '1.35rem',
-                color: '#202735',
-                marginBottom: '0.85rem'
-              }}>
-                Thoughtful Diagnostics
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.96rem', lineHeight: 1.7, margin: 0 }}>
-                Diagnostic examinations are selected according to the clinical question and relevant referral or medical advice.
-              </p>
-            </div>
-
-            {/* Principle 2: Clear Communication */}
-            <div className="reveal-on-scroll stagger-2" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.5rem 2rem',
-              border: '1px solid rgba(23, 169, 207, 0.2)',
-              boxShadow: '0 8px 24px rgba(23, 169, 207, 0.04)',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <div style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '14px',
-                background: '#E6F7FC',
-                color: '#17A9CF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <Sparkles size={24} />
-              </div>
-              <h3 style={{
-                fontFamily: '"Playfair Display", Georgia, serif',
-                fontSize: '1.35rem',
-                color: '#202735',
-                marginBottom: '0.85rem'
-              }}>
-                Clear Communication
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.96rem', lineHeight: 1.7, margin: 0 }}>
-                Patients should have access to clear information about appointments, examination preparation, and follow-up.
-              </p>
-            </div>
-
-            {/* Principle 3: Respectful Patient Care */}
-            <div className="reveal-on-scroll stagger-3" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.5rem 2rem',
-              border: '1px solid rgba(194, 24, 75, 0.12)',
-              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <div style={{
-                width: '50px',
-                height: '50px',
-                borderRadius: '14px',
-                background: '#FCE8EE',
-                color: '#C2184B',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.5rem'
-              }}>
-                <Heart size={24} />
-              </div>
-              <h3 style={{
-                fontFamily: '"Playfair Display", Georgia, serif',
-                fontSize: '1.35rem',
-                color: '#202735',
-                marginBottom: '0.85rem'
-              }}>
-                Respectful Patient Care
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.96rem', lineHeight: 1.7, margin: 0 }}>
-                Every patient deserves privacy, dignity, and individual attention throughout their consultation and ultrasound examination.
-              </p>
-            </div>
-          </div>
+              Every patient deserves individual attention, clear guidance and compassionate care. Our aim is to support families through their healthcare journey while building lasting relationships with patients and referring doctors.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* SECTION D — Centre Environment (Genuine Clinic Photography Showcase) */}
-      <section style={{ background: '#FFFFFF', padding: 'clamp(3rem, 6vw, 5.5rem) 1rem' }}>
-        <div className="container" style={{ maxWidth: '1240px' }}>
-          <div className="responsive-about-split">
-            {/* Visual Column: Genuine Reception Photo */}
-            <div className="reveal-on-scroll">
-              <div style={{
-                borderRadius: '24px',
-                overflow: 'hidden',
-                boxShadow: '0 16px 36px rgba(194, 24, 75, 0.08)',
-                border: '1.5px solid rgba(194, 24, 75, 0.16)',
-                position: 'relative',
-                maxHeight: '380px'
-              }}>
-                <img 
-                  src="/modern-reception.png" 
-                  alt="Sai Diagnostics & Fetal Medicine Centre Patient Reception Area, Anantapur" 
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    maxHeight: '380px',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }}
-                />
-                <div style={{
+      {/* =========================================================================
+          SECTION 2: FOUNDER'S MESSAGE (Sophisticated Balanced Editorial Composition)
+          ========================================================================= */}
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem' }}>
+        <div className="container">
+          <ScrollReveal direction="scale" delay={0.1} amount={0.2}>
+            <div style={{
+              maxWidth: '1240px',
+              margin: '0 auto',
+              background: 'linear-gradient(145deg, #FFFDFB 0%, #FFF9F5 60%, #FDF2F4 100%)',
+              borderRadius: '24px',
+              padding: 'clamp(2.25rem, 4.5vw, 3.5rem)',
+              border: '1.5px solid rgba(173, 35, 72, 0.14)',
+              borderLeft: '5px solid #AD2348',
+              boxShadow: '0 12px 36px rgba(173, 35, 72, 0.06)',
+              position: 'relative'
+            }}>
+              <Quote 
+                size={64} 
+                style={{
                   position: 'absolute',
-                  bottom: '14px',
-                  left: '16px',
-                  background: 'rgba(255, 255, 255, 0.94)',
-                  backdropFilter: 'blur(8px)',
-                  padding: '6px 14px',
-                  borderRadius: '999px',
-                  fontSize: '0.78rem',
+                  top: '1.75rem',
+                  right: '2rem',
+                  color: 'rgba(173, 35, 72, 0.12)',
+                  pointerEvents: 'none'
+                }} 
+              />
+
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#AD2348',
+                marginBottom: '1.25rem'
+              }}>
+                <Heart size={14} /> FOUNDER'S MESSAGE
+              </div>
+
+              <blockquote style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: 'clamp(1.12rem, 1.8vw, 1.3rem)',
+                lineHeight: 1.85,
+                color: '#1F2733',
+                margin: '0 0 1.75rem',
+                fontStyle: 'italic',
+                maxWidth: '880px'
+              }}>
+                “Recognised for its dedicated care in Rayalaseema, Sai Diagnostics and Fetal Medicine Centre is committed to providing personalised care to every patient. The centre has been involved in the evaluation of rare and complex fetal cases. We value the trust placed in us by senior gynaecologists and paediatric specialists and continue to work towards providing thoughtful, specialised care for every family.”
+              </blockquote>
+
+              <div style={{
+                height: '1px',
+                background: 'linear-gradient(90deg, #AD2348 0%, rgba(212, 66, 104, 0.3) 60%, transparent 100%)',
+                marginBottom: '1.35rem'
+              }} />
+
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontSize: '1.25rem',
                   fontWeight: 700,
-                  color: '#C2184B',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)'
+                  color: '#AD2348',
+                  marginBottom: '2px'
                 }}>
-                  <Building2 size={14} /> Reception & Consultation Lounge, Anantapur
-                </div>
+                  Dr. T. Sai Kiranmai
+                </span>
+                <span style={{ fontSize: '0.92rem', color: '#1F2733', fontWeight: 600 }}>
+                  Consultant Radiologist & Fetal Medicine Specialist
+                </span>
+                <span style={{ fontSize: '0.85rem', color: '#0B7F8C', fontWeight: 600, marginTop: '2px' }}>
+                  M.B.B.S., DMRD • Fellowship in Fetal Ultrasound
+                </span>
               </div>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
-            {/* Narrative Column: Confirmed Centre Information */}
-            <div className="reveal-on-scroll stagger-2">
+      {/* =========================================================================
+          SECTION 3: CLINICAL PHILOSOPHY ("Our Approach to Care")
+          ========================================================================= */}
+      <section style={{
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%)',
+        padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem',
+        borderTop: '1px solid rgba(173, 35, 72, 0.08)'
+      }}>
+        <div className="container">
+          
+          <div className="text-center" style={{ marginBottom: '3rem' }}>
+            <ScrollReveal direction="up" delay={0.05}>
               <span style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -347,141 +217,318 @@ const About = () => {
                 fontWeight: 700,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: '#C2184B',
-                background: 'rgba(194, 24, 75, 0.08)',
-                border: '1px solid rgba(194, 24, 75, 0.18)',
+                color: '#0B7F8C',
+                background: '#E8F8FA',
+                border: '1px solid rgba(11, 127, 140, 0.22)',
                 padding: '5px 14px',
                 borderRadius: '9999px',
-                marginBottom: '1rem'
+                marginBottom: '0.85rem'
               }}>
-                <Building2 size={13} /> CLINIC ENVIRONMENT
+                <ShieldCheck size={14} /> CLINICAL PHILOSOPHY
               </span>
+            </ScrollReveal>
 
+            <HeadingReveal delay={0.1}>
               <h2 style={{
                 fontFamily: '"Playfair Display", Georgia, serif',
                 fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
-                color: '#202735',
-                lineHeight: 1.22,
-                marginBottom: '1.25rem'
+                color: '#1F2733',
+                lineHeight: 1.2
               }}>
-                A Thoughtful, Calm Clinical Atmosphere
+                Our Approach to Care
               </h2>
+            </HeadingReveal>
+          </div>
 
-              <p style={{ color: '#343943', fontSize: '1.02rem', lineHeight: 1.8, marginBottom: '1.75rem' }}>
-                Sai Diagnostics and Fetal Medicine Centre is arranged to provide unhurried appointments, dedicated ultrasound rooms, and an orderly waiting environment so expectant parents feel comfortable and supported during every visit.
-              </p>
+          <StaggerContainer delayChildren={0.15} staggerChildren={0.1} className="about-philosophy-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+            gap: '1.75rem'
+          }}>
+            {philosophyPrinciples.map((item, index) => (
+              <StaggerItem key={index}>
+                <HoverCard lift={-5} style={{
+                  background: '#FFFFFF',
+                  borderRadius: '20px',
+                  padding: '2.5rem 2rem',
+                  border: '1.5px solid rgba(173, 35, 72, 0.12)',
+                  boxShadow: '0 6px 20px rgba(173, 35, 72, 0.04)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1.5rem'
+                  }}>
+                    <div style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '14px',
+                      background: item.accentBg,
+                      color: item.accentColor,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      {item.icon}
+                    </div>
+                    <span style={{
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontSize: '1.75rem',
+                      fontWeight: 700,
+                      color: 'rgba(173, 35, 72, 0.12)'
+                    }}>
+                      {item.num}
+                    </span>
+                  </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#202735' }}>
-                  <CheckCircle2 size={18} color="#C2184B" />
-                  <span>Dedicated ultrasound suites designed for maternal comfort & privacy</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#202735' }}>
-                  <CheckCircle2 size={18} color="#17A9CF" />
-                  <span>Scheduled appointment slots to ensure thorough scanning time</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#202735' }}>
-                  <CheckCircle2 size={18} color="#C2184B" />
-                  <span>Active collaboration with treating obstetricians & paediatricians</span>
+                  <h3 style={{
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontSize: '1.35rem',
+                    fontWeight: 700,
+                    color: '#1F2733',
+                    marginBottom: '0.85rem'
+                  }}>
+                    {item.title}
+                  </h3>
+
+                  <p style={{
+                    color: '#5B687B',
+                    fontSize: '0.95rem',
+                    lineHeight: 1.7,
+                    margin: 0
+                  }}>
+                    {item.desc}
+                  </p>
+                </HoverCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 4: CLINIC ENVIRONMENT ("A Thoughtful, Calm Clinical Atmosphere")
+          ========================================================================= */}
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem' }}>
+        <div className="container">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
+            gap: '3.5rem',
+            alignItems: 'center'
+          }}>
+            {/* Visual Column: Genuine Reception Photo */}
+            <ScrollReveal direction="left" delay={0.15} amount={0.25}>
+              <div style={{
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 16px 36px rgba(173, 35, 72, 0.08)',
+                border: '1.5px solid rgba(173, 35, 72, 0.14)',
+                position: 'relative'
+              }}>
+                <img 
+                  src="/modern-reception.png" 
+                  alt="Sai Diagnostics & Fetal Medicine Centre Patient Reception Area, Anantapur" 
+                  style={{
+                    width: '100%',
+                    height: '420px',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }}
+                  loading="lazy"
+                />
+                <div style={{
+                  position: 'absolute',
+                  bottom: '16px',
+                  left: '16px',
+                  right: '16px',
+                  background: 'rgba(255, 255, 255, 0.94)',
+                  backdropFilter: 'blur(8px)',
+                  padding: '8px 16px',
+                  borderRadius: '999px',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  color: '#AD2348',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)'
+                }}>
+                  <Building2 size={16} /> Reception & Consultation Lounge • Anantapur
                 </div>
               </div>
+            </ScrollReveal>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <Link to="/facilities" className="btn btn-outline" style={{ padding: '0.8rem 1.85rem', backgroundColor: '#FFFFFF' }}>
-                  View All Facilities
-                </Link>
-                <Link to="/doctors" className="btn btn-primary" style={{ padding: '0.8rem 1.85rem' }}>
-                  Specialist Profile <ArrowRight size={16} />
-                </Link>
-              </div>
+            {/* Narrative Column: Confirmed Centre Information */}
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <ScrollReveal direction="right" delay={0.05}>
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '7px',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  color: '#AD2348',
+                  background: 'rgba(173, 35, 72, 0.08)',
+                  border: '1px solid rgba(173, 35, 72, 0.18)',
+                  padding: '5px 14px',
+                  borderRadius: '9999px',
+                  marginBottom: '1rem',
+                  width: 'fit-content'
+                }}>
+                  <Building2 size={13} /> CLINIC ENVIRONMENT
+                </span>
+              </ScrollReveal>
+
+              <HeadingReveal delay={0.12}>
+                <h2 style={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+                  color: '#1F2733',
+                  lineHeight: 1.22,
+                  marginBottom: '1.15rem'
+                }}>
+                  A Thoughtful, Calm Clinical Atmosphere
+                </h2>
+              </HeadingReveal>
+
+              <ScrollReveal direction="right" delay={0.2}>
+                <p style={{ color: '#5B687B', fontSize: '1.02rem', lineHeight: 1.75, marginBottom: '1.75rem' }}>
+                  Sai Diagnostics and Fetal Medicine Centre is arranged to provide unhurried appointments, dedicated ultrasound rooms, and an orderly waiting environment so expectant parents feel comfortable and supported during every visit.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#1F2733' }}>
+                    <CheckCircle2 size={18} color="#AD2348" />
+                    <span>Dedicated ultrasound suites designed for maternal comfort & privacy</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#1F2733' }}>
+                    <CheckCircle2 size={18} color="#0B7F8C" />
+                    <span>Scheduled appointment slots to ensure thorough scanning time</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.94rem', color: '#1F2733' }}>
+                    <CheckCircle2 size={18} color="#AD2348" />
+                    <span>Active collaboration with treating obstetricians & paediatricians</span>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  <Link to="/facilities" className="btn btn-outline" style={{ padding: '0.8rem 1.85rem', backgroundColor: '#FFFFFF' }}>
+                    View All Facilities
+                  </Link>
+                  <Link to="/doctors" className="btn btn-primary" style={{ padding: '0.8rem 1.85rem' }}>
+                    Specialist Profile <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION E — Closing CTA */}
+      {/* =========================================================================
+          SECTION 5: ABOUT PAGE CTA ("Begin Your Visit With Confidence")
+          ========================================================================= */}
       <section style={{
-        background: 'linear-gradient(135deg, #8E133C 0%, #AD2348 55%, #C2184B 100%)',
-        padding: '5.5rem 1.5rem',
+        background: 'linear-gradient(135deg, #AD2348 0%, #C21850 60%, #90163C 100%)',
+        padding: 'clamp(3.5rem, 5vw, 4.5rem) 1.5rem',
         color: '#FFFFFF',
         textAlign: 'center'
       }}>
-        <div className="container reveal-on-scroll" style={{ maxWidth: '780px' }}>
-          <span style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            fontSize: '0.78rem',
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: '#FCE8EE',
-            background: 'rgba(255, 255, 255, 0.12)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            padding: '5px 14px',
-            borderRadius: '9999px',
-            marginBottom: '1.25rem'
-          }}>
-            <CalendarCheck size={14} /> PLAN YOUR VISIT
-          </span>
+        <div className="container">
+          <div style={{ maxWidth: '920px', margin: '0 auto' }}>
+          <ScrollReveal direction="up" delay={0.05}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#FFFFFF',
+              background: 'rgba(255, 255, 255, 0.18)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              padding: '5px 14px',
+              borderRadius: '9999px',
+              marginBottom: '1rem'
+            }}>
+              <CalendarCheck size={14} /> PLAN YOUR VISIT
+            </span>
+          </ScrollReveal>
 
-          <h2 style={{
-            fontFamily: '"Playfair Display", Georgia, serif',
-            fontSize: 'clamp(2.2rem, 3.8vw, 3rem)',
-            color: '#FFFFFF',
-            lineHeight: 1.2,
-            marginBottom: '1.15rem'
-          }}>
-            Begin Your Visit With Confidence
-          </h2>
+          <HeadingReveal delay={0.1}>
+            <h2 style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: 'clamp(2.1rem, 3.5vw, 2.85rem)',
+              color: '#FFFFFF',
+              lineHeight: 1.2,
+              marginBottom: '1rem'
+            }}>
+              Begin Your Visit With Confidence
+            </h2>
+          </HeadingReveal>
 
-          <p style={{
-            fontSize: '1.05rem',
-            lineHeight: 1.75,
-            color: 'rgba(255, 255, 255, 0.92)',
-            maxWidth: '620px',
-            margin: '0 auto 2.5rem'
-          }}>
-            Contact our centre to enquire about available diagnostic examinations, appointment timings, and visit preparation guidance.
-          </p>
+          <ScrollReveal direction="up" delay={0.15}>
+            <p style={{
+              fontSize: '1.05rem',
+              lineHeight: 1.7,
+              color: 'rgba(255, 255, 255, 0.92)',
+              maxWidth: '620px',
+              margin: '0 auto 2rem'
+            }}>
+              Contact our centre to enquire about available diagnostic examinations, appointment timings, and visit preparation guidance.
+            </p>
+          </ScrollReveal>
 
-          <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link 
-              to="/services" 
-              className="btn btn-cta-white"
-              style={{
-                background: '#FFFFFF',
-                color: '#AD2348',
-                fontWeight: 700,
-                padding: '0.9rem 2.25rem',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              Explore Our Services <ArrowRight size={16} />
-            </Link>
+          <ScrollReveal direction="up" delay={0.2}>
+            <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link 
+                to="/services" 
+                style={{
+                  background: '#FFFFFF',
+                  color: '#AD2348',
+                  fontWeight: 700,
+                  padding: '0.85rem 2.25rem',
+                  borderRadius: '9999px',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.12)',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                Explore Our Services <ArrowRight size={16} />
+              </Link>
 
-            <Link 
-              to="/contact" 
-              className="btn btn-cta-outline-white"
-              style={{
-                background: 'transparent',
-                color: '#FFFFFF',
-                fontWeight: 700,
-                padding: '0.9rem 2.25rem',
-                borderRadius: '9999px',
-                border: '1.5px solid rgba(255, 255, 255, 0.7)',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              <PhoneCall size={18} /> Contact the Centre
-            </Link>
+              <Link 
+                to="/contact" 
+                style={{
+                  background: 'transparent',
+                  color: '#FFFFFF',
+                  fontWeight: 700,
+                  padding: '0.85rem 2.25rem',
+                  borderRadius: '9999px',
+                  border: '1.5px solid rgba(255, 255, 255, 0.65)',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.25s ease'
+                }}
+              >
+                <PhoneCall size={18} /> Contact the Centre
+              </Link>
+            </div>
+          </ScrollReveal>
           </div>
         </div>
       </section>

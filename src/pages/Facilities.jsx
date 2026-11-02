@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Heart, 
@@ -8,330 +8,501 @@ import {
   Clock, 
   Navigation, 
   Building2, 
-  Sparkles 
+  Sparkles,
+  Maximize2,
+  X,
+  CalendarCheck
 } from 'lucide-react';
-import useScrollReveal from '../hooks/useScrollReveal';
+import { 
+  ScrollReveal, 
+  HeadingReveal, 
+  StaggerContainer, 
+  StaggerItem, 
+  HoverCard 
+} from '../components/motion/MotionReveal';
 
 const Facilities = () => {
-  useScrollReveal();
+  const [activePhoto, setActivePhoto] = useState(null);
 
   useEffect(() => {
     document.title = 'Our Centre and Facilities | Sai Diagnostics Anantapur';
   }, []);
 
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActivePhoto(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const galleryImages = [
+    {
+      id: 'waiting-room',
+      title: 'Patient Waiting Lounge & Fetal Artistry',
+      desc: 'Comfortable, air-conditioned reception lounge with dedicated seating for mothers and accompanying family.',
+      src: '/modern-waiting-room.png',
+      featured: true,
+      tag: 'FEATURED SPACE'
+    },
+    {
+      id: 'reception-desk',
+      title: 'Reception & Check-in Desk',
+      desc: 'Orderly registration and consultation reception counter designed for prompt appointment coordination.',
+      src: '/modern-reception.png',
+      featured: false,
+      tag: 'WELCOME & CHECK-IN'
+    },
+    {
+      id: 'clinic-exterior',
+      title: 'Sai Diagnostics Centre Exterior',
+      desc: 'Centrally located facility on 9th Cross Road, Sai Nagar, easily accessible with peaceful surroundings.',
+      src: '/sai-diagnostics-building.png',
+      featured: false,
+      tag: 'CENTRE EXTERIOR'
+    },
+    {
+      id: 'ultrasound-suite',
+      title: 'Dedicated Ultrasound Consultation Suite',
+      desc: 'Private diagnostic room equipped with high-resolution clinical ultrasound platform and secondary display for expectant parents.',
+      src: '/ultrasound.jpg',
+      featured: false,
+      tag: 'DIAGNOSTIC SUITE'
+    }
+  ];
+
+  const experiencePoints = [
+    {
+      num: '01',
+      title: 'Appointment Arrangements',
+      desc: 'Patients are scheduled by prior appointment to support organised diagnostic visits, minimizing wait times and ensuring adequate time for every scan.',
+      icon: <Clock size={24} />
+    },
+    {
+      num: '02',
+      title: 'Patient Privacy',
+      desc: 'Dedicated private ultrasound examination suites guarantee complete dignity, quiet reassurance, and comfort for expectant mothers throughout the procedure.',
+      icon: <ShieldCheck size={24} />
+    },
+    {
+      num: '03',
+      title: 'Visit Guidance',
+      desc: 'Our staff provides verified preparation advice (such as bladder fullness recommendations and report collection guidelines) prior to your visit.',
+      icon: <CheckCircle2 size={24} />
+    },
+    {
+      num: '04',
+      title: 'Comfortable Environment',
+      desc: 'Calm, hygienic waiting lounge with filtered drinking water, peaceful acoustics, and welcoming support for accompanying spouses and elders.',
+      icon: <Heart size={24} />
+    }
+  ];
+
   return (
     <div style={{ background: '#FFFFFF', minHeight: '100vh', paddingBottom: '0' }}>
       
-      {/* 1. Header Banner (Light Burgundy Warm Ambient Header) */}
+      {/* =========================================================================
+          SECTION 1: FACILITIES PAGE INTRODUCTION (Compact Title Banner)
+          ========================================================================= */}
       <section style={{
-        background: 'linear-gradient(135deg, #F8E7EC 0%, #E8F4FB 100%)',
-        color: 'var(--text-heading)',
-        padding: '3.75rem 1.5rem 3.25rem',
+        background: 'linear-gradient(135deg, #FDF2F4 0%, #FFF9F5 50%, #E8F8FA 100%)',
+        color: '#1F2733',
+        padding: 'clamp(3rem, 5vw, 4rem) 1.5rem clamp(2.5rem, 4vw, 3.25rem)',
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
         borderBottom: '1px solid rgba(173, 35, 72, 0.1)'
       }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <span className="section-tag" style={{ marginBottom: '0.85rem' }}>
-            ● PATIENT COMFORT & CLINICAL INFRASTRUCTURE
-          </span>
-
-          <h1 style={{
-            fontFamily: '"Playfair Display", serif',
-            fontSize: 'clamp(2.3rem, 4vw, 3.3rem)',
-            color: 'var(--text-heading)',
-            marginBottom: '1rem',
-            lineHeight: 1.15
-          }}>
-            Our Modern Diagnostic Facilities
-          </h1>
-
-          <p style={{
-            fontSize: '1.05rem',
-            color: 'var(--text-charcoal)',
-            lineHeight: 1.6,
-            maxWidth: '660px',
-            margin: '0 auto'
-          }}>
-            Experience healthcare in an environment designed for peace of mind, privacy, and clinical precision. Every detail of our center is tailored to support expecting mothers and families.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION B — Genuine Photo Showcase Gallery */}
-      <section style={{ background: '#FFFFFF', padding: '5.5rem 1.5rem' }}>
-        <div className="container" style={{ maxWidth: '1240px' }}>
-          <div className="text-center reveal-on-scroll" style={{ marginBottom: '3.5rem' }}>
+          <ScrollReveal direction="down" delay={0.05}>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '7px',
+              gap: '6px',
               fontSize: '0.78rem',
               fontWeight: 700,
-              letterSpacing: '0.08em',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: '#17A9CF',
-              background: '#E6F7FC',
-              border: '1px solid rgba(23, 169, 207, 0.25)',
-              padding: '5px 14px',
+              color: '#AD2348',
+              background: 'rgba(173, 35, 72, 0.08)',
+              border: '1px solid rgba(173, 35, 72, 0.18)',
+              padding: '4px 14px',
               borderRadius: '9999px',
               marginBottom: '1rem'
             }}>
-              <Sparkles size={13} /> AUTHENTIC CLINIC PHOTOGRAPHY
+              ● PATIENT COMFORT & CLINICAL INFRASTRUCTURE
             </span>
-            <h2 style={{
+          </ScrollReveal>
+
+          <HeadingReveal delay={0.1}>
+            <h1 style={{
               fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
-              color: '#202735',
-              lineHeight: 1.2
+              fontSize: 'clamp(2.2rem, 3.8vw, 3.2rem)',
+              color: '#1F2733',
+              marginBottom: '1rem',
+              lineHeight: 1.15
             }}>
-              Tour Our Diagnostic Setting
-            </h2>
-            <p style={{ color: '#59616B', fontSize: '1rem', maxWidth: '620px', margin: '0.5rem auto 0' }}>
-              Genuine views of our clinical spaces, patient reception, and diagnostic consultation suites in Anantapur.
+              Our Modern Diagnostic Facilities
+            </h1>
+          </HeadingReveal>
+
+          <ScrollReveal direction="up" delay={0.15}>
+            <p style={{
+              fontSize: '1.05rem',
+              color: '#5B687B',
+              lineHeight: 1.65,
+              maxWidth: '660px',
+              margin: '0 auto'
+            }}>
+              Experience healthcare in an environment designed for comfort, privacy and organised diagnostic care.
             </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '2rem'
-          }}>
-            {/* Photo 1: Patient Reception */}
-            <div className="reveal-on-scroll stagger-1" style={{
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 12px 32px rgba(194, 24, 75, 0.08)',
-              border: '1px solid rgba(194, 24, 75, 0.14)',
-              background: '#FFFFFF',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <div style={{ height: '260px', overflow: 'hidden' }}>
-                <img 
-                  src="/modern-reception.png" 
-                  alt="Sai Diagnostics Reception Lounge, Anantapur" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ padding: '1.5rem' }}>
-                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#C2184B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  PATIENT RECEPTION
-                </span>
-                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
-                  Reception & Check-in Desk
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
-                  Orderly registration counter where our front-desk staff assists expectant parents with arrival and scan coordination.
-                </p>
-              </div>
-            </div>
-
-            {/* Photo 2: Patient Waiting Lounge */}
-            <div className="reveal-on-scroll stagger-2" style={{
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 12px 32px rgba(23, 169, 207, 0.08)',
-              border: '1px solid rgba(23, 169, 207, 0.2)',
-              background: '#FFFFFF',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <div style={{ height: '260px', overflow: 'hidden' }}>
-                <img 
-                  src="/modern-waiting-room.png" 
-                  alt="Sai Diagnostics Patient Waiting Area, Anantapur" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ padding: '1.5rem' }}>
-                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#17A9CF', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  COMFORTABLE LOUNGE
-                </span>
-                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
-                  Patient Waiting Area
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
-                  A clean, air-conditioned waiting space providing comfortable seating and a serene atmosphere for accompanying family members.
-                </p>
-              </div>
-            </div>
-
-            {/* Photo 3: Clinic Exterior Entrance */}
-            <div className="reveal-on-scroll stagger-3" style={{
-              borderRadius: '24px',
-              overflow: 'hidden',
-              boxShadow: '0 12px 32px rgba(194, 24, 75, 0.08)',
-              border: '1px solid rgba(194, 24, 75, 0.14)',
-              background: '#FFFFFF',
-              display: 'flex',
-              flexDirection: 'column'
-            }}>
-              <div style={{ height: '260px', overflow: 'hidden' }}>
-                <img 
-                  src="/sai-diagnostics-building.png" 
-                  alt="Sai Diagnostics Centre Exterior Building, Anantapur" 
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ padding: '1.5rem' }}>
-                <span style={{ fontSize: '0.76rem', fontWeight: 700, color: '#C2184B', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  CENTRAL LOCATION
-                </span>
-                <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', margin: '4px 0 8px' }}>
-                  Clinic Entrance & Access
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: '#59616B', lineHeight: 1.6, margin: 0 }}>
-                  Conveniently situated on 9th Cross Road, Sai Nagar in Anantapur with direct road access for arriving families.
-                </p>
-              </div>
-            </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* SECTION C — Patient Experience (Editorial Alternating Layout) */}
+      {/* =========================================================================
+          SECTION 2: CLINIC PHOTO GALLERY (Editorial Layout with Lightbox)
+          ========================================================================= */}
+      <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5.5rem) 1.5rem' }}>
+        <div className="container">
+          
+          <div className="text-center" style={{ marginBottom: '3rem' }}>
+            <ScrollReveal direction="up" delay={0.05}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#AD2348',
+                background: 'rgba(173, 35, 72, 0.08)',
+                border: '1px solid rgba(173, 35, 72, 0.18)',
+                padding: '5px 14px',
+                borderRadius: '9999px',
+                marginBottom: '0.85rem'
+              }}>
+                <Sparkles size={13} /> AUTHENTIC CLINIC TOUR
+              </span>
+            </ScrollReveal>
+
+            <HeadingReveal delay={0.1}>
+              <h2 style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+                color: '#1F2733',
+                lineHeight: 1.2
+              }}>
+                Tour Our Diagnostic Setting
+              </h2>
+            </HeadingReveal>
+
+            <ScrollReveal direction="up" delay={0.15}>
+              <p style={{ color: '#5B687B', fontSize: '1rem', maxWidth: '620px', margin: '0.5rem auto 0' }}>
+                Explore our clinical spaces, patient reception and diagnostic environment. Click any photograph to view in high resolution.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Editorial Gallery Grid */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(12, 1fr)',
+            gap: '1.75rem'
+          }}>
+            {/* Featured Photo: Waiting Room Lounge (Span 8 on desktop) */}
+            <div 
+              style={{
+                gridColumn: 'span 12',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                boxShadow: '0 12px 32px rgba(173, 35, 72, 0.08)',
+                border: '1.5px solid rgba(173, 35, 72, 0.14)',
+                background: '#FFFFFF',
+                cursor: 'pointer',
+                position: 'relative'
+              }}
+              onClick={() => setActivePhoto(galleryImages[0])}
+            >
+              <div style={{ height: 'clamp(320px, 45vw, 440px)', position: 'relative', overflow: 'hidden' }}>
+                <img 
+                  src={galleryImages[0].src} 
+                  alt={galleryImages[0].title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  loading="lazy"
+                />
+                <div style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'linear-gradient(to top, rgba(31, 39, 51, 0.85) 0%, rgba(31, 39, 51, 0.1) 60%, transparent 100%)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  padding: 'clamp(1.5rem, 3vw, 2.25rem)'
+                }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
+                    <div>
+                      <span style={{
+                        background: '#AD2348',
+                        color: '#FFFFFF',
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.06em',
+                        padding: '4px 12px',
+                        borderRadius: '9999px',
+                        display: 'inline-block',
+                        marginBottom: '8px'
+                      }}>
+                        {galleryImages[0].tag}
+                      </span>
+                      <h3 style={{
+                        fontFamily: '"Playfair Display", Georgia, serif',
+                        fontSize: 'clamp(1.4rem, 2.4vw, 1.9rem)',
+                        color: '#FFFFFF',
+                        margin: '0 0 6px'
+                      }}>
+                        {galleryImages[0].title}
+                      </h3>
+                      <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.94rem', margin: 0, maxWidth: '640px' }}>
+                        {galleryImages[0].desc}
+                      </p>
+                    </div>
+
+                    <span style={{
+                      background: 'rgba(255, 255, 255, 0.92)',
+                      color: '#AD2348',
+                      fontSize: '0.82rem',
+                      fontWeight: 700,
+                      padding: '8px 16px',
+                      borderRadius: '9999px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}>
+                      <Maximize2 size={14} /> Click to Enlarge
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Three Supporting Photos */}
+            {galleryImages.slice(1).map((photo) => (
+              <div
+                key={photo.id}
+                style={{
+                  gridColumn: 'span 4',
+                  borderRadius: '20px',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 24px rgba(173, 35, 72, 0.05)',
+                  border: '1.5px solid rgba(173, 35, 72, 0.12)',
+                  background: '#FFFFFF',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'transform 0.25s ease, box-shadow 0.25s ease'
+                }}
+                onClick={() => setActivePhoto(photo)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 14px 32px rgba(173, 35, 72, 0.10)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(173, 35, 72, 0.05)';
+                }}
+              >
+                <div style={{ height: '230px', position: 'relative', overflow: 'hidden' }}>
+                  <img 
+                    src={photo.src} 
+                    alt={photo.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    loading="lazy"
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    left: '12px',
+                    background: 'rgba(255, 255, 255, 0.92)',
+                    color: '#AD2348',
+                    fontSize: '0.70rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.04em',
+                    padding: '3px 10px',
+                    borderRadius: '9999px'
+                  }}>
+                    {photo.tag}
+                  </div>
+                </div>
+
+                <div style={{ padding: '1.35rem', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+                  <div>
+                    <h3 style={{
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontSize: '1.2rem',
+                      fontWeight: 700,
+                      color: '#1F2733',
+                      marginBottom: '6px'
+                    }}>
+                      {photo.title}
+                    </h3>
+                    <p style={{ fontSize: '0.88rem', color: '#5B687B', lineHeight: 1.6, margin: 0 }}>
+                      {photo.desc}
+                    </p>
+                  </div>
+                  <div style={{
+                    marginTop: '1rem',
+                    paddingTop: '0.75rem',
+                    borderTop: '1px solid rgba(173, 35, 72, 0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    fontSize: '0.80rem',
+                    color: '#AD2348',
+                    fontWeight: 700
+                  }}>
+                    <span>View Image</span>
+                    <Maximize2 size={13} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 3: PATIENT EXPERIENCE ("Designed Around Your Comfort and Care")
+          ========================================================================= */}
       <section style={{
         background: 'linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 100%)',
-        padding: '5.5rem 1.5rem',
-        borderTop: '1px solid rgba(194, 24, 75, 0.06)'
+        padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem',
+        borderTop: '1px solid rgba(173, 35, 72, 0.08)'
       }}>
-        <div className="container" style={{ maxWidth: '1240px' }}>
-          <div className="text-center reveal-on-scroll" style={{ marginBottom: '3.5rem' }}>
-            <span style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '7px',
-              fontSize: '0.78rem',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#C2184B',
-              background: 'rgba(194, 24, 75, 0.08)',
-              border: '1px solid rgba(194, 24, 75, 0.18)',
-              padding: '5px 14px',
-              borderRadius: '9999px',
-              marginBottom: '1rem'
-            }}>
-              <Heart size={14} /> PATIENT-FIRST CARE
-            </span>
-            <h2 style={{
-              fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
-              color: '#202735',
-              lineHeight: 1.2
-            }}>
-              Pillars of the Patient Experience
-            </h2>
+        <div className="container">
+          
+          <div className="text-center" style={{ marginBottom: '3rem' }}>
+            <ScrollReveal direction="up" delay={0.05}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#0B7F8C',
+                background: '#E8F8FA',
+                border: '1px solid rgba(11, 127, 140, 0.22)',
+                padding: '5px 14px',
+                borderRadius: '9999px',
+                marginBottom: '0.85rem'
+              }}>
+                <Heart size={14} /> PATIENT-FIRST ENVIRONMENT
+              </span>
+            </ScrollReveal>
+
+            <HeadingReveal delay={0.1}>
+              <h2 style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+                color: '#1F2733',
+                lineHeight: 1.2
+              }}>
+                Designed Around Your Comfort and Care
+              </h2>
+            </HeadingReveal>
           </div>
 
-          <div style={{
+          <StaggerContainer delayChildren={0.15} staggerChildren={0.1} style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: '1.75rem'
           }}>
-            {/* Feature 1 */}
-            <div className="reveal-on-scroll stagger-1" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.25rem 1.85rem',
-              border: '1px solid rgba(194, 24, 75, 0.12)',
-              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)'
-            }}>
-              <div style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '12px',
-                background: '#FCE8EE',
-                color: '#C2184B',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <Clock size={22} />
-              </div>
-              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
-                Appointment Arrangements
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
-                Patients are scheduled by appointment to preserve dedicated scanning time for comprehensive fetal anatomical reviews.
-              </p>
-            </div>
+            {experiencePoints.map((item, index) => (
+              <StaggerItem key={index}>
+                <HoverCard lift={-5} style={{
+                  background: '#FFFFFF',
+                  borderRadius: '20px',
+                  padding: '2.25rem 1.75rem',
+                  border: '1.5px solid rgba(173, 35, 72, 0.12)',
+                  boxShadow: '0 4px 18px rgba(173, 35, 72, 0.04)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '1.25rem'
+                  }}>
+                    <div style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '14px',
+                      background: '#FFF9F5',
+                      border: '1px solid rgba(173, 35, 72, 0.14)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#AD2348'
+                    }}>
+                      {item.icon}
+                    </div>
+                    <span style={{
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontSize: '1.8rem',
+                      fontWeight: 800,
+                      color: 'rgba(173, 35, 72, 0.10)'
+                    }}>
+                      {item.num}
+                    </span>
+                  </div>
 
-            {/* Feature 2 */}
-            <div className="reveal-on-scroll stagger-2" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.25rem 1.85rem',
-              border: '1px solid rgba(23, 169, 207, 0.2)',
-              boxShadow: '0 8px 24px rgba(23, 169, 207, 0.04)'
-            }}>
-              <div style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '12px',
-                background: '#E6F7FC',
-                color: '#17A9CF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <ShieldCheck size={22} />
-              </div>
-              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
-                Patient Privacy
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
-                Individual ultrasound consultation rooms arranged to maintain dignified privacy and comfortable scanning for every patient.
-              </p>
-            </div>
+                  <h3 style={{
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                    fontSize: '1.25rem',
+                    fontWeight: 700,
+                    color: '#1F2733',
+                    marginBottom: '0.65rem'
+                  }}>
+                    {item.title}
+                  </h3>
 
-            {/* Feature 3 */}
-            <div className="reveal-on-scroll stagger-3" style={{
-              background: '#FFFFFF',
-              borderRadius: '20px',
-              padding: '2.25rem 1.85rem',
-              border: '1px solid rgba(194, 24, 75, 0.12)',
-              boxShadow: '0 8px 24px rgba(194, 24, 75, 0.04)'
-            }}>
-              <div style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '12px',
-                background: '#FCE8EE',
-                color: '#C2184B',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.25rem'
-              }}>
-                <CheckCircle2 size={22} />
-              </div>
-              <h3 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.25rem', color: '#202735', marginBottom: '0.65rem' }}>
-                Visit Guidance & Prep
-              </h3>
-              <p style={{ color: '#59616B', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
-                Clear preparation instructions (such as hydration or bladder requirements) are explained in advance when scheduling your scan.
-              </p>
-            </div>
-          </div>
+                  <p style={{
+                    color: '#5B687B',
+                    fontSize: '0.90rem',
+                    lineHeight: 1.65,
+                    margin: 0
+                  }}>
+                    {item.desc}
+                  </p>
+                </HoverCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
         </div>
       </section>
 
-      {/* SECTION D — Location CTA */}
+      {/* =========================================================================
+          SECTION 4: VISIT CTA ("Plan Your Visit")
+          ========================================================================= */}
       <section style={{
-        background: 'linear-gradient(135deg, #8E133C 0%, #AD2348 55%, #C2184B 100%)',
-        padding: '5.5rem 1.5rem',
+        background: 'linear-gradient(135deg, #AD2348 0%, #C21850 60%, #90163C 100%)',
+        padding: 'clamp(3.5rem, 5vw, 4.5rem) 1.5rem',
         color: '#FFFFFF',
         textAlign: 'center'
       }}>
-        <div className="container reveal-on-scroll" style={{ maxWidth: '780px' }}>
+        <div className="container">
+          <div style={{ maxWidth: '960px', margin: '0 auto' }}>
           <span style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -340,78 +511,162 @@ const Facilities = () => {
             fontWeight: 700,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: '#FCE8EE',
-            background: 'rgba(255, 255, 255, 0.12)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
+            color: '#FFFFFF',
+            background: 'rgba(255, 255, 255, 0.18)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
             padding: '5px 14px',
             borderRadius: '9999px',
-            marginBottom: '1.25rem'
+            marginBottom: '1rem'
           }}>
-            <Navigation size={14} /> DIRECTIONS & VISITS
+            <Navigation size={14} /> CLINIC LOCATION & VISITS
           </span>
 
           <h2 style={{
             fontFamily: '"Playfair Display", Georgia, serif',
-            fontSize: 'clamp(2.2rem, 3.8vw, 3rem)',
+            fontSize: 'clamp(2.1rem, 3.5vw, 2.85rem)',
             color: '#FFFFFF',
             lineHeight: 1.2,
-            marginBottom: '1.15rem'
+            marginBottom: '1rem'
           }}>
             Plan Your Visit
           </h2>
 
           <p style={{
             fontSize: '1.05rem',
-            lineHeight: 1.75,
+            lineHeight: 1.7,
             color: 'rgba(255, 255, 255, 0.92)',
             maxWidth: '620px',
-            margin: '0 auto 2.5rem'
+            margin: '0 auto 2.25rem'
           }}>
             Find our location in Anantapur or get in touch with our team for appointment scheduling and assistance.
           </p>
 
           <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a 
+            <a
               href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-cta-white"
               style={{
                 background: '#FFFFFF',
                 color: '#AD2348',
                 fontWeight: 700,
-                padding: '0.9rem 2.25rem',
+                padding: '0.85rem 2.25rem',
                 borderRadius: '9999px',
                 textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px'
+                gap: '8px',
+                boxShadow: '0 4px 14px rgba(0, 0, 0, 0.12)',
+                transition: 'all 0.25s ease'
               }}
             >
               <Navigation size={16} /> Get Directions
             </a>
 
-            <Link 
-              to="/contact" 
-              className="btn btn-cta-outline-white"
+            <Link
+              to="/contact"
               style={{
                 background: 'transparent',
                 color: '#FFFFFF',
                 fontWeight: 700,
-                padding: '0.9rem 2.25rem',
+                padding: '0.85rem 2.25rem',
                 borderRadius: '9999px',
-                border: '1.5px solid rgba(255, 255, 255, 0.7)',
+                border: '1.5px solid rgba(255, 255, 255, 0.65)',
                 textDecoration: 'none',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px'
+                gap: '8px',
+                transition: 'all 0.25s ease'
               }}
             >
               <PhoneCall size={18} /> Contact the Centre
             </Link>
           </div>
+          </div>
         </div>
       </section>
+
+      {/* =========================================================================
+          LIGHTBOX MODAL FOR GALLERY ENLARGEMENT
+          ========================================================================= */}
+      {activePhoto && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            backgroundColor: 'rgba(15, 23, 42, 0.85)',
+            backdropFilter: 'blur(8px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
+          onClick={() => setActivePhoto(null)}
+        >
+          <div
+            style={{
+              position: 'relative',
+              maxWidth: '920px',
+              width: '100%',
+              background: '#FFFFFF',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ position: 'relative', height: 'clamp(280px, 50vw, 520px)', background: '#1F2733' }}>
+              <img
+                src={activePhoto.src}
+                alt={activePhoto.title}
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
+              <button
+                type="button"
+                onClick={() => setActivePhoto(null)}
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '38px',
+                  height: '38px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  color: '#1F2733'
+                }}
+                aria-label="Close photo preview"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div style={{ padding: '1.5rem 2rem' }}>
+              <span style={{
+                color: '#AD2348',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                display: 'block',
+                marginBottom: '4px'
+              }}>
+                {activePhoto.tag}
+              </span>
+              <h3 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: '1.35rem', color: '#1F2733', margin: '0 0 6px' }}>
+                {activePhoto.title}
+              </h3>
+              <p style={{ margin: 0, color: '#5B687B', fontSize: '0.92rem', lineHeight: 1.6 }}>
+                {activePhoto.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
