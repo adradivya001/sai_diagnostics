@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Calendar, Phone, MapPin, Navigation, Clock } from 'lucide-react';
+import { Calendar, Phone, MapPin, Navigation, Clock, ArrowUp } from 'lucide-react';
 import { useAppointmentModal } from './AppointmentModal';
+import { HalftoneWordmarkFooter } from './ui/halftone-wordmark-footer';
 import './Footer.css';
 
 const Footer = () => {
   const { openModal } = useAppointmentModal();
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const quickLinks = [
     { name: 'Home', path: '/' },
@@ -138,17 +143,52 @@ const Footer = () => {
           </div>
 
         </div>
+      </div>
 
-        {/* Bottom Copyright Bar */}
-        <div className="footer-bottom-bar">
-          <div>
-            © 2026 Sai Diagnostics and Fetal Medicine Centre. All rights reserved.
+      {/* Full-Bleed Halftone Wordmark Canvas Banner: "sai diagnostics" */}
+      <div className="footer-halftone-banner">
+        <HalftoneWordmarkFooter
+          wordmark="sai diagnostics"
+          height="clamp(90px, 10.5vw, 150px)"
+          dotGap={6}
+          radius={85}
+          crop={0.2}
+          grain={0.4}
+          interactive={true}
+          palette={{
+            background: "#0D1728",
+            ink: "#B2CEE2",
+            warm: "#E9762B",
+          }}
+          showTopColumns={false}
+        />
+      </div>
+
+      {/* Bottom Copyright & Legal Strip with Back-to-Top Button */}
+      <div className="footer-dark-strip">
+        <div className="footer-dark-strip-container">
+          <div className="footer-copyright-text">
+            © 2026 Sai Diagnostics. All rights reserved.
           </div>
-          <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-            Personalised Maternal-Fetal Care & Diagnostic Imaging
+
+          <div className="footer-legal-links-row">
+            <Link to="/about">Privacy Policy</Link>
+            <span className="footer-legal-bullet">•</span>
+            <Link to="/about">Terms & Conditions</Link>
+            <span className="footer-legal-bullet">•</span>
+            <Link to="/contact">Sitemap</Link>
           </div>
+
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="footer-back-to-top-btn"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            <ArrowUp size={14} />
+          </button>
         </div>
-
       </div>
     </footer>
   );

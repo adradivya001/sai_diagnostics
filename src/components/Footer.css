@@ -6,7 +6,7 @@
   background: linear-gradient(180deg, #FFFFFF 0%, #FFF8FA 40%, #F9EBF0 100%);
   color: var(--text-charcoal);
   padding-top: 4rem;
-  padding-bottom: 2rem;
+  padding-bottom: 0;
   margin-top: auto;
   border-top: 1px solid rgba(173, 35, 72, 0.12);
   font-family: 'Inter', sans-serif;
@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: 1.35fr 1fr 1fr 1.35fr;
   gap: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 3.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -161,34 +161,106 @@
   box-shadow: 0 6px 18px rgba(173, 35, 72, 0.35);
 }
 
-.footer-bottom-bar {
+/* ==========================================================================
+   Full-Bleed Halftone Wordmark & Dark Bottom Strip
+   ========================================================================== */
+
+.footer-halftone-banner {
+  width: 100%;
+  position: relative;
+  border-top: 1px solid rgba(28, 50, 86, 0.4);
+  overflow: hidden;
+  background-color: #0D1728;
+  display: block;
+  line-height: 0;
+}
+
+.footer-dark-strip {
+  background-color: #090F1B;
+  color: #94a3b8;
+  border-top: 1px solid rgba(28, 50, 86, 0.4);
+  padding: 1.15rem 0;
+  width: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer-dark-strip-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(173, 35, 72, 0.1);
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
-.footer-legal-links {
+.footer-copyright-text {
+  color: #94a3b8;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.footer-legal-links-row {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  color: var(--text-muted);
-  font-size: 0.82rem;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  color: rgba(178, 206, 226, 0.8);
 }
 
-@media (max-width: 640px) {
-  .footer-bottom-bar {
+.footer-legal-links-row a {
+  color: rgba(178, 206, 226, 0.85);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal-links-row a:hover {
+  color: #FFFFFF;
+}
+
+.footer-legal-bullet {
+  color: rgba(178, 206, 226, 0.4);
+  font-size: 0.7rem;
+}
+
+.footer-back-to-top-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background-color: #1C3256;
+  color: #B2CEE2;
+  border: 1px solid rgba(58, 79, 153, 0.6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.footer-back-to-top-btn:hover {
+  background-color: #3A4F99;
+  color: #FFFFFF;
+  transform: translateY(-2px) scale(1.06);
+  border-color: rgba(178, 206, 226, 0.8);
+  box-shadow: 0 4px 12px rgba(58, 79, 153, 0.4);
+}
+
+@media (max-width: 768px) {
+  .footer-dark-strip-container {
     flex-direction: column;
     text-align: center;
+    gap: 0.85rem;
   }
 
-  .footer-legal-links {
-    justify-content: center;
+  .footer-legal-links-row {
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
   }
 }

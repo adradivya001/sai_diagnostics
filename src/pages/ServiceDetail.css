@@ -1,0 +1,1138 @@
+/* ==========================================================================
+   SERVICE DETAIL PAGE STYLES (Surya Hospital / Sai Diagnostics Reference UI)
+   Matches the 1:1 Clean Specialty Hospital UI in Reference Screenshots
+   ========================================================================== */
+
+.service-detail-page {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ECECE5;
+  color: #262626;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Container */
+.sd-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .sd-container {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sd-container {
+    padding: 0 1rem;
+  }
+}
+
+/* ==========================================================================
+   1. HERO SECTION
+   ========================================================================== */
+.sd-hero {
+  position: relative;
+  background-color: #ECECE5;
+  padding: 2.75rem 0 2.25rem;
+  border-bottom: 1px solid #D9E2EC;
+}
+
+.sd-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+}
+
+/* Breadcrumbs */
+.sd-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #756860;
+  margin-bottom: 0.25rem;
+}
+
+.sd-breadcrumb-link {
+  color: #756860;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sd-breadcrumb-link:hover {
+  color: #3A4F99;
+}
+
+.sd-breadcrumb-sep {
+  width: 12px;
+  height: 12px;
+  color: #A09890;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sd-breadcrumb-active {
+  color: #13233D;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badges Row */
+.sd-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.sd-badge-navy {
+  background-color: #13233D;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(19, 35, 61, 0.15);
+}
+
+.sd-badge-blue {
+  background-color: #EEF2FB;
+  color: #3A4F99;
+  border: 1px solid #B2CEE2;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Headings */
+.sd-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+  font-weight: 800;
+  color: #8E1939;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.sd-hero-subtitle {
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  color: #4A403B;
+  line-height: 1.6;
+  max-width: 820px;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+/* Action CTA Buttons */
+.sd-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 0.25rem;
+}
+
+.sd-btn-primary {
+  background-color: #3A4F99;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(58, 79, 153, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sd-btn-primary:hover {
+  background-color: #2A3B7A;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(58, 79, 153, 0.35);
+}
+
+.sd-btn-primary:active {
+  transform: translateY(0);
+}
+
+.sd-btn-secondary {
+  background-color: #FFFFFF;
+  color: #13233D !important;
+  border: 1px solid #D9E2EC;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.sd-btn-secondary:hover {
+  background-color: #F8FAFC;
+  border-color: #B2CEE2;
+  color: #3A4F99 !important;
+  transform: translateY(-1px);
+}
+
+/* Department Switcher Strip */
+.sd-dept-switcher-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(217, 226, 236, 0.75);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sd-dept-switcher-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.sd-dept-switcher-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #756860;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sd-dept-pill {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sd-dept-pill.active {
+  background-color: #3A4F99;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(58, 79, 153, 0.25);
+  border: 1px solid #3A4F99;
+}
+
+.sd-dept-pill.inactive {
+  background-color: #FFFFFF;
+  color: #13233D !important;
+  border: 1px solid #D9E2EC;
+}
+
+.sd-dept-pill.inactive:hover {
+  background-color: #EEF2FB;
+  color: #3A4F99 !important;
+  border-color: #B2CEE2;
+}
+
+/* ==========================================================================
+   2. STICKY QUICK-JUMP SUB-NAVIGATION
+   ========================================================================== */
+.sd-sticky-nav {
+  position: sticky;
+  top: 68px;
+  z-index: 40;
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid #D9E2EC;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  padding: 0.65rem 0;
+}
+
+.sd-sticky-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sd-sticky-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.sd-quickjump-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sd-quickjump-group::-webkit-scrollbar {
+  display: none;
+}
+
+.sd-quickjump-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #756860;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sd-quickjump-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sd-quickjump-link {
+  background-color: #ECECE5;
+  border: 1px solid #D9E2EC;
+  color: #262626 !important;
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.sd-quickjump-link:hover {
+  background-color: #EEF2FB;
+  color: #3A4F99 !important;
+  border-color: #B2CEE2;
+}
+
+.sd-btn-quick-book {
+  background-color: #3A4F99;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(58, 79, 153, 0.2);
+}
+
+.sd-btn-quick-book:hover {
+  background-color: #2A3B7A;
+}
+
+@media (max-width: 640px) {
+  .sd-quickjump-label {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   3. ABOUT THIS SPECIALITY & HERO PHOTOGRAPH
+   ========================================================================== */
+.sd-section-about {
+  background-color: #FFFFFF;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid #E8EFF5;
+  scroll-margin-top: 110px;
+}
+
+.sd-about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .sd-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.sd-about-left {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.sd-badge-about {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #EEF2FB;
+  border: 1px solid #D9E2EC;
+  color: #13233D;
+  border-radius: 9999px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  width: fit-content;
+}
+
+.sd-dot-orange {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #E94B1C;
+  flex-shrink: 0;
+}
+
+.sd-about-heading {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  color: #13233D;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.sd-about-text {
+  font-size: 0.95rem;
+  color: #4A403B;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.sd-about-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 540px) {
+  .sd-about-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sd-info-box {
+  background-color: #ECECE5;
+  border: 1px solid #D9E2EC;
+  border-radius: 16px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.sd-info-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #13233D;
+  margin-bottom: 4px;
+}
+
+.sd-info-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #13233D;
+  line-height: 1.35;
+}
+
+/* Right Photograph Frame */
+.sd-about-right {
+  position: relative;
+  width: 100%;
+}
+
+.sd-image-frame {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #D9E2EC;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  aspect-ratio: 4 / 3;
+  background-color: #EEF2FB;
+}
+
+.sd-image-element {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.sd-image-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.sd-image-content {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  text-align: left;
+  pointer-events: none;
+}
+
+.sd-image-tag-orange {
+  background-color: #E94B1C;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.sd-image-caption {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 6px 0 0 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   4. CONDITIONS WE TREAT & TREATMENTS/SERVICES (2-CARD GRID)
+   ========================================================================== */
+.sd-section-two-cards {
+  background-color: #ECECE5;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid #E8EFF5;
+  scroll-margin-top: 110px;
+}
+
+.sd-two-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.25rem;
+}
+
+@media (max-width: 960px) {
+  .sd-two-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
+.sd-card-white {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  padding: 2.5rem 2.25rem;
+  border: 1px solid #D9E2EC;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .sd-card-white {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+.sd-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sd-card-tag-navy {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #13233D;
+}
+
+.sd-card-tag-teal {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #006677;
+}
+
+.sd-card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #13233D;
+  margin: 4px 0 6px 0;
+  line-height: 1.25;
+}
+
+.sd-card-subtitle {
+  font-size: 13.5px;
+  color: #756860;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.sd-check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sd-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sd-icon-circle-blue {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #EEF2FB;
+  border: 1px solid #D9E2EC;
+  color: #3A4F99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sd-icon-circle-teal {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #E6F4F7;
+  border: 1px solid #BDE0E8;
+  color: #006677;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sd-check-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #262626;
+  line-height: 1.5;
+}
+
+/* Patient Preparation Alert Box */
+.sd-prep-box {
+  background-color: #FFF9F5;
+  border: 1px solid #F3DEC8;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-top: 0.5rem;
+}
+
+.sd-prep-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #B85D19;
+  font-size: 12.5px;
+  margin-bottom: 4px;
+}
+
+.sd-prep-desc {
+  font-size: 12px;
+  color: #7A4B23;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ==========================================================================
+   5. WHEN TO CONSULT OUR SPECIALISTS (ADVISORY BOX)
+   ========================================================================== */
+.sd-section-advisory {
+  background-color: #FFFFFF;
+  padding: 4rem 0;
+  border-bottom: 1px solid #E8EFF5;
+}
+
+.sd-advisory-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.sd-advisory-box {
+  background-color: #ECECE5;
+  border: 1px solid #D9E2EC;
+  border-radius: 24px;
+  padding: 2.25rem 2.5rem;
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .sd-advisory-box {
+    padding: 1.5rem;
+  }
+}
+
+.sd-advisory-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #D9E2EC;
+  margin-bottom: 1.5rem;
+}
+
+.sd-advisory-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #13233D;
+  display: block;
+}
+
+.sd-advisory-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #13233D;
+  margin: 4px 0 0 0;
+  line-height: 1.25;
+}
+
+.sd-advisory-btn-call {
+  background-color: #3A4F99;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.sd-advisory-btn-call:hover {
+  background-color: #2A3B7A;
+}
+
+.sd-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sd-advisory-pill {
+  background-color: #FFFFFF;
+  border: 1px solid #D9E2EC;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #262626;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease;
+}
+
+.sd-advisory-pill:hover {
+  border-color: #3A4F99;
+}
+
+.sd-dot-red {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #E94B1C;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   6. OUR SPECIALISTS SECTION
+   ========================================================================== */
+.sd-section-specialists {
+  background-color: #ECECE5;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid #E8EFF5;
+  scroll-margin-top: 110px;
+}
+
+.sd-specialists-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+}
+
+.sd-specialists-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #13233D;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sd-specialists-title {
+  font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: #13233D;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.sd-specialists-subtitle {
+  font-size: 13.5px;
+  color: #756860;
+  margin: 0;
+}
+
+.sd-doctor-card {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  border: 1px solid #D9E2EC;
+  padding: 2rem 2.25rem;
+  max-width: 620px;
+  margin: 0 auto;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  transition: border-color 0.2s ease;
+}
+
+.sd-doctor-card:hover {
+  border-color: #3A4F99;
+}
+
+@media (max-width: 640px) {
+  .sd-doctor-card {
+    padding: 1.5rem;
+  }
+}
+
+.sd-doctor-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sd-doctor-avatar-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background-color: #EEF2FB;
+  border: 1px solid #D9E2EC;
+  color: #3A4F99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sd-doctor-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #13233D;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.sd-doctor-deg {
+  font-size: 12px;
+  font-weight: 700;
+  color: #E94B1C;
+  margin-top: 3px;
+}
+
+.sd-doctor-title {
+  font-size: 12px;
+  color: #756860;
+  margin-top: 2px;
+}
+
+.sd-doctor-bio {
+  font-size: 13px;
+  color: #4A403B;
+  line-height: 1.65;
+  padding: 12px 0;
+  border-top: 1px solid #E8EFF5;
+  border-bottom: 1px solid #E8EFF5;
+  margin: 0;
+}
+
+.sd-doctor-timing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #756860;
+}
+
+.sd-icon-orange {
+  color: #E94B1C;
+  flex-shrink: 0;
+}
+
+.sd-btn-consult {
+  background-color: #3A4F99;
+  color: #FFFFFF !important;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(58, 79, 153, 0.25);
+}
+
+.sd-btn-consult:hover {
+  background-color: #2A3B7A;
+}
+
+/* ==========================================================================
+   7. FREQUENTLY ASKED QUESTIONS (ACCORDIONS)
+   ========================================================================== */
+.sd-section-faqs {
+  background-color: #FFFFFF;
+  padding: 4.5rem 0;
+  border-bottom: 1px solid #E8EFF5;
+  scroll-margin-top: 110px;
+}
+
+.sd-faqs-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+}
+
+.sd-faqs-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #13233D;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sd-faqs-title {
+  font-size: clamp(1.8rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: #13233D;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.sd-faqs-subtitle {
+  font-size: 13.5px;
+  color: #756860;
+  margin: 0;
+}
+
+.sd-faqs-list {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sd-faq-card {
+  background-color: #ECECE5;
+  border: 1px solid #D9E2EC;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.sd-faq-btn {
+  width: 100%;
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #13233D;
+  line-height: 1.4;
+  transition: background-color 0.2s ease;
+}
+
+.sd-faq-btn:hover {
+  background-color: rgba(238, 242, 251, 0.5);
+}
+
+.sd-faq-chevron {
+  width: 16px;
+  height: 16px;
+  color: #13233D;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sd-faq-chevron.rotate {
+  transform: rotate(180deg);
+}
+
+.sd-faq-answer {
+  background-color: #FFFFFF;
+  border-top: 1px solid #D9E2EC;
+  padding: 1.15rem 1.35rem;
+  font-size: 13.5px;
+  color: #4A403B;
+  line-height: 1.65;
+  text-align: left;
+}
+
+/* ==========================================================================
+   8. APPOINTMENT DESK BANNER
+   ========================================================================== */
+.sd-section-cta {
+  background-color: #ECECE5;
+  padding: 3.5rem 0 4rem;
+}
+
+.sd-cta-card {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  border: 1px solid #D9E2EC;
+  padding: 2.75rem 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .sd-cta-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.75rem;
+  }
+}
+
+.sd-cta-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 680px;
+}
+
+.sd-cta-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #3A4F99;
+}
+
+.sd-cta-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  color: #13233D;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.sd-cta-desc {
+  font-size: 13.5px;
+  color: #756860;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.sd-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.sd-btn-wa {
+  background-color: #ECECE5;
+  color: #1F2733 !important;
+  border: 1px solid #D9E2EC;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sd-btn-wa:hover {
+  background-color: #E2E8F0;
+  border-color: #CBD5E1;
+}
+

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { services } from '../data/services';
 import { 
   Search, 
@@ -55,6 +56,7 @@ const mapServiceToCategory = (service) => {
 };
 
 const Services = () => {
+  const navigate = useNavigate();
   const { openModal } = useAppointmentModal();
   const [selectedCategory, setSelectedCategory] = useState('All Services');
   const [searchQuery, setSearchQuery] = useState('');
@@ -422,13 +424,23 @@ const Services = () => {
           {displayedServices.map((service) => (
             <div
               key={service.id}
-              onClick={() => setActiveModalTest(service)}
+              onClick={() => {
+                if (service.slug) {
+                  navigate(`/services/${service.slug}`);
+                } else {
+                  setActiveModalTest(service);
+                }
+              }}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
-                  setActiveModalTest(service);
+                  if (service.slug) {
+                    navigate(`/services/${service.slug}`);
+                  } else {
+                    setActiveModalTest(service);
+                  }
                 }
               }}
               style={{

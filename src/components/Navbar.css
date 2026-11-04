@@ -307,3 +307,236 @@
     height: 48px;
   }
 }
+
+/* ==========================================================================
+   Mega Dropdown Menu (Matching Screenshot 1)
+   ========================================================================== */
+
+.navbar-mega-dropdown-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  padding-top: 12px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.navbar-mega-dropdown-card {
+  width: 780px;
+  max-width: 94vw;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  border: 1px solid #D9E2EC;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 4px 14px rgba(173, 35, 72, 0.08);
+  padding: 1.5rem 1.65rem;
+  text-align: left;
+}
+
+.navbar-mega-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.navbar-mega-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.navbar-mega-col-right {
+  border-left: 1px solid #F0F4F8;
+  padding-left: 1.5rem;
+  justify-content: space-between;
+}
+
+.navbar-mega-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid #E8EFF5;
+  margin-bottom: 0.5rem;
+}
+
+.navbar-mega-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar-mega-icon-box.bg-rose {
+  background-color: #FDF2F4;
+  color: #AD2348;
+}
+
+.navbar-mega-icon-box.bg-teal {
+  background-color: #E6F4F7;
+  color: #006677;
+}
+
+.navbar-mega-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #13233D;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.navbar-mega-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navbar-mega-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.55rem;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  min-width: 0;
+}
+
+.navbar-mega-item:hover {
+  background-color: #FDF2F4;
+}
+
+.navbar-mega-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.navbar-mega-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid rgba(217, 226, 236, 0.8);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.navbar-mega-item:hover .navbar-mega-thumb {
+  transform: scale(1.08);
+  border-color: #AD2348;
+}
+
+.navbar-mega-item-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #13233D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.navbar-mega-item:hover .navbar-mega-item-name {
+  color: #AD2348;
+  transform: translateX(2px);
+}
+
+.navbar-mega-arrow {
+  color: #AD2348;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+.navbar-mega-item:hover .navbar-mega-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.navbar-mega-guidance-card {
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.95rem;
+  border-radius: 16px;
+  background-color: #F8F9FA;
+  border: 1px solid #D9E2EC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.guidance-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #13233D;
+  line-height: 1.2;
+}
+
+.guidance-subtitle {
+  font-size: 0.7rem;
+  color: #647184;
+  margin-top: 1px;
+}
+
+.guidance-btn {
+  padding: 0.38rem 0.85rem;
+  border-radius: 10px;
+  background-color: #AD2348;
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(173, 35, 72, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.guidance-btn:hover {
+  background-color: #8E1939;
+  transform: translateY(-1px);
+}
+
+/* Mobile sublist */
+.navbar-mobile-services-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navbar-mobile-sublist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0.5rem 0.75rem 0.5rem 1.25rem;
+  background: #FFF9F5;
+  border-radius: 14px;
+  margin-top: 4px;
+}
+
+.navbar-mobile-subitem {
+  color: #343943;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 500;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.navbar-mobile-subitem:hover {
+  color: #AD2348;
+}

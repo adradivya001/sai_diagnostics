@@ -470,3 +470,129 @@ export const services = [
     preparation: "Bring records of the current cycle's previous scans and prescribed fertility medications."
   }
 ];
+
+export const slugify = (text) => {
+  return (text || '')
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+const TIMING_MAP = {
+  1: '6 – 10 Weeks of Gestation',
+  2: '11 – 13+6 Weeks of Gestation',
+  3: '11 – 14 Weeks of Gestation',
+  4: '11 – 13+6 Weeks of Gestation',
+  5: '18 – 22 Weeks of Gestation',
+  6: '24 – 28 Weeks of Gestation',
+  7: '20 – 24 Weeks of Gestation',
+  8: '18 – 22 Weeks of Gestation',
+  9: '18 – 22 Weeks of Gestation',
+  10: '28 – 36 Weeks of Gestation',
+  11: 'Every 2–4 Weeks from 24 Weeks',
+  12: '24 – 38 Weeks of Gestation',
+  13: '16 – 24 Weeks of Gestation',
+  14: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  15: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  16: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  17: 'Cycle Days 9 to 18 (As Advised)',
+  18: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  19: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  20: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  21: 'Targeted Fetal Brain Scan Window',
+  22: '11 – 13+6 Weeks of Gestation',
+  23: '15 – 20 Weeks of Gestation',
+  24: 'From 10 Weeks of Gestation onwards',
+  25: 'Mon – Sat: 8:30 AM – 7:00 PM',
+  26: 'As Clinically Indicated',
+  27: 'As Clinically Indicated',
+  28: 'From 15–16 Weeks of Gestation',
+  29: 'From 15–16 Weeks of Gestation',
+  30: 'Sequential Follicular Days'
+};
+
+// Enrich all services with robust metadata for detail views and navigation
+services.forEach((s) => {
+  s.slug = slugify(s.name);
+  s.timing = TIMING_MAP[s.id] || "Mon – Sat: 8:30 AM – 7:00 PM";
+  s.shortDescription = s.purpose;
+  s.departmentType = s.category;
+  s.introduction = s.introduction || `${s.name} at Sai Diagnostics & Fetal Medicine Centre provides high-precision diagnostic imaging and careful clinical evaluation. Conducted by Dr. T. Sai Kiranmai using advanced GE Voluson ultrasound systems, this examination ensures unhurried, attentive assessment and clear doctor explanations for parents and referring obstetricians.`;
+  s.conditions = s.whatItChecks || [];
+  s.services = [
+    "High-resolution real-time ultrasound imaging with multi-planar assessment",
+    "Detailed biometric measurements calibrated against international reference standards",
+    "Color Doppler hemodynamic blood-flow analysis when clinically indicated",
+    "Standardised evaluation adhering strictly to FMF and ISUOG clinical protocols",
+    "Direct in-person consultation and findings explanation by Dr. T. Sai Kiranmai",
+    "Comprehensive printed diagnostic report with high-definition thermal scan prints"
+  ];
+  s.whenToConsult = [
+    "Prescribed or referred by your consulting obstetrician/doctor",
+    "Reaching the recommended gestational age or clinical screening window",
+    "Follow-up evaluation on previous scan findings or ultrasound observations",
+    "Presence of maternal risk factors, twin pregnancy, or previous complications",
+    "Expectant parents seeking verified specialist imaging and reassurance"
+  ];
+  s.faqs = [
+    {
+      question: "Is this ultrasound examination safe for the baby and mother?",
+      answer: "Yes, diagnostic ultrasound uses high-frequency sound waves without ionizing radiation. It is clinically established as completely safe throughout all trimesters of pregnancy when performed by trained specialists."
+    },
+    {
+      question: "What preparation is needed before arriving for the scan?",
+      answer: s.preparation || "Generally, a moderately full bladder is helpful for early scans, while mid-to-late pregnancy scans require no special fasting. Please bring your consulting doctor's prescription."
+    },
+    {
+      question: "How long does the examination take and when will I get my report?",
+      answer: "Most scans take approximately 25 to 45 minutes to ensure an attentive, unhurried assessment. Your comprehensive diagnostic report and ultrasound images are handed over on the same day after doctor review."
+    },
+    {
+      question: "Can my spouse or a family member join me in the scan suite?",
+      answer: "Yes, at Sai Diagnostics we welcome expectant mothers to have their spouse or an accompanying family member present in our comfortable consultation suite during the examination."
+    },
+    {
+      question: "Will the doctor explain the scan results to us?",
+      answer: "Dr. T. Sai Kiranmai personally performs the scan and provides immediate, reassuring explanations of the findings, answering all questions and coordinating closely with your referring obstetrician."
+    }
+  ];
+});
+
+export function getServiceBySlug(slug) {
+  if (!slug) return null;
+  const clean = slug.toLowerCase().trim();
+  return (
+    services.find(
+      (s) =>
+        s.slug === clean ||
+        slugify(s.name) === clean ||
+        String(s.id) === clean
+    ) || null
+  );
+}
+
+export const FETAL_MEDICINE_SCANS = [
+  services.find((s) => s.id === 5),  // Anomaly / TIFFA Scan
+  services.find((s) => s.id === 2),  // NT Scan (12-14W)
+  services.find((s) => s.id === 7),  // Advanced Fetal Echo
+  services.find((s) => s.id === 12), // Obstetric Doppler + AFI
+  services.find((s) => s.id === 1),  // Dating / Viability Scan
+  services.find((s) => s.id === 10), // Growth / Fetal Well-Being
+  services.find((s) => s.id === 9),  // Twins Anomaly Scan
+  services.find((s) => s.id === 13), // Cervical Assessment Scan
+].filter(Boolean);
+
+export const GENERAL_DIAGNOSTIC_SCANS = [
+  services.find((s) => s.id === 14), // USG Abdomen / Pelvis
+  services.find((s) => s.id === 16), // Pelvis 3D Scan
+  services.find((s) => s.id === 15), // Pelvis / TVS Scan
+  services.find((s) => s.id === 17), // Follicular Monitoring
+  services.find((s) => s.id === 18), // Breast Scan
+  services.find((s) => s.id === 19), // Thyroid Scan
+  services.find((s) => s.id === 21), // Neurosonogram
+  services.find((s) => s.id === 24), // NIPT Cell-Free DNA Test
+].filter(Boolean);
+

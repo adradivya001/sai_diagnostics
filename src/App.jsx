@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 import Doctors from './pages/Doctors';
 import Contact from './pages/Contact';
 import Facilities from './pages/Facilities';
@@ -35,7 +36,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/doctors" element={<Doctors />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<ServiceDetailPage />} />
+            <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/services-directory" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/facilities" element={<Facilities />} />
           </Routes>
