@@ -137,6 +137,73 @@ const Home = () => {
       <PregnancyJourneyHero />
 
       {/* =========================================================================
+          FOUNDER'S MESSAGE (Placed Directly After Hero Section)
+          ========================================================================= */}
+      <section className="home-founder-message-section" id="founder-message">
+        <div className="container">
+          <ScrollReveal direction="scale" delay={0.08} amount={0.2}>
+            <div className="home-founder-message-card">
+              <Quote 
+                size={72} 
+                className="home-founder-message-quote-bg"
+                aria-hidden="true"
+              />
+
+              <div className="home-founder-message-top">
+                <span className="home-founder-eyebrow">
+                  <Heart size={14} /> FOUNDER'S MESSAGE
+                </span>
+                <span className="home-founder-badge-pill">
+                  <Award size={13} /> Dedicated Maternal-Fetal Care
+                </span>
+              </div>
+
+              <blockquote className="home-founder-quote-text">
+                “Recognised for its dedicated care in Rayalaseema, Sai Diagnostics and Fetal Medicine Centre is committed to providing personalised care to every patient. The centre has been involved in the evaluation of rare and complex fetal cases. We value the trust placed in us by senior gynaecologists and paediatric specialists and continue to work towards providing thoughtful, specialised care for every family.”
+              </blockquote>
+
+              <div className="home-founder-divider" />
+
+              <div className="home-founder-footer">
+                <div className="home-founder-profile">
+                  <div className="home-founder-avatar-monogram">
+                    <span>SK</span>
+                  </div>
+                  <div className="home-founder-info">
+                    <h3 className="home-founder-name">
+                      Dr. T. Sai Kiranmai
+                    </h3>
+                    <div className="home-founder-role">
+                      Consultant Radiologist &amp; Fetal Medicine Specialist
+                    </div>
+                    <div className="home-founder-deg">
+                      M.B.B.S., DMRD • Fellowship in Fetal Ultrasound
+                    </div>
+                  </div>
+                </div>
+
+                <div className="home-founder-actions">
+                  <button
+                    type="button"
+                    onClick={() => openModal("Consultation with Dr. T. Sai Kiranmai")}
+                    className="btn btn-primary home-founder-btn"
+                  >
+                    <CalendarCheck size={16} /> Book Consultation
+                  </button>
+                  <Link
+                    to="/about"
+                    className="btn btn-outline home-founder-btn-secondary"
+                  >
+                    About Our Centre <ArrowRight size={15} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* =========================================================================
           SECTION 01: SPECIALISED FETAL MEDICINE INTRODUCTION
           ========================================================================= */}
       <section className="home-intro-section" id="about-centre">
