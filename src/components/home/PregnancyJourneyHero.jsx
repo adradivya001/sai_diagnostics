@@ -118,7 +118,7 @@ const PregnancyJourneyHero = () => {
 
               {/* Small highlight with blinking starlet placeholder */}
               <div className="pj-hero-highlight-badge">
-                <span className="pj-blinking-starlet" aria-hidden="true">✦</span>
+                <span className="pj-blinking-starlet" aria-hidden="true">?</span>
                 <Sparkles size={14} className="pj-highlight-sparkle" />
                 <span>Specialised Fetal Medicine | Advanced Pregnancy Imaging</span>
               </div>
@@ -163,7 +163,7 @@ const PregnancyJourneyHero = () => {
 
               {/* Small highlight with blinking starlet placeholder */}
               <div className="pj-hero-highlight-badge">
-                <span className="pj-blinking-starlet" aria-hidden="true">✦</span>
+                <span className="pj-blinking-starlet" aria-hidden="true">?</span>
                 <Sparkles size={14} className="pj-highlight-sparkle" />
                 <span>Precision in Diagnosis | Care for Every Family</span>
               </div>

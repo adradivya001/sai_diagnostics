@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Phone, Calendar, Menu, X, ChevronDown, Stethoscope, Activity, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAppointmentModal } from './AppointmentModal';
@@ -8,20 +8,25 @@ import './Navbar.css';
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
   const dropdownRef = useRef(null);
   const timeoutRef = useRef(null);
+  const isNavigatingRef = useRef(false);
   const { openModal } = useAppointmentModal();
 
+  const isHome = location.pathname === '/';
+  const isServicesActive = location.pathname.startsWith('/services');
+
+  // Track scroll position to toggle header scrolled appearance
   useEffect(() => {
     const handleScroll = () => {
-      // On the home page, remain completely transparent throughout all 3 hero section stages
-      // Only switch to frosted/scrolled navbar after scrolling past the full hero section
-      const threshold = location.pathname === '/' ? (window.innerHeight - 80) : 10;
-      setScrolled(window.scrollY > threshold);
+      // Threshold to turn on blurred frosted background and clear active pill
+      setScrolled(window.scrollY > 40);
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -31,6 +36,71 @@ const Navbar = () => {
       window.removeEventListener('resize', handleScroll);
     };
   }, [location.pathname]);
+
+  // Scroll-spy: Track current visible homepage section based on scroll position
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection('');
+      return;
+    }
+
+    const sections = [
+      { id: 'location', navKey: 'location' },
+      { id: 'appointment-cta', navKey: 'location' },
+      { id: 'patient-journey', navKey: 'location' },
+      { id: 'why-choose-us', navKey: 'technology' },
+      { id: 'technology', navKey: 'technology' },
+      { id: 'services', navKey: 'services' },
+      { id: 'founder', navKey: 'founder' },
+      { id: 'about-centre', navKey: 'about-centre' },
+      { id: 'founder-message', navKey: 'founder' }
+    ];
+
+    const updateActiveSection = () => {
+      if (isNavigatingRef.current) return;
+
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+      // When near the top, highlight Home
+      if (scrollY < 180) {
+        setActiveSection('hero');
+        return;
+      }
+
+      // If scrolled near bottom of page, highlight Contact
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      if (scrollY + windowHeight >= docHeight - 120) {
+        setActiveSection('location');
+        return;
+      }
+
+      // Target trigger line: 30% from the top of viewport (where user is reading)
+      const scanLine = scrollY + 160;
+
+      for (const item of sections) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scanLine >= top) {
+            setActiveSection(item.navKey);
+            return;
+          }
+        }
+      }
+
+      setActiveSection('hero');
+    };
+
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection, { passive: true });
+    updateActiveSection();
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
+  }, [isHome]);
 
   // Close dropdowns on route change
   useEffect(() => {
@@ -61,17 +131,73 @@ const Navbar = () => {
     }, 200);
   };
 
-  const isHome = location.pathname === '/';
-  const isServicesActive = location.pathname.startsWith('/services');
+  // Smooth scroll handler for homepage section links
+  const scrollToTargetSection = useCallback((sectionId) => {
+    isNavigatingRef.current = true;
+    setActiveSection(sectionId);
+
+    const targetEl = document.getElementById(sectionId);
+    if (targetEl) {
+      const navbarHeight = 90;
+      const elementPosition = targetEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 800);
+  }, []);
+
+  const handleNavClick = (e, link) => {
+    if (link.isDropdown) return;
+
+    if (link.path === '/') {
+      if (isHome) {
+        e.preventDefault();
+        isNavigatingRef.current = true;
+        setActiveSection('hero');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          isNavigatingRef.current = false;
+        }, 800);
+      }
+      setMobileMenuOpen(false);
+      return;
+    }
+
+    // Direct page navigation for each route (/about, /doctors, /services, /facilities, /contact)
+    setMobileMenuOpen(false);
+  };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Doctor', path: '/doctors' },
-    { name: 'Services', path: '/services', isDropdown: true },
-    { name: 'Facilities', path: '/facilities' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Home', path: '/', sectionId: 'hero' },
+    { name: 'About Us', path: '/about', sectionId: 'about-centre' },
+    { name: 'Doctor', path: '/doctors', sectionId: 'founder' },
+    { name: 'Services', path: '/services', sectionId: 'services', isDropdown: true },
+    { name: 'Facilities', path: '/facilities', sectionId: 'technology' },
+    { name: 'Contact', path: '/contact', sectionId: 'location' }
   ];
+
+  // Helper to determine if a nav link is visually active
+  const isLinkActive = (link) => {
+    if (isHome) {
+      if (link.path === '/' && activeSection === 'hero') return true;
+      if (link.path === '/services' && activeSection === 'services') return true;
+      if (link.path === '/facilities' && activeSection === 'technology') return true;
+      if (link.sectionId && activeSection === link.sectionId) return true;
+      if (link.path === '/about' && (activeSection === 'founder-message' || activeSection === 'about-centre')) return true;
+      if (link.path === '/doctors' && (activeSection === 'founder' || activeSection === 'why-choose-us')) return true;
+      if (link.path === '/contact' && (activeSection === 'location' || activeSection === 'appointment-cta' || activeSection === 'patient-journey' || activeSection === 'faq')) return true;
+      return false;
+    }
+    if (link.isDropdown) return isServicesActive;
+    return location.pathname === link.path;
+  };
 
   return (
     <header className={`navbar ${isHome ? 'navbar-hero' : ''} ${scrolled ? 'scrolled' : ''}`}>
@@ -101,7 +227,7 @@ const Navbar = () => {
                   <div style={{ display: 'inline-flex', alignItems: 'center' }}>
                     <Link
                       to="/services"
-                      className={`navbar-link-item ${isServicesActive ? 'active' : ''}`}
+                      className={`navbar-link-item ${isLinkActive(link) ? 'active' : ''}`}
                       style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                       onClick={() => setServicesDropdownOpen(false)}
                     >
@@ -261,12 +387,13 @@ const Navbar = () => {
               );
             }
 
-            const isCurrent = location.pathname === link.path;
+            const active = isLinkActive(link);
             return (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`navbar-link-item ${isCurrent ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, link)}
+                className={`navbar-link-item ${active ? 'active' : ''}`}
               >
                 {link.name}
               </Link>
@@ -313,10 +440,10 @@ const Navbar = () => {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                   <Link
                     to="/services"
-                    className={`navbar-link-item ${isServicesActive ? 'active' : ''}`}
+                    className={`navbar-link-item ${isLinkActive(link) ? 'active' : ''}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Services (All)
+                    Services
                   </Link>
                   <button
                     type="button"
@@ -361,7 +488,7 @@ const Navbar = () => {
                       className="navbar-mobile-subitem"
                       style={{ fontWeight: 700, color: '#AD2348' }}
                     >
-                      View All 30 Services →
+                      View All Services →
                     </Link>
                   </div>
                 )}
@@ -369,12 +496,13 @@ const Navbar = () => {
             );
           }
 
-          const isCurrent = location.pathname === link.path;
+          const active = isLinkActive(link);
           return (
             <Link
               key={link.path}
               to={link.path}
-              className={`navbar-link-item ${isCurrent ? 'active' : ''}`}
+              onClick={(e) => handleNavClick(e, link)}
+              className={`navbar-link-item ${active ? 'active' : ''}`}
             >
               {link.name}
             </Link>

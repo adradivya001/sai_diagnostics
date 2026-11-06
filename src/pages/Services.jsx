@@ -49,7 +49,7 @@ const mapServiceToCategory = (service) => {
   if (name.includes('doppler') || name.includes('growth') || name.includes('wellbeing')) {
     return 'Growth & Doppler Studies';
   }
-  if (cat === 'General Ultrasound Scans' || cat === 'Fertility Follow-Up' || name.includes('abdomen') || name.includes('thyroid') || name.includes('breast')) {
+  if (cat === 'General Ultrasound Scans' || cat === 'Fertility Follow-Up' || name.includes('abdomen') || name.includes('swelling')) {
     return 'General Ultrasound';
   }
   return 'Other Diagnostic Investigations';

@@ -38,15 +38,10 @@ import './HomeSections.css';
 
 const Home = () => {
   const { openModal } = useAppointmentModal();
-  const [openFaq, setOpenFaq] = useState(0);
 
   useEffect(() => {
     document.title = 'Sai Diagnostics & Fetal Medicine Centre | Advanced Prenatal Care Anantapur';
   }, []);
-
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? -1 : index);
-  };
 
   // Section 02: Comprehensive Diagnostic Services (6 Verified Cards)
   const serviceCards = [
@@ -100,34 +95,6 @@ const Home = () => {
     }
   ];
 
-  // Section 08: Frequently Asked Questions (Exact 6 Required Questions)
-  const faqData = [
-    {
-      q: 'What types of pregnancy scans are available at Sai Diagnostics?',
-      a: 'We offer comprehensive obstetric ultrasound examinations including Dating & Viability Scans (6–9 weeks), First-Trimester NT/NB Screening Scans (11–13⁺⁶ weeks), Mid-Trimester Anomaly Scans (TIFFA / Target Scan, 18–22 weeks), Fetal Growth & Wellbeing Scans (28–36 weeks), Obstetric Color Doppler Studies, Fetal Echocardiography, and Fetal Neurosonography.'
-    },
-    {
-      q: 'When should I schedule my first pregnancy ultrasound?',
-      a: 'The first scan (dating and viability ultrasound) is typically performed between 6 and 9 weeks of pregnancy. This scan confirms the location of the gestational sac, confirms the embryonic heartbeat, accurately estimates your due date, and checks whether you are carrying single or multiple babies.'
-    },
-    {
-      q: 'Do I need an appointment before visiting?',
-      a: 'Yes, we strongly encourage scheduling an appointment in advance. Detailed maternal-fetal ultrasound requires careful, unhurried examination by our specialist radiologist. Pre-booking ensures minimal waiting time and guarantees dedicated scan time for you and your baby.'
-    },
-    {
-      q: 'What is an anomaly scan, and when is it performed?',
-      a: 'The anomaly scan (also known as TIFFA or Targeted Imaging for Fetal Anomalies) is performed between 18 and 22 weeks of pregnancy. It is an in-depth anatomical assessment that evaluates the baby’s brain, face, spine, heart chambers, kidneys, stomach, abdominal wall, and limbs to ensure healthy structural development.'
-    },
-    {
-      q: 'How should I prepare for my ultrasound appointment?',
-      a: 'Preparation varies by scan type. For early first-trimester transabdominal scans, drinking 2–3 glasses of water 1 hour before the scan helps fill the bladder for clearer visibility. For mid-trimester scans (such as TIFFA), a full bladder is usually not required. Having a light meal beforehand is often recommended. Please always bring your doctor’s prescription and all previous scan reports.'
-    },
-    {
-      q: 'How can I collect my diagnostic reports?',
-      a: 'Routine ultrasound reports with high-resolution diagnostic images are provided on the same day, immediately following the scan review and personal consultation with our specialist doctor. Digital copies and direct communication with your referring obstetrician are also supported upon request.'
-    }
-  ];
-
   return (
     <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh' }}>
       
@@ -137,7 +104,7 @@ const Home = () => {
       <PregnancyJourneyHero />
 
       {/* =========================================================================
-          FOUNDER'S MESSAGE (Placed Directly After Hero Section)
+          SECTION 01: FOUNDER'S MESSAGE (Placed directly after Hero section)
           ========================================================================= */}
       <section className="home-founder-message-section" id="founder-message">
         <div className="container">
@@ -204,7 +171,7 @@ const Home = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 01: SPECIALISED FETAL MEDICINE INTRODUCTION
+          SECTION 02: ABOUT US / SPECIALISED FETAL MEDICINE INTRODUCTION
           ========================================================================= */}
       <section className="home-intro-section" id="about-centre">
         <div className="container">
@@ -296,199 +263,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* =========================================================================
-          SECTION 02: COMPREHENSIVE DIAGNOSTIC SERVICES (6 Verified Cards)
-          ========================================================================= */}
-      <section className="home-services-section" id="services">
-        <div className="container">
-          
-          <div className="text-center" style={{ marginBottom: '1.5rem' }}>
-            <ScrollReveal direction="up" delay={0.05}>
-              <span className="home-section-eyebrow">
-                <Activity size={13} /> EVIDENCE-BASED DIAGNOSTICS
-              </span>
-            </ScrollReveal>
-
-            <HeadingReveal delay={0.12}>
-              <h2 className="home-section-heading">
-                Comprehensive Diagnostic Care.
-              </h2>
-            </HeadingReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <p className="home-section-subheading">
-                Explore specialised diagnostic services designed to support informed medical assessments throughout your pregnancy journey.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          {/* 6 Visually Consistent Service Cards */}
-          <StaggerContainer delayChildren={0.15} staggerChildren={0.08} className="home-services-grid">
-            {serviceCards.map((service, index) => (
-              <StaggerItem key={index}>
-                <HoverCard lift={-6} className="home-service-card" style={{ height: '100%' }}>
-                  <div>
-                    <div className="home-service-card-top">
-                      <span className="home-service-tag">
-                        {service.badge}
-                      </span>
-                      <div className="home-service-icon-box">
-                        {service.icon}
-                      </div>
-                    </div>
-
-                    <h3 className="home-service-title">
-                      {service.name}
-                    </h3>
-
-                    <p className="home-service-desc">
-                      {service.desc}
-                    </p>
-                  </div>
-
-                  <div className="home-service-footer">
-                    <Link to={service.link} className="home-service-link">
-                      Explore Service <ArrowRight size={15} />
-                    </Link>
-                  </div>
-                </HoverCard>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-
-          {/* View All Services CTA */}
-          <div className="text-center" style={{ marginTop: '2.5rem' }}>
-            <ScrollReveal direction="up" delay={0.3}>
-              <Link 
-                to="/services" 
-                className="btn btn-outline" 
-                style={{ padding: '0.85rem 2.25rem', backgroundColor: '#FFFFFF' }}
-              >
-                View All Services <ArrowRight size={16} />
-              </Link>
-            </ScrollReveal>
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 03: ADVANCED IMAGING AND TECHNOLOGY
-          ========================================================================= */}
-      <section className="home-technology-section" id="technology">
-        <div className="container">
-          
-          <div className="text-center">
-            <ScrollReveal direction="up" delay={0.05}>
-              <span className="home-section-eyebrow home-section-eyebrow-cyan">
-                <Cpu size={13} /> MODERN FETAL IMAGING
-              </span>
-            </ScrollReveal>
-
-            <HeadingReveal delay={0.12}>
-              <h2 className="home-section-heading">
-                Advanced Imaging. Greater Diagnostic Clarity.
-              </h2>
-            </HeadingReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <p className="home-section-subheading">
-                Modern imaging capabilities support detailed diagnostic assessments and help provide valuable insights throughout the pregnancy journey.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="home-technology-grid">
-            
-            {/* Left: Authentic Diagnostic Equipment Photograph */}
-            <ScrollReveal direction="left" delay={0.2} amount={0.25}>
-              <div className="home-technology-image-wrap">
-                <img 
-                  src="/ultrasound.jpg" 
-                  alt="Sai Diagnostics Clinical Ultrasound Diagnostic Platform" 
-                  loading="lazy"
-                />
-                <div className="home-technology-floating-tag">
-                  <Activity size={14} /> High-Resolution Clinical Ultrasound Platform
-                </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Right: Four Feature Rows */}
-            <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-technology-features-list">
-              <StaggerItem>
-                <div className="home-tech-item-card">
-                  <div className="home-tech-item-icon">
-                    <Cpu size={20} />
-                  </div>
-                  <div>
-                    <h3 className="home-tech-item-title">
-                      Advanced Ultrasound Technology
-                    </h3>
-                    <p className="home-tech-item-desc">
-                      Equipped with multi-frequency matrix transducer probes optimized for superior acoustic penetration and fine tissue differentiation.
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="home-tech-item-card">
-                  <div className="home-tech-item-icon">
-                    <Eye size={20} />
-                  </div>
-                  <div>
-                    <h3 className="home-tech-item-title">
-                      High-Resolution Imaging
-                    </h3>
-                    <p className="home-tech-item-desc">
-                      Volume rendering algorithms deliver remarkable clarity for subtle fetal facial features and critical anatomical landmarks.
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="home-tech-item-card">
-                  <div className="home-tech-item-icon">
-                    <Heart size={20} />
-                  </div>
-                  <div>
-                    <h3 className="home-tech-item-title">
-                      Detailed Fetal Assessment
-                    </h3>
-                    <p className="home-tech-item-desc">
-                      Directional color and spectral Doppler provide quantitative velocity measurement of vital maternal-fetal vascular flows.
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-
-              <StaggerItem>
-                <div className="home-tech-item-card">
-                  <div className="home-tech-item-icon">
-                    <ShieldCheck size={20} />
-                  </div>
-                  <div>
-                    <h3 className="home-tech-item-title">
-                      Patient-Centred Diagnostic Process
-                    </h3>
-                    <p className="home-tech-item-desc">
-                      Strict ALARA safety protocols combined with dedicated scan review ensure unhurried, reassuring clinical evaluations.
-                    </p>
-                  </div>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 04: MEET OUR FOUNDER / MEDICAL EXPERTISE
-          ========================================================================= */}
       <section className="home-doctor-section" id="founder">
         <div className="container">
           
@@ -602,6 +376,196 @@ const Home = () => {
               </ScrollReveal>
 
             </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 03: SERVICES / COMPREHENSIVE DIAGNOSTIC SERVICES (6 Cards)
+          ========================================================================= */}
+      <section className="home-services-section" id="services">
+        <div className="container">
+          
+          <div className="text-center" style={{ marginBottom: '1.5rem' }}>
+            <ScrollReveal direction="up" delay={0.05}>
+              <span className="home-section-eyebrow">
+                <Activity size={13} /> EVIDENCE-BASED DIAGNOSTICS
+              </span>
+            </ScrollReveal>
+
+            <HeadingReveal delay={0.12}>
+              <h2 className="home-section-heading">
+                Comprehensive Diagnostic Care.
+              </h2>
+            </HeadingReveal>
+
+            <ScrollReveal direction="up" delay={0.2}>
+              <p className="home-section-subheading">
+                Explore specialised diagnostic services designed to support informed medical assessments throughout your pregnancy journey.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* 6 Visually Consistent Service Cards */}
+          <StaggerContainer delayChildren={0.15} staggerChildren={0.08} className="home-services-grid">
+            {serviceCards.map((service, index) => (
+              <StaggerItem key={index}>
+                <HoverCard lift={-6} className="home-service-card" style={{ height: '100%' }}>
+                  <div>
+                    <div className="home-service-card-top">
+                      <span className="home-service-tag">
+                        {service.badge}
+                      </span>
+                      <div className="home-service-icon-box">
+                        {service.icon}
+                      </div>
+                    </div>
+
+                    <h3 className="home-service-title">
+                      {service.name}
+                    </h3>
+
+                    <p className="home-service-desc">
+                      {service.desc}
+                    </p>
+                  </div>
+
+                  <div className="home-service-footer">
+                    <Link to={service.link} className="home-service-link">
+                      Explore Service <ArrowRight size={15} />
+                    </Link>
+                  </div>
+                </HoverCard>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* View All Services CTA */}
+          <div className="text-center" style={{ marginTop: '2.5rem' }}>
+            <ScrollReveal direction="up" delay={0.3}>
+              <Link 
+                to="/services" 
+                className="btn btn-outline" 
+                style={{ padding: '0.85rem 2.25rem', backgroundColor: '#FFFFFF' }}
+              >
+                View All Services <ArrowRight size={16} />
+              </Link>
+            </ScrollReveal>
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 04: FACILITIES / ADVANCED IMAGING AND TECHNOLOGY
+          ========================================================================= */}
+      <section className="home-technology-section" id="technology">
+        <div className="container">
+          
+          <div className="text-center">
+            <ScrollReveal direction="up" delay={0.05}>
+              <span className="home-section-eyebrow home-section-eyebrow-cyan">
+                <Cpu size={13} /> MODERN FETAL IMAGING
+              </span>
+            </ScrollReveal>
+
+            <HeadingReveal delay={0.12}>
+              <h2 className="home-section-heading">
+                Advanced Imaging. Greater Diagnostic Clarity.
+              </h2>
+            </HeadingReveal>
+
+            <ScrollReveal direction="up" delay={0.2}>
+              <p className="home-section-subheading">
+                Modern imaging capabilities support detailed diagnostic assessments and help provide valuable insights throughout the pregnancy journey.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <div className="home-technology-grid">
+            
+            {/* Left: Authentic Diagnostic Equipment Photograph */}
+            <ScrollReveal direction="left" delay={0.2} amount={0.25}>
+              <div className="home-technology-image-wrap">
+                <img 
+                  src="/ultrasound.jpg" 
+                  alt="Sai Diagnostics Clinical Ultrasound Diagnostic Platform" 
+                  loading="lazy"
+                />
+                <div className="home-technology-floating-tag">
+                  <Activity size={14} /> High-Resolution Clinical Ultrasound Platform
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Right: Four Feature Rows */}
+            <StaggerContainer delayChildren={0.2} staggerChildren={0.1} className="home-technology-features-list">
+              <StaggerItem>
+                <div className="home-tech-item-card">
+                  <div className="home-tech-item-icon">
+                    <Cpu size={20} />
+                  </div>
+                  <div>
+                    <h3 className="home-tech-item-title">
+                      Advanced Ultrasound Technology
+                    </h3>
+                    <p className="home-tech-item-desc">
+                      Equipped with multi-frequency matrix transducer probes optimized for superior acoustic penetration and fine tissue differentiation.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="home-tech-item-card">
+                  <div className="home-tech-item-icon">
+                    <Eye size={20} />
+                  </div>
+                  <div>
+                    <h3 className="home-tech-item-title">
+                      High-Resolution Imaging
+                    </h3>
+                    <p className="home-tech-item-desc">
+                      Volume rendering algorithms deliver remarkable clarity for subtle fetal facial features and critical anatomical landmarks.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="home-tech-item-card">
+                  <div className="home-tech-item-icon">
+                    <Heart size={20} />
+                  </div>
+                  <div>
+                    <h3 className="home-tech-item-title">
+                      Detailed Fetal Assessment
+                    </h3>
+                    <p className="home-tech-item-desc">
+                      Directional color and spectral Doppler provide quantitative velocity measurement of vital maternal-fetal vascular flows.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="home-tech-item-card">
+                  <div className="home-tech-item-icon">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div>
+                    <h3 className="home-tech-item-title">
+                      Patient-Centred Diagnostic Process
+                    </h3>
+                    <p className="home-tech-item-desc">
+                      Strict ALARA safety protocols combined with dedicated scan review ensure unhurried, reassuring clinical evaluations.
+                    </p>
+                  </div>
+                </div>
+              </StaggerItem>
+            </StaggerContainer>
 
           </div>
 
@@ -785,61 +749,6 @@ const Home = () => {
                 </p>
               </HoverCard>
             </StaggerItem>
-          </StaggerContainer>
-
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SECTION 07: FREQUENTLY ASKED QUESTIONS (Smooth Interactive Accordion)
-          ========================================================================= */}
-      <section className="home-faq-section" id="faq">
-        <div className="container">
-          
-          <div className="text-center">
-            <ScrollReveal direction="up" delay={0.05}>
-              <span className="home-section-eyebrow">
-                <Sparkles size={13} /> COMMON ENQUIRIES
-              </span>
-            </ScrollReveal>
-
-            <HeadingReveal delay={0.12}>
-              <h2 className="home-section-heading">
-                Questions You May Have.
-              </h2>
-            </HeadingReveal>
-
-            <ScrollReveal direction="up" delay={0.2}>
-              <p className="home-section-subheading">
-                Find clear, medically reviewed guidance on appointments, scan timing, and preparation.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <StaggerContainer delayChildren={0.2} staggerChildren={0.08} className="home-faq-accordion-wrap">
-            {faqData.map((faq, index) => {
-              const isOpen = openFaq === index;
-              return (
-                <StaggerItem key={index}>
-                  <div className={`home-faq-item ${isOpen ? 'open' : ''}`}>
-                    <button 
-                      type="button"
-                      className="home-faq-trigger"
-                      onClick={() => toggleFaq(index)}
-                      aria-expanded={isOpen}
-                    >
-                      <h3 className="home-faq-question">{faq.q}</h3>
-                      <ChevronDown size={20} className="home-faq-chevron" />
-                    </button>
-                    {isOpen && (
-                      <div className="home-faq-answer">
-                        <p style={{ margin: 0 }}>{faq.a}</p>
-                      </div>
-                    )}
-                  </div>
-                </StaggerItem>
-              );
-            })}
           </StaggerContainer>
 
         </div>

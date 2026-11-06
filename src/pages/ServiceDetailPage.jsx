@@ -52,8 +52,8 @@ export function ServiceDetailPage() {
 
   const quickJumpLinks = [
     { label: "About", href: "#about-speciality" },
-    { label: "Conditions Treated", href: "#conditions-treated" },
-    { label: "Treatments", href: "#treatments-services" },
+    { label: "Diagnostic Focus", href: "#conditions-treated" },
+    { label: "What It Evaluates", href: "#treatments-services" },
     { label: "Specialists", href: "#consultant-doctors" },
     { label: "FAQs", href: "#speciality-faqs" }
   ];
@@ -238,58 +238,56 @@ export function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* ── 4. CONDITIONS WE TREAT & TREATMENTS/SERVICES (MATCHING SCREENSHOT) ── */}
+      {/* ── 4. DIAGNOSTIC FOCUS & WHAT THIS SCAN EVALUATES ── */}
       <section id="conditions-treated" className="sd-section-two-cards">
         <div className="sd-container">
           <div className="sd-two-cards-grid">
             
-            {/* Left Card: Conditions We Treat */}
+            {/* Left Card: Diagnostic Focus */}
             <div className="sd-card-white">
               <div className="sd-card-header">
                 <span className="sd-card-tag-navy">
-                  DIAGNOSIS &amp; CARE
+                  CLINICAL EVALUATION
                 </span>
                 <h3 className="sd-card-title">
-                  Conditions We Treat
+                  Diagnostic Focus
                 </h3>
-                <p className="sd-card-subtitle">
-                  Our doctors provide accurate evaluations and treatment for a wide range of conditions, including:
+                <p className="sd-card-subtitle" style={{ fontSize: '0.94rem', lineHeight: 1.7, color: '#334155' }}>
+                  {service.diagnosticFocus || service.purpose || service.shortDescription}
                 </p>
               </div>
 
-              <ul className="sd-check-list">
-                {(service.conditions || service.whatItChecks || []).map((condition, idx) => (
-                  <li key={idx} className="sd-check-item">
-                    <div className="sd-icon-circle-blue">
-                      <CheckCircle2 size={13} strokeWidth={2.5} />
-                    </div>
-                    <span className="sd-check-text">
-                      {condition}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {service.procedure && (
+                <div style={{ marginTop: '1.25rem', padding: '14px 18px', background: '#F8FAFC', borderRadius: '14px', border: '1px solid #E2E8F0' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#0B7F8C', marginBottom: '4px' }}>
+                    Clinical Protocol
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.88rem', color: '#475569', lineHeight: 1.6 }}>
+                    {service.procedure}
+                  </p>
+                </div>
+              )}
             </div>
 
-            {/* Right Card: Treatments and Services */}
+            {/* Right Card: What This Scan Evaluates */}
             <div id="treatments-services" className="sd-card-white">
               <div className="sd-card-header">
                 <span className="sd-card-tag-teal">
-                  CLINICAL SERVICES
+                  ANATOMICAL &amp; SCREENING SCOPE
                 </span>
                 <h3 className="sd-card-title">
-                  Treatments and Services
+                  What This Scan Evaluates
                 </h3>
-                <p className="sd-card-subtitle">
-                  We offer modern diagnostic tests, supportive medical care, and specialized procedures:
+                <p className="sd-card-subtitle" style={{ fontSize: '0.92rem', lineHeight: 1.65, color: '#334155', marginBottom: '1.25rem' }}>
+                  {service.evaluates || "This comprehensive ultrasound assessment examines key anatomical structures and clinical markers:"}
                 </p>
               </div>
 
               <ul className="sd-check-list">
-                {(service.services || []).map((item, idx) => (
+                {(service.evaluatesList || service.conditions || service.whatItChecks || []).map((item, idx) => (
                   <li key={idx} className="sd-check-item">
                     <div className="sd-icon-circle-teal">
-                      <ShieldCheck size={13} strokeWidth={2.5} />
+                      <CheckCircle2 size={13} strokeWidth={2.5} />
                     </div>
                     <span className="sd-check-text">
                       {item}
@@ -297,19 +295,6 @@ export function ServiceDetailPage() {
                   </li>
                 ))}
               </ul>
-
-              {/* Patient Preparation Note */}
-              {service.preparation && (
-                <div className="sd-prep-box">
-                  <div className="sd-prep-title">
-                    <Info size={14} />
-                    <span>Patient Preparation Note:</span>
-                  </div>
-                  <p className="sd-prep-desc">
-                    {service.preparation}
-                  </p>
-                </div>
-              )}
             </div>
 
           </div>

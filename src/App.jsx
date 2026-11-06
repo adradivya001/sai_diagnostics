@@ -31,7 +31,7 @@ function App() {
         <ScrollToTop />
         <FloatingContact />
         <Navbar />
-        <main className={`site-main-content ${isHome ? 'is-home' : ''}`} style={{ flex: 1, paddingTop: isHome ? 0 : '4.5rem' }}>
+        <main className={`site-main-content ${isHome ? 'is-home' : ''}`} style={{ flex: 1, paddingTop: isHome ? 0 : '5rem' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

@@ -1136,3 +1136,109 @@
   border-color: #CBD5E1;
 }
 
+/* ==========================================================================
+   SERVICE DETAIL MOBILE AUDIT & REFINEMENTS
+   Breakpoints: <=768px, <=480px, <=360px
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .sd-hero {
+    padding: 1.75rem 0 1.5rem;
+  }
+
+  .sd-section-two-cards {
+    padding: 2.75rem 0;
+  }
+
+  .sd-two-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .sd-doctor-card-box {
+    padding: 1.75rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  .sd-doctor-split {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sd-doctor-meta {
+    align-items: center;
+  }
+
+  .sd-doc-tags {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .sd-hero-title {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    line-height: 1.2;
+  }
+
+  .sd-hero-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .sd-hero-actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .sd-hero-actions button,
+  .sd-hero-actions a {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .sd-card-white {
+    padding: 1.35rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  .sd-cta-card {
+    padding: 1.5rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  .sd-cta-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .sd-cta-actions button,
+  .sd-cta-actions a {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .sd-dept-btn {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .sd-card-white {
+    padding: 1.15rem 0.95rem;
+  }
+
+  .sd-card-title {
+    font-size: 1.15rem;
+  }
+
+  .sd-btn-primary {
+    font-size: 0.82rem;
+    padding: 0.65rem 1rem;
+  }
+}
+

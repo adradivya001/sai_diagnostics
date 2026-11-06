@@ -6,12 +6,13 @@ import {
   Stethoscope, 
   Sparkles, 
   PhoneCall, 
-  ArrowRight,
-  Quote,
-  CheckCircle2,
-  CalendarCheck,
-  Building2,
-  MessageSquare
+  ArrowRight, 
+  Quote, 
+  CheckCircle2, 
+  CalendarCheck, 
+  Building2, 
+  MessageSquare,
+  Award
 } from 'lucide-react';
 import { 
   ScrollReveal, 
@@ -312,7 +313,115 @@ const About = () => {
       </section>
 
       {/* =========================================================================
-          SECTION 4: CLINIC ENVIRONMENT ("A Thoughtful, Calm Clinical Atmosphere")
+          SECTION 4: RECOGNITIONS & ACHIEVEMENTS (Certificate Presentation Milestone)
+          ========================================================================= */}
+      <section style={{
+        background: 'linear-gradient(180deg, #FFF9F5 0%, #FFFFFF 50%, #FDF2F4 100%)',
+        padding: 'clamp(3.5rem, 6vw, 5.5rem) 1.5rem',
+        borderTop: '1px solid rgba(173, 35, 72, 0.08)'
+      }}>
+        <div className="container">
+          
+          <div className="text-center" style={{ maxWidth: '820px', margin: '0 auto 3rem' }}>
+            <ScrollReveal direction="up" delay={0.05}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                color: '#AD2348',
+                background: 'rgba(173, 35, 72, 0.08)',
+                border: '1px solid rgba(173, 35, 72, 0.18)',
+                padding: '5px 14px',
+                borderRadius: '9999px',
+                marginBottom: '0.85rem'
+              }}>
+                <Award size={14} /> PROFESSIONAL RECOGNITION
+              </span>
+            </ScrollReveal>
+
+            <HeadingReveal delay={0.1}>
+              <h2 style={{
+                fontFamily: '"Playfair Display", Georgia, serif',
+                fontSize: 'clamp(2rem, 3.2vw, 2.75rem)',
+                color: '#1F2733',
+                lineHeight: 1.2,
+                marginBottom: '1rem'
+              }}>
+                Recognitions &amp; Achievements
+              </h2>
+            </HeadingReveal>
+
+            <ScrollReveal direction="up" delay={0.15}>
+              <p style={{
+                color: '#5B687B',
+                fontSize: '1.02rem',
+                lineHeight: 1.7,
+                margin: 0
+              }}>
+                Recognising professional milestones and moments of appreciation that reflect our commitment to specialized fetal medicine, diagnostic excellence and patient care.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          {/* Prominent Framed Photograph Composition */}
+          <ScrollReveal direction="up" delay={0.2} amount={0.2}>
+            <div style={{
+              maxWidth: '920px',
+              margin: '0 auto',
+              background: '#FFFFFF',
+              borderRadius: '24px',
+              padding: 'clamp(1rem, 2.5vw, 1.75rem)',
+              border: '1.5px solid rgba(173, 35, 72, 0.14)',
+              boxShadow: '0 16px 44px rgba(173, 35, 72, 0.08)'
+            }}>
+              <div style={{
+                borderRadius: '18px',
+                overflow: 'hidden',
+                background: '#0F172A',
+                boxShadow: '0 4px 18px rgba(0, 0, 0, 0.06)'
+              }}>
+                <img
+                  src="/recognitions-and-achievements.jpg"
+                  alt="Certificate presentation ceremony honouring professional milestone at Sai Diagnostics and Fetal Medicine Centre"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '560px',
+                    objectFit: 'contain',
+                    display: 'block',
+                    margin: '0 auto'
+                  }}
+                  loading="lazy"
+                />
+              </div>
+
+              <div style={{
+                marginTop: '1.25rem',
+                paddingTop: '1rem',
+                borderTop: '1px solid rgba(173, 35, 72, 0.08)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                fontSize: '0.86rem',
+                color: '#5B687B',
+                textAlign: 'center'
+              }}>
+                <CheckCircle2 size={16} color="#AD2348" />
+                <span>Professional certificate presentation and academic recognition ceremony</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTION 5: CLINIC ENVIRONMENT ("A Thoughtful, Calm Clinical Atmosphere")
           ========================================================================= */}
       <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem' }}>
         <div className="container">

@@ -49,6 +49,14 @@ const Facilities = () => {
       tag: 'FEATURED SPACE'
     },
     {
+      id: 'pharmacy-counter',
+      title: 'Laasya Medicals & Pharmacy Services',
+      desc: 'In-house accredited pharmaceutical care counter providing essential maternal medicines, supplements and doctor-prescribed therapeutics.',
+      src: '/laasya-medicals-pharmacy.jpg',
+      featured: false,
+      tag: 'PHARMACY & DISPENSARY'
+    },
+    {
       id: 'reception-desk',
       title: 'Reception & Check-in Desk',
       desc: 'Orderly registration and consultation reception counter designed for prompt appointment coordination.',
@@ -209,15 +217,18 @@ const Facilities = () => {
           </div>
 
           {/* Editorial Gallery Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '1.75rem'
-          }}>
-            {/* Featured Photo: Waiting Room Lounge (Span 8 on desktop) */}
+          <div 
+            className="facilities-gallery-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+              gap: '1.75rem'
+            }}
+          >
+            {/* Featured Photo: Waiting Room Lounge */}
             <div 
               style={{
-                gridColumn: 'span 12',
+                gridColumn: '1 / -1',
                 borderRadius: '24px',
                 overflow: 'hidden',
                 boxShadow: '0 12px 32px rgba(173, 35, 72, 0.08)',
@@ -290,12 +301,12 @@ const Facilities = () => {
               </div>
             </div>
 
-            {/* Three Supporting Photos */}
+            {/* Supporting Photos */}
             {galleryImages.slice(1).map((photo) => (
               <div
                 key={photo.id}
                 style={{
-                  gridColumn: 'span 4',
+                  gridColumn: 'auto',
                   borderRadius: '20px',
                   overflow: 'hidden',
                   boxShadow: '0 8px 24px rgba(173, 35, 72, 0.05)',
@@ -316,7 +327,7 @@ const Facilities = () => {
                   e.currentTarget.style.boxShadow = '0 8px 24px rgba(173, 35, 72, 0.05)';
                 }}
               >
-                <div style={{ height: '230px', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ height: '240px', position: 'relative', overflow: 'hidden', background: '#F8F9FA' }}>
                   <img 
                     src={photo.src} 
                     alt={photo.title}
@@ -327,13 +338,16 @@ const Facilities = () => {
                     position: 'absolute',
                     top: '12px',
                     left: '12px',
-                    background: 'rgba(255, 255, 255, 0.92)',
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
                     color: '#AD2348',
                     fontSize: '0.70rem',
                     fontWeight: 700,
                     letterSpacing: '0.04em',
                     padding: '3px 10px',
-                    borderRadius: '9999px'
+                    borderRadius: '9999px',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
                   }}>
                     {photo.tag}
                   </div>

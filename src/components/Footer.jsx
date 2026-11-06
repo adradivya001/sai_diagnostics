@@ -36,16 +36,11 @@ const Footer = () => {
           
           {/* Column 1 — Centre Information */}
           <div>
-            <Link to="/" style={{ display: 'inline-block', textDecoration: 'none', marginBottom: '1rem' }}>
+            <Link to="/" style={{ display: 'inline-block', textDecoration: 'none', marginBottom: '1.25rem' }}>
               <img 
                 src="/maternal-fetal-medicine-logo.png" 
                 alt="Sai Diagnostics & Fetal Medicine Center" 
-                style={{ 
-                  height: '56px', 
-                  width: 'auto', 
-                  objectFit: 'contain',
-                  display: 'block'
-                }} 
+                className="site-footer-logo-img"
               />
             </Link>
 
@@ -90,56 +85,73 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4 — Contact Us */}
-          <div>
+          {/* Column 4 — Contact Us & Interactive Map Split */}
+          <div className="footer-contact-col">
             <h4 className="footer-col-title">Contact Us</h4>
-            
-            {/* Address */}
-            <div className="footer-contact-item">
-              <MapPin size={18} className="footer-contact-icon" />
-              <span>
-                9th Cross Road, Sai Nagar, Anantapur, Andhra Pradesh 515001.
-              </span>
-            </div>
 
-            {/* Directions Link */}
-            <div>
-              <a
-                href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-directions-link"
-              >
-                <Navigation size={14} /> Get Directions →
-              </a>
-            </div>
+            <div className="footer-contact-split">
+              {/* Left: Existing Contact Details */}
+              <div className="footer-contact-info">
+                {/* Address */}
+                <div className="footer-contact-item">
+                  <MapPin size={18} className="footer-contact-icon" />
+                  <span>
+                    9th Cross Road, Sai Nagar, Anantapur, Andhra Pradesh 515001.
+                  </span>
+                </div>
 
-            {/* Phone */}
-            <div className="footer-contact-item" style={{ marginBottom: '0.85rem' }}>
-              <Phone size={18} className="footer-contact-icon" />
-              <a href="tel:+917799900248" className="footer-contact-link" style={{ fontWeight: 600 }}>
-                +91 77999 00248
-              </a>
-            </div>
+                {/* Directions Link */}
+                <div>
+                  <a
+                    href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-directions-link"
+                  >
+                    <Navigation size={14} /> Get Directions →
+                  </a>
+                </div>
 
-            {/* Operating Hours */}
-            <div className="footer-contact-item" style={{ marginBottom: '1.25rem' }}>
-              <Clock size={18} className="footer-contact-icon" />
-              <span>
-                Mon – Sat: 8:30 AM – 7:00 PM<br />
-                <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Sunday: Closed</span>
-              </span>
-            </div>
+                {/* Phone */}
+                <div className="footer-contact-item" style={{ marginBottom: '0.85rem' }}>
+                  <Phone size={18} className="footer-contact-icon" />
+                  <a href="tel:+917799900248" className="footer-contact-link" style={{ fontWeight: 600 }}>
+                    +91 77999 00248
+                  </a>
+                </div>
 
-            {/* Prominent Appointment CTA */}
-            <button
-              onClick={() => openModal()}
-              type="button"
-              className="footer-appointment-btn"
-            >
-              <Calendar size={16} />
-              <span>Book an Appointment</span>
-            </button>
+                {/* Operating Hours */}
+                <div className="footer-contact-item" style={{ marginBottom: '1.25rem' }}>
+                  <Clock size={18} className="footer-contact-icon" />
+                  <span>
+                    Mon – Sat: 8:30 AM – 7:00 PM<br />
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Sunday: Closed</span>
+                  </span>
+                </div>
+
+                {/* Prominent Appointment CTA */}
+                <button
+                  onClick={() => openModal()}
+                  type="button"
+                  className="footer-appointment-btn"
+                >
+                  <Calendar size={16} />
+                  <span>Book an Appointment</span>
+                </button>
+              </div>
+
+              {/* Right: Verified Interactive Google Map */}
+              <div className="footer-map-wrapper">
+                <iframe
+                  title="Sai Diagnostics and Fetal Medicine Centre Location Map"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=250&amp;hl=en&amp;q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  className="footer-map-iframe"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
           </div>
 
         </div>

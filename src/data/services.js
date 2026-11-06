@@ -266,36 +266,7 @@ export const services = [
     ],
     preparation: "Requires multiple scheduled visits during the cycle. Empty bladder before each scan."
   },
-  {
-    id: 18,
-    name: "Breast Scan",
-    category: "General Ultrasound Scans",
-    price: "1500",
-    image: "/breast-scan.png",
-    purpose: "To examine breast tissue and investigate breast changes.",
-    procedure: "An ultrasound probe is moved over the breast to produce images of the underlying tissue.",
-    whatItChecks: [
-      "Breast lumps and cysts",
-      "Tissue changes and architecture",
-      "Other visible abnormalities in the examined area"
-    ],
-    preparation: "Wear comfortable two-piece clothing. Bring any previous mammography or ultrasound reports."
-  },
-  {
-    id: 19,
-    name: "Thyroid Scan",
-    category: "General Ultrasound Scans",
-    price: "1200",
-    image: "/thyroid-scan.png",
-    purpose: "To examine the thyroid gland in the neck.",
-    procedure: "An ultrasound probe is moved over the front of the neck to obtain images of the thyroid gland.",
-    whatItChecks: [
-      "Thyroid size and structure",
-      "Nodules or cysts",
-      "Other structural abnormalities and vascularity"
-    ],
-    preparation: "Wear an open-neck shirt or blouse; avoid necklaces and jewelry around the neck."
-  },
+
   {
     id: 20,
     name: "USG Soft Tissues Swelling",
@@ -514,14 +485,213 @@ const TIMING_MAP = {
   30: 'Sequential Follicular Days'
 };
 
+// Service-wise verified diagnostic content (Diagnostic Focus & What This Scan Evaluates)
+export const DIAGNOSTIC_DETAILS_MAP = {
+  // 1. Anomaly / TIFFA Scan (id: 5)
+  5: {
+    diagnosticFocus: "The Anomaly or TIFFA Scan is a detailed ultrasound examination performed during pregnancy to assess the baby's anatomical development. It provides a systematic evaluation of major fetal organs and structures to identify visible structural abnormalities and variations in development.",
+    evaluates: "This scan examines the development of the baby's brain, spine, face, heart, abdomen and limbs. It evaluates major internal organs, skeletal structures and the abdominal wall. It also assesses placental location and amniotic fluid levels as part of the overall fetal examination.",
+    evaluatesList: [
+      "Brain, spine, face, and intracranial anatomy",
+      "Four-chamber cardiac structures and outflow tracts",
+      "Abdomen, kidneys, stomach, and abdominal wall integrity",
+      "Upper and lower limbs and extremities",
+      "Skeletal structures and spinal alignment",
+      "Placental location, umbilical cord insertion, and amniotic fluid volume"
+    ]
+  },
+  // 2. Nuchal Translucency Scan (12–14 Weeks) (id: 2)
+  2: {
+    diagnosticFocus: "The Nuchal Translucency Scan is a specialized first-trimester ultrasound examination that measures the fluid-filled space at the back of the baby's neck. It helps assess early fetal development and contributes to prenatal screening for selected chromosomal conditions.",
+    evaluates: "The examination measures nuchal translucency thickness and crown-rump length to assess early fetal development. It also evaluates fetal heartbeat, observes early anatomical structures and assesses the nasal bone and other screening markers when indicated.",
+    evaluatesList: [
+      "Nuchal translucency (NT) thickness measurement",
+      "Crown-rump length (CRL) and accurate gestational dating",
+      "Fetal cardiac activity and heart rate",
+      "Nasal bone presence and early facial profile",
+      "Early anatomical structures and physiological milestones",
+      "First-trimester chromosomal screening risk markers"
+    ]
+  },
+  // 3. Advanced Fetal Echo (id: 7)
+  7: {
+    diagnosticFocus: "Advanced Fetal Echocardiography is a specialized ultrasound examination that provides detailed imaging of the developing baby's heart. It focuses on evaluating cardiac anatomy, structural development and selected functional characteristics to identify suspected abnormalities of the fetal heart.",
+    evaluates: "The examination assesses the four chambers of the fetal heart, cardiac valves and septal structures. It also evaluates the major blood vessels, including the aortic and pulmonary outflow tracts, and examines fetal heart rate, rhythm and blood-flow patterns using Doppler techniques when indicated.",
+    evaluatesList: [
+      "Four cardiac chambers, ventricular symmetry, and atrial arrangement",
+      "Atrioventricular and semilunar cardiac valves",
+      "Interventricular and interatrial septal structures",
+      "Aortic and pulmonary arterial outflow tract alignment",
+      "Fetal heart rate, rhythm, and cardiac contractility",
+      "Color and spectral Doppler blood-flow velocities across cardiac valves"
+    ]
+  },
+  // 4. Obstetric Doppler + AFI Check (id: 12)
+  12: {
+    diagnosticFocus: "Obstetric Doppler and Amniotic Fluid Index assessment combine ultrasound techniques to evaluate blood circulation in selected maternal-fetal blood vessels and measure the fluid surrounding the baby. These assessments provide important information for monitoring pregnancy and evaluating selected indicators of fetal wellbeing.",
+    evaluates: "The examination assesses blood-flow patterns in the umbilical artery and other selected maternal or fetal blood vessels, depending on clinical requirements. It also measures amniotic fluid volume using the Amniotic Fluid Index or deepest vertical pocket method and evaluates additional fetal wellbeing parameters when indicated.",
+    evaluatesList: [
+      "Umbilical artery blood-flow waveforms and resistance index",
+      "Middle cerebral artery (MCA) Doppler and peak systolic velocity",
+      "Uterine artery bilateral Doppler impedance",
+      "Ductus venosus blood-flow patterns when clinically required",
+      "Amniotic Fluid Index (AFI) or single deepest vertical pocket (DVP)",
+      "Comprehensive fetal hemodynamic wellbeing assessment"
+    ]
+  },
+  // 5. Dating, Viability / Pregnancy Scan (id: 1)
+  1: {
+    diagnosticFocus: "A Dating and Viability Scan is an early pregnancy ultrasound examination performed to assess the location and development of the pregnancy. It helps establish gestational age, evaluate early embryonic development and observe cardiac activity when appropriate for the stage of pregnancy.",
+    evaluates: "The examination identifies the gestational sac and assesses the presence of the yolk sac and embryo. It measures crown-rump length when appropriate, evaluates fetal cardiac activity and estimates gestational age. It also assesses the number of gestational sacs and embryos and examines visible uterine and surrounding pelvic structures.",
+    evaluatesList: [
+      "Gestational sac location (intrauterine pregnancy confirmation)",
+      "Yolk sac presence and healthy morphological appearance",
+      "Embryonic pole identification and crown-rump length (CRL)",
+      "Early cardiac flicker and heart rate quantification",
+      "Number of gestational sacs and embryos (singleton vs. multiple)",
+      "Uterine cavity, myometrium, and adjacent adnexal structures"
+    ]
+  },
+  // 6. Growth / Fetal Well-Being Scan (id: 10)
+  10: {
+    diagnosticFocus: "A Growth and Fetal Well-Being Scan is an ultrasound examination performed during pregnancy to assess the baby's physical growth and development. It provides biometric measurements, estimated fetal weight and information about selected parameters associated with fetal wellbeing.",
+    evaluates: "The examination measures the baby's head circumference, abdominal circumference, biparietal diameter and femur length. These measurements are used to estimate fetal weight and assess growth in relation to gestational age. It also evaluates amniotic fluid volume, placental location and additional fetal wellbeing or blood-flow parameters when clinically indicated.",
+    evaluatesList: [
+      "Head circumference (HC) and biparietal diameter (BPD)",
+      "Abdominal circumference (AC) for metabolic growth evaluation",
+      "Femur length (FL) and long bone biometric tracking",
+      "Estimated Fetal Weight (EFW) plotted against gestational percentiles",
+      "Amniotic fluid volume assessment (AFI / DVP)",
+      "Placental location, grading, and fetal presentation"
+    ]
+  },
+  // 7. Twins Anomaly Scan (id: 9)
+  9: {
+    diagnosticFocus: "A Twins Anomaly Scan is a detailed ultrasound examination designed to assess the anatomical development of both babies in a twin pregnancy. It provides an individual assessment of each fetus while also evaluating the placental arrangement and other important features of the multiple pregnancy.",
+    evaluates: "The examination assesses the brain, spine, face, heart, abdomen and skeletal structures of both babies. It measures each baby's growth separately and evaluates placental location, chorionicity and amniotic fluid levels in the respective sacs. Additional Doppler assessments may be performed when clinically indicated.",
+    evaluatesList: [
+      "Individual structural head-to-toe anomaly assessment for Twin A and Twin B",
+      "Placental chorionicity and amnionicity confirmation",
+      "Separate biometric growth tracking and inter-twin weight discordance",
+      "Amniotic fluid volume evaluation in each individual gestational sac",
+      "Umbilical cord insertions and placental site mapping",
+      "Twin-specific Doppler blood-flow assessments when indicated"
+    ]
+  },
+  // 8. Cervical Assessment Scan (id: 13)
+  13: {
+    diagnosticFocus: "A Cervical Assessment Scan is an ultrasound examination that evaluates the length and appearance of the cervix during pregnancy. It provides measurements and structural observations that help clinicians assess cervical characteristics and evaluate factors associated with the risk of preterm birth.",
+    evaluates: "The examination measures cervical length and assesses the appearance of the cervical canal and its internal and external openings. It also evaluates the presence of cervical funneling or other visible structural changes that may be relevant to pregnancy monitoring.",
+    evaluatesList: [
+      "Closed cervical canal length measurement",
+      "Internal and external cervical os structural integrity",
+      "Presence or absence of cervical funneling under gentle fundal pressure",
+      "Evaluation of lower uterine segment architecture",
+      "Monitoring cervical cerclage position when applicable",
+      "Objective risk stratification for spontaneous preterm delivery"
+    ]
+  },
+  // 9. USG Abdomen / Pelvis Scan (id: 14)
+  14: {
+    diagnosticFocus: "An Abdominal and Pelvic Ultrasound is a non-invasive imaging examination that uses sound waves to visualize internal organs and assess their structure, size and appearance. It helps identify visible abnormalities in the abdominal and pelvic regions through detailed ultrasound imaging.",
+    evaluates: "Depending on the requested examination, the scan evaluates the liver, gallbladder, pancreas, spleen, kidneys and urinary bladder. When a pelvic examination is included, it also assesses the uterus and ovaries. The examination may identify visible cysts, stones, masses, fluid collections and other structural changes.",
+    evaluatesList: [
+      "Liver size, parenchyma, and intrahepatic biliary ducts",
+      "Gallbladder wall thickness, calculi (gallstones), and lumen",
+      "Pancreas and spleen size, outline, and echo-texture",
+      "Bilateral kidneys for calculi, hydronephrosis, and cortico-medullary differentiation",
+      "Urinary bladder distension, wall regularity, and pre/post-void volume",
+      "Pelvic organs (uterus, endometrial lining, and ovaries) with mass/cyst review"
+    ]
+  },
+  // 10. Pelvis 3D Scan (id: 16)
+  16: {
+    diagnosticFocus: "A Pelvis 3D Scan is an advanced ultrasound examination that produces three-dimensional images of pelvic structures. It provides detailed visualization of uterine anatomy and the endometrial cavity, helping evaluate structural variations and selected pelvic abnormalities.",
+    evaluates: "The examination provides three-dimensional views of the uterus, including its shape, contour and endometrial cavity configuration. It also evaluates visible uterine structural variations, fibroids and their location, along with the appearance of the endometrial cavity and other relevant pelvic structures.",
+    evaluatesList: [
+      "Three-dimensional coronal-plane visualization of the uterine cavity",
+      "Congenital uterine anomalies (septate, arcuate, bicornuate, unicornuate)",
+      "Endometrial cavity contour, polyps, and intra-cavitary adhesions",
+      "Uterine fibroid mapping (submucosal, intramural, subserosal)",
+      "Adenomyosis depth, junctional zone assessment, and distribution",
+      "Ovarian follicular reserve and detailed adnexal structural analysis"
+    ]
+  },
+  // 11. Pelvis / Transvaginal Scan (id: 15)
+  15: {
+    diagnosticFocus: "A Pelvic and Transvaginal Ultrasound is an imaging examination used to assess the female reproductive organs and surrounding pelvic structures. Depending on clinical requirements, abdominal or transvaginal imaging is used to obtain detailed views of the uterus, ovaries and related anatomical structures.",
+    evaluates: "The examination assesses uterine size, shape and endometrial thickness. It evaluates ovarian size, follicular development and the presence of visible cysts or other abnormalities. It also examines surrounding pelvic structures, including the adnexa, and identifies visible masses or fluid collections when present.",
+    evaluatesList: [
+      "Uterine size, myometrial echo-pattern, and position",
+      "Endometrial thickness measurement and phase-appropriate architecture",
+      "Bilateral ovarian volume, morphology, and follicular pattern",
+      "Identification of simple cysts, hemorrhagic cysts, endometriomas, or dermoids",
+      "Adnexal regions for visible masses, hydrosalpinx, or fluid collections",
+      "Pouch of Douglas evaluation for free pelvic fluid"
+    ]
+  },
+  // 12. Follicular Monitoring Studies (id: 17)
+  17: {
+    diagnosticFocus: "Follicular Monitoring is a series of ultrasound examinations performed during selected days of the menstrual cycle to observe ovarian follicular development. It helps track the growth of developing follicles, monitor changes in the uterine lining and identify ultrasound findings associated with ovulation.",
+    evaluates: "The examinations monitor the number and size of developing ovarian follicles and identify the growth of the dominant follicle. They also measure endometrial thickness, assess its appearance and observe changes in the ovaries across different monitoring visits. Evidence of follicular rupture may also be evaluated during the monitoring process.",
+    evaluatesList: [
+      "Sequential measurement and growth tracking of dominant follicle(s)",
+      "Ovarian follicular count in right and left ovaries",
+      "Endometrial thickness and trilaminar pattern tracking",
+      "Detection of sonographic signs of ovulation / follicular rupture",
+      "Post-ovulatory changes including corpus luteum formation and cul-de-sac fluid",
+      "Timing coordination for natural conception, IUI, or fertility guidance"
+    ]
+  },
+  // 13. Neurosonogram (Fetal Neurosonogram) (id: 21)
+  21: {
+    diagnosticFocus: "A Fetal Neurosonogram is a specialized ultrasound examination focused on the developing baby's brain and central nervous system. It provides detailed imaging of intracranial structures to assess neurological anatomy and identify visible structural variations or abnormalities.",
+    evaluates: "The examination assesses the cerebral hemispheres, ventricular system and midline brain structures. It also evaluates the posterior fossa, cerebellum and cisterna magna. Additional structures, including the corpus callosum and fetal spine, may be examined depending on the clinical indication and scanning protocol.",
+    evaluatesList: [
+      "Cerebral hemispheres, gyral development, and sylvian fissure maturation",
+      "Lateral ventricles, atrium, third ventricle, and choroid plexus",
+      "Midline brain structures including cavum septum pellucidum and corpus callosum",
+      "Posterior fossa anatomy, cerebellar vermis, transverse diameter, and cisterna magna",
+      "Brain parenchymal echo-texture and vascular circle of Willis Doppler",
+      "Complete fetal spinal canal, vertebral bodies, and posterior elements"
+    ]
+  },
+  // 14. NIPT – Cell-Free DNA Test (id: 24)
+  24: {
+    diagnosticFocus: "Non-Invasive Prenatal Testing (NIPT) is a blood-based prenatal screening test that analyzes cell-free DNA circulating in the mother's blood. It estimates the likelihood of selected chromosomal conditions in the developing baby without requiring an invasive sampling procedure.",
+    evaluates: "Depending on the selected laboratory panel, the test screens for common chromosomal conditions such as Trisomy 21 (Down syndrome), Trisomy 18 (Edwards syndrome) and Trisomy 13 (Patau syndrome). Certain panels may also evaluate selected sex chromosome aneuploidies and additional chromosomal conditions. The results indicate screening risk and are not a definitive diagnosis.",
+    evaluatesList: [
+      "Trisomy 21 (Down syndrome) statistical screening risk",
+      "Trisomy 18 (Edwards syndrome) statistical screening risk",
+      "Trisomy 13 (Patau syndrome) statistical screening risk",
+      "Sex chromosome aneuploidies (Turner, Klinefelter, Triple X, Jacobs syndromes)",
+      "Circulating fetal fraction percentage calculation",
+      "Microdeletion syndromes (when specific expanded panel is requested)"
+    ]
+  }
+};
+
 // Enrich all services with robust metadata for detail views and navigation
 services.forEach((s) => {
   s.slug = slugify(s.name);
   s.timing = TIMING_MAP[s.id] || "Mon – Sat: 8:30 AM – 7:00 PM";
   s.shortDescription = s.purpose;
   s.departmentType = s.category;
-  s.introduction = s.introduction || `${s.name} at Sai Diagnostics & Fetal Medicine Centre provides high-precision diagnostic imaging and careful clinical evaluation. Conducted by Dr. T. Sai Kiranmai using advanced GE Voluson ultrasound systems, this examination ensures unhurried, attentive assessment and clear doctor explanations for parents and referring obstetricians.`;
-  s.conditions = s.whatItChecks || [];
+
+  const verifiedDetail = DIAGNOSTIC_DETAILS_MAP[s.id];
+  if (verifiedDetail) {
+    s.diagnosticFocus = verifiedDetail.diagnosticFocus;
+    s.evaluates = verifiedDetail.evaluates;
+    s.evaluatesList = verifiedDetail.evaluatesList;
+    s.introduction = verifiedDetail.diagnosticFocus;
+  } else {
+    s.diagnosticFocus = s.purpose;
+    s.evaluates = s.procedure;
+    s.evaluatesList = s.whatItChecks || [];
+    s.introduction = s.introduction || `${s.name} at Sai Diagnostics & Fetal Medicine Centre provides high-precision diagnostic imaging and careful clinical evaluation. Conducted by Dr. T. Sai Kiranmai using advanced GE Voluson ultrasound systems, this examination ensures unhurried, attentive assessment and clear doctor explanations for parents and referring obstetricians.`;
+  }
+
+  s.conditions = s.evaluatesList && s.evaluatesList.length > 0 ? s.evaluatesList : (s.whatItChecks || []);
   s.services = [
     "High-resolution real-time ultrasound imaging with multi-planar assessment",
     "Detailed biometric measurements calibrated against international reference standards",
@@ -590,8 +760,7 @@ export const GENERAL_DIAGNOSTIC_SCANS = [
   services.find((s) => s.id === 16), // Pelvis 3D Scan
   services.find((s) => s.id === 15), // Pelvis / TVS Scan
   services.find((s) => s.id === 17), // Follicular Monitoring
-  services.find((s) => s.id === 18), // Breast Scan
-  services.find((s) => s.id === 19), // Thyroid Scan
+  services.find((s) => s.id === 20), // USG Soft Tissues Swelling
   services.find((s) => s.id === 21), // Neurosonogram
   services.find((s) => s.id === 24), // NIPT Cell-Free DNA Test
 ].filter(Boolean);
