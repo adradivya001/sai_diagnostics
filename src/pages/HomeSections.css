@@ -244,7 +244,13 @@
    Seamless natural transition from Hero (No large empty gap!)
    -------------------------------------------------------------------------- */
 
+/* --------------------------------------------------------------------------
+   ABOUT US SECTION: SPECIALISED FETAL MEDICINE & FOUNDER'S MESSAGE
+   Seamless unified section under the About anchor
+   -------------------------------------------------------------------------- */
+
 .home-founder-message-section,
+.home-about-composite-section,
 .home-intro-section,
 .home-services-section,
 .home-technology-section,
@@ -255,6 +261,18 @@
 .home-cta-fullwidth-section,
 .home-contact-split-section {
   scroll-margin-top: 96px;
+}
+
+.home-about-composite-section {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F5 40%, #FFFFFF 100%);
+  padding: 4.5rem 1.5rem 5.5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(173, 35, 72, 0.08);
+}
+
+.home-about-founder-wrapper {
+  margin-top: clamp(3.5rem, 5vw, 5rem);
 }
 
 .home-intro-section {

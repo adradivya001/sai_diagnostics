@@ -52,8 +52,7 @@ const Navbar = () => {
       { id: 'technology', navKey: 'technology' },
       { id: 'services', navKey: 'services' },
       { id: 'founder', navKey: 'founder' },
-      { id: 'about-centre', navKey: 'about-centre' },
-      { id: 'founder-message', navKey: 'founder' }
+      { id: 'about-centre', navKey: 'about-centre' }
     ];
 
     const updateActiveSection = () => {
