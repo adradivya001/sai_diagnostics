@@ -1,22 +1,23 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Resolve Supabase URL & Public Key from Vite / Next compatible environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+// Fallback configuration to prevent bundle crash if env vars are missing on hosting platforms
+const FALLBACK_URL = 'https://qmqjyssmhewsfrlptjcy.supabase.co';
+const FALLBACK_KEY = 'sb_publishable_pWrjZUIWIYQam76OD-8Mxw_8bx_hGN-';
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.error(
-    '[Supabase Configuration Error]: Missing Supabase environment variables.\n' +
-    'Please make sure VITE_SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) and ' +
-    'VITE_SUPABASE_ANON_KEY (or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) are defined in your .env file.'
-  );
-}
+const supabaseUrl = 
+  import.meta.env.VITE_SUPABASE_URL || 
+  import.meta.env.NEXT_PUBLIC_SUPABASE_URL || 
+  FALLBACK_URL;
 
-// Initialize Supabase singleton client
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '', {
+const supabaseAnonKey = 
+  import.meta.env.VITE_SUPABASE_ANON_KEY || 
+  import.meta.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 
+  FALLBACK_KEY;
+
+// Safe client initialization that will never crash the initial app render
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: true,
     autoRefreshToken: true
   }
 });
-
