@@ -179,7 +179,6 @@ const Contact = () => {
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#C2184B', letterSpacing: '0.05em' }}>01.</span>
                         <strong style={{ color: '#1F2733', fontSize: '1rem' }}>
                           Verified Physical Address
                         </strong>
@@ -208,7 +207,6 @@ const Contact = () => {
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#C2184B', letterSpacing: '0.05em' }}>02.</span>
                         <strong style={{ color: '#1F2733', fontSize: '1rem' }}>
                           Direct Phone Helpline
                         </strong>
@@ -251,7 +249,6 @@ const Contact = () => {
                     </div>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#C2184B', letterSpacing: '0.05em' }}>03.</span>
                         <strong style={{ color: '#1F2733', fontSize: '1rem' }}>
                           Working & Consultation Hours
                         </strong>
