@@ -65,18 +65,13 @@ CREATE TRIGGER trg_appointments_updated_at
 -- 6. Enable Row Level Security (RLS)
 ALTER TABLE public.appointments ENABLE ROW LEVEL SECURITY;
 
--- 7. RLS Policy: Public Patients can INSERT appointment requests
--- Allows anonymous and authenticated visitors to submit appointment requests
+-- 7. RLS Policy: Allow Public/Anon Patients to INSERT
 DROP POLICY IF EXISTS "Public patients can submit appointment requests" ON public.appointments;
 CREATE POLICY "Public patients can submit appointment requests"
   ON public.appointments
   FOR INSERT
-  TO anon, authenticated
-  WITH CHECK (
-    -- Basic validation check at RLS layer
-    char_length(patient_name) >= 2 AND
-    char_length(phone_number) >= 10
-  );
+  TO public
+  WITH CHECK (true);
 
 -- 8. RLS Policy: Prohibit Public SELECT / UPDATE / DELETE
 -- By default with RLS enabled and no SELECT policy for anon, anonymous users CANNOT read any patient data.

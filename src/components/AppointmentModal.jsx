@@ -93,17 +93,14 @@ export const AppointmentModalProvider = ({ children }) => {
         whatsapp_status: 'pending'
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('appointments')
-        .insert([recordToInsert])
-        .select('id')
-        .single();
+        .insert([recordToInsert]);
 
       if (error) {
         throw error;
       }
 
-      setRequestId(data?.id || null);
       setSubmitted(true);
     } catch (err) {
       console.error('Failed to submit appointment to Supabase:', err);
