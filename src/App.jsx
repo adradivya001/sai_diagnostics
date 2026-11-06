@@ -10,7 +10,6 @@ import Doctors from './pages/Doctors';
 import Contact from './pages/Contact';
 import Facilities from './pages/Facilities';
 import FloatingContact from './components/FloatingContact';
-import BackToTop from './components/BackToTop';
 import MobileBottomBar from './components/MobileBottomBar';
 import { AppointmentModalProvider } from './components/AppointmentModal';
 
@@ -45,7 +44,6 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <BackToTop />
         <MobileBottomBar />
       </div>
     </AppointmentModalProvider>

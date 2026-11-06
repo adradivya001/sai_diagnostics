@@ -1,177 +1,215 @@
 /* ==========================================================================
-   Edge-Anchored Floating Action Pills / Tabs (Right Screen Edge)
-   Default State:
-   - Compact rounded half-pill showing only the icon docked at the screen edge.
-   Clicked / Active / Hover State:
-   - Slides out smoothly to reveal the button's name label.
+   Compact Interactive Expandable Floating Action Buttons (FAB Stack)
+   Specifications:
+   - Default: Perfect circular buttons vertically stacked on right side.
+   - Fixed right anchor; no extra horizontal space or page-width expansion.
+   - Click-to-Expand: Expands smoothly towards the LEFT into a horizontal pill.
+   - Right edge stays completely fixed and aligned.
+   - Transitions: 240ms cubic-bezier for smooth slide & label fade-in.
    ========================================================================== */
 
-.floating-contact-container {
+:root {
+  --fab-size: 48px;
+  --fab-gap: 12px;
+  --fab-right-offset: 1.25rem;
+}
+
+/* Container pinned to the right edge */
+.fab-stack-container {
   position: fixed;
-  right: 0;
+  right: var(--fab-right-offset);
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--fab-gap);
   z-index: 9995;
-  align-items: flex-end;
+  align-items: flex-end; /* Pins right edge firmly */
   pointer-events: none;
+  width: var(--fab-size); /* Container width stays strictly equal to button size */
 }
 
-.floating-tab-item {
+/* Individual Slot (maintains precise vertical layout) */
+.fab-slot {
+  position: relative;
+  width: var(--fab-size);
+  height: var(--fab-size);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Back-to-Top slot visibility control */
+.fab-slot-top {
+  opacity: 0;
+  transform: scale(0.75);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.fab-slot-top.is-visible {
+  opacity: 1;
+  transform: scale(1);
   pointer-events: auto;
+}
+
+/* Base FAB button (Circular by default, expands to pill towards LEFT) */
+.fab-btn {
+  pointer-events: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: var(--fab-size);
+  min-width: var(--fab-size);
+  width: var(--fab-size);
+  border-radius: calc(var(--fab-size) / 2);
   display: inline-flex;
   align-items: center;
-  height: 48px;
-  padding: 0 8px 0 10px;
-  border-top-left-radius: 24px;
-  border-bottom-left-radius: 24px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  justify-content: flex-end;
   text-decoration: none;
   border: none;
   cursor: pointer;
   outline: none;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: #FFFFFF;
-  box-shadow: -4px 6px 18px rgba(0, 0, 0, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-  user-select: none;
+  padding: 0;
+  margin: 0;
   white-space: nowrap;
+  user-select: none;
   overflow: hidden;
-  max-width: 50px; /* Collapsed width: shows only the rounded icon cap */
-  transition: max-width 0.32s cubic-bezier(0.34, 1.4, 0.64, 1), 
-              padding 0.28s ease, 
-              box-shadow 0.25s ease, 
-              filter 0.2s ease, 
-              transform 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: width 0.26s cubic-bezier(0.34, 1.25, 0.64, 1),
+              box-shadow 0.22s ease,
+              transform 0.2s ease,
+              filter 0.2s ease;
 }
 
-/* Icon wrap: circular background matching reference */
-.floating-tab-icon-wrap {
+.fab-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.06);
+}
+
+.fab-btn:active {
+  transform: scale(0.96);
+}
+
+/* Expanded state: Expands towards the left by widening width */
+.fab-btn.is-expanded {
+  width: auto;
+  min-width: var(--fab-size);
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.25), 0 3px 10px rgba(0, 0, 0, 0.12);
+  transform: scale(1);
+}
+
+/* Icon circle: Anchored on the right inside the button */
+.fab-icon-circle {
+  width: var(--fab-size);
+  height: var(--fab-size);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
   flex-shrink: 0;
 }
 
-/* Label: hidden by default, smoothly reveals when expanded */
-.floating-tab-label {
+/* Label: Sits to the left of the icon, hidden in circular state */
+.fab-label {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
   letter-spacing: 0.01em;
+  color: #FFFFFF;
   line-height: 1;
+  padding-left: 18px;
+  padding-right: 4px;
   opacity: 0;
-  transform: translateX(10px);
-  transition: opacity 0.22s ease, transform 0.24s cubic-bezier(0.34, 1.4, 0.64, 1);
-  padding-left: 8px;
-  padding-right: 12px;
+  max-width: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, 
+              max-width 0.24s cubic-bezier(0.34, 1.25, 0.64, 1), 
+              transform 0.24s cubic-bezier(0.34, 1.25, 0.64, 1);
 }
 
-/* Expanded state: Triggered on Click (and on Desktop Hover) */
-.floating-tab-item.is-active,
-.floating-tab-item:hover {
-  max-width: 175px; /* Unfolds to reveal the name */
-  padding: 0 14px 0 10px;
-  box-shadow: -6px 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  filter: brightness(1.05);
-}
-
-.floating-tab-item.is-active .floating-tab-label,
-.floating-tab-item:hover .floating-tab-label {
+.fab-btn.is-expanded .fab-label {
   opacity: 1;
+  max-width: 200px;
   transform: translateX(0);
 }
 
-.floating-tab-item:active {
-  transform: scale(0.97);
+/* --------------------------------------------------------------------------
+   BRAND COLOR VARIANTS (Preserving signature Sai Diagnostics palette)
+   -------------------------------------------------------------------------- */
+
+/* 1. Appointment – Deep Rose / Burgundy */
+.fab-btn-appointment {
+  background: linear-gradient(135deg, #C21850 0%, #AD2348 100%);
+  color: #FFFFFF;
 }
 
-/* 1. Appointment Tab (Deep Pink / Burgundy) */
-.floating-tab-appointment {
-  background: linear-gradient(135deg, #C21850 0%, #8E1038 100%);
-  box-shadow: -4px 6px 20px rgba(194, 24, 80, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+.fab-btn-appointment:hover {
+  box-shadow: 0 6px 22px rgba(194, 24, 80, 0.45);
 }
 
-.floating-tab-appointment:hover,
-.floating-tab-appointment.is-active {
-  box-shadow: -6px 8px 26px rgba(194, 24, 80, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+/* 2. Call – Medical Teal / Cyan */
+.fab-btn-call {
+  background: linear-gradient(135deg, #0B7F8C 0%, #086670 100%);
+  color: #FFFFFF;
 }
 
-/* 2. Call Helpline Tab (Clinical Teal / Cyan) */
-.floating-tab-call {
-  background: linear-gradient(135deg, #0B7F8C 0%, #065058 100%);
-  box-shadow: -4px 6px 20px rgba(11, 127, 140, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+.fab-btn-call:hover {
+  box-shadow: 0 6px 22px rgba(11, 127, 140, 0.45);
 }
 
-.floating-tab-call:hover,
-.floating-tab-call.is-active {
-  box-shadow: -6px 8px 26px rgba(11, 127, 140, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+/* 3. Location – Rose Coral */
+.fab-btn-location {
+  background: linear-gradient(135deg, #D44268 0%, #B82C52 100%);
+  color: #FFFFFF;
 }
 
-/* 3. Google Maps Location Tab (Warm Rose / Coral) */
-.floating-tab-maps {
-  background: linear-gradient(135deg, #D44268 0%, #AA264A 100%);
-  box-shadow: -4px 6px 20px rgba(212, 66, 104, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+.fab-btn-location:hover {
+  box-shadow: 0 6px 22px rgba(212, 66, 104, 0.45);
 }
 
-.floating-tab-maps:hover,
-.floating-tab-maps.is-active {
-  box-shadow: -6px 8px 26px rgba(212, 66, 104, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+/* 4. Back to Top – Pure White with Charcoal Text & Subtle Pink Hover */
+.fab-btn-top {
+  background: #FFFFFF;
+  color: #202B3C;
+  border: 1.5px solid rgba(173, 35, 72, 0.16);
+  box-shadow: 0 4px 16px rgba(32, 43, 60, 0.12);
 }
 
-/* 4. Scroll To Top Pill */
-.floating-tab-top {
-  height: 38px;
-  max-width: 44px;
-  padding: 0 10px;
-  border-top-left-radius: 19px;
-  border-bottom-left-radius: 19px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #5B687B;
-  border: 1px solid rgba(173, 35, 72, 0.15);
-  box-shadow: -2px 4px 12px rgba(52, 57, 67, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.fab-btn-top .fab-label {
+  color: #202B3C;
 }
 
-.floating-tab-top:hover {
-  max-width: 44px;
+.fab-btn-top:hover {
   background: #FFFFFF;
   color: #C21850;
-  box-shadow: -4px 6px 16px rgba(194, 24, 80, 0.2);
+  border-color: #C21850;
+  box-shadow: 0 6px 20px rgba(194, 24, 80, 0.22);
 }
 
-/* Responsive adjustment for Mobile / Tablet */
+.fab-btn-top:hover .fab-label {
+  color: #C21850;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE OPTIMIZATIONS (Mobile & Tablet <= 768px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  .floating-contact-container {
+  :root {
+    --fab-size: 44px;
+    --fab-gap: 10px;
+    --fab-right-offset: 0.85rem;
+  }
+
+  .fab-stack-container {
     top: auto;
-    bottom: 5.5rem; /* Sits cleanly above the pinned mobile bottom bar */
+    bottom: 5.5rem; /* Sits comfortably above the pinned bottom bar */
     transform: none;
-    gap: 8px;
   }
 
-  .floating-tab-item {
-    height: 44px;
-    max-width: 46px;
-    border-top-left-radius: 22px;
-    border-bottom-left-radius: 22px;
-  }
-
-  .floating-tab-item.is-active {
-    max-width: 155px;
-    font-size: 0.85rem;
-  }
-
-  .floating-tab-icon-wrap {
-    width: 30px;
-    height: 30px;
+  .fab-label {
+    font-size: 0.84rem;
+    padding-left: 14px;
+    padding-right: 2px;
   }
 }
