@@ -1,154 +1,155 @@
 /* ==========================================================================
-   Floating Action Buttons (FAB Container - Right Side)
-   Includes:
-   1. Appointment Form Modal Trigger (Calendar)
-   2. Direct Call Helpline (Phone)
-   3. Google Maps Clinic Directions (MapPin)
-   4. Scroll to Top (ArrowUp)
+   Edge-Anchored Floating Action Pills / Tabs (Right Screen Edge)
+   Styled exactly as shown in reference:
+   - Attached to the right edge with rounded-left pill caps
+   - Soft inset highlight, glowing drop shadow, bold typography
+   - Hover reveals full label with smooth slide-out transition
    ========================================================================== */
 
 .floating-contact-container {
   position: fixed;
-  right: 1.5rem;
-  bottom: 2rem;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 12px;
   z-index: 9995;
-  align-items: center;
+  align-items: flex-end;
+  pointer-events: none;
 }
 
-.floating-fab-btn {
-  width: 48px;
+.floating-tab-item {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   height: 48px;
-  border-radius: 50%;
+  padding: 0 16px 0 16px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateX(0);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, filter 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.floating-tab-item:hover {
+  transform: translateX(-8px);
+  filter: brightness(1.06);
+}
+
+.floating-tab-item:active {
+  transform: translateX(-4px) scale(0.98);
+}
+
+.floating-tab-icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  position: relative;
-  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, background-color 0.2s ease;
-  box-shadow: 0 4px 16px rgba(173, 35, 72, 0.25);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  flex-shrink: 0;
 }
 
-.floating-fab-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 24px rgba(173, 35, 72, 0.4);
+.floating-tab-label {
+  letter-spacing: 0.01em;
+  line-height: 1;
 }
 
-.floating-fab-btn:active {
-  transform: scale(0.95);
+/* 1. Appointment Tab (Deep Burgundy / Berry Pink — Brand signature) */
+.floating-tab-appointment {
+  background: linear-gradient(135deg, #C21850 0%, #8E1038 100%);
+  box-shadow: -4px 6px 22px rgba(194, 24, 80, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
-/* 1. Appointment FAB (Burgundy / Rose) */
-.floating-fab-appointment {
-  background: linear-gradient(135deg, #C21850 0%, #AD2348 100%);
-  color: #FFFFFF;
+.floating-tab-appointment:hover {
+  box-shadow: -6px 8px 28px rgba(194, 24, 80, 0.48), inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-.floating-fab-appointment:hover {
-  background: linear-gradient(135deg, #a11341 0%, #8f1b3a 100%);
+/* 2. Call Helpline Tab (Clinical Teal / Cyan) */
+.floating-tab-call {
+  background: linear-gradient(135deg, #0B7F8C 0%, #065058 100%);
+  box-shadow: -4px 6px 22px rgba(11, 127, 140, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
-/* 2. Call FAB (Clinical Cyan / Teal) */
-.floating-fab-call {
-  background: linear-gradient(135deg, #0B7F8C 0%, #08616B 100%);
-  color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(11, 127, 140, 0.35);
+.floating-tab-call:hover {
+  box-shadow: -6px 8px 28px rgba(11, 127, 140, 0.48), inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-.floating-fab-call:hover {
-  background: linear-gradient(135deg, #096873 0%, #064b54 100%);
-  box-shadow: 0 8px 24px rgba(11, 127, 140, 0.5);
+/* 3. Google Maps Location Tab (Warm Amber-Rose / Coral) */
+.floating-tab-maps {
+  background: linear-gradient(135deg, #D44268 0%, #AA264A 100%);
+  box-shadow: -4px 6px 22px rgba(212, 66, 104, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
-/* 3. Maps Directions FAB (Warm Coral / Rose) */
-.floating-fab-maps {
+.floating-tab-maps:hover {
+  box-shadow: -6px 8px 28px rgba(212, 66, 104, 0.48), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* 4. WhatsApp Chat Tab (WhatsApp Vibrant Emerald Green — exactly as reference) */
+.floating-tab-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: -4px 6px 22px rgba(37, 211, 102, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.floating-tab-whatsapp:hover {
+  box-shadow: -6px 8px 28px rgba(37, 211, 102, 0.48), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Scroll To Top Pill (Compact bottom corner) */
+.floating-tab-top {
+  margin-top: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border-top-left-radius: 19px;
+  border-bottom-left-radius: 19px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #5B687B;
+  border: 1px solid rgba(173, 35, 72, 0.15);
+  box-shadow: -2px 4px 14px rgba(52, 57, 67, 0.1);
+}
+
+.floating-tab-top:hover {
   background: #FFFFFF;
   color: #C21850;
-  border: 1.5px solid rgba(194, 24, 80, 0.25);
-  box-shadow: 0 4px 16px rgba(52, 57, 67, 0.12);
+  box-shadow: -4px 6px 18px rgba(194, 24, 80, 0.18);
 }
 
-.floating-fab-maps:hover {
-  background: #FDF2F4;
-  border-color: #C21850;
-  box-shadow: 0 8px 22px rgba(194, 24, 80, 0.22);
-}
-
-/* 4. Scroll To Top FAB (Minimal White) */
-.floating-fab-top {
-  width: 40px;
-  height: 40px;
-  background: #FFFFFF;
-  color: #5B687B;
-  border: 1px solid rgba(91, 104, 123, 0.2);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.floating-fab-top:hover {
-  background: #F8F9FA;
-  color: #1F2733;
-}
-
-/* Optional Tooltip label on desktop hover */
-.floating-fab-tooltip {
-  position: absolute;
-  right: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  background: #202B3C;
-  color: #FFFFFF;
-  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.floating-fab-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  border-width: 4px;
-  border-style: solid;
-  border-color: transparent transparent transparent #202B3C;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .floating-fab-btn:hover .floating-fab-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-50%) translateX(-2px);
-  }
-}
-
-/* Responsive adjustment for Mobile viewports where MobileBottomBar is active */
+/* Responsive optimization for Mobile / Tablet */
 @media (max-width: 768px) {
   .floating-contact-container {
-    right: 1rem;
-    bottom: 5.25rem; /* Above the pinned bottom bar */
-    gap: 0.6rem;
+    top: auto;
+    bottom: 5.5rem; /* Above mobile bottom bar */
+    transform: none;
+    gap: 8px;
   }
 
-  .floating-fab-btn {
-    width: 44px;
-    height: 44px;
+  .floating-tab-item {
+    height: 42px;
+    padding: 0 12px 0 12px;
+    border-top-left-radius: 21px;
+    border-bottom-left-radius: 21px;
+    font-size: 0.86rem;
   }
 
-  .floating-fab-top {
-    width: 36px;
-    height: 36px;
+  .floating-tab-icon-wrap {
+    width: 28px;
+    height: 28px;
   }
 }

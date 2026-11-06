@@ -13,51 +13,57 @@ const FloatingContact = () => {
 
   return (
     <div className="floating-contact-container" aria-label="Quick Actions">
-      {/* 1. Appointment Form Modal Trigger FAB */}
+      {/* 1. Appointment Pill Tab */}
       <button
         type="button"
         onClick={() => openModal()}
-        className="floating-fab-btn floating-fab-appointment"
-        title="Book Appointment"
-        aria-label="Book scan appointment online"
+        className="floating-tab-item floating-tab-appointment"
+        title="Book Scan Appointment Online"
+        aria-label="Book appointment"
       >
-        <Calendar size={21} />
-        <span className="floating-fab-tooltip">Book Appointment</span>
+        <span className="floating-tab-icon-wrap">
+          <Calendar size={18} />
+        </span>
+        <span className="floating-tab-label">Appointment</span>
       </button>
 
-      {/* 2. Direct Call Helpline FAB */}
+      {/* 2. Direct Call Helpline Pill Tab */}
       <a 
         href="tel:+917799900248"
-        className="floating-fab-btn floating-fab-call"
+        className="floating-tab-item floating-tab-call"
         title="Call Helpline: +91 77999 00248"
-        aria-label="Call clinic helpline directly"
+        aria-label="Call clinic directly"
       >
-        <Phone size={21} />
-        <span className="floating-fab-tooltip">Call Clinic (+91 77999 00248)</span>
+        <span className="floating-tab-icon-wrap">
+          <Phone size={18} />
+        </span>
+        <span className="floating-tab-label">Call</span>
       </a>
 
-      {/* 3. Google Maps Clinic Directions FAB */}
+      {/* 3. Google Maps Clinic Directions Pill Tab */}
       <a 
         href={GOOGLE_MAPS_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="floating-fab-btn floating-fab-maps"
-        title="Get Directions on Google Maps"
-        aria-label="Open clinic location on Google Maps"
+        className="floating-tab-item floating-tab-maps"
+        title="Find Clinic Directions on Google Maps"
+        aria-label="View location on Google Maps"
       >
-        <MapPin size={21} />
-        <span className="floating-fab-tooltip">Clinic Location & Directions</span>
+        <span className="floating-tab-icon-wrap">
+          <MapPin size={18} />
+        </span>
+        <span className="floating-tab-label">Maps</span>
       </a>
 
-      {/* 4. Scroll to Top Floating Button */}
+      {/* 4. Scroll To Top Button */}
       <button 
         onClick={scrollToTop}
-        className="floating-fab-btn floating-fab-top"
+        className="floating-tab-item floating-tab-top"
         title="Scroll to Top"
         aria-label="Scroll back to top of page"
         type="button"
       >
-        <ArrowUp size={18} />
+        <ArrowUp size={16} />
       </button>
     </div>
   );
