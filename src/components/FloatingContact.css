@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Floating Action Buttons (FAB Container - Right Side)
+   Includes:
+   1. Appointment Form Modal Trigger (Calendar)
+   2. Direct Call Helpline (Phone)
+   3. Google Maps Clinic Directions (MapPin)
+   4. Scroll to Top (ArrowUp)
+   ========================================================================== */
+
+.floating-contact-container {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 9995;
+  align-items: center;
+}
+
+.floating-fab-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease, background-color 0.2s ease;
+  box-shadow: 0 4px 16px rgba(173, 35, 72, 0.25);
+}
+
+.floating-fab-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(173, 35, 72, 0.4);
+}
+
+.floating-fab-btn:active {
+  transform: scale(0.95);
+}
+
+/* 1. Appointment FAB (Burgundy / Rose) */
+.floating-fab-appointment {
+  background: linear-gradient(135deg, #C21850 0%, #AD2348 100%);
+  color: #FFFFFF;
+}
+
+.floating-fab-appointment:hover {
+  background: linear-gradient(135deg, #a11341 0%, #8f1b3a 100%);
+}
+
+/* 2. Call FAB (Clinical Cyan / Teal) */
+.floating-fab-call {
+  background: linear-gradient(135deg, #0B7F8C 0%, #08616B 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(11, 127, 140, 0.35);
+}
+
+.floating-fab-call:hover {
+  background: linear-gradient(135deg, #096873 0%, #064b54 100%);
+  box-shadow: 0 8px 24px rgba(11, 127, 140, 0.5);
+}
+
+/* 3. Maps Directions FAB (Warm Coral / Rose) */
+.floating-fab-maps {
+  background: #FFFFFF;
+  color: #C21850;
+  border: 1.5px solid rgba(194, 24, 80, 0.25);
+  box-shadow: 0 4px 16px rgba(52, 57, 67, 0.12);
+}
+
+.floating-fab-maps:hover {
+  background: #FDF2F4;
+  border-color: #C21850;
+  box-shadow: 0 8px 22px rgba(194, 24, 80, 0.22);
+}
+
+/* 4. Scroll To Top FAB (Minimal White) */
+.floating-fab-top {
+  width: 40px;
+  height: 40px;
+  background: #FFFFFF;
+  color: #5B687B;
+  border: 1px solid rgba(91, 104, 123, 0.2);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.floating-fab-top:hover {
+  background: #F8F9FA;
+  color: #1F2733;
+}
+
+/* Optional Tooltip label on desktop hover */
+.floating-fab-tooltip {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #202B3C;
+  color: #FFFFFF;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-fab-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent transparent transparent #202B3C;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .floating-fab-btn:hover .floating-fab-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(-2px);
+  }
+}
+
+/* Responsive adjustment for Mobile viewports where MobileBottomBar is active */
+@media (max-width: 768px) {
+  .floating-contact-container {
+    right: 1rem;
+    bottom: 5.25rem; /* Above the pinned bottom bar */
+    gap: 0.6rem;
+  }
+
+  .floating-fab-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .floating-fab-top {
+    width: 36px;
+    height: 36px;
+  }
+}

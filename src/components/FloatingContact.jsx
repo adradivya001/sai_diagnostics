@@ -1,72 +1,63 @@
-import { Phone, ArrowUp } from 'lucide-react';
+import { Phone, Calendar, MapPin, ArrowUp } from 'lucide-react';
+import { useAppointmentModal } from './AppointmentModal';
+import './FloatingContact.css';
+
+const GOOGLE_MAPS_URL = "https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001";
 
 const FloatingContact = () => {
+  const { openModal } = useAppointmentModal();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="floating-contact-container">
-      {/* Phone Helpline Floating Button (Primary Burgundy) */}
+    <div className="floating-contact-container" aria-label="Quick Actions">
+      {/* 1. Appointment Form Modal Trigger FAB */}
+      <button
+        type="button"
+        onClick={() => openModal()}
+        className="floating-fab-btn floating-fab-appointment"
+        title="Book Appointment"
+        aria-label="Book scan appointment online"
+      >
+        <Calendar size={21} />
+        <span className="floating-fab-tooltip">Book Appointment</span>
+      </button>
+
+      {/* 2. Direct Call Helpline FAB */}
       <a 
         href="tel:+917799900248"
-        style={{
-          width: '46px',
-          height: '46px',
-          borderRadius: '50%',
-          backgroundColor: '#AD2348',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#ffffff',
-          boxShadow: '0 4px 14px rgba(173, 35, 72, 0.4)',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-          textDecoration: 'none'
-        }}
-        onMouseOver={e => {
-          e.currentTarget.style.transform = 'scale(1.08)';
-          e.currentTarget.style.boxShadow = '0 6px 18px rgba(173, 35, 72, 0.55)';
-          e.currentTarget.style.backgroundColor = '#8f1b3a';
-        }}
-        onMouseOut={e => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 14px rgba(173, 35, 72, 0.4)';
-          e.currentTarget.style.backgroundColor = '#AD2348';
-        }}
-        title="Call Helpline"
+        className="floating-fab-btn floating-fab-call"
+        title="Call Helpline: +91 77999 00248"
+        aria-label="Call clinic helpline directly"
       >
-        <Phone size={20} />
+        <Phone size={21} />
+        <span className="floating-fab-tooltip">Call Clinic (+91 77999 00248)</span>
       </a>
 
-      {/* Scroll to Top Floating Button */}
+      {/* 3. Google Maps Clinic Directions FAB */}
+      <a 
+        href={GOOGLE_MAPS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="floating-fab-btn floating-fab-maps"
+        title="Get Directions on Google Maps"
+        aria-label="Open clinic location on Google Maps"
+      >
+        <MapPin size={21} />
+        <span className="floating-fab-tooltip">Clinic Location & Directions</span>
+      </a>
+
+      {/* 4. Scroll to Top Floating Button */}
       <button 
         onClick={scrollToTop}
-        style={{
-          width: '46px',
-          height: '46px',
-          borderRadius: '50%',
-          backgroundColor: '#ffffff',
-          border: '1.5px solid rgba(173, 35, 72, 0.2)',
-          color: '#AD2348',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 14px rgba(52, 57, 67, 0.1)',
-          transition: 'transform 0.2s ease, background 0.2s ease'
-        }}
-        onMouseOver={e => {
-          e.currentTarget.style.transform = 'scale(1.08)';
-          e.currentTarget.style.backgroundColor = '#F8E7EC';
-        }}
-        onMouseOut={e => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.backgroundColor = '#ffffff';
-        }}
+        className="floating-fab-btn floating-fab-top"
         title="Scroll to Top"
+        aria-label="Scroll back to top of page"
         type="button"
       >
-        <ArrowUp size={20} />
+        <ArrowUp size={18} />
       </button>
     </div>
   );
