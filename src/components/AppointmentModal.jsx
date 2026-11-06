@@ -15,7 +15,6 @@ export const AppointmentModalProvider = ({ children }) => {
     age: '',
     scanType: 'TIFFA / Anomaly Scan',
     preferredDate: '',
-    preferredTime: 'Morning (09:00 AM - 01:00 PM)',
     doctor: 'Dr. T. Sai Kiranmai (M.B.B.S., DMRD)',
     notes: ''
   });
@@ -195,7 +194,7 @@ export const AppointmentModalProvider = ({ children }) => {
                   }}>
                     <div style={{ fontWeight: 700, color: '#2589C4', marginBottom: '0.35rem' }}>Inquiry Summary:</div>
                     <div><strong>Specialist:</strong> {formData.doctor}</div>
-                    <div><strong>Requested Time Window:</strong> {formData.preferredDate || 'Earliest Available'} ({formData.preferredTime})</div>
+                    <div><strong>Requested Date:</strong> {formData.preferredDate || 'Earliest Available'}</div>
                     <div><strong>Clinic Helpline:</strong> +91 77999 00248</div>
                   </div>
 
@@ -317,36 +316,18 @@ export const AppointmentModalProvider = ({ children }) => {
                       </select>
                     </div>
 
-                    {/* Preferred Date & Time Slot Row */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.85rem' }}>
-                      <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label" htmlFor="modal-date">
-                          Preferred Date
-                        </label>
-                        <input
-                          id="modal-date"
-                          type="date"
-                          value={formData.preferredDate}
-                          onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                          className="form-input"
-                        />
-                      </div>
-
-                      <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label className="form-label" htmlFor="modal-time">
-                          Preferred Time Window
-                        </label>
-                        <select
-                          id="modal-time"
-                          value={formData.preferredTime}
-                          onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                          className="form-select"
-                        >
-                          <option value="Morning (09:00 AM - 01:00 PM)">Morning (09:00 AM - 01:00 PM)</option>
-                          <option value="Afternoon (01:00 PM - 04:00 PM)">Afternoon (01:00 PM - 04:00 PM)</option>
-                          <option value="Evening (04:00 PM - 07:00 PM)">Evening (04:00 PM - 07:00 PM)</option>
-                        </select>
-                      </div>
+                    {/* Preferred Date */}
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label" htmlFor="modal-date">
+                        Preferred Date
+                      </label>
+                      <input
+                        id="modal-date"
+                        type="date"
+                        value={formData.preferredDate}
+                        onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                        className="form-input"
+                      />
                     </div>
 
                     {/* Consultant Doctor */}
