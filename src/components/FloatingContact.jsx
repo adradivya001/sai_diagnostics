@@ -102,17 +102,6 @@ const FloatingContact = () => {
         </span>
         <span className="floating-tab-label">Directions</span>
       </a>
-
-      {/* 4. Scroll To Top Button */}
-      <button 
-        onClick={scrollToTop}
-        className="floating-tab-item floating-tab-top"
-        title="Scroll to Top"
-        aria-label="Scroll back to top of page"
-        type="button"
-      >
-        <ArrowUp size={16} />
-      </button>
     </div>
   );
 };
