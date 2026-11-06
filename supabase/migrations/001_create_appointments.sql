@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS public.appointments (
   scan_type TEXT NOT NULL,
   consultant_doctor TEXT NOT NULL DEFAULT 'Dr. T. Sai Kiranmai (M.B.B.S., DMRD)',
   preferred_date DATE NULL,
-  preferred_time TEXT NULL,
   additional_notes TEXT NULL,
 
   -- Appointment Lifecycle Workflow Statuses
@@ -95,3 +94,4 @@ CREATE POLICY "Authorized staff can view and manage appointments"
     (auth.jwt() -> 'app_metadata' ->> 'role') = 'clinic_staff'
     OR (auth.jwt() ->> 'role') = 'service_role'
   );
+
