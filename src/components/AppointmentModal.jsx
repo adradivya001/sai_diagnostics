@@ -1,6 +1,7 @@
 import { useState, createContext, useContext } from 'react';
 import { X, Calendar, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
 import { services } from '../data/services';
+import { supabase } from '../lib/supabaseClient';
 
 const AppointmentModalContext = createContext(null);
 
@@ -22,6 +23,8 @@ export const AppointmentModalProvider = ({ children }) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const [requestId, setRequestId] = useState(null);
+  const [submitError, setSubmitError] = useState(null);
 
   const openModal = (initialService = '') => {
     if (initialService) {
@@ -30,6 +33,8 @@ export const AppointmentModalProvider = ({ children }) => {
     setSubmitted(false);
     setIsSubmitting(false);
     setErrors({});
+    setRequestId(null);
+    setSubmitError(null);
     setIsOpen(true);
   };
 
@@ -38,6 +43,8 @@ export const AppointmentModalProvider = ({ children }) => {
     setSubmitted(false);
     setIsSubmitting(false);
     setErrors({});
+    setRequestId(null);
+    setSubmitError(null);
   };
 
   const validate = () => {
@@ -49,19 +56,64 @@ export const AppointmentModalProvider = ({ children }) => {
     if (!cleanPhone || !/^[6-9]\d{9}$/.test(cleanPhone)) {
       errs.phone = 'Please enter a valid 10-digit mobile number.';
     }
+    if (formData.age) {
+      const numAge = parseInt(formData.age, 10);
+      if (isNaN(numAge) || numAge <= 0 || numAge > 120) {
+        errs.age = 'Please enter a valid age.';
+      }
+    }
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
-    
+    if (!validate() || isSubmitting) return;
+
+    setSubmitError(null);
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      const cleanPhone = formData.phone.trim().replace(/\D/g, '');
+      const isConsultation = formData.scanType.toLowerCase().includes('consultation');
+      const requestType = isConsultation ? 'consultation' : 'appointment';
+      const parsedAge = formData.age ? parseInt(formData.age, 10) : null;
+
+      const recordToInsert = {
+        request_type: requestType,
+        patient_name: formData.name.trim(),
+        phone_number: cleanPhone,
+        age: parsedAge,
+        scan_type: formData.scanType,
+        consultant_doctor: formData.doctor,
+        preferred_date: formData.preferredDate || null,
+        additional_notes: formData.notes.trim() || null,
+        status: 'pending_review',
+        reception_status: 'pending',
+        whatsapp_status: 'pending'
+      };
+
+      const { data, error } = await supabase
+        .from('appointments')
+        .insert([recordToInsert])
+        .select('id')
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      setRequestId(data?.id || null);
       setSubmitted(true);
-    }, 700);
+    } catch (err) {
+      console.error('Failed to submit appointment to Supabase:', err);
+      setSubmitError(
+        err?.message || 
+        'Unable to connect to the clinic server. Please check your internet connection or call our reception directly at +91 77999 00248.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -193,6 +245,11 @@ export const AppointmentModalProvider = ({ children }) => {
                     textAlign: 'left'
                   }}>
                     <div style={{ fontWeight: 700, color: '#2589C4', marginBottom: '0.35rem' }}>Inquiry Summary:</div>
+                    {requestId && (
+                      <div style={{ marginBottom: '0.25rem' }}>
+                        <strong>Reference ID:</strong> <code style={{ fontSize: '0.8rem', background: 'rgba(37, 137, 196, 0.12)', padding: '2px 6px', borderRadius: '4px' }}>{requestId.slice(0, 8).toUpperCase()}</code>
+                      </div>
+                    )}
                     <div><strong>Specialist:</strong> {formData.doctor}</div>
                     <div><strong>Requested Date:</strong> {formData.preferredDate || 'Earliest Available'}</div>
                     <div><strong>Clinic Helpline:</strong> +91 77999 00248</div>
@@ -209,6 +266,27 @@ export const AppointmentModalProvider = ({ children }) => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate>
+                  {/* Error Notification Banner */}
+                  {submitError && (
+                    <div style={{
+                      background: '#FDF2F4',
+                      border: '1px solid #C2184B',
+                      borderRadius: '12px',
+                      padding: '0.85rem 1rem',
+                      marginBottom: '1.25rem',
+                      fontSize: '0.85rem',
+                      color: '#C2184B',
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px'
+                    }}>
+                      <AlertCircle size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <div style={{ flex: 1, lineHeight: 1.5 }}>
+                        <strong>Submission Issue:</strong> {submitError}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Step Indicators / Info Badge */}
                   <div style={{
                     background: '#F8E7EC',
@@ -291,9 +369,18 @@ export const AppointmentModalProvider = ({ children }) => {
                           min="1"
                           max="120"
                           value={formData.age}
-                          onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                          onChange={(e) => {
+                            setFormData({ ...formData, age: e.target.value });
+                            if (errors.age) setErrors({ ...errors, age: undefined });
+                          }}
                           className="form-input"
+                          style={{ borderColor: errors.age ? '#C2184B' : undefined }}
                         />
+                        {errors.age && (
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C2184B', fontSize: '0.8rem', marginTop: '4px' }}>
+                            <AlertCircle size={13} /> {errors.age}
+                          </span>
+                        )}
                       </div>
                     </div>
 
