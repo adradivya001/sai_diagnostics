@@ -263,7 +263,7 @@ const Contact = () => {
                 </div>
 
                 {/* Direct Action Buttons */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }} className="contact-actions-grid">
                   <button
                     type="button"
                     onClick={() => openModal()}
@@ -272,6 +272,7 @@ const Contact = () => {
                       padding: '0.85rem 1.6rem',
                       display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '8px',
                       fontSize: '0.92rem',
                       borderRadius: '12px',
@@ -290,6 +291,7 @@ const Contact = () => {
                       padding: '0.85rem 1.6rem',
                       display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '8px',
                       fontSize: '0.92rem',
                       borderRadius: '12px',
@@ -307,6 +309,7 @@ const Contact = () => {
                       padding: '0.85rem 1.6rem',
                       display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '8px',
                       fontSize: '0.92rem',
                       borderRadius: '12px',
@@ -325,6 +328,7 @@ const Contact = () => {
                       padding: '0.85rem 1.6rem',
                       display: 'inline-flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '8px',
                       fontSize: '0.92rem',
                       borderRadius: '12px',

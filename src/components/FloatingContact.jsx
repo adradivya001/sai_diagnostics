@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Phone, Calendar, MapPin, ArrowUp } from 'lucide-react';
+import { Phone, Calendar, MapPin } from 'lucide-react';
 import { useAppointmentModal } from './AppointmentModal';
 import './FloatingContact.css';
 
@@ -7,23 +7,8 @@ const GOOGLE_MAPS_URL = "https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+R
 
 const FloatingContact = () => {
   const { openModal } = useAppointmentModal();
-  const [expandedId, setExpandedId] = useState(null); // 'appointment' | 'call' | 'location' | 'top' | null
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [expandedId, setExpandedId] = useState(null); // 'appointment' | 'call' | 'location' | null
   const containerRef = useRef(null);
-
-  // Monitor scroll depth for the Back to Top button
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 250) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Collapse expanded FAB if user clicks anywhere outside
   useEffect(() => {
@@ -70,16 +55,6 @@ const FloatingContact = () => {
       setExpandedId('location');
     }
     // If already expanded, target="_blank" opens Google Maps
-  };
-
-  const handleScrollTopClick = (e) => {
-    e.stopPropagation();
-    if (expandedId === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setExpandedId(null);
-    } else {
-      setExpandedId('top');
-    }
   };
 
   return (
@@ -132,22 +107,6 @@ const FloatingContact = () => {
             <MapPin size={20} />
           </span>
         </a>
-      </div>
-
-      {/* 4. Back to Top – Scroll to Top (Smoothly appears on scroll) */}
-      <div className={`fab-slot fab-slot-top ${showScrollTop ? 'is-visible' : ''}`}>
-        <button
-          type="button"
-          onClick={handleScrollTopClick}
-          className={`fab-btn fab-btn-top ${expandedId === 'top' ? 'is-expanded' : ''}`}
-          aria-label="Scroll to Top"
-          title={expandedId === 'top' ? 'Click to scroll to top' : 'Scroll to Top'}
-        >
-          <span className="fab-label">Scroll to Top</span>
-          <span className="fab-icon-circle">
-            <ArrowUp size={20} />
-          </span>
-        </button>
       </div>
     </aside>
   );

@@ -108,6 +108,17 @@ const Navbar = () => {
     setMobileServicesOpen(false);
   }, [location.pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [mobileMenuOpen]);
+
   // Click outside listener for desktop dropdown
   useEffect(() => {
     const handleClickOutside = (event) => {

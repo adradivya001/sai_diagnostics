@@ -1,6 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Quote, MessageSquareQuote, CheckCircle2, ExternalLink } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Quote, MessageSquareQuote, CheckCircle2, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { CrowdCanvas } from "../ui/skiper39";
 
 // Google G SVG Icon for genuine verified Google reviews
@@ -127,12 +127,64 @@ const realReviews = [
   },
 ];
 
-// Split reviews across 3 columns
+// Split reviews across 3 columns for Desktop/Tablet Marquee
 const col1 = [realReviews[0], realReviews[3], realReviews[6], realReviews[9]];
 const col2 = [realReviews[1], realReviews[4], realReviews[7], realReviews[10]];
 const col3 = [realReviews[2], realReviews[5], realReviews[8], realReviews[11]];
 
-// Smooth infinite vertical scrolling column matching TalentOps animation
+// Reusable Review Card Component
+function ReviewCard({ item }) {
+  return (
+    <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-[#F0E2E7] hover:border-[#AD2348]/35 shadow-sm transition-all duration-300 text-left select-none">
+      {/* Top Quote Glyph & Verified Google Review Badge */}
+      <div className="flex items-center justify-between mb-3.5">
+        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FFF0F4] to-[#FFE8EF] border border-[#FAD0DE] flex items-center justify-center text-[#AD2348]">
+          <Quote className="w-4 h-4 fill-current" />
+        </div>
+
+        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200/80 text-[11px] font-semibold text-slate-700 shadow-2xs">
+          <GoogleIcon className="w-3.5 h-3.5" />
+          <span>Google Review</span>
+        </div>
+      </div>
+
+      {/* Patient Review Text */}
+      <p className="text-[13.5px] sm:text-[14px] text-slate-700 leading-relaxed font-normal mb-5">
+        "{item.review}"
+      </p>
+
+      {/* Patient Profile Info */}
+      <div className="flex items-center gap-3 pt-3.5 border-t border-[#F5E6EC]">
+        {/* Clean Initials Avatar */}
+        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#FFF0F4] via-[#FCE8EF] to-[#FAD0DE] border border-[#FAD0DE] text-[#AD2348] font-bold text-xs flex items-center justify-center shadow-xs shrink-0 tracking-wide">
+          {item.initials}
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <cite className="font-sans font-bold not-italic text-sm text-[#1F2733] leading-snug truncate block">
+              {item.name}
+            </cite>
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" title="Verified Review" />
+          </div>
+
+          {item.isGuide ? (
+            <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#AD2348] mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#AD2348]" />
+              Local Guide
+            </span>
+          ) : (
+            <span className="text-[11px] text-slate-500 font-medium mt-0.5 block">
+              Verified Patient
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Smooth infinite vertical scrolling column for Desktop
 function TestimonialsColumn({ reviews, duration = 32, className = "" }) {
   return (
     <div className={`relative flex-1 min-w-[280px] max-w-sm ${className}`}>
@@ -154,52 +206,9 @@ function TestimonialsColumn({ reviews, duration = 32, className = "" }) {
                     "0 20px 40px -12px rgba(173, 35, 72, 0.16), 0 4px 12px rgba(0, 0, 0, 0.04)",
                   transition: { type: "spring", stiffness: 400, damping: 25 },
                 }}
-                className="p-6 rounded-2xl bg-white/95 backdrop-blur-md border border-[#F0E2E7] hover:border-[#AD2348]/35 shadow-sm transition-all duration-300 text-left select-none cursor-pointer group"
+                className="cursor-pointer"
               >
-                {/* Top Quote Glyph & Verified Google Review Badge */}
-                <div className="flex items-center justify-between mb-3.5">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FFF0F4] to-[#FFE8EF] border border-[#FAD0DE] flex items-center justify-center text-[#AD2348]">
-                    <Quote className="w-4 h-4 fill-current" />
-                  </div>
-
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200/80 text-[11px] font-semibold text-slate-700 shadow-2xs">
-                    <GoogleIcon className="w-3.5 h-3.5" />
-                    <span>Google Review</span>
-                  </div>
-                </div>
-
-                {/* Patient Review Text */}
-                <p className="text-[13.5px] sm:text-[14px] text-slate-700 leading-relaxed font-normal mb-5">
-                  "{item.review}"
-                </p>
-
-                {/* Patient Profile Info */}
-                <div className="flex items-center gap-3 pt-4 border-t border-[#F5E6EC]">
-                  {/* Clean Initials Avatar */}
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FFF0F4] via-[#FCE8EF] to-[#FAD0DE] border border-[#FAD0DE] text-[#AD2348] font-bold text-xs flex items-center justify-center shadow-xs shrink-0 tracking-wide">
-                    {item.initials}
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-1.5">
-                      <cite className="font-sans font-bold not-italic text-sm text-[#1F2733] leading-snug truncate block">
-                        {item.name}
-                      </cite>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" title="Verified Review" />
-                    </div>
-
-                    {item.isGuide ? (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#AD2348] mt-0.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#AD2348]" />
-                        Local Guide
-                      </span>
-                    ) : (
-                      <span className="text-[11px] text-slate-500 font-medium mt-0.5 block">
-                        Verified Patient
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <ReviewCard item={item} />
               </motion.li>
             ))}
           </React.Fragment>
@@ -210,9 +219,40 @@ function TestimonialsColumn({ reviews, duration = 32, className = "" }) {
 }
 
 export function TestimonialCarousel() {
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+  const touchStartXRef = useRef(0);
+  const touchEndXRef = useRef(0);
+
+  const prevReview = () => {
+    setActiveMobileIdx((prev) => (prev === 0 ? realReviews.length - 1 : prev - 1));
+  };
+
+  const nextReview = () => {
+    setActiveMobileIdx((prev) => (prev === realReviews.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartXRef.current - touchEndXRef.current;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextReview();
+      } else {
+        prevReview();
+      }
+    }
+  };
+
   return (
     <section className="relative py-12 sm:py-16 bg-gradient-to-b from-[#ECECE5] via-[#FBF9F7] to-[#ECECE5] text-[#1F2733] overflow-hidden border-t border-[#D9E2EC]" id="testimonials">
-      {/* Dynamic Keyframes for butter-smooth vertical infinite marquee with pause on hover */}
+      {/* Dynamic Keyframes for butter-smooth vertical infinite marquee on desktop */}
       <style>{`
         @keyframes testimonialVerticalLoop {
           0% {
@@ -227,14 +267,13 @@ export function TestimonialCarousel() {
           animation-timing-function: linear;
           animation-iteration-count: infinite;
         }
-        /* Butter-smooth pause when hovering over the review section, columns, or cards */
         .testimonials-marquee-container:hover .testimonial-marquee-track,
         .testimonial-marquee-track:hover {
           animation-play-state: paused !important;
         }
       `}</style>
 
-      {/* ── Skiper39 Canvas Crowd Background ── */}
+      {/* Skiper39 Canvas Crowd Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30 mix-blend-multiply z-0">
         <CrowdCanvas
           src="/images/peeps/all-peeps.png"
@@ -249,7 +288,7 @@ export function TestimonialCarousel() {
       <div className="absolute bottom-0 left-10 w-[450px] h-[450px] rounded-full bg-[#DFF6F5]/25 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Editorial Section Header (Matching Screenshot) */}
+        {/* Editorial Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10 text-left">
           <div className="space-y-3.5 max-w-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FDF2F4] border border-[#AD2348]/25 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#AD2348] shadow-xs">
@@ -257,7 +296,7 @@ export function TestimonialCarousel() {
               <span>AUTHENTIC PATIENT VOICES</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-sans font-bold text-[#13233D] tracking-tight leading-[1.15]">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-sans font-bold text-[#13233D] tracking-tight leading-[1.18]">
               Real People.
               <br />
               Real{" "}
@@ -273,7 +312,7 @@ export function TestimonialCarousel() {
 
           {/* Right Header Editorial Callout */}
           <div className="lg:text-right max-w-sm space-y-2">
-            <div className="font-sans text-2xl sm:text-3xl font-bold text-[#13233D] leading-tight">
+            <div className="font-sans text-xl sm:text-3xl font-bold text-[#13233D] leading-tight">
               Your Health.
               <br />
               <span className="italic font-sans text-[#AD2348]">
@@ -287,19 +326,80 @@ export function TestimonialCarousel() {
           </div>
         </div>
 
-        {/* ── 3-COLUMN INFINITE VERTICAL SCROLLING MARQUEE ── */}
+        {/* ── MOBILE HORIZONTAL SWIPE CAROUSEL (Screen <= 767px) ── */}
+        <div className="block md:hidden">
+          <div 
+            className="touch-pan-y relative overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeMobileIdx}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.22, ease: "easeInOut" }}
+                className="w-full"
+              >
+                <ReviewCard item={realReviews[activeMobileIdx]} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Mobile Navigation Controls & Dots */}
+          <div className="flex items-center justify-between mt-5 pt-2">
+            <button
+              type="button"
+              onClick={prevReview}
+              className="w-10 h-10 rounded-full bg-white border border-[#F0E2E7] text-[#AD2348] flex items-center justify-center shadow-xs active:scale-95 transition-transform"
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex items-center gap-1.5 overflow-x-auto max-w-[200px] px-2 py-1">
+              {realReviews.map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  onClick={() => setActiveMobileIdx(dotIdx)}
+                  aria-label={`Go to review ${dotIdx + 1}`}
+                  className={`transition-all rounded-full ${
+                    dotIdx === activeMobileIdx
+                      ? "w-6 h-2 bg-[#AD2348]"
+                      : "w-2 h-2 bg-slate-300"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={nextReview}
+              className="w-10 h-10 rounded-full bg-white border border-[#F0E2E7] text-[#AD2348] flex items-center justify-center shadow-xs active:scale-95 transition-transform"
+              aria-label="Next review"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* ── DESKTOP/TABLET 3-COLUMN INFINITE VERTICAL SCROLLING MARQUEE (Screen >= 768px) ── */}
         <div
-          className="testimonials-marquee-container flex justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[520px] sm:max-h-[560px] overflow-hidden"
+          className="hidden md:flex testimonials-marquee-container justify-center gap-6 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[520px] sm:max-h-[560px] overflow-hidden"
           role="region"
           aria-label="Patient Testimonials"
         >
-          {/* Column 1: Always visible */}
+          {/* Column 1: Always visible on tablet & desktop */}
           <TestimonialsColumn reviews={col1} duration={34} />
 
           {/* Column 2: Visible on tablet and desktop */}
-          <TestimonialsColumn reviews={col2} duration={40} className="hidden md:block" />
+          <TestimonialsColumn reviews={col2} duration={40} />
 
-          {/* Column 3: Visible on desktop */}
+          {/* Column 3: Visible on large desktop */}
           <TestimonialsColumn reviews={col3} duration={36} className="hidden lg:block" />
         </div>
 
@@ -309,7 +409,7 @@ export function TestimonialCarousel() {
             href="https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-[#FDF2F4] text-[#13233D] hover:text-[#AD2348] border border-[#D9E2EC] hover:border-[#AD2348]/40 text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all text-decoration-none"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white hover:bg-[#FDF2F4] text-[#13233D] hover:text-[#AD2348] border border-[#D9E2EC] hover:border-[#AD2348]/40 text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all text-decoration-none min-h-[44px]"
           >
             <span>View Our Verified Google Reviews Profile</span>
             <ExternalLink className="w-3.5 h-3.5 text-[#AD2348]" />
@@ -321,4 +421,3 @@ export function TestimonialCarousel() {
 }
 
 export default TestimonialCarousel;
-

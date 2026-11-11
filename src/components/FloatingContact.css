@@ -193,23 +193,10 @@
 
 /* --------------------------------------------------------------------------
    RESPONSIVE OPTIMIZATIONS (Mobile & Tablet <= 768px)
+   Hide right-side floating action buttons on mobile since bottom navigation bar handles mobile actions
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
-  :root {
-    --fab-size: 44px;
-    --fab-gap: 10px;
-    --fab-right-offset: 0.85rem;
-  }
-
   .fab-stack-container {
-    top: auto;
-    bottom: 5.5rem; /* Sits comfortably above the pinned bottom bar */
-    transform: none;
-  }
-
-  .fab-label {
-    font-size: 0.84rem;
-    padding-left: 14px;
-    padding-right: 2px;
+    display: none !important;
   }
 }

@@ -36,6 +36,7 @@ export const AppointmentModalProvider = ({ children }) => {
     setRequestId(null);
     setSubmitError(null);
     setIsOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
@@ -45,6 +46,7 @@ export const AppointmentModalProvider = ({ children }) => {
     setErrors({});
     setRequestId(null);
     setSubmitError(null);
+    document.body.style.overflow = '';
   };
 
   const validate = () => {

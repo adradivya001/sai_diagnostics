@@ -425,10 +425,7 @@ const About = () => {
           ========================================================================= */}
       <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5rem) 1.5rem' }}>
         <div className="container">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
-            gap: '3.5rem',
+          <div className="responsive-about-split" style={{
             alignItems: 'center'
           }}>
             {/* Visual Column: Genuine Reception Photo */}
@@ -445,7 +442,7 @@ const About = () => {
                   alt="Sai Diagnostics & Fetal Medicine Centre Patient Reception Area, Anantapur" 
                   style={{
                     width: '100%',
-                    height: '420px',
+                    height: 'clamp(240px, 45vw, 420px)',
                     objectFit: 'cover',
                     display: 'block'
                   }}

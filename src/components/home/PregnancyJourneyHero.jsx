@@ -17,6 +17,8 @@ const PregnancyJourneyHero = () => {
   const [activeStage, setActiveStage] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const timerRef = useRef(null);
+  const touchStartXRef = useRef(0);
+  const touchEndXRef = useRef(0);
 
   // Preload both images in browser memory to eliminate loading delay
   useEffect(() => {
@@ -51,6 +53,28 @@ const PregnancyJourneyHero = () => {
       document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
+
+  // Mobile Touch Swipe Handlers for carousel navigation
+  const handleTouchStart = (e) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const diff = touchStartXRef.current - touchEndXRef.current;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        // Swipe left -> advance to next slide
+        setActiveStage((prev) => (prev === 1 ? 2 : 1));
+      } else {
+        // Swipe right -> advance to prev slide
+        setActiveStage((prev) => (prev === 1 ? 2 : 1));
+      }
+    }
+  };
 
   const scrollToAbout = useCallback((e) => {
     e.preventDefault();
@@ -91,7 +115,48 @@ const PregnancyJourneyHero = () => {
         </div>
 
         {/* 2. HERO CONTENT: EDITORIAL HEALTHCARE LAYOUT */}
-        <div className="pj-content-container">
+        <div 
+          className="pj-content-container"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Mobile-dedicated Synchronized Hero Visual Card */}
+          <div className="pj-mobile-hero-visual-card" aria-hidden="true">
+            <div className={`pj-mobile-img-layer ${activeStage === 1 ? 'active' : 'inactive'}`}>
+              <img
+                src={stage1Img}
+                alt="Sai Diagnostics & Fetal Medicine Centre - Expert Fetal Care"
+                className="pj-mobile-hero-img pj-mobile-hero-img-stage1"
+                loading="eager"
+              />
+            </div>
+            <div className={`pj-mobile-img-layer ${activeStage === 2 ? 'active' : 'inactive'}`}>
+              <img
+                src={stage2Img}
+                alt="Sai Diagnostics & Fetal Medicine Centre - A Beautiful Beginning"
+                className="pj-mobile-hero-img pj-mobile-hero-img-stage2"
+                loading="eager"
+              />
+            </div>
+
+            {/* Mobile Slide Indicator Dots */}
+            <div className="pj-mobile-slide-dots" aria-hidden="true">
+              <button
+                type="button"
+                onClick={() => setActiveStage(1)}
+                className={`pj-mobile-dot ${activeStage === 1 ? 'active' : ''}`}
+                aria-label="Go to slide 1"
+              />
+              <button
+                type="button"
+                onClick={() => setActiveStage(2)}
+                className={`pj-mobile-dot ${activeStage === 2 ? 'active' : ''}`}
+                aria-label="Go to slide 2"
+              />
+            </div>
+          </div>
+
           <div 
             className="pj-narrative-col"
             onMouseEnter={() => setIsPaused(true)}
@@ -118,7 +183,6 @@ const PregnancyJourneyHero = () => {
 
               {/* Small highlight with blinking starlet placeholder */}
               <div className="pj-hero-highlight-badge">
-                <span className="pj-blinking-starlet" aria-hidden="true">?</span>
                 <Sparkles size={14} className="pj-highlight-sparkle" />
                 <span>Specialised Fetal Medicine | Advanced Pregnancy Imaging</span>
               </div>
@@ -163,7 +227,6 @@ const PregnancyJourneyHero = () => {
 
               {/* Small highlight with blinking starlet placeholder */}
               <div className="pj-hero-highlight-badge">
-                <span className="pj-blinking-starlet" aria-hidden="true">?</span>
                 <Sparkles size={14} className="pj-highlight-sparkle" />
                 <span>Precision in Diagnosis | Care for Every Family</span>
               </div>

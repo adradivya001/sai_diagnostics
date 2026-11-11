@@ -370,7 +370,7 @@ p {
 /* Page Spacing for Mobile Bottom Bar */
 @media (max-width: 768px) {
   .site-main-content {
-    padding-bottom: 4.5rem !important;
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 
@@ -510,6 +510,13 @@ iframe {
   border: 0;
 }
 
+/* Ensure mobile main site content has proper clearance for fixed bottom navigation bar */
+@media (max-width: 768px) {
+  .site-main-content {
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* Fluid responsive padding for main site containers */
 @media (max-width: 480px) {
   .btn {
@@ -523,11 +530,11 @@ iframe {
   }
 
   h1 {
-    font-size: clamp(1.85rem, 7vw, 2.35rem);
+    font-size: clamp(1.75rem, 6.8vw, 2.25rem);
   }
 
   h2 {
-    font-size: clamp(1.5rem, 5.5vw, 1.95rem);
+    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
   }
 
   .py-12 {
@@ -539,20 +546,47 @@ iframe {
     padding-top: 3rem;
     padding-bottom: 3rem;
   }
+
+  /* Universal touch-friendly action grids */
+  .contact-actions-grid,
+  .responsive-btn-row {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .contact-actions-grid .btn,
+  .contact-actions-grid a,
+  .contact-actions-grid button,
+  .responsive-btn-row .btn,
+  .responsive-btn-row a,
+  .responsive-btn-row button {
+    width: 100% !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    min-height: 44px !important;
+  }
 }
 
 /* Small mobile (320px - 360px) safeguards */
 @media (max-width: 360px) {
   .btn {
-    padding: 0.55rem 1rem;
-    font-size: 0.84rem;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.82rem;
     gap: 0.35rem;
   }
 
   .section-tag {
-    font-size: 0.72rem;
-    padding: 4px 10px;
-    letter-spacing: 1px;
+    font-size: 0.70rem;
+    padding: 4px 8px;
+    letter-spacing: 0.8px;
+  }
+
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
   }
 }
 

@@ -123,10 +123,7 @@ const Doctors = () => {
           ========================================================================= */}
       <section style={{ background: '#FFFFFF', padding: 'clamp(3.5rem, 6vw, 5.5rem) 1.5rem' }}>
         <div className="container">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 460px), 1fr))',
-            gap: '4rem',
+          <div className="responsive-split-editorial" style={{
             alignItems: 'center'
           }}>
             
@@ -338,7 +335,7 @@ const Doctors = () => {
                   “Committed to providing careful fetal imaging and personalised attention, with a focus on helping expectant parents understand their examinations and receive appropriate guidance.”
                 </blockquote>
 
-                <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} className="responsive-btn-row">
                   <button
                     onClick={() => openModal()}
                     type="button"
