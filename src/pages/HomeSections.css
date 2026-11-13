@@ -158,6 +158,27 @@
   gap: 16px;
 }
 
+.home-founder-avatar-frame {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2.5px solid #AD2348;
+  box-shadow: 0 4px 14px rgba(173, 35, 72, 0.2);
+  flex-shrink: 0;
+  background: #FFF9F5;
+}
+
+.home-founder-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 54%;
+  transform: scale(1.85);
+  transform-origin: center 54%;
+  display: block;
+}
+
 .home-founder-avatar-monogram {
   width: 52px;
   height: 52px;
@@ -667,6 +688,49 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.home-doctor-image-container {
+  width: 290px;
+  max-width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 3px solid rgba(173, 35, 72, 0.22);
+  box-shadow: 0 16px 36px rgba(173, 35, 72, 0.16);
+  margin-bottom: 1.5rem;
+  position: relative;
+  background: #FFFDFB;
+}
+
+.home-doctor-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 82%;
+  transform: none;
+  display: block;
+}
+
+.home-doctor-image-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 127, 140, 0.95);
+  backdrop-filter: blur(6px);
+  color: #FFFFFF;
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  z-index: 2;
 }
 
 .home-doctor-monogram {
@@ -1506,6 +1570,12 @@
     border-radius: 20px;
   }
 
+  .home-doctor-image-container {
+    width: 260px;
+    height: 310px;
+    border-radius: 20px;
+  }
+
   .home-technology-feature-list {
     gap: 0.85rem;
   }
@@ -1596,6 +1666,12 @@
 
   .home-service-card {
     padding: 1.25rem 1rem;
+  }
+
+  .home-doctor-image-container {
+    width: 230px;
+    height: 280px;
+    border-radius: 18px;
   }
 
   .home-contact-meta-col {

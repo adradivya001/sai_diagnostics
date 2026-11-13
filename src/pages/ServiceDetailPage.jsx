@@ -355,8 +355,12 @@ export function ServiceDetailPage() {
 
           <div className="sd-doctor-card">
             <div className="sd-doctor-profile">
-              <div className="sd-doctor-avatar-box">
-                <User size={30} />
+              <div className="sd-doctor-avatar-box" style={{ overflow: 'hidden', padding: 0, border: '2px solid #C21850' }}>
+                <img
+                  src="/dr-sai-kiranmai.jpg"
+                  alt={doctor.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 54%', transform: 'scale(1.85)', transformOrigin: 'center 54%' }}
+                />
               </div>
               <div>
                 <h3 className="sd-doctor-name">

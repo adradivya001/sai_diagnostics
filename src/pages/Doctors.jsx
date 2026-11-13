@@ -141,39 +141,30 @@ const Doctors = () => {
                 alignItems: 'center',
                 textAlign: 'center'
               }}>
-                {/* Monogram Seal */}
+                {/* Doctor Portrait Frame */}
                 <div style={{
-                  width: '130px',
-                  height: '130px',
-                  borderRadius: '50%',
-                  background: '#FFFFFF',
-                  border: '2px solid rgba(173, 35, 72, 0.22)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 12px 28px rgba(173, 35, 72, 0.10)',
-                  marginBottom: '1.75rem'
+                  width: 'clamp(240px, 28vw, 300px)',
+                  height: 'clamp(280px, 32vw, 350px)',
+                  borderRadius: '24px',
+                  overflow: 'hidden',
+                  border: '3px solid rgba(173, 35, 72, 0.22)',
+                  boxShadow: '0 16px 36px rgba(173, 35, 72, 0.16)',
+                  marginBottom: '1.75rem',
+                  position: 'relative',
+                  background: '#FFFDFB'
                 }}>
-                  <span style={{
-                    fontFamily: '"Playfair Display", Georgia, serif',
-                    fontSize: '2.5rem',
-                    fontWeight: 800,
-                    color: '#AD2348',
-                    lineHeight: 1
-                  }}>
-                    SK
-                  </span>
-                  <span style={{
-                    fontSize: '0.66rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    color: '#0B7F8C',
-                    marginTop: '4px'
-                  }}>
-                    FETAL CARE
-                  </span>
+                  <img
+                    src="/dr-sai-kiranmai.jpg"
+                    alt="Dr. T. Sai Kiranmai"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center 82%',
+                      transform: 'none',
+                      display: 'block'
+                    }}
+                  />
                 </div>
 
                 <h3 style={{

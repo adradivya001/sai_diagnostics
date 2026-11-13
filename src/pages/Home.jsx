@@ -270,9 +270,12 @@ const Home = () => {
             {/* Left: Founder / Doctor Visual Identity Presentation */}
             <ScrollReveal direction="left" delay={0.15} amount={0.25}>
               <div className="home-doctor-visual-frame">
-                <div className="home-doctor-monogram">
-                  <span className="home-doctor-monogram-initials">SK</span>
-                  <span className="home-doctor-monogram-sub">FETAL MEDICINE</span>
+                <div className="home-doctor-image-container">
+                  <img
+                    src="/dr-sai-kiranmai.jpg"
+                    alt="Dr. T. Sai Kiranmai - Consultant Radiologist & Fetal Medicine Specialist"
+                    className="home-doctor-portrait-img"
+                  />
                 </div>
 
                 <h3 className="home-doctor-name-card">

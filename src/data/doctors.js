@@ -2,6 +2,7 @@ export const doctors = [
   {
     id: "doc-kiranmai",
     name: "Dr. T. Sai Kiranmai",
+    image: "/dr-sai-kiranmai.jpg",
     qualifications: "M.B.B.S., DMRD",
     fellowship: "Fellowship in Fetal Ultrasound",
     title: "Consultant Radiologist & Fetal Medicine Specialist",
