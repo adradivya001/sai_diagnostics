@@ -1096,6 +1096,17 @@
     box-sizing: border-box;
   }
 
+  /* Hide Book Appointment button in mobile hero - relocated to mobile top header */
+  .pj-btn-primary {
+    display: none !important;
+  }
+
+  .pj-btn-secondary {
+    width: auto;
+    min-width: 220px;
+    margin: 0 auto;
+  }
+
   .pj-sparkle-anchor {
     right: 35vw;
     top: 38vh;
@@ -1194,20 +1205,22 @@
   }
 
   .pj-actions {
-    flex-direction: column;
-    gap: 0.55rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     margin-bottom: 0.35rem;
   }
 
-  .pj-btn-primary,
   .pj-btn-secondary {
     width: 100%;
+    max-width: 280px;
     padding: 0.7rem 1.25rem;
     font-size: 0.88rem;
     min-height: 44px;
     box-sizing: border-box;
     justify-content: center;
+    margin: 0 auto;
   }
 
   .pj-stage-indicator-btn {

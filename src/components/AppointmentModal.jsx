@@ -78,34 +78,39 @@ export const AppointmentModalProvider = ({ children }) => {
     try {
       const cleanPhone = formData.phone.trim().replace(/\D/g, '');
       const isConsultation = formData.scanType.toLowerCase().includes('consultation');
-      const requestType = isConsultation ? 'consultation' : 'appointment';
-      const parsedAge = formData.age ? parseInt(formData.age, 10) : null;
+      const requestType = isConsultation ? 'consultation' : 'scan';
+      
+      // Calculate normalized appointment date (fallback to today/tomorrow if not picked)
+      const selectedDate = formData.preferredDate || new Date().toISOString().split('T')[0];
 
-      const recordToInsert = {
-        request_type: requestType,
-        patient_name: formData.name.trim(),
-        phone_number: cleanPhone,
-        age: parsedAge,
-        scan_type: formData.scanType,
-        consultant_doctor: formData.doctor,
-        preferred_date: formData.preferredDate || null,
-        additional_notes: formData.notes.trim() || null,
-        status: 'pending_review',
-        reception_status: 'pending',
-        whatsapp_status: 'pending'
-      };
+      // Submit to backend API endpoint POST /api/appointments
+      const response = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          patient_name: formData.name.trim(),
+          mobile_number: cleanPhone,
+          request_type: requestType,
+          service: formData.scanType,
+          appointment_date: selectedDate,
+        }),
+      });
 
-      const { error } = await supabase
-        .from('appointments')
-        .insert([recordToInsert]);
+      const result = await response.json();
 
-      if (error) {
-        throw error;
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || result.details?.[0]?.message || 'Failed to submit appointment request');
+      }
+
+      if (result.appointment?.id) {
+        setRequestId(result.appointment.id);
       }
 
       setSubmitted(true);
     } catch (err) {
-      console.error('Failed to submit appointment to Supabase:', err);
+      console.error('Failed to submit appointment request to backend:', err);
       setSubmitError(
         err?.message || 
         'Unable to connect to the clinic server. Please check your internet connection or call our reception directly at +91 77999 00248.'
@@ -226,11 +231,13 @@ export const AppointmentModalProvider = ({ children }) => {
                   </div>
 
                   <h3 style={{ fontSize: '1.45rem', color: 'var(--text-heading)', marginBottom: '0.5rem', fontFamily: '"Playfair Display", serif' }}>
-                    Inquiry Received, {formData.name}!
+                    Appointment Request Submitted!
                   </h3>
 
                   <p style={{ color: 'var(--text-charcoal)', fontSize: '0.94rem', lineHeight: 1.6, maxWidth: '440px', margin: '0 auto 1.5rem' }}>
-                    We have logged your request for <strong>{formData.scanType}</strong>. Please note: An appointment request is not confirmed until our reception team calls you at <strong>{formData.phone}</strong> to confirm doctor schedule and scan preparation.
+                    Thank you, <strong>{formData.name}</strong>. We have received your appointment request for <strong>{formData.scanType}</strong>.
+                    <br /><br />
+                    <span style={{ color: '#AD2348', fontWeight: 600 }}>Please Note:</span> Your appointment is currently <strong>Pending Confirmation</strong>. Our hospital reception team will contact you at <strong>{formData.phone}</strong> to confirm your slot time and clinical preparation.
                   </p>
 
                   <div style={{

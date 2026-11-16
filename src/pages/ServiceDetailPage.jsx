@@ -359,7 +359,7 @@ export function ServiceDetailPage() {
                 <img
                   src="/dr-sai-kiranmai.jpg"
                   alt={doctor.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 54%', transform: 'scale(1.85)', transformOrigin: 'center 54%' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: '42% 54%', transform: 'scale(1.85)', transformOrigin: '42% 54%' }}
                 />
               </div>
               <div>

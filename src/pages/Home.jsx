@@ -136,8 +136,12 @@ const Home = () => {
 
                 <div className="home-founder-footer">
                   <div className="home-founder-profile">
-                    <div className="home-founder-avatar-monogram">
-                      <span>SK</span>
+                    <div className="home-founder-avatar-frame">
+                      <img
+                        src="/dr-sai-kiranmai.jpg"
+                        alt="Dr. T. Sai Kiranmai"
+                        className="home-founder-avatar-img"
+                      />
                     </div>
                     <div className="home-founder-info">
                       <h3 className="home-founder-name">

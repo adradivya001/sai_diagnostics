@@ -160,7 +160,7 @@ const Doctors = () => {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      objectPosition: 'center 82%',
+                      objectPosition: '42% 82%',
                       transform: 'none',
                       display: 'block'
                     }}

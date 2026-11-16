@@ -429,15 +429,38 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
-        <button
-          className="navbar-mobile-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-          type="button"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Header Actions (Two-line Book Appointment & Phone CTA + Hamburger) */}
+        <div className="navbar-mobile-header-actions">
+          <div className="navbar-mobile-dual-cta">
+            <button
+              type="button"
+              onClick={() => openModal()}
+              className="navbar-mobile-cta-row navbar-mobile-cta-booking"
+              title="Book Scan Appointment Online"
+            >
+              <span>Book Appointment</span>
+              <ArrowRight size={13} className="navbar-mobile-cta-arrow" />
+            </button>
+            <a
+              href="tel:+917799900248"
+              className="navbar-mobile-cta-row navbar-mobile-cta-phone"
+              title="Call +91 7799900248"
+            >
+              <Phone size={11} className="navbar-mobile-phone-icon" />
+              <span>+91 7799900248</span>
+            </a>
+          </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            className="navbar-mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            type="button"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
       </div>
 
@@ -518,24 +541,6 @@ const Navbar = () => {
             </Link>
           );
         })}
-        <div className="navbar-mobile-actions">
-          <a href="tel:+917799900248" className="navbar-phone-btn">
-            <Phone size={15} className="phone-icon-wiggle" />
-            +91 7799900248
-          </a>
-          <button 
-            onClick={() => {
-              setMobileMenuOpen(false);
-              openModal();
-            }} 
-            className="navbar-cta-btn"
-            style={{ cursor: 'pointer', width: '100%', justifyContent: 'center' }}
-            type="button"
-          >
-            <Calendar size={15} className="calendar-icon-pulse" />
-            Book Appointment
-          </button>
-        </div>
       </div>
     </header>
   );

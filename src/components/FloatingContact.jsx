@@ -1,112 +1,60 @@
-import { useState, useEffect, useRef } from 'react';
-import { Phone, Calendar, MapPin } from 'lucide-react';
-import { useAppointmentModal } from './AppointmentModal';
+import React from 'react';
+import { Phone, MessageCircle, MapPin } from 'lucide-react';
 import './FloatingContact.css';
 
+const PHONE_NUMBER = "+917799900248";
+const WHATSAPP_URL = "https://wa.me/917799900248?text=Hello%20Sai%20Diagnostics,%20I%20would%20like%20to%20enquire%20about%20an%20appointment";
 const GOOGLE_MAPS_URL = "https://maps.google.com/?q=Sai+Diagnostics,+9th+Cross+Rd,+Sai+Nagar,+Anantapur,+Andhra+Pradesh+515001";
 
+/**
+ * FloatingActionButtons (FABs)
+ * Stack of 3 action buttons (Call, WhatsApp, Maps) mounted globally,
+ * pinned vertically dead-center on the right viewport edge on both desktop & mobile.
+ */
 const FloatingContact = () => {
-  const { openModal } = useAppointmentModal();
-  const [expandedId, setExpandedId] = useState(null); // 'appointment' | 'call' | 'location' | null
-  const containerRef = useRef(null);
-
-  // Collapse expanded FAB if user clicks anywhere outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setExpandedId(null);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, []);
-
-  const toggleExpand = (id) => {
-    setExpandedId((prev) => (prev === id ? null : id));
-  };
-
-  const handleAppointmentClick = (e) => {
-    e.stopPropagation();
-    if (expandedId === 'appointment') {
-      openModal();
-      setExpandedId(null);
-    } else {
-      setExpandedId('appointment');
-    }
-  };
-
-  const handleCallClick = (e) => {
-    e.stopPropagation();
-    if (expandedId !== 'call') {
-      e.preventDefault();
-      setExpandedId('call');
-    }
-    // If already expanded, native href="tel:+917799900248" initiates the call
-  };
-
-  const handleLocationClick = (e) => {
-    e.stopPropagation();
-    if (expandedId !== 'location') {
-      e.preventDefault();
-      setExpandedId('location');
-    }
-    // If already expanded, target="_blank" opens Google Maps
-  };
-
   return (
-    <aside className="fab-stack-container" ref={containerRef} aria-label="Quick Actions">
-      {/* 1. Calendar – Book Appointment */}
-      <div className="fab-slot">
-        <button
-          type="button"
-          onClick={handleAppointmentClick}
-          className={`fab-btn fab-btn-appointment ${expandedId === 'appointment' ? 'is-expanded' : ''}`}
-          aria-label="Book Appointment"
-          title={expandedId === 'appointment' ? 'Click to open booking form' : 'Book Appointment'}
-        >
-          <span className="fab-label">Book Appointment</span>
-          <span className="fab-icon-circle">
-            <Calendar size={20} />
-          </span>
-        </button>
-      </div>
-
-      {/* 2. Phone – Call Us */}
-      <div className="fab-slot">
+    <aside className="fab-stack-container" aria-label="Quick Actions">
+      {/* 1. Call 24/7 Helpline */}
+      <div className="fab-item-group">
+        <div className="fab-tooltip">Call +91 77999 00248</div>
         <a
-          href="tel:+917799900248"
-          onClick={handleCallClick}
-          className={`fab-btn fab-btn-call ${expandedId === 'call' ? 'is-expanded' : ''}`}
-          aria-label="Call Us: +91 77999 00248"
-          title={expandedId === 'call' ? 'Click to dial +91 77999 00248' : 'Call Us'}
+          href={`tel:${PHONE_NUMBER}`}
+          className="fab-circle-btn fab-btn-call"
+          aria-label="Call Sai Diagnostics: +91 77999 00248"
         >
-          <span className="fab-label">Call Us</span>
-          <span className="fab-icon-circle">
-            <Phone size={20} />
-          </span>
+          <Phone size={19} className="fab-icon" />
         </a>
+        <span className="fab-badge-label">Call</span>
       </div>
 
-      {/* 3. Location – Find Us */}
-      <div className="fab-slot">
+      {/* 2. WhatsApp Desk */}
+      <div className="fab-item-group">
+        <div className="fab-tooltip">Chat on WhatsApp</div>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fab-circle-btn fab-btn-whatsapp"
+          aria-label="Chat with Sai Diagnostics on WhatsApp"
+        >
+          <MessageCircle size={19} className="fab-icon" />
+        </a>
+        <span className="fab-badge-label">WhatsApp</span>
+      </div>
+
+      {/* 3. Google Maps Directions */}
+      <div className="fab-item-group">
+        <div className="fab-tooltip">Get Google Maps Directions</div>
         <a
           href={GOOGLE_MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={handleLocationClick}
-          className={`fab-btn fab-btn-location ${expandedId === 'location' ? 'is-expanded' : ''}`}
-          aria-label="Find Us on Google Maps"
-          title={expandedId === 'location' ? 'Click to open Google Maps directions' : 'Find Us'}
+          className="fab-circle-btn fab-btn-maps"
+          aria-label="Find Sai Diagnostics on Google Maps"
         >
-          <span className="fab-label">Find Us</span>
-          <span className="fab-icon-circle">
-            <MapPin size={20} />
-          </span>
+          <MapPin size={19} className="fab-icon" />
         </a>
+        <span className="fab-badge-label">Maps</span>
       </div>
     </aside>
   );
