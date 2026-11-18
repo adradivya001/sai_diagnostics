@@ -1,7 +1,10 @@
 import { useState, createContext, useContext } from 'react';
-import { X, Calendar, CheckCircle2, Clock, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Calendar, CheckCircle2, Clock, AlertCircle, Loader2, MessageCircle, ShieldCheck } from 'lucide-react';
 import { services } from '../data/services';
 import { supabase } from '../lib/supabaseClient';
+
+const CONSENT_TEXT_VERSION = 'v1.0_2026';
+const CONSENT_SOURCE = 'web_appointment_modal';
 
 const AppointmentModalContext = createContext(null);
 
@@ -20,6 +23,10 @@ export const AppointmentModalProvider = ({ children }) => {
     notes: ''
   });
 
+  // WhatsApp communication preferences (both optional and unchecked by default)
+  const [whatsappAppointmentConsent, setWhatsappAppointmentConsent] = useState(false);
+  const [whatsappPromotionalConsent, setWhatsappPromotionalConsent] = useState(false);
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
@@ -30,6 +37,8 @@ export const AppointmentModalProvider = ({ children }) => {
     if (initialService) {
       setFormData(prev => ({ ...prev, scanType: initialService }));
     }
+    setWhatsappAppointmentConsent(false);
+    setWhatsappPromotionalConsent(false);
     setSubmitted(false);
     setIsSubmitting(false);
     setErrors({});
@@ -41,12 +50,22 @@ export const AppointmentModalProvider = ({ children }) => {
 
   const closeModal = () => {
     setIsOpen(false);
+    setWhatsappAppointmentConsent(false);
+    setWhatsappPromotionalConsent(false);
     setSubmitted(false);
     setIsSubmitting(false);
     setErrors({});
     setRequestId(null);
     setSubmitError(null);
     document.body.style.overflow = '';
+  };
+
+  const getTodayDateString = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   const validate = () => {
@@ -64,6 +83,37 @@ export const AppointmentModalProvider = ({ children }) => {
         errs.age = 'Please enter a valid age.';
       }
     }
+
+    // Strict Date Guardrails:
+    // 1. Must be a valid date format YYYY-MM-DD
+    // 2. Reject all-zeros or invalid segments (e.g. 0000-00-00, 2026-00-00)
+    // 3. Disallow past dates (prior to today)
+    if (formData.preferredDate) {
+      const dateVal = formData.preferredDate.trim();
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateVal);
+      if (!match) {
+        errs.preferredDate = 'Please select a valid appointment date.';
+      } else {
+        const year = parseInt(match[1], 10);
+        const month = parseInt(match[2], 10);
+        const day = parseInt(match[3], 10);
+
+        if (year <= 0 || month <= 0 || month > 12 || day <= 0 || day > 31) {
+          errs.preferredDate = 'Invalid date. Zeros or invalid calendar values are not accepted.';
+        } else {
+          const parsed = new Date(`${dateVal}T00:00:00`);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          if (isNaN(parsed.getTime())) {
+            errs.preferredDate = 'Please enter a valid calendar date.';
+          } else if (parsed < today) {
+            errs.preferredDate = 'Past dates are not available for booking. Please select today or a future date.';
+          }
+        }
+      }
+    }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -83,29 +133,100 @@ export const AppointmentModalProvider = ({ children }) => {
       // Calculate normalized appointment date (fallback to today/tomorrow if not picked)
       const selectedDate = formData.preferredDate || new Date().toISOString().split('T')[0];
 
-      // Submit to backend API endpoint POST /api/appointments
-      const response = await fetch('/api/appointments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      let createdAppointmentId = null;
+      const consentTimestamp = new Date().toISOString();
+
+      // 1. Direct insert to Supabase appointments table including patient consent selections
+      try {
+        const appointmentRecord = {
           patient_name: formData.name.trim(),
           mobile_number: cleanPhone,
           request_type: requestType,
           service: formData.scanType,
           appointment_date: selectedDate,
-        }),
-      });
+          whatsapp_consent_appointment: !!whatsappAppointmentConsent,
+          whatsapp_consent_promotional: !!whatsappPromotionalConsent,
+          consent_timestamp: consentTimestamp,
+          consent_source: CONSENT_SOURCE,
+          consent_text_version: CONSENT_TEXT_VERSION,
+          status: 'pending'
+        };
 
-      const result = await response.json();
+        const { data: insertedData, error: insertError } = await supabase
+          .from('appointments')
+          .insert([appointmentRecord])
+          .select('id')
+          .single();
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || result.details?.[0]?.message || 'Failed to submit appointment request');
+        if (insertError) {
+          console.warn('Direct Supabase insert notice, attempting API fallback:', insertError.message);
+        } else if (insertedData?.id) {
+          createdAppointmentId = insertedData.id;
+          setRequestId(createdAppointmentId);
+        }
+      } catch (directErr) {
+        console.warn('Direct Supabase insert encountered exception:', directErr);
       }
 
-      if (result.appointment?.id) {
-        setRequestId(result.appointment.id);
+      // 2. If direct insert was not used, fall back to backend API endpoint POST /api/appointments
+      if (!createdAppointmentId) {
+        try {
+          const response = await fetch('/api/appointments', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              patient_name: formData.name.trim(),
+              mobile_number: cleanPhone,
+              request_type: requestType,
+              service: formData.scanType,
+              appointment_date: selectedDate,
+              whatsapp_consent_appointment: whatsappAppointmentConsent,
+              whatsapp_consent_promotional: whatsappPromotionalConsent,
+              consent_source: CONSENT_SOURCE,
+              consent_text_version: CONSENT_TEXT_VERSION,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.error || result.details?.[0]?.message || 'Failed to submit appointment request');
+          }
+
+          if (result.appointment?.id) {
+            createdAppointmentId = result.appointment.id;
+            setRequestId(createdAppointmentId);
+          }
+        } catch (apiErr) {
+          // If neither direct insert nor API succeeded, throw error
+          if (!createdAppointmentId) {
+            throw apiErr;
+          }
+        }
+      }
+
+      // 3. Record consent in Supabase (if whatsapp_consent table exists)
+      try {
+        const consentTimestamp = new Date().toISOString();
+        const consentPayload = {
+          patient_id: createdAppointmentId,
+          patient_name: formData.name.trim(),
+          mobile_number: cleanPhone,
+          consent_appointment: whatsappAppointmentConsent,
+          consent_promotional: whatsappPromotionalConsent,
+          consent_timestamp: consentTimestamp,
+          consent_source: CONSENT_SOURCE,
+          consent_text_version: CONSENT_TEXT_VERSION
+        };
+
+        await supabase
+          .from('whatsapp_consent')
+          .insert([consentPayload]);
+      } catch (consentErr) {
+        // Non-blocking write: consent log failure must never abort successful booking
+        console.warn('WhatsApp consent logging to Supabase notice:', consentErr);
       }
 
       setSubmitted(true);
@@ -417,10 +538,23 @@ export const AppointmentModalProvider = ({ children }) => {
                       <input
                         id="modal-date"
                         type="date"
+                        min={getTodayDateString()}
                         value={formData.preferredDate}
-                        onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setFormData({ ...formData, preferredDate: val });
+                          if (errors.preferredDate) {
+                            setErrors({ ...errors, preferredDate: undefined });
+                          }
+                        }}
                         className="form-input"
+                        style={{ borderColor: errors.preferredDate ? '#C2184B' : undefined }}
                       />
+                      {errors.preferredDate && (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C2184B', fontSize: '0.8rem', marginTop: '4px' }}>
+                          <AlertCircle size={13} /> {errors.preferredDate}
+                        </span>
+                      )}
                     </div>
 
                     {/* Consultant Doctor */}
@@ -454,8 +588,116 @@ export const AppointmentModalProvider = ({ children }) => {
                     </div>
                   </div>
 
+                  {/* WhatsApp Communication Preferences Section */}
+                  <div
+                    style={{
+                      marginTop: '1.25rem',
+                      padding: '1rem 1.1rem',
+                      background: '#FFF9F5',
+                      border: '1px solid rgba(173, 35, 72, 0.16)',
+                      borderRadius: '16px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.85rem'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          borderRadius: '50%',
+                          background: '#E8F5E9',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#2E7D32',
+                          flexShrink: 0
+                        }}
+                      >
+                        <MessageCircle size={14} />
+                      </span>
+                      <div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-heading, #1F2733)' }}>
+                          WhatsApp Communication Preferences
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: 'var(--text-muted, #647184)' }}>
+                          Optional · You can modify or withdraw consent at any time
+                        </div>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                      {/* Preference 1: Appointment Updates */}
+                      <label
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: '10px',
+                          cursor: 'pointer',
+                          fontSize: '0.82rem',
+                          color: '#343943',
+                          lineHeight: 1.45,
+                          userSelect: 'none'
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={whatsappAppointmentConsent}
+                          onChange={(e) => setWhatsappAppointmentConsent(e.target.checked)}
+                          style={{
+                            marginTop: '2px',
+                            accentColor: '#AD2348',
+                            width: '16px',
+                            height: '16px',
+                            cursor: 'pointer',
+                            flexShrink: 0
+                          }}
+                        />
+                        <span>
+                          <strong>Appointment Updates:</strong> I agree to receive appointment confirmations, reminders and booking-related updates from the hospital through WhatsApp.
+                        </span>
+                      </label>
+
+                      {/* Preference 2: Health Awareness & Promotional Updates */}
+                      <label
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          gap: '10px',
+                          cursor: 'pointer',
+                          fontSize: '0.82rem',
+                          color: '#343943',
+                          lineHeight: 1.45,
+                          userSelect: 'none'
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={whatsappPromotionalConsent}
+                          onChange={(e) => setWhatsappPromotionalConsent(e.target.checked)}
+                          style={{
+                            marginTop: '2px',
+                            accentColor: '#AD2348',
+                            width: '16px',
+                            height: '16px',
+                            cursor: 'pointer',
+                            flexShrink: 0
+                          }}
+                        />
+                        <span>
+                          <strong>Health Awareness &amp; Promotional Updates:</strong> I agree to receive hospital health campaigns, awareness programmes, health camp announcements and promotional information through WhatsApp.
+                        </span>
+                      </label>
+                    </div>
+
+                    <p style={{ margin: 0, fontSize: '0.72rem', color: '#647184', lineHeight: 1.4 }}>
+                      * Both choices are completely optional. Declining consent will not prevent or delay your appointment booking. Your clinical notes and medical records are kept confidential and are never used for promotional targeting.
+                    </p>
+                  </div>
+
                   {/* Submit Button */}
-                  <div style={{ marginTop: '1.5rem' }}>
+                  <div style={{ marginTop: '1.25rem' }}>
                     <button
                       type="submit"
                       disabled={isSubmitting}

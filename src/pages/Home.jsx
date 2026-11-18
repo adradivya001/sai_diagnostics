@@ -696,7 +696,7 @@ const Home = () => {
           </div>
 
           <StaggerContainer delayChildren={0.2} staggerChildren={0.12} className="home-journey-timeline">
-            <StaggerItem>
+            <StaggerItem style={{ position: 'relative', zIndex: 1, height: '100%' }}>
               <HoverCard lift={-5} className="home-journey-step-card" style={{ height: '100%' }}>
                 <span className="home-journey-number-badge">01</span>
                 <div className="home-journey-icon-wrap">
@@ -711,7 +711,7 @@ const Home = () => {
               </HoverCard>
             </StaggerItem>
 
-            <StaggerItem>
+            <StaggerItem style={{ position: 'relative', zIndex: 1, height: '100%' }}>
               <HoverCard lift={-5} className="home-journey-step-card" style={{ height: '100%' }}>
                 <span className="home-journey-number-badge">02</span>
                 <div className="home-journey-icon-wrap">
@@ -726,7 +726,7 @@ const Home = () => {
               </HoverCard>
             </StaggerItem>
 
-            <StaggerItem>
+            <StaggerItem style={{ position: 'relative', zIndex: 1, height: '100%' }}>
               <HoverCard lift={-5} className="home-journey-step-card" style={{ height: '100%' }}>
                 <span className="home-journey-number-badge">03</span>
                 <div className="home-journey-icon-wrap">
@@ -741,7 +741,7 @@ const Home = () => {
               </HoverCard>
             </StaggerItem>
 
-            <StaggerItem>
+            <StaggerItem style={{ position: 'relative', zIndex: 1, height: '100%' }}>
               <HoverCard lift={-5} className="home-journey-step-card" style={{ height: '100%' }}>
                 <span className="home-journey-number-badge">04</span>
                 <div className="home-journey-icon-wrap">
