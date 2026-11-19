@@ -159,7 +159,7 @@ const Home = () => {
                   <div className="home-founder-actions">
                     <button
                       type="button"
-                      onClick={() => openModal("Consultation with Dr. T. Sai Kiranmai")}
+                      onClick={() => openModal()}
                       className="btn btn-primary home-founder-btn"
                     >
                       <CalendarCheck size={16} /> Book Consultation

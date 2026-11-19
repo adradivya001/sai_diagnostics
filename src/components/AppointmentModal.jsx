@@ -17,7 +17,7 @@ export const AppointmentModalProvider = ({ children }) => {
     name: '',
     phone: '',
     age: '',
-    scanType: 'TIFFA / Anomaly Scan',
+    scanType: services[0]?.name || 'Dating, Viability / Pregnancy Scan',
     preferredDate: '',
     doctor: 'Dr. T. Sai Kiranmai (M.B.B.S., DMRD)',
     notes: ''
@@ -34,9 +34,11 @@ export const AppointmentModalProvider = ({ children }) => {
   const [submitError, setSubmitError] = useState(null);
 
   const openModal = (initialService = '') => {
-    if (initialService) {
-      setFormData(prev => ({ ...prev, scanType: initialService }));
-    }
+    const matchedService = services.find(s => s.name === initialService);
+    setFormData(prev => ({
+      ...prev,
+      scanType: matchedService ? matchedService.name : (services[0]?.name || 'Dating, Viability / Pregnancy Scan')
+    }));
     setWhatsappAppointmentConsent(false);
     setWhatsappPromotionalConsent(false);
     setSubmitted(false);
@@ -50,6 +52,15 @@ export const AppointmentModalProvider = ({ children }) => {
 
   const closeModal = () => {
     setIsOpen(false);
+    setFormData(prev => ({
+      ...prev,
+      name: '',
+      phone: '',
+      age: '',
+      scanType: services[0]?.name || 'Dating, Viability / Pregnancy Scan',
+      preferredDate: '',
+      notes: ''
+    }));
     setWhatsappAppointmentConsent(false);
     setWhatsappPromotionalConsent(false);
     setSubmitted(false);
@@ -114,6 +125,14 @@ export const AppointmentModalProvider = ({ children }) => {
       }
     }
 
+    // Strict Service Selection Validation:
+    // Ensure selected service exists in approved services list and is not empty
+    if (!formData.scanType || !formData.scanType.trim()) {
+      errs.scanType = 'Please select a diagnostic scan or service.';
+    } else if (!services.some(s => s.name === formData.scanType)) {
+      errs.scanType = 'The selected service is not recognized. Please choose a valid service from the list.';
+    }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -133,105 +152,32 @@ export const AppointmentModalProvider = ({ children }) => {
       // Calculate normalized appointment date (fallback to today/tomorrow if not picked)
       const selectedDate = formData.preferredDate || new Date().toISOString().split('T')[0];
 
-      let createdAppointmentId = null;
-      const consentTimestamp = new Date().toISOString();
+      // Submit appointment request securely via Supabase RPC (Zero patient-data exposure)
+      const { data: rpcResponse, error: rpcError } = await supabase.rpc('submit_appointment_request', {
+        p_patient_name: formData.name.trim(),
+        p_mobile_number: cleanPhone,
+        p_request_type: requestType,
+        p_service: formData.scanType,
+        p_appointment_date: selectedDate,
+        p_whatsapp_consent_appointment: !!whatsappAppointmentConsent,
+        p_whatsapp_consent_promotional: !!whatsappPromotionalConsent,
+        p_consent_source: CONSENT_SOURCE,
+        p_consent_text_version: CONSENT_TEXT_VERSION
+      });
 
-      // 1. Direct insert to Supabase appointments table including patient consent selections
-      try {
-        const appointmentRecord = {
-          patient_name: formData.name.trim(),
-          mobile_number: cleanPhone,
-          request_type: requestType,
-          service: formData.scanType,
-          appointment_date: selectedDate,
-          whatsapp_consent_appointment: !!whatsappAppointmentConsent,
-          whatsapp_consent_promotional: !!whatsappPromotionalConsent,
-          consent_timestamp: consentTimestamp,
-          consent_source: CONSENT_SOURCE,
-          consent_text_version: CONSENT_TEXT_VERSION,
-          status: 'pending'
-        };
-
-        const { data: insertedData, error: insertError } = await supabase
-          .from('appointments')
-          .insert([appointmentRecord])
-          .select('id')
-          .single();
-
-        if (insertError) {
-          console.warn('Direct Supabase insert notice, attempting API fallback:', insertError.message);
-        } else if (insertedData?.id) {
-          createdAppointmentId = insertedData.id;
-          setRequestId(createdAppointmentId);
-        }
-      } catch (directErr) {
-        console.warn('Direct Supabase insert encountered exception:', directErr);
+      if (rpcError) {
+        throw new Error(rpcError.message || 'Unable to register appointment request.');
       }
 
-      // 2. If direct insert was not used, fall back to backend API endpoint POST /api/appointments
-      if (!createdAppointmentId) {
-        try {
-          const response = await fetch('/api/appointments', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              patient_name: formData.name.trim(),
-              mobile_number: cleanPhone,
-              request_type: requestType,
-              service: formData.scanType,
-              appointment_date: selectedDate,
-              whatsapp_consent_appointment: whatsappAppointmentConsent,
-              whatsapp_consent_promotional: whatsappPromotionalConsent,
-              consent_source: CONSENT_SOURCE,
-              consent_text_version: CONSENT_TEXT_VERSION,
-            }),
-          });
-
-          const result = await response.json();
-
-          if (!response.ok || !result.success) {
-            throw new Error(result.error || result.details?.[0]?.message || 'Failed to submit appointment request');
-          }
-
-          if (result.appointment?.id) {
-            createdAppointmentId = result.appointment.id;
-            setRequestId(createdAppointmentId);
-          }
-        } catch (apiErr) {
-          // If neither direct insert nor API succeeded, throw error
-          if (!createdAppointmentId) {
-            throw apiErr;
-          }
-        }
+      if (!rpcResponse || !rpcResponse.success || !rpcResponse.appointment_id) {
+        throw new Error(rpcResponse?.error || 'Registration failed. Please check form inputs or contact clinic reception.');
       }
 
-      // 3. Record consent in Supabase (if whatsapp_consent table exists)
-      try {
-        const consentTimestamp = new Date().toISOString();
-        const consentPayload = {
-          patient_id: createdAppointmentId,
-          patient_name: formData.name.trim(),
-          mobile_number: cleanPhone,
-          consent_appointment: whatsappAppointmentConsent,
-          consent_promotional: whatsappPromotionalConsent,
-          consent_timestamp: consentTimestamp,
-          consent_source: CONSENT_SOURCE,
-          consent_text_version: CONSENT_TEXT_VERSION
-        };
-
-        await supabase
-          .from('whatsapp_consent')
-          .insert([consentPayload]);
-      } catch (consentErr) {
-        // Non-blocking write: consent log failure must never abort successful booking
-        console.warn('WhatsApp consent logging to Supabase notice:', consentErr);
-      }
-
+      // Success confirmed by database: Record Request ID and transition view
+      setRequestId(rpcResponse.appointment_id);
       setSubmitted(true);
     } catch (err) {
-      console.error('Failed to submit appointment request to backend:', err);
+      console.error('Appointment submission error:', err?.message || err);
       setSubmitError(
         err?.message || 
         'Unable to connect to the clinic server. Please check your internet connection or call our reception directly at +91 77999 00248.'
@@ -519,8 +465,15 @@ export const AppointmentModalProvider = ({ children }) => {
                       <select
                         id="modal-service"
                         value={formData.scanType}
-                        onChange={(e) => setFormData({ ...formData, scanType: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setFormData({ ...formData, scanType: val });
+                          if (errors.scanType) {
+                            setErrors({ ...errors, scanType: undefined });
+                          }
+                        }}
                         className="form-select"
+                        style={{ borderColor: errors.scanType ? '#C2184B' : undefined }}
                       >
                         {services.map((s) => (
                           <option key={s.id} value={s.name}>
@@ -528,6 +481,11 @@ export const AppointmentModalProvider = ({ children }) => {
                           </option>
                         ))}
                       </select>
+                      {errors.scanType && (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#C2184B', fontSize: '0.8rem', marginTop: '4px' }}>
+                          <AlertCircle size={13} /> {errors.scanType}
+                        </span>
+                      )}
                     </div>
 
                     {/* Preferred Date */}
