@@ -11,7 +11,10 @@ import {
   TrendingUp,
   AlertTriangle,
   Stethoscope,
-  Plus
+  Plus,
+  Phone,
+  UserCheck,
+  Check
 } from 'lucide-react';
 import { dashboardService } from '../services/dashboardService';
 import { appointmentService } from '../services/appointmentService';
@@ -58,7 +61,7 @@ export const AdminOverview = () => {
       const [statsData, todayData, pendingData, upcomingData, docData] = await Promise.all([
         dashboardService.getDashboardStats(),
         dashboardService.getTodayAppointments(),
-        dashboardService.getPendingRequests(6),
+        dashboardService.getPendingRequests(8),
         dashboardService.getUpcomingAppointments(6),
         doctorService.getPrimaryDoctor()
       ]);
@@ -79,7 +82,6 @@ export const AdminOverview = () => {
   useEffect(() => {
     loadData();
 
-    // Listen for custom events triggered by AddAppointmentModal or DoctorProfileModal
     const handleApptAdded = () => loadData();
     const handleDocUpdated = () => {
       doctorService.getPrimaryDoctor().then(d => setDoctor(d));
@@ -131,7 +133,7 @@ export const AdminOverview = () => {
   };
 
   if (loading) {
-    return <LoadingState message="Loading hospital appointment statistics..." />;
+    return <LoadingState message="Loading hospital appointment queue..." />;
   }
 
   if (error) {
@@ -160,36 +162,34 @@ export const AdminOverview = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       
-      {/* Welcome Banner */}
+      {/* Nurse-Friendly Action Welcome Header */}
       <div
         style={{
           background: isDark
             ? 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)'
-            : 'linear-gradient(135deg, #AD2348 0%, #781530 100%)',
-          borderRadius: '24px',
-          padding: '1.75rem 2rem',
-          color: '#FFFFFF',
+            : 'linear-gradient(135deg, #FAF0F3 0%, #FFF9F5 100%)',
+          borderRadius: '20px',
+          padding: '1.5rem',
+          border: `1.5px solid ${colors.border}`,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
-          border: isDark ? `1.5px solid ${colors.border}` : 'none',
           flexWrap: 'wrap',
-          gap: '1.25rem'
+          gap: '1rem',
+          boxShadow: isDark ? '0 4px 20px rgba(0, 0, 0, 0.4)' : '0 4px 20px rgba(173, 35, 72, 0.06)'
         }}
       >
         <div>
-          <span style={{ fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: isDark ? '#F43F5E' : 'rgba(255, 255, 255, 0.9)' }}>
-            Centralized Hospital Administration
-          </span>
-          <h2 style={{ margin: '0.3rem 0 0.4rem', fontSize: '1.6rem', fontWeight: 700 }}>
-            Welcome, {profile?.full_name || 'Staff Member'}
-          </h2>
-          <p style={{ margin: 0, fontSize: '0.88rem', opacity: 0.9, maxWidth: '620px', lineHeight: 1.5 }}>
-            Shared appointment coordinator workspace for Sai Diagnostics &amp; Fetal Medicine Centre.
-            Manage patient intake, coordinate slot allocation with {doctor?.name || 'Dr. T. Sai Kiranmai'}, and monitor appointment outcomes.
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.25rem' }}>
+            <span style={{ fontSize: '1.25rem' }}>👋</span>
+            <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: 800, color: colors.textPrimary }}>
+              Sai Diagnostics Clinic Desk
+            </h2>
+          </div>
+          <p style={{ margin: 0, fontSize: '0.9rem', color: colors.textSecondary, maxWidth: '640px', lineHeight: 1.4 }}>
+            Consultant: <strong>{doctor?.name || 'Dr. T. Sai Kiranmai (M.B.B.S., DMRD)'}</strong>. Use this desk to book patients, assign appointment times, and mark completions.
           </p>
         </div>
 
@@ -199,21 +199,21 @@ export const AdminOverview = () => {
               type="button"
               onClick={onOpenAddAppointment}
               style={{
-                padding: '0.75rem 1.3rem',
+                padding: '0.75rem 1.4rem',
                 borderRadius: '12px',
                 border: 'none',
                 background: colors.brandPrimary,
                 color: '#FFFFFF',
                 fontWeight: 700,
-                fontSize: '0.88rem',
+                fontSize: '0.92rem',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '8px',
                 boxShadow: '0 4px 14px rgba(173, 35, 72, 0.35)'
               }}
             >
-              <Plus size={16} /> Add Appointment
+              <Plus size={18} strokeWidth={2.5} /> Book New Patient
             </button>
           )}
 
@@ -221,94 +221,186 @@ export const AdminOverview = () => {
             type="button"
             onClick={() => navigate('/admin/appointments')}
             style={{
-              padding: '0.75rem 1.3rem',
+              padding: '0.75rem 1.25rem',
               borderRadius: '12px',
-              border: isDark ? `1px solid ${colors.border}` : 'none',
-              background: isDark ? colors.cardBg : '#FFFFFF',
-              color: isDark ? colors.textPrimary : colors.brandPrimary,
+              border: `1px solid ${colors.border}`,
+              background: colors.cardBg,
+              color: colors.textPrimary,
               fontWeight: 700,
               fontSize: '0.88rem',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
+              gap: '6px'
             }}
           >
-            Manage Appointments <ArrowRight size={16} />
+            All Appointments <ArrowRight size={16} />
           </button>
         </div>
       </div>
 
-      {/* Primary KPI Stats Cards */}
+      {/* Action-First Summary Cards */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '1rem'
         }}
       >
         <StatCard
-          title="Total Requests"
-          value={stats?.total || 0}
-          icon={Users}
-          color={colors.textPrimary}
-          bgColor={colors.subtleBg}
-          onClick={() => navigate('/admin/appointments')}
-        />
-        <StatCard
-          title="Pending Review"
+          title="Action Needed: Unscheduled"
           value={stats?.pending || 0}
-          subtitle="Needs nurse intake"
+          subtitle="Waiting for slot assignment"
           icon={Clock}
-          color={colors.warning}
-          bgColor={colors.warningBg}
+          color="#D97706"
+          bgColor={isDark ? 'rgba(217, 119, 6, 0.2)' : '#FEF3C7'}
+          urgent={(stats?.pending || 0) > 0}
           onClick={() => navigate('/admin/appointments?status=pending')}
         />
         <StatCard
-          title="Today's Appointments"
+          title="Today's Patients"
           value={stats?.today || 0}
-          subtitle="Scheduled today"
+          subtitle="Consultations today"
           icon={Calendar}
-          color={colors.info}
-          bgColor={colors.infoBg}
+          color="#0284C7"
+          bgColor={isDark ? 'rgba(2, 132, 199, 0.2)' : '#E0F2FE'}
           onClick={() => navigate('/admin/appointments?filter=today')}
         />
         <StatCard
-          title="Confirmed Slots"
+          title="Confirmed Appointments"
           value={stats?.confirmed || 0}
+          subtitle="Upcoming booked slots"
           icon={CheckCircle2}
-          color={colors.success}
-          bgColor={colors.successBg}
+          color="#16A34A"
+          bgColor={isDark ? 'rgba(22, 163, 74, 0.2)' : '#DCFCE7'}
           onClick={() => navigate('/admin/appointments?status=confirmed')}
         />
         <StatCard
-          title="Rescheduled"
-          value={stats?.rescheduled || 0}
-          icon={CalendarClock}
-          color="#9333EA"
-          bgColor="rgba(147, 51, 234, 0.15)"
-          onClick={() => navigate('/admin/appointments?status=rescheduled')}
-        />
-        <StatCard
-          title="Completed"
+          title="Completed Today / Total"
           value={stats?.completed || 0}
-          icon={CheckCircle2}
+          subtitle="Finished scans"
+          icon={UserCheck}
           color={colors.textSecondary}
           bgColor={colors.subtleBg}
           onClick={() => navigate('/admin/appointments?status=completed')}
         />
       </div>
 
-      {/* Two Column Section: Today's Schedule & Pending Requests */}
+      {/* Priority 1 & 2 Queues: Pending Actions & Today's Schedule */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))',
           gap: '1.5rem'
         }}
       >
-        {/* Today's Appointments */}
+        {/* Priority 1: Pending Intake Queue (Always First) */}
+        <div
+          style={{
+            background: colors.cardBg,
+            borderRadius: '20px',
+            padding: '1.5rem',
+            border: (pendingAppts.length > 0)
+              ? `2px solid ${isDark ? '#D97706' : '#F59E0B'}`
+              : `1.5px solid ${colors.border}`,
+            boxShadow: isDark ? '0 4px 20px rgba(0, 0, 0, 0.3)' : '0 4px 18px rgba(173, 35, 72, 0.04)'
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Clock size={18} style={{ color: '#D97706' }} />
+                <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: 800, color: colors.textPrimary }}>
+                  Pending Requests ({pendingAppts.length})
+                </h3>
+              </div>
+              <p style={{ margin: '0.2rem 0 0', fontSize: '0.82rem', color: colors.textSecondary }}>
+                Patients waiting for nurse to assign consultation time
+              </p>
+            </div>
+            {pendingAppts.length > 0 && (
+              <span
+                style={{
+                  fontSize: '0.78rem',
+                  fontWeight: 800,
+                  padding: '4px 12px',
+                  borderRadius: '9999px',
+                  background: isDark ? 'rgba(217, 119, 6, 0.25)' : '#FEF3C7',
+                  color: isDark ? '#FBBF24' : '#B45309'
+                }}
+              >
+                Needs Action
+              </span>
+            )}
+          </div>
+
+          {pendingAppts.length === 0 ? (
+            <EmptyState
+              title="All Caught Up! Queue is Clear"
+              description="No incoming patient requests currently waiting for nurse appointment scheduling."
+            />
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+              {pendingAppts.map((appt) => (
+                <div
+                  key={appt.id}
+                  style={{
+                    padding: '1rem',
+                    borderRadius: '14px',
+                    border: `1.5px solid ${colors.border}`,
+                    background: isDark ? '#1E293B' : '#FFFDF9',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '1rem',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
+                  }}
+                >
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <strong style={{ color: colors.textPrimary, fontSize: '0.98rem' }}>
+                        {appt.patient_name}
+                      </strong>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', color: colors.textSecondary, fontSize: '0.82rem' }}>
+                        <Phone size={12} /> {appt.mobile_number}
+                      </span>
+                    </div>
+                    <div style={{ color: colors.brandPrimary, fontSize: '0.86rem', fontWeight: 700, marginTop: '3px' }}>
+                      {appt.service}
+                    </div>
+                    <div style={{ color: colors.textMuted, fontSize: '0.8rem', marginTop: '2px' }}>
+                      Preferred Date: <strong>{formatDate(appt.appointment_date)}</strong>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setAllocatingAppt(appt)}
+                    style={{
+                      padding: '0.65rem 1.15rem',
+                      borderRadius: '10px',
+                      border: 'none',
+                      background: colors.brandPrimary,
+                      color: '#FFFFFF',
+                      fontSize: '0.86rem',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      flexShrink: 0,
+                      boxShadow: '0 3px 10px rgba(173, 35, 72, 0.28)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '5px'
+                    }}
+                  >
+                    <CalendarClock size={15} /> Book Time
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Priority 2: Today's Scheduled Appointments */}
         <div
           style={{
             background: colors.cardBg,
@@ -320,31 +412,38 @@ export const AdminOverview = () => {
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: colors.textPrimary }}>
-                Today's Appointments
-              </h3>
-              <p style={{ margin: '0.2rem 0 0', fontSize: '0.8rem', color: colors.textSecondary }}>
-                Consultations and scans assigned for today
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Calendar size={18} style={{ color: '#0284C7' }} />
+                <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: 800, color: colors.textPrimary }}>
+                  Today's Schedule ({todayAppts.length})
+                </h3>
+              </div>
+              <p style={{ margin: '0.2rem 0 0', fontSize: '0.82rem', color: colors.textSecondary }}>
+                Patients booked for consultations and scans today
               </p>
             </div>
-            <span
+            <button
+              type="button"
+              onClick={() => navigate('/admin/appointments?filter=today')}
               style={{
                 fontSize: '0.78rem',
                 fontWeight: 700,
                 padding: '4px 10px',
-                borderRadius: '9999px',
-                background: colors.infoBg,
-                color: colors.info
+                borderRadius: '8px',
+                background: colors.subtleBg,
+                border: `1px solid ${colors.border}`,
+                color: colors.textPrimary,
+                cursor: 'pointer'
               }}
             >
-              {todayAppts.length} Today
-            </span>
+              View Full List
+            </button>
           </div>
 
           {todayAppts.length === 0 ? (
             <EmptyState
               title="No Appointments Scheduled Today"
-              description="There are currently no confirmed appointments on today's calendar."
+              description="There are currently no patients booked on today's calendar."
             />
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -358,26 +457,66 @@ export const AdminOverview = () => {
                     background: colors.subtleBg,
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    gap: '0.75rem'
                   }}
                 >
-                  <div>
-                    <div style={{ fontWeight: 600, color: colors.textPrimary, fontSize: '0.92rem' }}>
-                      {appt.patient_name}
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span
+                        style={{
+                          fontSize: '0.82rem',
+                          fontWeight: 800,
+                          padding: '2px 8px',
+                          borderRadius: '6px',
+                          background: colors.cardBg,
+                          border: `1px solid ${colors.border}`,
+                          color: colors.brandPrimary
+                        }}
+                      >
+                        {appt.assigned_time ? formatTime(appt.assigned_time) : 'Time Pending'}
+                      </span>
+                      <strong style={{ color: colors.textPrimary, fontSize: '0.94rem' }}>
+                        {appt.patient_name}
+                      </strong>
                     </div>
-                    <div style={{ color: colors.textSecondary, fontSize: '0.8rem', marginTop: '2px' }}>
-                      {appt.service} • {appt.assigned_time ? formatTime(appt.assigned_time) : 'Time Pending'}
+                    <div style={{ color: colors.textSecondary, fontSize: '0.82rem', marginTop: '3px' }}>
+                      {appt.service} • {appt.mobile_number}
                     </div>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
                     <StatusBadge status={appt.status} size="small" />
+                    
+                    {appt.status !== 'completed' && (
+                      <button
+                        type="button"
+                        onClick={() => setCompletingAppt(appt)}
+                        title="Mark Finished"
+                        style={{
+                          padding: '5px 10px',
+                          borderRadius: '8px',
+                          border: 'none',
+                          background: colors.success,
+                          color: '#FFFFFF',
+                          fontSize: '0.78rem',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '3px'
+                        }}
+                      >
+                        <Check size={13} strokeWidth={3} /> Done
+                      </button>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => setSelectedAppt(appt)}
                       style={{
-                        padding: '4px 10px',
-                        borderRadius: '6px',
+                        padding: '5px 9px',
+                        borderRadius: '8px',
                         border: `1px solid ${colors.border}`,
                         background: colors.cardBg,
                         color: colors.textPrimary,
@@ -389,91 +528,6 @@ export const AdminOverview = () => {
                       View
                     </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Pending Requests Requiring Nurse Review */}
-        <div
-          style={{
-            background: colors.cardBg,
-            borderRadius: '20px',
-            padding: '1.5rem',
-            border: `1.5px solid ${colors.border}`,
-            boxShadow: isDark ? '0 4px 20px rgba(0, 0, 0, 0.3)' : '0 4px 18px rgba(173, 35, 72, 0.04)'
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-            <div>
-              <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: 700, color: colors.textPrimary }}>
-                Pending Review Queue
-              </h3>
-              <p style={{ margin: '0.2rem 0 0', fontSize: '0.8rem', color: colors.textSecondary }}>
-                Incoming patient booking requests requiring slot allocation
-              </p>
-            </div>
-            <span
-              style={{
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                padding: '4px 10px',
-                borderRadius: '9999px',
-                background: colors.warningBg,
-                color: colors.warning
-              }}
-            >
-              {pendingAppts.length} Pending
-            </span>
-          </div>
-
-          {pendingAppts.length === 0 ? (
-            <EmptyState
-              title="Queue is Clear"
-              description="No incoming patient requests currently waiting for nurse intake."
-            />
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {pendingAppts.map((appt) => (
-                <div
-                  key={appt.id}
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '12px',
-                    border: `1px solid ${colors.warning}40`,
-                    background: colors.warningBg,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <div>
-                    <div style={{ fontWeight: 600, color: colors.textPrimary, fontSize: '0.92rem' }}>
-                      {appt.patient_name} <span style={{ fontWeight: 400, color: colors.textSecondary, fontSize: '0.82rem' }}>({appt.mobile_number})</span>
-                    </div>
-                    <div style={{ color: colors.textSecondary, fontSize: '0.8rem', marginTop: '2px' }}>
-                      {appt.service} • Pref: {formatDate(appt.appointment_date)}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setAllocatingAppt(appt)}
-                    style={{
-                      padding: '6px 12px',
-                      borderRadius: '8px',
-                      border: 'none',
-                      background: colors.brandPrimary,
-                      color: '#FFFFFF',
-                      fontSize: '0.8rem',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 6px rgba(173, 35, 72, 0.2)'
-                    }}
-                  >
-                    Allocate Slot
-                  </button>
                 </div>
               ))}
             </div>
@@ -498,7 +552,6 @@ export const AdminOverview = () => {
       {selectedAppt && (
         <AppointmentDetails
           appointment={selectedAppt}
-          role={role}
           onClose={() => setSelectedAppt(null)}
           onAllocate={() => {
             setAllocatingAppt(selectedAppt);
@@ -515,54 +568,107 @@ export const AdminOverview = () => {
         />
       )}
 
-      {/* Confirmation: Mark Completed */}
-      <ConfirmationDialog
-        isOpen={Boolean(completingAppt)}
-        title="Mark Appointment Completed"
-        message={`Confirm that the clinical scan/consultation for "${completingAppt?.patient_name}" has been completed?`}
-        confirmLabel="Mark Completed"
-        isLoading={actionLoading}
-        onConfirm={handleCompleteConfirm}
-        onCancel={() => setCompletingAppt(null)}
-      />
+      {/* Complete Confirmation Dialog */}
+      {completingAppt && (
+        <ConfirmationDialog
+          isOpen={Boolean(completingAppt)}
+          title="Mark Appointment as Completed?"
+          message={`Are you sure you want to mark the appointment for ${completingAppt.patient_name} (${completingAppt.service}) as completed? This confirms that the scan or consultation was conducted.`}
+          confirmText="Yes, Mark Completed"
+          confirmColor="green"
+          loading={actionLoading}
+          onConfirm={handleCompleteConfirm}
+          onCancel={() => setCompletingAppt(null)}
+        />
+      )}
 
-      {/* Confirmation: Cancel Appointment */}
-      <ConfirmationDialog
-        isOpen={Boolean(cancellingAppt)}
-        title="Cancel Patient Appointment"
-        message={`Are you sure you want to cancel the appointment for "${cancellingAppt?.patient_name}"? A valid reason is required.`}
-        confirmLabel="Cancel Appointment"
-        isDestructive={true}
-        isLoading={actionLoading}
-        onConfirm={handleCancelConfirm}
-        onCancel={() => {
-          setCancellingAppt(null);
-          setCancelReason('');
-        }}
-      >
-        <div style={{ marginTop: '0.85rem' }}>
-          <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: colors.textPrimary, marginBottom: '0.35rem' }}>
-            Cancellation Reason *
-          </label>
-          <input
-            type="text"
-            placeholder="e.g. Patient requested cancellation, Doctor leave..."
-            value={cancelReason}
-            onChange={(e) => setCancelReason(e.target.value)}
+      {/* Cancel Appointment Dialog with Reason */}
+      {cancellingAppt && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: colors.modalOverlay,
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem'
+          }}
+          onClick={() => setCancellingAppt(null)}
+        >
+          <div
             style={{
+              background: colors.cardBg,
+              borderRadius: '16px',
+              maxWidth: '480px',
               width: '100%',
-              padding: '0.65rem',
-              borderRadius: '8px',
-              border: `1.5px solid ${colors.border}`,
-              background: colors.inputBg,
-              color: colors.textPrimary,
-              fontSize: '0.88rem',
-              outline: 'none',
-              boxSizing: 'border-box'
+              padding: '1.5rem',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.25)',
+              border: `1px solid ${colors.border}`
             }}
-          />
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 style={{ margin: '0 0 0.5rem', color: colors.danger, fontSize: '1.15rem', fontWeight: 700 }}>
+              Cancel Appointment
+            </h3>
+            <p style={{ margin: '0 0 1rem', fontSize: '0.86rem', color: colors.textSecondary }}>
+              Please specify the cancellation reason for <strong>{cancellingAppt.patient_name}</strong>:
+            </p>
+            <input
+              type="text"
+              placeholder="e.g. Patient requested cancellation, duplicate request..."
+              value={cancelReason}
+              onChange={e => setCancelReason(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '0.65rem 0.85rem',
+                borderRadius: '8px',
+                border: `1.5px solid ${colors.border}`,
+                background: colors.inputBg,
+                color: colors.textPrimary,
+                fontSize: '0.88rem',
+                marginBottom: '1.25rem',
+                outline: 'none'
+              }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem' }}>
+              <button
+                type="button"
+                onClick={() => setCancellingAppt(null)}
+                style={{
+                  padding: '0.55rem 1rem',
+                  borderRadius: '8px',
+                  border: `1px solid ${colors.border}`,
+                  background: colors.cardBg,
+                  color: colors.textSecondary,
+                  cursor: 'pointer'
+                }}
+              >
+                Go Back
+              </button>
+              <button
+                type="button"
+                disabled={actionLoading || !cancelReason.trim()}
+                onClick={handleCancelConfirm}
+                style={{
+                  padding: '0.55rem 1.25rem',
+                  borderRadius: '8px',
+                  border: 'none',
+                  background: colors.danger,
+                  color: '#FFFFFF',
+                  fontWeight: 600,
+                  cursor: actionLoading || !cancelReason.trim() ? 'not-allowed' : 'pointer',
+                  opacity: actionLoading || !cancelReason.trim() ? 0.6 : 1
+                }}
+              >
+                {actionLoading ? 'Cancelling...' : 'Confirm Cancellation'}
+              </button>
+            </div>
+          </div>
         </div>
-      </ConfirmationDialog>
+      )}
+
     </div>
   );
 };
